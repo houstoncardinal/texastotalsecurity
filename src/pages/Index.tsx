@@ -198,6 +198,7 @@ const Index = () => {
 
     <CTABlock />
   </Layout>
-);
+  );
+};
 
 export default Index;
