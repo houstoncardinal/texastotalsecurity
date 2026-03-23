@@ -3,10 +3,33 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import { lazy, Suspense } from "react";
+
+import Index from "./pages/Index";
+
+const About = lazy(() => import("./pages/About"));
+const AlarmSystems = lazy(() => import("./pages/AlarmSystems"));
+const SecurityCameras = lazy(() => import("./pages/SecurityCameras"));
+const ResidentialSecurity = lazy(() => import("./pages/ResidentialSecurity"));
+const CommercialSecurity = lazy(() => import("./pages/CommercialSecurity"));
+const HOASecurity = lazy(() => import("./pages/HOASecurity"));
+const MonitoringServices = lazy(() => import("./pages/MonitoringServices"));
+const ServiceMaintenance = lazy(() => import("./pages/ServiceMaintenance"));
+const IndustriesWeServe = lazy(() => import("./pages/IndustriesWeServe"));
+const Portfolio = lazy(() => import("./pages/Portfolio"));
+const Reviews = lazy(() => import("./pages/Reviews"));
+const ServiceAreas = lazy(() => import("./pages/ServiceAreas"));
+const Contact = lazy(() => import("./pages/Contact"));
+const FreeAnalysis = lazy(() => import("./pages/FreeAnalysis"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
+
+const Loading = () => (
+  <div className="flex min-h-screen items-center justify-center bg-background">
+    <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -14,11 +37,26 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/alarm-systems" element={<AlarmSystems />} />
+            <Route path="/security-cameras" element={<SecurityCameras />} />
+            <Route path="/residential-security" element={<ResidentialSecurity />} />
+            <Route path="/commercial-security" element={<CommercialSecurity />} />
+            <Route path="/hoa-security" element={<HOASecurity />} />
+            <Route path="/monitoring-services" element={<MonitoringServices />} />
+            <Route path="/service-maintenance" element={<ServiceMaintenance />} />
+            <Route path="/industries" element={<IndustriesWeServe />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/service-areas" element={<ServiceAreas />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/free-analysis" element={<FreeAnalysis />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
