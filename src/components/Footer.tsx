@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Shield } from "lucide-react";
+import { cities } from "@/lib/cityData";
 
 const Footer = () => (
   <footer className="section-dark">
     <div className="container-tight px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-primary-foreground/10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-primary-foreground/10">
         {/* Brand */}
-        <div>
+        <div className="lg:col-span-1">
           <div className="flex items-center gap-2.5 mb-4">
             <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
               <Shield className="w-6 h-6 text-accent-foreground" />
@@ -49,6 +50,7 @@ const Footer = () => (
               { name: "Portfolio", href: "/portfolio" },
               { name: "Reviews", href: "/reviews" },
               { name: "Service Areas", href: "/service-areas" },
+              { name: "Blog & Resources", href: "/blog" },
               { name: "Contact", href: "/contact" },
               { name: "Free Security Analysis", href: "/free-analysis" },
             ].map((l) => (
@@ -56,6 +58,25 @@ const Footer = () => (
                 <Link to={l.href} className="text-sm opacity-70 hover:opacity-100 transition-opacity">{l.name}</Link>
               </li>
             ))}
+          </ul>
+        </div>
+
+        {/* Service Areas */}
+        <div>
+          <h4 className="font-display font-semibold text-sm uppercase tracking-wider mb-4">Service Areas</h4>
+          <ul className="space-y-2">
+            {cities.slice(0, 8).map((city) => (
+              <li key={city.slug}>
+                <Link to={`/${city.slug}-security-systems`} className="text-sm opacity-70 hover:opacity-100 transition-opacity">
+                  {city.name}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link to="/service-areas" className="text-sm text-accent hover:opacity-80 transition-opacity">
+                View All Areas →
+              </Link>
+            </li>
           </ul>
         </div>
 

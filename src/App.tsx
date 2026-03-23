@@ -21,6 +21,10 @@ const Reviews = lazy(() => import("./pages/Reviews"));
 const ServiceAreas = lazy(() => import("./pages/ServiceAreas"));
 const Contact = lazy(() => import("./pages/Contact"));
 const FreeAnalysis = lazy(() => import("./pages/FreeAnalysis"));
+const CityLanding = lazy(() => import("./pages/CityLanding"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogArticle = lazy(() => import("./pages/BlogArticle"));
+const BlogCategory = lazy(() => import("./pages/BlogCategory"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -54,6 +58,13 @@ const App = () => (
             <Route path="/service-areas" element={<ServiceAreas />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/free-analysis" element={<FreeAnalysis />} />
+            {/* Blog */}
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:articleSlug" element={<BlogArticle />} />
+            <Route path="/blog/category/:categorySlug" element={<BlogCategory />} />
+            {/* City SEO Landing Pages */}
+            <Route path="/:citySlug-security-systems" element={<CityLanding />} />
+            <Route path="/:citySlug-security" element={<CityLanding />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
