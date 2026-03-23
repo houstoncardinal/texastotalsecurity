@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SEOHead from "@/components/SEOHead";
 import TrustBar from "@/components/TrustBar";
 import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -6,6 +7,7 @@ import CTABlock from "@/components/CTABlock";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
 import { Link } from "react-router-dom";
+import { generateLocalBusinessSchema, generateFAQSchema, generateOrganizationSchema } from "@/lib/seo";
 import {
   Shield, Camera, Home, Building2, Users, Radio, ArrowRight, Phone,
   PhoneCall, ClipboardCheck, Wrench, HeadphonesIcon, CheckCircle2, Star,
