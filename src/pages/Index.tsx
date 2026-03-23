@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SEOHead from "@/components/SEOHead";
 import TrustBar from "@/components/TrustBar";
 import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -6,6 +7,7 @@ import CTABlock from "@/components/CTABlock";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
 import { Link } from "react-router-dom";
+import { generateLocalBusinessSchema, generateFAQSchema, generateOrganizationSchema } from "@/lib/seo";
 import {
   Shield, Camera, Home, Building2, Users, Radio, ArrowRight, Phone,
   PhoneCall, ClipboardCheck, Wrench, HeadphonesIcon, CheckCircle2, Star,
@@ -36,8 +38,17 @@ const faqs = [
   { q: "What makes your monitoring different?", a: "Unlike national companies that route calls through distant call centers, our monitoring is handled locally in Houston. This means faster response times, better communication with local authorities, and real accountability." },
 ];
 
-const Index = () => (
+const Index = () => {
+  const faqSchemaItems = faqs.map(f => ({ question: f.q, answer: f.a }));
+  const schemas = [generateOrganizationSchema(), generateLocalBusinessSchema(), generateFAQSchema(faqSchemaItems)];
+
+  return (
   <Layout>
+    <SEOHead
+      title="Texas Total Security | Houston Alarm, Camera & Monitoring Systems"
+      description="Houston's trusted security experts for 30+ years. Custom alarm systems, security cameras, 24/7 local monitoring for homes, businesses, and HOAs. Free onsite security analysis. Call (713) 387-9937."
+      schemas={schemas}
+    />
     {/* Hero */}
     <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(205_100%_50%/0.15),transparent_60%)]" />
@@ -187,6 +198,7 @@ const Index = () => (
 
     <CTABlock />
   </Layout>
-);
+  );
+};
 
 export default Index;

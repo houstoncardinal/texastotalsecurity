@@ -1,57 +1,82 @@
 import Layout from "@/components/Layout";
-import PageHero from "@/components/PageHero";
+import SEOHead from "@/components/SEOHead";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import CTABlock from "@/components/CTABlock";
 import SectionHeading from "@/components/SectionHeading";
 import { MapPin, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { cities } from "@/lib/cityData";
+import { generateLocalBusinessSchema, generateBreadcrumbSchema } from "@/lib/seo";
 
-const areas = [
-  { name: "Houston", desc: "Comprehensive security services across the Houston metro — from downtown to the suburbs." },
-  { name: "Bellaire", desc: "Premium home and business security for the Bellaire community." },
-  { name: "Sugar Land", desc: "Residential and commercial security solutions throughout Sugar Land." },
-  { name: "Katy", desc: "Alarm, camera, and HOA security systems for Katy neighborhoods and businesses." },
-  { name: "Missouri City", desc: "Custom security design and installation for Missouri City properties." },
-  { name: "Pearland", desc: "Complete security coverage for homes and businesses in Pearland." },
-  { name: "The Woodlands", desc: "Expert security services for The Woodlands communities and commercial centers." },
-  { name: "Cypress", desc: "Local security installation and monitoring for Cypress-area properties." },
-  { name: "Pasadena", desc: "Industrial, commercial, and residential security in Pasadena." },
-  { name: "League City", desc: "Alarm and surveillance solutions for League City homes and businesses." },
-  { name: "Richmond", desc: "Security system design and service for Richmond and Fort Bend County." },
-  { name: "Rosenberg", desc: "Comprehensive protection for Rosenberg residential and commercial properties." },
-];
+const ServiceAreas = () => {
+  const schemas = [
+    generateLocalBusinessSchema(),
+    generateBreadcrumbSchema([
+      { name: "Home", href: "/" },
+      { name: "Service Areas", href: "/service-areas" },
+    ]),
+  ];
 
-const ServiceAreas = () => (
-  <Layout>
-    <PageHero
-      title="Service Areas"
-      subtitle="Texas Total Security proudly serves Houston and surrounding communities. Local service, local monitoring, local expertise — wherever you are in the greater Houston area."
-    />
+  return (
+    <Layout>
+      <SEOHead
+        title="Service Areas | Houston & Surrounding Cities Security"
+        description="Texas Total Security serves Houston, Sugar Land, Katy, Pearland, Cypress, The Woodlands, Pasadena, Missouri City, League City, Richmond, Rosenberg, Bellaire and surrounding areas."
+        schemas={schemas}
+      />
+      <Breadcrumbs items={[{ name: "Service Areas" }]} />
 
-    <section className="section-padding">
-      <div className="container-tight">
-        <SectionHeading title="Areas We Serve" subtitle="We provide security system installation, monitoring, and service across the greater Houston metropolitan area." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {areas.map((area) => (
-            <div key={area.name} className="glass-card p-6 flex gap-4">
-              <MapPin className="w-5 h-5 text-accent shrink-0 mt-1" />
-              <div>
-                <h3 className="font-display font-semibold text-foreground mb-1">{area.name}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{area.desc}</p>
-              </div>
-            </div>
-          ))}
+      <section className="section-dark py-16 sm:py-20 lg:py-24">
+        <div className="container-tight px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
+            Security Systems Across Houston & Surrounding Cities
+          </h1>
+          <p className="text-lg opacity-70">
+            Texas Total Security proudly serves Houston and surrounding communities with custom alarm systems, security cameras, and 24/7 local monitoring. Local service, local monitoring, local expertise — wherever you are in the greater Houston area.
+          </p>
         </div>
-        <div className="text-center mt-10">
-          <p className="text-muted-foreground mb-4">Don't see your area? We likely serve your community too.</p>
-          <Link to="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all">
-            Contact Us to Confirm <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <CTABlock title="Need Security in Your Area?" subtitle="Contact us to schedule a free onsite security analysis at your property." />
-  </Layout>
-);
+      <section className="section-padding">
+        <div className="container-tight">
+          <SectionHeading
+            title="Areas We Serve"
+            subtitle="Click any city for detailed information about security services in your area."
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cities.map((city) => (
+              <Link
+                key={city.slug}
+                to={`/${city.slug}-security-systems`}
+                className="glass-card p-6 flex gap-4 group"
+              >
+                <MapPin className="w-5 h-5 text-accent shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-display font-semibold text-foreground mb-1 group-hover:text-accent transition-colors">
+                    {city.name} Security Systems
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-2">
+                    {city.county} · Population {city.population}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent group-hover:gap-2 transition-all">
+                    View Services <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <p className="text-muted-foreground mb-4">Don't see your area? We likely serve your community too.</p>
+            <Link to="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all">
+              Contact Us to Confirm <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <CTABlock title="Need Security in Your Area?" subtitle="Contact us to schedule a free onsite security analysis at your property." />
+    </Layout>
+  );
+};
 
 export default ServiceAreas;
