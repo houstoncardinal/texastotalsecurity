@@ -1,7 +1,9 @@
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTABlock from "@/components/CTABlock";
+import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
+import LeadForm from "@/components/LeadForm";
 import { Radio, MapPin, Clock, Shield, PhoneCall, CheckCircle2 } from "lucide-react";
 
 const benefits = [
@@ -11,6 +13,20 @@ const benefits = [
   { icon: Shield, title: "24/7/365 Coverage", desc: "Round-the-clock monitoring every day of the year. Holidays, weekends, severe weather — we never close." },
   { icon: CheckCircle2, title: "Video Verification", desc: "For systems with cameras, our operators can verify alarm events visually — reducing false dispatches and improving police response priority." },
   { icon: Radio, title: "Multiple Communication Paths", desc: "Cellular, IP, and phone line monitoring ensure your system stays connected even if one communication path fails." },
+];
+
+const monitoringTypes = [
+  "Alarm Monitoring — Through Dispatch Center located in San Antonio, TX",
+  "Video Monitoring — Double verified video monitoring triggered by alarm events",
+  "Video Guard Patrol — Monitoring station logs into cameras at scheduled times to check on specific cameras",
+  "Custom Monitoring Services — Specific environments monitored for specific events",
+];
+
+const faqs = [
+  { question: "How is local monitoring different from national monitoring?", answer: "Local monitoring means our operators are right here in the Houston area. They understand local geography, have direct relationships with local dispatch, and can process alarm signals faster than distant national call centers that route through multiple hubs." },
+  { question: "Do you sell monitoring contracts to other companies?", answer: "Never. Your account stays with us for as long as you choose. We never sell our alarm contracts to big national companies. You'll always have a direct line to real people who know your system." },
+  { question: "What types of monitoring do you offer?", answer: "We offer standard alarm monitoring, video monitoring (double verified), video guard patrol where operators check your cameras on schedule, and custom monitoring services designed for specific environments and events." },
+  { question: "Can you monitor my existing alarm system?", answer: "In most cases, yes. We can take over monitoring of your existing alarm equipment from another provider, saving you the cost of new equipment while upgrading to faster, local service." },
 ];
 
 const MonitoringServices = () => (
@@ -35,34 +51,52 @@ const MonitoringServices = () => (
       </div>
     </section>
 
+    {/* Monitoring Types */}
     <section className="section-padding bg-secondary">
-      <div className="container-tight max-w-3xl mx-auto">
-        <SectionHeading title="Local vs. National Monitoring" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="glass-card p-6">
-            <h3 className="font-display font-bold text-accent mb-4">Texas Total Security</h3>
-            <ul className="space-y-3">
-              {["Houston-based operators", "Direct local dispatch", "Know your neighborhood", "Personal accountability", "Video verification available", "No contract selling"].map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm text-foreground">
-                  <CheckCircle2 className="w-4 h-4 text-accent shrink-0" /> {item}
-                </li>
-              ))}
-            </ul>
+      <div className="container-tight">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-3xl font-display font-bold text-foreground mb-6">Local vs. National Monitoring</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="glass-card p-6">
+                <h3 className="font-display font-bold text-accent mb-4">Texas Total Security</h3>
+                <ul className="space-y-3">
+                  {["Houston-based operators", "Direct local dispatch", "Know your neighborhood", "Personal accountability", "Video verification available", "No contract selling"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-foreground">
+                      <CheckCircle2 className="w-4 h-4 text-accent shrink-0" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glass-card p-6 opacity-70">
+                <h3 className="font-display font-bold text-muted-foreground mb-4">National Providers</h3>
+                <ul className="space-y-3">
+                  {["Distant call centers", "Routed through multiple hubs", "No local knowledge", "Faceless service", "Basic alarm-only response", "Contracts frequently sold"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span className="w-4 h-4 rounded-full border border-muted-foreground/30 shrink-0" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-          <div className="glass-card p-6 opacity-70">
-            <h3 className="font-display font-bold text-muted-foreground mb-4">National Providers</h3>
-            <ul className="space-y-3">
-              {["Distant call centers", "Routed through multiple hubs", "No local knowledge", "Faceless service", "Basic alarm-only response", "Contracts frequently sold"].map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="w-4 h-4 rounded-full border border-muted-foreground/30 shrink-0" /> {item}
-                </li>
+          <div>
+            <h3 className="text-xl font-display font-bold text-foreground mb-4">Monitoring Services We Offer</h3>
+            <div className="space-y-3 mb-8">
+              {monitoringTypes.map((item) => (
+                <div key={item} className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-1" />
+                  <span className="text-sm text-muted-foreground leading-relaxed">{item}</span>
+                </div>
               ))}
-            </ul>
+            </div>
+            <LeadForm title="Switch to Local Monitoring" subtitle="Tell us about your current system and we'll make switching easy." />
           </div>
         </div>
       </div>
     </section>
 
+    <FAQSection items={faqs} />
     <CTABlock />
   </Layout>
 );

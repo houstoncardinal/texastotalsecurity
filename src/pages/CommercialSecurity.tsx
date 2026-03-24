@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTABlock from "@/components/CTABlock";
+import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
 import { Building2, Camera, Shield, Lock, Wifi, Zap, Eye, Users } from "lucide-react";
@@ -15,16 +16,38 @@ const solutions = [
 ];
 
 const industries = [
-  "Office Buildings", "Retail Stores", "Restaurants", "Medical Facilities", "Schools & Daycare",
-  "Industrial & Warehouse", "Apartment Complexes", "Construction Sites", "Parking Garages",
-  "Hotels & Hospitality", "Places of Worship", "Government Buildings", "Airports & Marinas",
+  "Small Businesses",
+  "Apartment Complexes",
+  "Condominium or Townhome Complexes",
+  "Home Owners Associations (HOA)",
+  "Industrial Complexes",
+  "Government Buildings",
+  "Hotels",
+  "Daycares / Schools / Universities",
+  "Hospital / Dental / Medical Facilities",
+  "Retail Centers",
+  "Parking Garages",
+  "Valet Facilities",
+  "Construction Sites",
+  "Recycling Centers",
+  "Places of Worship",
+  "Restaurants",
+  "Stadiums",
+  "Airports",
+  "Marinas",
+];
+
+const faqs = [
+  { question: "What types of commercial properties do you serve?", answer: "We serve virtually every type of commercial property — from small businesses and retail stores to industrial complexes, government buildings, hospitals, schools, hotels, construction sites, parking garages, places of worship, airports, marinas, and more. Each system is custom-designed for the unique needs of your operation." },
+  { question: "Can you integrate surveillance with our existing alarm system?", answer: "Yes. We specialize in integrating security cameras, alarms, access control, and monitoring into a unified system. If you already have equipment, we can often work with it and build around it." },
+  { question: "Do you provide monitoring for commercial properties?", answer: "Absolutely. Our local Houston-based monitoring center provides 24/7 alarm and video monitoring. We also offer video guard patrol, where our monitoring station logs into your cameras at scheduled times to check on specific areas." },
 ];
 
 const CommercialSecurity = () => (
   <Layout>
     <PageHero
-      title="Commercial Security Systems"
-      subtitle="Enterprise-grade alarm, surveillance, and monitoring solutions designed for Houston businesses. Scalable, reliable, and custom-built for your operations."
+      title="Commercial Security Systems in Houston, TX"
+      subtitle="Contact Texas Total Security to discuss your commercial security project. Enterprise-grade alarm, surveillance, and monitoring solutions designed for Houston businesses."
       ctaText="Request a Commercial Consultation"
     />
 
@@ -57,6 +80,7 @@ const CommercialSecurity = () => (
       </div>
     </section>
 
+    <FAQSection items={faqs} />
     <CTABlock />
   </Layout>
 );
