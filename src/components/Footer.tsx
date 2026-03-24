@@ -96,7 +96,7 @@ const Footer = () => (
             </li>
             <li className="flex items-start gap-2 text-sm opacity-70">
               <MapPin className="w-4 h-4 text-accent mt-0.5" />
-              <span>Serving Houston &<br />Surrounding Areas</span>
+              <span>11331 Richmond Ave. #102<br />Houston, TX 77082</span>
             </li>
           </ul>
         </div>
