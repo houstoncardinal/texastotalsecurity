@@ -5,7 +5,6 @@ import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTABlock from "@/components/CTABlock";
 import SectionHeading from "@/components/SectionHeading";
-import LeadForm from "@/components/LeadForm";
 import { Link } from "react-router-dom";
 import { generateLocalBusinessSchema, generateFAQSchema, generateOrganizationSchema } from "@/lib/seo";
 import {
@@ -51,11 +50,11 @@ const Index = () => {
     />
     {/* Hero */}
     <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(205_100%_50%/0.15),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(0_85%_46%/0.15),transparent_60%)]" />
       <div className="container-tight px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 relative z-10">
         <div className="max-w-3xl">
-          <div className="trust-badge mb-6 bg-primary-foreground/10 text-primary-foreground">
-            <Shield className="w-4 h-4 text-accent" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-accent/20 text-accent-foreground mb-6">
+            <Shield className="w-4 h-4" />
             Houston's Trusted Security Experts — 30+ Years
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight mb-6">
@@ -141,7 +140,7 @@ const Index = () => {
               <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
                 <step.icon className="w-7 h-7 text-accent" />
               </div>
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-7 h-7 rounded-full bg-accent text-accent-foreground text-xs font-bold flex items-center justify-center">
                 {i + 1}
               </div>
               <h3 className="font-display font-semibold text-foreground mb-2">{step.title}</h3>
