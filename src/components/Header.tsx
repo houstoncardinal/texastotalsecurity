@@ -40,7 +40,7 @@ const Header = () => {
             <a href="mailto:info@texastotalsecurity.com" className="opacity-80 hover:opacity-100 transition-opacity">
               info@texastotalsecurity.com
             </a>
-            <a href="tel:7133879937" className="flex items-center gap-1.5 font-semibold">
+            <a href="tel:7133879937" className="flex items-center gap-1.5 font-semibold text-accent">
               <Phone className="w-3.5 h-3.5" />
               (713) 387-9937
             </a>
@@ -52,11 +52,11 @@ const Header = () => {
       <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
         <div className="container-tight flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <Shield className="w-6 h-6 text-accent" />
+            <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
+              <Shield className="w-6 h-6 text-accent-foreground" />
             </div>
             <div className="leading-tight">
-              <span className="font-display font-bold text-primary text-lg block">Texas Total Security</span>
+              <span className="font-display font-bold text-foreground text-lg block">Texas Total Security</span>
               <span className="text-muted-foreground text-[11px] tracking-wider uppercase">Houston, TX</span>
             </div>
           </Link>
@@ -92,7 +92,7 @@ const Header = () => {
                 to={link.href}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   location.pathname === link.href
-                    ? "bg-secondary text-primary"
+                    ? "bg-accent/10 text-accent"
                     : "text-foreground hover:bg-secondary"
                 }`}
               >
@@ -104,7 +104,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-3">
             <a
               href="tel:7133879937"
-              className="flex items-center gap-2 text-sm font-semibold text-primary"
+              className="flex items-center gap-2 text-sm font-semibold text-accent"
             >
               <Phone className="w-4 h-4" />
               (713) 387-9937
@@ -159,7 +159,7 @@ const Header = () => {
               </Link>
               <a
                 href="tel:7133879937"
-                className="block text-center py-3 text-sm font-semibold text-primary"
+                className="block text-center py-3 text-sm font-semibold text-accent"
               >
                 Call (713) 387-9937
               </a>
