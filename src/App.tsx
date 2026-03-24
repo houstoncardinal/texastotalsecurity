@@ -66,6 +66,7 @@ const App = () => (
             {/* City SEO Landing Pages */}
             <Route path="/:citySlug-security-systems" element={<CityLanding />} />
             <Route path="/:citySlug-security" element={<CityLanding />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
