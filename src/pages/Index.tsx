@@ -28,12 +28,32 @@ const testimonials = [
   {
     name: "Business Owner",
     role: "Houston, TX",
-    text: "My business was growing so quickly that I needed to keep an eye on day to day operations at my office but, I couldn't be there all the time. Texas Total Security installed the surveillance cameras in all the right locations. Now I can be on the go and travel while getting remote access to my cameras on my cell phone or tablet.",
+    text: "My business was growing so quickly that I needed to keep an eye on day to day operations at my office but, I couldn't be there all the time. Texas Total Security installed the surveillance cameras in all the right locations. Now I can be on the go and travel while getting remote access to my cameras on my cell phone or tablet. Now I spend more time with family!",
+  },
+  {
+    name: "Homeowner",
+    role: "Houston, TX",
+    text: "My husband and I were unhappy with our current big national alarm company. Now Texas Total Security provides us with great customer service and alarm monitoring. It was a quick simple process to switch!",
+  },
+  {
+    name: "Property Manager",
+    role: "Houston, TX",
+    text: "I needed help getting video coverage and protecting our entrance and exit gates. Texas Total Security not only provided great security camera coverage so we can see who hits the gates but, provided deterrence with red and blue strobe lights. Their license plate cameras are great!",
   },
   {
     name: "Homeowner",
     role: "Bellaire, TX",
     text: "During the process of building our new house in Bellaire I decided we needed to get professional security. What really stood out the most was how Texas Total Security described to me in such detail and confidence the process and exactly what I will be getting.",
+  },
+  {
+    name: "Homeowner",
+    role: "Houston, TX",
+    text: "My friend referred me to Tim and Texas Total Security because they were pleased with the quality of security cameras and they felt safe with the new equipment. Tim came out to my home and provided me with the free security analysis. He was professional and courteous but really listened to what I needed. I have full control of my home!",
+  },
+  {
+    name: "HOA Board Member",
+    role: "Houston, TX",
+    text: "So glad we went with Texas Total Security! They have helped us with providing CCTV footage of events that HPD needed. They even dropped the memory stick at the property management's office.",
   },
 ];
 
@@ -76,6 +96,9 @@ const Index = () => {
           </h1>
           <p className="text-lg sm:text-xl text-primary-foreground/70 max-w-xl mb-4 leading-relaxed">
             #1 Security Systems for Homes and Businesses in Houston, TX
+          </p>
+          <p className="text-base text-primary-foreground/60 max-w-xl mb-4 leading-relaxed">
+            Also Serving All Surrounding Areas
           </p>
           <p className="text-base text-primary-foreground/60 max-w-xl mb-8 leading-relaxed">
             Experience a higher level of safety with proven, modern security systems tailored to homes and businesses of every size. Our solutions feature advanced alarm systems designed to handle the unique conditions and security concerns found throughout the Houston area.
@@ -203,10 +226,15 @@ const Index = () => {
     <section className="section-padding">
       <div className="container-tight">
         <SectionHeading title="What Our Customers Are Saying About Us…" subtitle="Real feedback from homeowners, business owners, and property managers across Houston." />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.slice(0, 6).map((t, i) => (
             <TestimonialCard key={i} {...t} />
           ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link to="/reviews" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all">
+            View All Reviews <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>
@@ -247,7 +275,12 @@ const Index = () => {
     <section className="section-padding bg-secondary">
       <div className="container-tight text-center max-w-2xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-display font-bold text-foreground mb-4">Check Us Out on Google!</h2>
-        <p className="text-muted-foreground mb-6">Where you can learn more about our company information, view photos of past projects, and read reviews.</p>
+        <p className="text-muted-foreground mb-2">Where you can learn more about our:</p>
+        <ul className="text-muted-foreground mb-6 space-y-1">
+          <li>Company Information</li>
+          <li>View Photos of Past Projects</li>
+          <li>Reviews</li>
+        </ul>
         <a
           href="https://maps.app.goo.gl/o4XYckgxB3B77AyW8"
           target="_blank"

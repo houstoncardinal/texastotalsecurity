@@ -4,17 +4,38 @@ import CTABlock from "@/components/CTABlock";
 import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
-import { Camera, Eye, Zap, Sun, Wifi, Video, MonitorSpeaker, Shield } from "lucide-react";
+import { Camera, Eye, Zap, Sun, Wifi, Video, MonitorSpeaker, Shield, CheckCircle2 } from "lucide-react";
 
 const cameraTypes = [
   { icon: Camera, title: "HD & 4K Cameras", desc: "Crystal-clear footage day and night with professional-grade IP cameras built for Houston weather." },
-  { icon: Eye, title: "License Plate Cameras", desc: "Specialized LPR cameras that capture plate numbers clearly — essential for HOAs, parking, and commercial properties." },
+  { icon: Eye, title: "License Plate Cameras", desc: "Cameras specifically used to capture license plates — essential for HOAs, parking, and commercial properties." },
   { icon: Zap, title: "Active Deterrence", desc: "Cameras with built-in sirens, strobes, and two-way audio that actively deter intruders before they act." },
-  { icon: Sun, title: "Solar Camera Systems", desc: "Off-grid surveillance for construction sites, ranches, and remote locations with solar-powered cameras." },
-  { icon: Wifi, title: "Wireless Systems", desc: "Flexible wireless camera setups for properties where running cable isn't practical or desired." },
-  { icon: Video, title: "PTZ & Fisheye", desc: "Pan-tilt-zoom and 360° fisheye cameras for large areas requiring comprehensive coverage from fewer units." },
-  { icon: MonitorSpeaker, title: "Doorbell Cameras", desc: "Video doorbell integration for front-door visibility with two-way communication and motion alerts." },
+  { icon: Sun, title: "Solar Camera Systems", desc: "Used in areas where there is no electricity. Off-grid surveillance for construction sites, ranches, and remote locations." },
+  { icon: Wifi, title: "Wireless Systems", desc: "Using a secured wireless network setup or access points/antennas, we design multiple cameras at different locations that all function together on one network." },
+  { icon: Video, title: "PTZ & Fisheye", desc: "Pan-tilt-zoom cameras for large areas like parking lots, controlled with joystick or auto patrol. Fisheye cameras for top-down coverage in auditoriums, sports centers, jewelry stores." },
+  { icon: MonitorSpeaker, title: "Doorbell Cameras", desc: "2-way voice and notification system for home or business. Can record 24/7 to DVR or NVR security hard drive. Used with cell phone app." },
   { icon: Shield, title: "Remote Viewing", desc: "View all cameras from your phone, tablet, or computer — anywhere in the world, anytime." },
+];
+
+const fullCameraList = [
+  "License Plate Cameras — Cameras specifically used to capture license plates",
+  "90 Degree Wide Angle Cameras — Most common camera. Provides large areas of coverage with one camera",
+  "180 Degree Cameras — Provides 180 degree coverage with one camera",
+  "Fisheye Cameras — Used for top-down coverage (Auditoriums, Sports Centers, Jewelry Stores, etc.)",
+  "PTZ Camera (Pan, Tilt, Zoom) — Coverage for large areas like parking lots or fields. Joystick or auto patrol",
+  "Doorbell Camera — 2 way voice and notification system. Records 24/7 to DVR or NVR",
+  "Audio Recording — Built into the security camera or standalone microphone",
+  "Security Poles — Custom setups with wide angle cameras, LPR cameras, LED strobe light kits, speakers, antennas",
+  "Wireless Security Camera Systems — Secured wireless network with access points/antennas across locations",
+  "Solar Camera Systems — For areas with no electricity",
+  "Remote Camera Systems — Offsite systems using antennas, air cards, hot spots, or solar",
+  "Construction Site Camera Systems — Surveillance at construction sites",
+  "Analytic Systems — AI-powered analytics including line crossing, vehicle detection, person detection",
+  "Deterrence Systems — Active deterrence with prerecorded audio messages to inform or keep away",
+  "LED Strobe Light Kits — Deterrence notification, typically red and blue colors",
+  "Notification Systems — Alerts to cell phone app or directly to DVR/NVR monitor",
+  "2 Way Voice Systems — Outdoor speaker system to talk with someone while watching through camera app",
+  "Recording Systems — NVR or DVR with security hard drives for video footage recording",
 ];
 
 const faqs = [
@@ -28,7 +49,7 @@ const faqs = [
 const SecurityCameras = () => (
   <Layout>
     <PageHero
-      title="Security Camera Systems"
+      title="Security Camera Systems & Surveillance"
       subtitle="Professional surveillance design, installation, and support. From single-camera doorbell setups to enterprise-grade multi-site systems — custom-built for Houston properties."
       ctaText="Get a Custom Surveillance Plan"
     />
@@ -48,6 +69,7 @@ const SecurityCameras = () => (
       </div>
     </section>
 
+    {/* Full equipment list from original services page */}
     <section className="section-padding bg-secondary">
       <div className="container-tight">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -59,8 +81,24 @@ const SecurityCameras = () => (
               <p>Our installations are clean, weatherproof, and built to last. We run structured cabling, configure network settings, optimize recording schedules, and set up remote access on all your devices before we leave.</p>
             </div>
           </div>
-          <LeadForm title="Request a Custom Camera Design" subtitle="Tell us about your property and surveillance goals." />
+          <div>
+            <h3 className="text-xl font-display font-bold text-foreground mb-4">Complete Camera & Surveillance Equipment</h3>
+            <div className="space-y-2 max-h-[500px] overflow-y-auto pr-2">
+              {fullCameraList.map((item) => (
+                <div key={item} className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-1" />
+                  <span className="text-sm text-muted-foreground leading-relaxed">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section className="section-padding">
+      <div className="container-tight max-w-2xl mx-auto">
+        <LeadForm title="Request a Custom Camera Design" subtitle="Tell us about your property and surveillance goals." />
       </div>
     </section>
 
