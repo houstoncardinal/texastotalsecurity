@@ -14,52 +14,32 @@ import {
 
 const processSteps = [
   { icon: PhoneCall, title: "Initial Phone Call", desc: "Speak with a security specialist about your needs and schedule your free analysis." },
-  { icon: ClipboardCheck, title: "Free Onsite Analysis", desc: "Security Pro meets with you onsite at your home or business. Examines layout and gathers information regarding equipment." },
+  { icon: ClipboardCheck, title: "Free Onsite Analysis", desc: "Security Pro meets with you onsite. Examines layout and gathers information regarding equipment." },
   { icon: Wrench, title: "Professional Installation", desc: "Certified technicians install your system with precision and clean workmanship." },
-  { icon: HeadphonesIcon, title: "Follow Up & Support", desc: "Follow up phone call, 24/7 local monitoring, maintenance, and fast-response support for the life of your system." },
+  { icon: HeadphonesIcon, title: "Follow Up & Support", desc: "24/7 local monitoring, maintenance, and fast-response support for the life of your system." },
 ];
 
 const testimonials = [
-  {
-    name: "Homeowner",
-    role: "Houston, TX",
-    text: "I love my new security cameras — the coverage and resolution is great! The camera monitor is awesome. I can cook in the kitchen and keep an eye on the kids while they play. Also the street and driveway coverage is nice. Thank you Texas Total Security!",
-  },
-  {
-    name: "Business Owner",
-    role: "Houston, TX",
-    text: "My business was growing so quickly that I needed to keep an eye on day to day operations at my office but, I couldn't be there all the time. Texas Total Security installed the surveillance cameras in all the right locations. Now I can be on the go and travel while getting remote access to my cameras on my cell phone or tablet. Now I spend more time with family!",
-  },
-  {
-    name: "Homeowner",
-    role: "Houston, TX",
-    text: "My husband and I were unhappy with our current big national alarm company. Now Texas Total Security provides us with great customer service and alarm monitoring. It was a quick simple process to switch!",
-  },
-  {
-    name: "Property Manager",
-    role: "Houston, TX",
-    text: "I needed help getting video coverage and protecting our entrance and exit gates. Texas Total Security not only provided great security camera coverage so we can see who hits the gates but, provided deterrence with red and blue strobe lights. Their license plate cameras are great!",
-  },
-  {
-    name: "Homeowner",
-    role: "Bellaire, TX",
-    text: "During the process of building our new house in Bellaire I decided we needed to get professional security. What really stood out the most was how Texas Total Security described to me in such detail and confidence the process and exactly what I will be getting.",
-  },
-  {
-    name: "Homeowner",
-    role: "Houston, TX",
-    text: "My friend referred me to Tim and Texas Total Security because they were pleased with the quality of security cameras and they felt safe with the new equipment. Tim came out to my home and provided me with the free security analysis. He was professional and courteous but really listened to what I needed. I have full control of my home!",
-  },
-  {
-    name: "HOA Board Member",
-    role: "Houston, TX",
-    text: "So glad we went with Texas Total Security! They have helped us with providing CCTV footage of events that HPD needed. They even dropped the memory stick at the property management's office.",
-  },
+  { name: "Homeowner", role: "Houston, TX", text: "I love my new security cameras — the coverage and resolution is great! The camera monitor is awesome. I can cook in the kitchen and keep an eye on the kids while they play. Also the street and driveway coverage is nice. Thank you Texas Total Security!" },
+  { name: "Business Owner", role: "Houston, TX", text: "My business was growing so quickly that I needed to keep an eye on day to day operations at my office but, I couldn't be there all the time. Texas Total Security installed the surveillance cameras in all the right locations. Now I can be on the go and travel while getting remote access to my cameras on my cell phone or tablet." },
+  { name: "Homeowner", role: "Houston, TX", text: "My husband and I were unhappy with our current big national alarm company. Now Texas Total Security provides us with great customer service and alarm monitoring. It was a quick simple process to switch!" },
+  { name: "Property Manager", role: "Houston, TX", text: "I needed help getting video coverage and protecting our entrance and exit gates. Texas Total Security not only provided great security camera coverage so we can see who hits the gates but, provided deterrence with red and blue strobe lights. Their license plate cameras are great!" },
+  { name: "Homeowner", role: "Bellaire, TX", text: "During the process of building our new house in Bellaire I decided we needed to get professional security. What really stood out the most was how Texas Total Security described to me in such detail and confidence the process and exactly what I will be getting." },
+  { name: "Homeowner", role: "Houston, TX", text: "My friend referred me to Tim and Texas Total Security because they were pleased with the quality of security cameras and they felt safe with the new equipment. Tim came out to my home and provided me with the free security analysis. He was professional and courteous but really listened to what I needed." },
 ];
 
 const industries = [
   "Residential", "HOAs", "Retail", "Medical", "Schools", "Restaurants",
   "Industrial", "Hotels", "Construction", "Parking", "Government", "Worship",
+];
+
+const whyBest = [
+  { title: "Reliable Security Equipment", desc: "Equipment built for real-world Houston conditions, backed by professional support." },
+  { title: "Newest Technology to Fight Crime", desc: "Active deterrence cameras, LPR systems, and smart integrations." },
+  { title: "30+ Years of Trusted Service", desc: "Trustworthy security techs working in Houston and surrounding areas." },
+  { title: "Friendly, Local Customer Service", desc: "You'll know your technician by name, and they'll know your system." },
+  { title: "In-House Monitoring by Dispatch Center", desc: "Local operators dispatch local authorities fast — not a distant call center." },
+  { title: "We Don't Sell Our Alarm Contracts", desc: "Your account stays with us — always. Never sold to national companies." },
 ];
 
 const faqs = [
@@ -81,38 +61,57 @@ const Index = () => {
       description="Houston's trusted security experts for 30+ years. Custom alarm systems, security cameras, 24/7 local monitoring for homes, businesses, and HOAs. Free onsite security analysis. Call (713) 387-9937."
       schemas={schemas}
     />
-    {/* Hero */}
+
+    {/* ━━━ HERO ━━━ */}
     <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(0_85%_46%/0.15),transparent_60%)]" />
-      <div className="container-tight px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 relative z-10">
+      <div className="absolute inset-0" style={{ background: "var(--gradient-hero-radial)" }} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_90%,hsl(0_85%_45%/0.06),transparent_40%)]" />
+
+      <div className="container-tight px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40 relative z-10">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-accent/20 text-accent-foreground mb-6">
-            <Shield className="w-4 h-4" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-accent/15 text-accent border border-accent/20 mb-8 animate-fade-up">
+            <Shield className="w-3.5 h-3.5" />
             Houston's Trusted Security Experts — 30+ Years
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-primary-foreground leading-[1.05] mb-6 animate-fade-up animate-delay-100">
             Get the Protection<br />
             <span className="text-gradient">You Deserve</span>
           </h1>
-          <p className="text-lg sm:text-xl text-primary-foreground/70 max-w-xl mb-4 leading-relaxed">
+          <p className="text-lg sm:text-xl text-primary-foreground/70 max-w-xl mb-2 leading-relaxed animate-fade-up animate-delay-200">
             #1 Security Systems for Homes and Businesses in Houston, TX
           </p>
-          <p className="text-base text-primary-foreground/60 max-w-xl mb-4 leading-relaxed">
+          <p className="text-sm text-primary-foreground/40 max-w-xl mb-4 animate-fade-up animate-delay-200">
             Also Serving All Surrounding Areas
           </p>
-          <p className="text-base text-primary-foreground/60 max-w-xl mb-8 leading-relaxed">
-            Experience a higher level of safety with proven, modern security systems tailored to homes and businesses of every size. Our solutions feature advanced alarm systems designed to handle the unique conditions and security concerns found throughout the Houston area.
+          <p className="text-base text-primary-foreground/50 max-w-xl mb-10 leading-relaxed animate-fade-up animate-delay-300">
+            Experience a higher level of safety with proven, modern security systems tailored to homes and businesses of every size. Our solutions feature advanced alarm systems designed for Houston.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animate-delay-400">
             <Link to="/free-analysis" className="btn-primary-gradient inline-flex items-center justify-center gap-2 text-base px-8 py-4">
               Get a Free Security Analysis <ArrowRight className="w-5 h-5" />
             </Link>
-            <a
-              href="tel:7133879937"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-primary-foreground border border-primary-foreground/20 hover:bg-primary-foreground/10 transition-colors"
-            >
+            <a href="tel:7133879937" className="btn-outline-light">
               <Phone className="w-5 h-5" /> Call (713) 387-9937
             </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats bar overlay */}
+      <div className="relative z-10 border-t border-primary-foreground/8">
+        <div className="container-tight px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { num: "30+", label: "Years Protecting Houston" },
+              { num: "1000s", label: "Systems Installed" },
+              { num: "24/7", label: "Local Monitoring" },
+              { num: "100%", label: "Locally Owned" },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <p className="stat-number mb-1">{s.num}</p>
+                <p className="text-xs text-primary-foreground/40 font-medium uppercase tracking-wider">{s.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -120,8 +119,8 @@ const Index = () => {
 
     <TrustBar />
 
-    {/* Services Overview */}
-    <section className="section-padding">
+    {/* ━━━ SERVICES ━━━ */}
+    <section className="section-padding" style={{ background: "var(--gradient-surface)" }}>
       <div className="container-tight">
         <SectionHeading
           title="Specializing in…"
@@ -129,35 +128,30 @@ const Index = () => {
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <ServiceCard icon={Shield} title="Alarm Systems" description="Custom alarm design, installation, and local monitoring for homes and businesses. Hardwired, wireless, and hybrid solutions." href="/alarm-systems" />
-          <ServiceCard icon={Camera} title="Security Camera & Surveillance Systems" description="HD surveillance, license plate cameras, PTZ, active deterrence, and remote viewing — professionally installed and supported." href="/security-cameras" />
-          <ServiceCard icon={Home} title="Residential Security" description="Whole-home protection with smart integration, environmental sensors, and 24/7 monitoring tailored to your family's needs." href="/residential-security" />
-          <ServiceCard icon={Building2} title="Commercial Security" description="Scalable security for offices, retail, industrial sites, and multi-location businesses. Custom-designed for your operations." href="/commercial-security" />
-          <ServiceCard icon={Users} title="HOA Security" description="Gate cameras, license plate recognition, common area surveillance, and community-wide security systems for property managers and boards." href="/hoa-security" />
-          <ServiceCard icon={Radio} title="Active Deterrence & Notification Systems" description="Cameras with sirens, strobes, and two-way talk that confront trespassers. Indoor or outdoor networking and WiFi systems." href="/monitoring-services" />
+          <ServiceCard icon={Camera} title="Security Camera & Surveillance" description="HD surveillance, license plate cameras, PTZ, active deterrence, and remote viewing — professionally installed." href="/security-cameras" />
+          <ServiceCard icon={Home} title="Residential Security" description="Whole-home protection with smart integration, environmental sensors, and 24/7 monitoring for your family." href="/residential-security" />
+          <ServiceCard icon={Building2} title="Commercial Security" description="Scalable security for offices, retail, industrial sites, and multi-location businesses." href="/commercial-security" />
+          <ServiceCard icon={Users} title="HOA Security" description="Gate cameras, license plate recognition, common area surveillance, and community-wide security." href="/hoa-security" />
+          <ServiceCard icon={Radio} title="Active Deterrence & Monitoring" description="Cameras with sirens, strobes, and two-way talk. Indoor/outdoor networking and WiFi systems." href="/monitoring-services" />
         </div>
       </div>
     </section>
 
-    {/* Why We're the Best */}
-    <section className="section-padding bg-secondary">
+    {/* ━━━ WHY WE'RE THE BEST ━━━ */}
+    <section className="section-padding">
       <div className="container-tight">
         <SectionHeading
           title="Why We're the Best"
-          subtitle="We're not a national franchise. We're your neighbors — and we've been protecting Houston properties for over three decades."
+          subtitle="We're not a national franchise. We're your neighbors — protecting Houston properties for over three decades."
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            { title: "Reliable Security Equipment", desc: "Equipment that works when you need it — built for real-world Houston conditions and backed by professional support." },
-            { title: "Newest Technology to Fight Crime", desc: "We utilize the newest technology to fight crime, including active deterrence cameras, LPR systems, and smart integrations." },
-            { title: "30+ Years of Trusted Service", desc: "Trustworthy security techs working in Houston and surrounding areas for over 30 years." },
-            { title: "Friendly, Local Customer Service", desc: "Customer service by friendly and local staff. You'll know your technician by name, and they'll know your system inside and out." },
-            { title: "In-House Monitoring by Dispatch Center", desc: "In-house monitoring by dispatch center — not a distant national call center. Local operators dispatch local authorities fast." },
-            { title: "We Don't Sell Our Alarm Contracts", desc: "We don't sell our alarm contracts to big national companies. Your account stays with us — always." },
-          ].map((item) => (
-            <div key={item.title} className="flex gap-4">
-              <CheckCircle2 className="w-6 h-6 text-accent shrink-0 mt-0.5" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {whyBest.map((item) => (
+            <div key={item.title} className="flex gap-4 group">
+              <div className="w-10 h-10 rounded-xl bg-accent/8 flex items-center justify-center shrink-0 group-hover:bg-accent/15 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-accent" />
+              </div>
               <div>
-                <h3 className="font-display font-semibold text-foreground mb-1">{item.title}</h3>
+                <h3 className="font-display font-semibold text-foreground mb-1.5">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
             </div>
@@ -166,36 +160,40 @@ const Index = () => {
       </div>
     </section>
 
-    {/* Process */}
-    <section className="section-padding">
-      <div className="container-tight">
+    {/* ━━━ PROCESS ━━━ */}
+    <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+      <div className="absolute inset-0" style={{ background: "var(--gradient-hero-radial)" }} />
+      <div className="container-tight px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 relative z-10">
         <SectionHeading
           title="Our Process"
-          subtitle="From your first call to 24/7 monitored protection — we make the process simple, transparent, and stress-free."
+          subtitle="From your first call to 24/7 monitored protection — simple, transparent, and stress-free."
+          light
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {processSteps.map((step, i) => (
             <div key={step.title} className="text-center relative">
-              <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mx-auto mb-5">
                 <step.icon className="w-7 h-7 text-accent" />
               </div>
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-7 h-7 rounded-full bg-accent text-accent-foreground text-xs font-bold flex items-center justify-center">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-7 h-7 rounded-full bg-accent text-accent-foreground text-xs font-bold flex items-center justify-center shadow-[0_2px_8px_hsl(0_85%_45%/0.4)]">
                 {i + 1}
               </div>
-              <h3 className="font-display font-semibold text-foreground mb-2">{step.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+              <h3 className="font-display font-semibold text-primary-foreground mb-2">{step.title}</h3>
+              <p className="text-sm text-primary-foreground/50 leading-relaxed">{step.desc}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    {/* Free Onsite Security Analysis */}
-    <section className="section-padding bg-secondary">
+    {/* ━━━ FREE ANALYSIS ━━━ */}
+    <section className="section-padding" style={{ background: "var(--gradient-surface)" }}>
       <div className="container-tight">
-        <div className="glass-card p-8 sm:p-12 lg:p-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="glass-card-static p-8 sm:p-12 lg:p-16 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative z-10">
             <div>
+              <div className="divider-accent !mx-0" />
               <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-6">Free Onsite Security Analysis</h2>
               <ul className="space-y-4">
                 {[
@@ -222,16 +220,16 @@ const Index = () => {
       </div>
     </section>
 
-    {/* Testimonials */}
+    {/* ━━━ TESTIMONIALS ━━━ */}
     <section className="section-padding">
       <div className="container-tight">
-        <SectionHeading title="What Our Customers Are Saying About Us…" subtitle="Real feedback from homeowners, business owners, and property managers across Houston." />
+        <SectionHeading title="What Our Customers Are Saying…" subtitle="Real feedback from homeowners, business owners, and property managers across Houston." />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.slice(0, 6).map((t, i) => (
+          {testimonials.map((t, i) => (
             <TestimonialCard key={i} {...t} />
           ))}
         </div>
-        <div className="text-center mt-8">
+        <div className="text-center mt-10">
           <Link to="/reviews" className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all">
             View All Reviews <ArrowRight className="w-4 h-4" />
           </Link>
@@ -239,8 +237,8 @@ const Index = () => {
       </div>
     </section>
 
-    {/* Industries Preview */}
-    <section className="section-padding bg-secondary">
+    {/* ━━━ INDUSTRIES ━━━ */}
+    <section className="section-padding-sm" style={{ background: "var(--gradient-surface)" }}>
       <div className="container-tight">
         <SectionHeading title="Industries We Protect" subtitle="Custom security solutions for every sector — from homes to hospitals, schools to construction sites." />
         <div className="flex flex-wrap justify-center gap-3 mb-8">
@@ -256,13 +254,13 @@ const Index = () => {
       </div>
     </section>
 
-    {/* FAQ */}
+    {/* ━━━ FAQ ━━━ */}
     <section className="section-padding">
       <div className="container-tight">
-        <SectionHeading title="Frequently Asked Questions (FAQs)" />
-        <div className="max-w-3xl mx-auto space-y-4">
+        <SectionHeading title="Frequently Asked Questions" />
+        <div className="max-w-3xl mx-auto space-y-3">
           {faqs.map((faq) => (
-            <div key={faq.q} className="glass-card p-6">
+            <div key={faq.q} className="glass-card-static p-6 sm:p-7">
               <h3 className="font-display font-semibold text-foreground mb-2 text-sm">{faq.q}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
             </div>
@@ -271,16 +269,10 @@ const Index = () => {
       </div>
     </section>
 
-    {/* Google CTA */}
-    <section className="section-padding bg-secondary">
+    {/* ━━━ GOOGLE CTA ━━━ */}
+    <section className="section-padding-sm" style={{ background: "var(--gradient-surface)" }}>
       <div className="container-tight text-center max-w-2xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-display font-bold text-foreground mb-4">Check Us Out on Google!</h2>
-        <p className="text-muted-foreground mb-2">Where you can learn more about our:</p>
-        <ul className="text-muted-foreground mb-6 space-y-1">
-          <li>Company Information</li>
-          <li>View Photos of Past Projects</li>
-          <li>Reviews</li>
-        </ul>
+        <SectionHeading title="Check Us Out on Google!" subtitle="Company information, photos of past projects, and reviews." />
         <a
           href="https://maps.app.goo.gl/o4XYckgxB3B77AyW8"
           target="_blank"
