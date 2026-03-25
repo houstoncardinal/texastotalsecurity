@@ -7,6 +7,7 @@ import { lazy, Suspense } from "react";
 
 import Index from "./pages/Index";
 
+const Services = lazy(() => import("./pages/Services"));
 const About = lazy(() => import("./pages/About"));
 const AlarmSystems = lazy(() => import("./pages/AlarmSystems"));
 const SecurityCameras = lazy(() => import("./pages/SecurityCameras"));
@@ -45,11 +46,12 @@ const App = () => (
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About />} />
             <Route path="/alarm-systems" element={<AlarmSystems />} />
             <Route path="/security-cameras" element={<SecurityCameras />} />
-            <Route path="/residential-security" element={<ResidentialSecurity />} />
-            <Route path="/commercial-security" element={<CommercialSecurity />} />
+            <Route path="/residential" element={<ResidentialSecurity />} />
+            <Route path="/commercial" element={<CommercialSecurity />} />
             <Route path="/hoa-security" element={<HOASecurity />} />
             <Route path="/monitoring-services" element={<MonitoringServices />} />
             <Route path="/service-maintenance" element={<ServiceMaintenance />} />

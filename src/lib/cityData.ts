@@ -211,6 +211,24 @@ export const cities: CityData[] = [
     metaTitle: "Bellaire Security Systems | Premium Alarm & Camera Installation | Texas Total Security",
     metaDescription: "Premium security systems for Bellaire, TX homes. Discreet cameras, custom alarms & 24/7 local monitoring. Trusted 30+ years. Call (713) 387-9937.",
   },
+  {
+    slug: "memorial-houston",
+    name: "Memorial Houston",
+    county: "Harris County",
+    population: "80,000+ (Memorial area)",
+    intro: "The Memorial area of Houston encompasses some of the city's most sought-after neighborhoods — including Memorial Villages, Bunker Hill, Piney Point, Hedwig Village, and Spring Valley. With large wooded lots, upscale estates, and winding streets, Memorial properties require security systems that blend high performance with architectural sensitivity.",
+    securityContext: "Memorial Houston's affluent neighborhoods and secluded home sites make them frequent targets for residential burglary and vehicle theft. The area's mature tree canopy and large lot sizes create blind spots that off-the-shelf systems can't reliably cover — making custom camera placement and professionally monitored alarm systems essential investments for Memorial homeowners.",
+    neighborhoods: ["Bunker Hill Village", "Piney Point Village", "Hedwig Village", "Spring Valley Village", "Hunters Creek Village", "Memorial City", "Energy Corridor"],
+    services: ["estate security systems", "discreet camera installation", "alarm systems", "smart home security integration", "24/7 alarm monitoring", "access control", "video doorbell systems"],
+    faqs: [
+      { question: "Do you install security systems in the Memorial Houston area?", answer: "Yes. Texas Total Security provides professional alarm and camera installation throughout Memorial Houston — including Bunker Hill, Piney Point, Hedwig Village, Hunters Creek, and the Energy Corridor. We design every system around your property's unique layout." },
+      { question: "How do you handle camera placement on large Memorial properties?", answer: "Our technicians conduct a thorough onsite evaluation to map blind spots, entry points, and coverage gaps created by mature trees and estate-style landscaping. We position cameras to maximize coverage while keeping them architecturally unobtrusive." },
+      { question: "Can you integrate security with smart home systems in Memorial?", answer: "Absolutely. We work with leading smart home platforms to integrate your alarm system, cameras, and access control into a unified, app-controlled ecosystem — ideal for Memorial homeowners who want seamless, remote management of their security." },
+      { question: "What is the cost of a security system in Memorial Houston?", answer: "System costs vary based on property size, number of cameras, alarm zones, and monitoring needs. Texas Total Security provides free onsite assessments and transparent quotes with no hidden fees. Call (713) 387-9937 to schedule your complimentary evaluation." },
+    ],
+    metaTitle: "Memorial Houston Security Systems | Alarm & Camera Installation | Texas Total Security",
+    metaDescription: "Custom security systems for Memorial Houston, TX. Estate-grade alarm & camera installation for Bunker Hill, Piney Point, Hedwig Village & more. Call (713) 387-9937.",
+  },
 ];
 
 export function getCityBySlug(slug: string): CityData | undefined {

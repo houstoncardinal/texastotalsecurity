@@ -19,8 +19,8 @@ import { Shield, Camera, Radio, Home, Building2, Users, CheckCircle2, MapPin, Ar
 const serviceLinks = [
   { label: "Alarm Systems", href: "/alarm-systems" },
   { label: "Security Cameras", href: "/security-cameras" },
-  { label: "Residential Security", href: "/residential-security" },
-  { label: "Commercial Security", href: "/commercial-security" },
+  { label: "Residential Security", href: "/residential" },
+  { label: "Commercial Security", href: "/commercial" },
   { label: "HOA Security", href: "/hoa-security" },
   { label: "Monitoring Services", href: "/monitoring-services" },
 ];

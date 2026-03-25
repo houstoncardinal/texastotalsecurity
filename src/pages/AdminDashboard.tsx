@@ -87,7 +87,7 @@ const topPages = [
   { page: "/security-cameras", views: 2180, conversion: 4.1 },
   { page: "/alarm-systems", views: 1950, conversion: 3.8 },
   { page: "/free-analysis", views: 1420, conversion: 8.5 },
-  { page: "/commercial-security", views: 1100, conversion: 5.2 },
+  { page: "/commercial", views: 1100, conversion: 5.2 },
 ];
 
 type NavItem = {
@@ -753,12 +753,12 @@ const AnalyticsPage = () => {
             <tbody>
               {[
                 { page: "/free-analysis", views: 1420, leads: 121, rate: 8.5 },
-                { page: "/commercial-security", views: 1100, leads: 57, rate: 5.2 },
+                { page: "/commercial", views: 1100, leads: 57, rate: 5.2 },
                 { page: "/security-cameras", views: 2180, leads: 89, rate: 4.1 },
                 { page: "/alarm-systems", views: 1950, leads: 74, rate: 3.8 },
                 { page: "/hoa-security", views: 890, leads: 31, rate: 3.5 },
                 { page: "/", views: 4520, leads: 145, rate: 3.2 },
-                { page: "/residential-security", views: 980, leads: 28, rate: 2.9 },
+                { page: "/residential", views: 980, leads: 28, rate: 2.9 },
               ].map((p) => (
                 <tr key={p.page} className="border-b border-border/50">
                   <td className="py-3 px-2 font-mono text-xs text-foreground">{p.page}</td>

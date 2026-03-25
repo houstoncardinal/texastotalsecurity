@@ -34,8 +34,8 @@ const BlogArticle = () => {
     const labels: Record<string, string> = {
       "/alarm-systems": "Alarm Systems",
       "/security-cameras": "Security Cameras",
-      "/residential-security": "Residential Security",
-      "/commercial-security": "Commercial Security",
+      "/residential": "Residential Security",
+      "/commercial": "Commercial Security",
       "/hoa-security": "HOA Security",
       "/monitoring-services": "Monitoring Services",
       "/service-maintenance": "Service & Maintenance",

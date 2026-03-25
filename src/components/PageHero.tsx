@@ -16,14 +16,29 @@ const PageHero = ({
   ctaText = "Get a Free Security Analysis",
   ctaHref = "/free-analysis",
 }: PageHeroProps) => (
-  <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
-    <div className="absolute inset-0" style={{ background: "var(--gradient-hero-radial)" }} />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,hsl(0_85%_45%/0.06),transparent_40%)]" />
-    <div className="container-tight px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 relative z-10 text-center max-w-4xl mx-auto">
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-primary-foreground leading-[1.1] mb-5 animate-fade-up">
+  <section
+    className="relative overflow-hidden"
+    style={{ background: "hsl(0 0% 4%)" }}
+  >
+    {/* Subtle red radial glow */}
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{ background: "radial-gradient(ellipse 80% 60% at 50% -10%, hsl(0 85% 45% / 0.11), transparent 65%)" }}
+    />
+    {/* Fine grid texture */}
+    <div
+      className="absolute inset-0 pointer-events-none opacity-[0.025]"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+        backgroundSize: "64px 64px",
+      }}
+    />
+    <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 text-center">
+      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white leading-[1.07] tracking-tight mb-5 animate-fade-up">
         {title}
       </h1>
-      <p className="text-base sm:text-lg text-primary-foreground/60 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-up animate-delay-100">
+      <p className="text-[1.0625rem] sm:text-lg text-white/48 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-up animate-delay-100">
         {subtitle}
       </p>
       {showCTA && (

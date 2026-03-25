@@ -81,7 +81,7 @@ The short answer: yes. Beyond crime prevention, a security system can reduce hom
 If you're a Houston homeowner considering a security system, the first step is understanding your specific vulnerabilities. Texas Total Security offers a **free onsite security analysis** — a no-obligation assessment of your property by a trained specialist who will identify risks and recommend a custom solution.
 
 Call **(713) 387-9937** or [schedule your free analysis](/free-analysis) today.`,
-    relatedServices: ["/alarm-systems", "/residential-security", "/monitoring-services"],
+    relatedServices: ["/alarm-systems", "/residential", "/monitoring-services"],
     tags: ["houston", "home security", "burglary prevention", "alarm systems"],
   },
   {
@@ -142,7 +142,7 @@ Centralized cloud-based video management allows business owners to view all loca
 Every Houston business has unique security requirements. Texas Total Security provides **free commercial security consultations** — we'll visit your facility, assess your needs, and design a camera system that provides the coverage, features, and reliability your operation demands.
 
 Contact us at **(713) 387-9937** or [request a consultation](/free-analysis).`,
-    relatedServices: ["/security-cameras", "/commercial-security"],
+    relatedServices: ["/security-cameras", "/commercial"],
     tags: ["commercial security", "security cameras", "business surveillance", "houston"],
   },
   {
@@ -193,7 +193,7 @@ Houston's urban sprawl means that police response times can vary significantly b
 Texas Total Security provides **free onsite security analyses** for Houston-area homeowners. Our specialists identify your property's specific vulnerabilities and design a system that makes your home a hard target.
 
 Call **(713) 387-9937** or [schedule online](/free-analysis).`,
-    relatedServices: ["/alarm-systems", "/residential-security", "/security-cameras"],
+    relatedServices: ["/alarm-systems", "/residential", "/security-cameras"],
     tags: ["crime prevention", "burglary", "home security", "houston"],
   },
   {
@@ -285,7 +285,7 @@ Many of our Houston installations use a hybrid approach: wired cameras for prima
 For permanent installations on homes and businesses where maximum reliability and image quality matter, **wired PoE camera systems** are the professional standard. For supplemental coverage, temporary deployments, or locations without existing cabling, **wireless cameras** offer practical flexibility.
 
 Texas Total Security designs custom camera systems that match your property's specific needs. [Schedule a free consultation](/free-analysis) to discuss your options.`,
-    relatedServices: ["/security-cameras", "/residential-security"],
+    relatedServices: ["/security-cameras", "/residential"],
     tags: ["security cameras", "wired cameras", "wireless cameras", "technology"],
   },
   {
