@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, CheckCircle } from "lucide-react";
 
 interface LeadFormProps {
   title?: string;
@@ -21,12 +21,12 @@ const LeadForm = ({
 
   if (submitted) {
     return (
-      <div className="glass-card p-8 sm:p-10 text-center">
-        <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-          <Send className="w-8 h-8 text-accent" />
+      <div className="glass-card-static p-10 sm:p-12 text-center">
+        <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-5 animate-pulse-glow">
+          <CheckCircle className="w-8 h-8 text-accent" />
         </div>
         <h3 className="font-display font-bold text-xl mb-2 text-foreground">Thank You!</h3>
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted-foreground text-sm leading-relaxed">
           Your request has been received. A security specialist will contact you within 24 hours.
         </p>
       </div>
@@ -34,32 +34,17 @@ const LeadForm = ({
   }
 
   return (
-    <div className="glass-card p-6 sm:p-8">
-      {title && <h3 className="font-display font-bold text-xl mb-1 text-foreground">{title}</h3>}
-      {subtitle && <p className="text-sm text-muted-foreground mb-6">{subtitle}</p>}
+    <div className="glass-card-static p-7 sm:p-9">
+      {title && <h3 className="font-display font-bold text-xl mb-1.5 text-foreground">{title}</h3>}
+      {subtitle && <p className="text-sm text-muted-foreground mb-7">{subtitle}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input
-            type="text"
-            placeholder="Full Name *"
-            required
-            className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50"
-          />
-          <input
-            type="tel"
-            placeholder="Phone Number *"
-            required
-            className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50"
-          />
+          <input type="text" placeholder="Full Name *" required className="input-premium" />
+          <input type="tel" placeholder="Phone Number *" required className="input-premium" />
         </div>
-        <input
-          type="email"
-          placeholder="Email Address *"
-          required
-          className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50"
-        />
+        <input type="email" placeholder="Email Address *" required className="input-premium" />
         {showServiceType && (
-          <select className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50">
+          <select className="input-premium">
             <option value="">What type of service do you need?</option>
             <option>Alarm System Installation</option>
             <option>Security Camera Installation</option>
@@ -73,7 +58,7 @@ const LeadForm = ({
             <option>Other</option>
           </select>
         )}
-        <select className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50">
+        <select className="input-premium">
           <option value="">Property Type</option>
           <option>Residential Home</option>
           <option>Condo / Townhome</option>
@@ -85,9 +70,9 @@ const LeadForm = ({
         <textarea
           placeholder="Tell us about your security needs..."
           rows={3}
-          className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 resize-none"
+          className="input-premium resize-none"
         />
-        <button type="submit" className="w-full btn-primary-gradient flex items-center justify-center gap-2">
+        <button type="submit" className="w-full btn-primary-gradient flex items-center justify-center gap-2 text-base py-4">
           <Send className="w-4 h-4" /> Submit Request
         </button>
         <p className="text-xs text-muted-foreground text-center">
