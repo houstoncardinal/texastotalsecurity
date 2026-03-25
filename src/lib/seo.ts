@@ -1,4 +1,4 @@
-// SEO utilities: schema markup, meta tags, breadcrumbs
+ pages// SEO utilities: schema markup, meta tags, breadcrumbs
 
 export interface PageMeta {
   title: string;
