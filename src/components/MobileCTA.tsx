@@ -2,7 +2,7 @@ import { Phone, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const MobileCTA = () => (
-  <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-card/98 backdrop-blur-xl border-t border-border px-4 py-3 flex gap-3">
+  <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-card/98 backdrop-blur-xl border-t border-border px-4 py-3 flex gap-3">
     <a
       href="tel:7133879937"
       className="flex-1 flex items-center justify-center gap-2 bg-primary text-primary-foreground rounded-xl py-3 text-sm font-bold"
