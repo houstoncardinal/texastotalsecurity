@@ -5,6 +5,8 @@ import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
 import TestimonialCard from "@/components/TestimonialCard";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { Camera, Eye, Zap, Shield, Smartphone, FileText, Users, MonitorSpeaker } from "lucide-react";
 
 const solutions = [
@@ -32,8 +34,28 @@ const faqs = [
   { question: "Can the system capture license plates at night?", answer: "Yes. Our LPR cameras use specialized IR illumination designed specifically for nighttime plate capture." },
 ];
 
+const hoaSchemas = [
+  generateLocalBusinessSchema(),
+  generateEnhancedServiceSchema(
+    "HOA Security Systems Houston TX",
+    "Professional HOA and community security solutions in Houston, TX. Gate cameras, license plate recognition, common area surveillance, active deterrence & 24/7 monitoring for residential communities.",
+    "/hoa-security",
+    "HOA Security System Installation",
+    ["HOA security Houston TX", "HOA cameras Houston", "gate cameras Houston", "license plate recognition HOA Houston", "community security cameras Houston"]
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "HOA Security", href: "/hoa-security" },
+  ]),
+];
+
 const HOASecurity = () => (
   <Layout>
+    <SEOHead
+      title="HOA Security Systems Houston TX | Gate Cameras & Community Surveillance"
+      description="HOA and community security solutions in Houston, TX. Gate cameras, license plate recognition, common area surveillance & active deterrence. Trusted by Houston HOAs since 1994. Call (713) 387-9937."
+      schemas={hoaSchemas}
+    />
     <PageHero
       title="HOA Security Solutions"
       subtitle="Gate cameras, license plate recognition, common area surveillance, and community-wide protection systems designed for Houston-area HOAs and property managers."

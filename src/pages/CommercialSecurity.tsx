@@ -4,6 +4,8 @@ import CTABlock from "@/components/CTABlock";
 import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import {
   Building2, Camera, Shield, Lock, Wifi, Zap,
   Eye, Users, CheckCircle2, ArrowRight, Phone,
@@ -94,8 +96,28 @@ const faqs = [
   },
 ];
 
+const commercialSchemas = [
+  generateLocalBusinessSchema(),
+  generateEnhancedServiceSchema(
+    "Commercial Security Systems Houston TX",
+    "Enterprise-grade security for Houston businesses. Commercial alarms, HD surveillance, access control, active deterrence & 24/7 video monitoring. Scalable for any industry or business size.",
+    "/commercial",
+    "Commercial Security System Installation",
+    ["commercial security systems Houston TX", "business alarm system Houston", "commercial surveillance Houston", "access control Houston TX", "commercial CCTV Houston"]
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Commercial Security", href: "/commercial" },
+  ]),
+];
+
 const CommercialSecurity = () => (
   <Layout>
+    <SEOHead
+      title="Commercial Security Systems Houston TX | Business Alarm & Surveillance"
+      description="Enterprise-grade commercial security systems in Houston, TX. Business alarms, surveillance cameras, access control & 24/7 monitoring. Serving all industries since 1994. Free analysis: (713) 387-9937."
+      schemas={commercialSchemas}
+    />
 
     {/* ── HERO ─────────────────────────────────────────── */}
     <section className="relative overflow-hidden min-h-[88vh] flex items-center">

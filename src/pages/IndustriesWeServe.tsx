@@ -2,6 +2,8 @@ import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTABlock from "@/components/CTABlock";
 import SectionHeading from "@/components/SectionHeading";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateItemListSchema } from "@/lib/seo";
 import { Link } from "react-router-dom";
 import { ArrowRight, Home, Users, Building2, ShoppingBag, Stethoscope, GraduationCap, Hotel, UtensilsCrossed, Factory, Car, HardHat, Landmark, Plane, Anchor, Church, Star } from "lucide-react";
 
@@ -24,8 +26,29 @@ const industries = [
   { icon: Church, name: "Places of Worship", desc: "Interior/exterior cameras, entry monitoring, and event security." },
 ];
 
+const industriesSchemas = [
+  generateLocalBusinessSchema(),
+  generateItemListSchema(
+    industries.map((ind, i) => ({
+      name: ind.name,
+      description: ind.desc,
+      url: "/industries",
+      position: i + 1,
+    }))
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Industries We Serve", href: "/industries" },
+  ]),
+];
+
 const IndustriesWeServe = () => (
   <Layout>
+    <SEOHead
+      title="Industries We Serve | Security Systems for Every Business in Houston TX"
+      description="Texas Total Security serves every industry in Houston, TX. Retail, healthcare, schools, restaurants, warehouses, hotels & more. Custom security solutions designed for your specific industry needs."
+      schemas={industriesSchemas}
+    />
     <PageHero
       title="Industries We Serve"
       subtitle="Custom security solutions for every sector. From residential homes to industrial complexes, we have the expertise to protect any property type."

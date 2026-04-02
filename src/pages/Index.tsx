@@ -1,48 +1,68 @@
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useSpring, useInView } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
-import ServiceCard from "@/components/ServiceCard";
-import TestimonialCard from "@/components/TestimonialCard";
 import CTABlock from "@/components/CTABlock";
-import SectionHeading from "@/components/SectionHeading";
 import { Link } from "react-router-dom";
-import { generateLocalBusinessSchema, generateFAQSchema, generateOrganizationSchema } from "@/lib/seo";
+import { useTranslation } from "react-i18next";
+import { generateLocalBusinessSchema, generateFAQSchema, generateOrganizationSchema, generateSiteLinksSearchBoxSchema, generateItemListSchema } from "@/lib/seo";
 import {
   Shield, Camera, Home, Building2, Users, Radio,
   ArrowRight, Phone, CheckCircle2, Star,
   PhoneCall, ClipboardCheck, Wrench, HeadphonesIcon,
-  Award, Lock, Zap, MapPin,
+  Award, Lock, MapPin, Plus, Minus,
 } from "lucide-react";
 
-/* ─── Data ─────────────────────────────────────────────────────── */
-
-const techPartners = ["Honeywell / Resideo", "Alarm.com", "DMP", "DSC", "Hikvision", "Bosch Security"];
-
-const processSteps = [
-  { icon: PhoneCall,      num: "01", title: "Initial Call",         desc: "Speak with a security specialist about your needs and schedule your free analysis." },
-  { icon: ClipboardCheck, num: "02", title: "Free Onsite Analysis", desc: "We meet you onsite, examine your layout, and gather everything needed to build your solution." },
-  { icon: Wrench,         num: "03", title: "Expert Installation",  desc: "Certified technicians install your system with precision and clean workmanship." },
-  { icon: HeadphonesIcon, num: "04", title: "24/7 Monitoring",      desc: "Local dispatch, ongoing support, and fast response — for the life of your system." },
-];
-
-const featuredTestimonial = {
-  text: "What really stood out was how Texas Total Security described in such detail and confidence the process and exactly what I would be getting. They delivered on every promise.",
-  name: "Homeowner",
-  role: "Bellaire, TX",
+/* ─── Animation variants ────────────────────────────────────── */
+const fadeUp = {
+  hidden:  { opacity: 0, y: 36 },
+  show:    { opacity: 1, y: 0 },
 };
 
-const testimonials = [
-  { name: "Homeowner",        role: "Houston, TX",   text: "I love my new security cameras — the coverage and resolution is great! I can keep an eye on the kids while they play. The street and driveway coverage is excellent." },
-  { name: "Business Owner",   role: "Houston, TX",   text: "Texas Total Security installed surveillance cameras in all the right locations. Now I can travel while getting remote access to my cameras on my phone or tablet. Exactly what I needed." },
-  { name: "Property Manager", role: "Houston, TX",   text: "They provided great coverage for our entrance and exit gates, plus active deterrence with strobe lights. Their license plate cameras are outstanding." },
+const fadeLeft = {
+  hidden:  { opacity: 0, x: -32 },
+  show:    { opacity: 1, x: 0 },
+};
+
+const fadeRight = {
+  hidden:  { opacity: 0, x: 32 },
+  show:    { opacity: 1, x: 0 },
+};
+
+const easeExpo = [0.16, 1, 0.3, 1] as const;
+
+const vp = { once: true, amount: 0.15 };
+
+/* ─── Data ──────────────────────────────────────────────────── */
+const services = [
+  { icon: Shield,    title: "Alarm Systems",                  desc: "Custom alarm design, installation & local monitoring. Hardwired, wireless, and hybrid solutions.",              href: "/alarm-systems" },
+  { icon: Camera,    title: "Security Camera Systems",        desc: "HD surveillance, license plate cameras, PTZ, active deterrence & full remote viewing.",                          href: "/security-cameras" },
+  { icon: Home,      title: "Residential Security",           desc: "Whole-home protection with smart integration, environmental sensors & 24/7 monitoring.",                        href: "/residential" },
+  { icon: Building2, title: "Commercial Security",            desc: "Scalable security for offices, retail, industrial sites & multi-location businesses of any size.",               href: "/commercial" },
+  { icon: Users,     title: "HOA Security",                   desc: "Gate cameras, license plate recognition, common area surveillance & community-wide systems.",                   href: "/hoa-security" },
+  { icon: Radio,     title: "Active Deterrence & Monitoring", desc: "Cameras with sirens, strobes & two-way talk. Indoor/outdoor networking & 24/7 local dispatch.",                href: "/monitoring-services" },
+];
+
+const processSteps = [
+  { icon: PhoneCall,       num: "01", title: "Initial Call",         desc: "Speak with a security specialist about your needs and schedule your free onsite analysis." },
+  { icon: ClipboardCheck,  num: "02", title: "Free Onsite Analysis", desc: "We meet you onsite, examine your layout, and gather everything needed to build your solution." },
+  { icon: Wrench,          num: "03", title: "Expert Installation",  desc: "Certified technicians install your system with precision and clean, professional workmanship." },
+  { icon: HeadphonesIcon,  num: "04", title: "24/7 Monitoring",      desc: "Local dispatch, ongoing support, and fast response — for the life of your system." },
 ];
 
 const whyUs = [
-  { icon: MapPin,         title: "Houston-Born & Operated",      desc: "Trustworthy security techs working in Houston and surrounding areas for over 30 years. We live and work in the same communities we protect." },
-  { icon: Shield,         title: "We Don't Sell Your Contract",  desc: "We don't sell our alarm contracts to big national companies. Your account stays with us — always." },
-  { icon: HeadphonesIcon, title: "In-House Monitoring",          desc: "Our monitoring center is local. When an alarm triggers, local operators dispatch local authorities — fast." },
-  { icon: Users,          title: "Friendly, Local Service",      desc: "You'll know your technician by name, and they'll know your system inside and out." },
-  { icon: Award,          title: "30+ Years of Experience",      desc: "Trusted Houston security technicians serving the greater area since 1994." },
-  { icon: Lock,           title: "Latest Equipment & Tech",      desc: "Active deterrence, license plate recognition, and smart integrations backed by top-tier hardware." },
+  { icon: MapPin,          title: "Houston-Born & Operated",     desc: "Security techs working in Houston and surrounding areas for over 30 years. We live in the same communities we protect." },
+  { icon: Shield,          title: "We Don't Sell Your Contract",  desc: "We never sell alarm contracts to national companies. Your account stays with us — always." },
+  { icon: HeadphonesIcon,  title: "In-House Monitoring",          desc: "Our monitoring center is local. When an alarm triggers, local operators dispatch local authorities — fast." },
+  { icon: Users,           title: "Friendly, Local Service",      desc: "You'll know your technician by name, and they'll know your system inside and out." },
+  { icon: Award,           title: "30+ Years of Experience",      desc: "Trusted Houston security technicians serving the greater area since 1994." },
+  { icon: Lock,            title: "Latest Equipment & Tech",      desc: "Active deterrence, license plate recognition, and smart integrations backed by top-tier hardware." },
+];
+
+const testimonials = [
+  { name: "Homeowner",        role: "Houston, TX",   text: "I love my new security cameras — the coverage and resolution is great! I can keep an eye on the kids while they play. Street and driveway coverage is excellent." },
+  { name: "Business Owner",   role: "Houston, TX",   text: "Texas Total Security installed surveillance in all the right locations. I can travel while getting remote access to my cameras on my phone. Exactly what I needed." },
+  { name: "Property Manager", role: "Houston, TX",   text: "They provided great coverage for our entrance and exit gates, plus active deterrence with strobe lights. Their license plate cameras are outstanding." },
 ];
 
 const faqs = [
@@ -53,17 +73,96 @@ const faqs = [
   { q: "Do you serve both residential and commercial properties?", a: "Yes. From single-family homes to warehouses and retail spaces — every setup is customized to match your property's size, layout, and safety goals." },
 ];
 
-/* ─── Page ─────────────────────────────────────────────────────── */
+/* ─── CountUp ───────────────────────────────────────────────── */
+function CountUp({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.8 });
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    const t0 = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min((t - t0) / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - p, 4);
+      setVal(Math.round(eased * to));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [inView, to, duration]);
+  return <span ref={ref}>{val}{suffix}</span>;
+}
 
+/* ─── Page ──────────────────────────────────────────────────── */
 const Index = () => {
+  const { t } = useTranslation();
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowFloatingCTA(window.scrollY > window.innerHeight * 0.35);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const schemas = [
+    generateSiteLinksSearchBoxSchema(),
     generateOrganizationSchema(),
     generateLocalBusinessSchema(),
     generateFAQSchema(faqs.map(f => ({ question: f.q, answer: f.a }))),
+    generateItemListSchema([
+      { name: "Alarm Systems", description: "Custom alarm design, installation & local monitoring", url: "/alarm-systems", position: 1 },
+      { name: "Security Camera Systems", description: "HD surveillance, license plate cameras, PTZ & remote viewing", url: "/security-cameras", position: 2 },
+      { name: "Residential Security", description: "Whole-home protection with smart integration & 24/7 monitoring", url: "/residential", position: 3 },
+      { name: "Commercial Security", description: "Scalable security for offices, retail & industrial sites", url: "/commercial", position: 4 },
+      { name: "HOA Security", description: "Gate cameras, license plate recognition & community surveillance", url: "/hoa-security", position: 5 },
+      { name: "Active Deterrence & Monitoring", description: "Cameras with sirens, strobes & two-way talk, 24/7 local dispatch", url: "/monitoring-services", position: 6 },
+    ]),
   ];
 
   return (
     <Layout>
+      {/* ── Scroll progress bar ── */}
+      <motion.div
+        className="scroll-progress"
+        style={{ scaleX }}
+      />
+
+      {/* ── Floating Call CTA ── */}
+      <AnimatePresence>
+        {showFloatingCTA && (
+          <motion.div
+            className="floating-cta"
+            initial={{ opacity: 0, y: 80 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 80 }}
+            transition={{ duration: 0.45, ease: easeExpo }}
+          >
+            <motion.a
+              href="tel:7133879937"
+              className="flex items-center gap-3 px-5 py-3.5 rounded-full font-semibold text-white text-sm shadow-2xl"
+              style={{
+                background: "linear-gradient(135deg, hsl(0 85% 38%) 0%, hsl(0 85% 50%) 100%)",
+                boxShadow: "0 8px 32px hsl(0 85% 45% / 0.45), 0 2px 8px rgba(0,0,0,0.3)",
+              }}
+              whileHover={{ scale: 1.04, y: -2, boxShadow: "0 12px 40px hsl(0 85% 45% / 0.55), 0 4px 12px rgba(0,0,0,0.3)" }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <motion.span
+                className="w-2 h-2 rounded-full bg-white/80"
+                animate={{ opacity: [1, 0.4, 1] }}
+                transition={{ duration: 1.6, repeat: Infinity }}
+              />
+              <Phone className="w-4 h-4" />
+              <span>(713) 387-9937</span>
+            </motion.a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <SEOHead
         title="Houston Security Systems | Alarm & Camera Installation | Texas Total Security"
         description="Houston's #1 security company. Expert alarm systems, security cameras & 24/7 local monitoring for homes & businesses. Serving Houston 30+ years. Free analysis: (713) 387-9937."
@@ -71,145 +170,246 @@ const Index = () => {
       />
 
       {/* ══════════════════════════════════════════════════
-          HERO — editorial, type-driven, with background image
+          HERO — cinematic, full-height, ultra-scale type WITH VIDEO BACKGROUND
       ══════════════════════════════════════════════════ */}
       <section
         className="relative overflow-hidden"
-        style={{ background: "hsl(0 0% 3%)", minHeight: "96vh", display: "flex", flexDirection: "column" }}
+        style={{
+          background: "hsl(0 0% 3%)",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
-        {/* Background image with overlay */}
-        <div className="absolute inset-0">
+        {/* Video Background Layer */}
+        <div className="absolute inset-0 z-0">
+          {/* Primary video - security camera footage */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            poster="/imgi_11_Security-Camera-with-Buildings-in-background-Commercial.jpg_1675696598-scaled.jpg"
+          >
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-security-camera-view-of-a-city-street-at-night-34556-large.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Fallback image if video fails */}
           <img
             src="/imgi_11_Security-Camera-with-Buildings-in-background-Commercial.jpg_1675696598-scaled.jpg"
-            alt="Houston commercial security"
-            className="w-full h-full object-cover object-center"
-            loading="eager"
+            alt="Houston commercial security installation"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          {/* Dark gradient overlay for readability */}
+          
+          {/* Layered overlays for depth - darker for video */}
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.80) 40%, rgba(0,0,0,0.60) 100%)" }}
+            style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.80) 45%, rgba(0,0,0,0.65) 100%)" }}
           />
-          {/* Red accent glow */}
-          <div
+          
+          {/* Animated gradient overlay for visual interest */}
+          <motion.div
             className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse 70% 60% at 25% 40%, hsl(0 85% 45% / 0.12), transparent 55%)" }}
+            style={{
+              background: "radial-gradient(ellipse 60% 50% at 30% 40%, hsl(0 85% 45% / 0.08), transparent 70%)",
+            }}
+            animate={{
+              opacity: [0.6, 1, 0.6],
+              scale: [1, 1.05, 1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          
+          {/* Upper center bloom */}
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              top: "-10%", left: "50%", transform: "translateX(-50%)",
+              width: "1200px", height: "700px",
+              background: "radial-gradient(ellipse at center, hsl(0 85% 45% / 0.06) 0%, transparent 65%)",
+            }}
+          />
+          
+          {/* Bottom fade to bg */}
+          <div
+            className="absolute bottom-0 inset-x-0 h-64 pointer-events-none"
+            style={{ background: "linear-gradient(to top, hsl(0 0% 3%) 0%, transparent 100%)" }}
           />
         </div>
+
         {/* Fine grid texture */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-[1]"
           style={{
-            opacity: 0.025,
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-            backgroundSize: "72px 72px",
+            opacity: 0.018,
+            backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
           }}
-        />
-        {/* Red radial bloom — upper center */}
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            top: "-10%",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "900px",
-            height: "600px",
-            background: "radial-gradient(ellipse at center, hsl(0 85% 45% / 0.08) 0%, transparent 68%)",
-          }}
-        />
-        {/* Subtle bottom fade */}
-        <div
-          className="absolute bottom-0 inset-x-0 h-48 pointer-events-none"
-          style={{ background: "linear-gradient(to top, hsl(0 0% 3%), transparent)" }}
         />
 
-        {/* Content */}
+
+        {/* Hero content */}
         <div className="relative z-10 flex-1 flex items-center">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-24 lg:py-32 text-center">
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-28 lg:py-36 text-center">
 
-            {/* Live badge */}
-            <div
-              className="inline-flex items-center gap-2.5 mb-10 px-4 py-2 rounded-full border animate-fade-up"
+            {/* Live badge with pulse animation */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: easeExpo }}
+              className="inline-flex items-center gap-2.5 mb-10 px-5 py-2.5 rounded-full border"
               style={{
-                background: "hsl(0 85% 45% / 0.08)",
-                borderColor: "hsl(0 85% 45% / 0.22)",
+                background: "hsl(0 85% 45% / 0.12)",
+                borderColor: "hsl(0 85% 45% / 0.28)",
+                boxShadow: "0 0 30px hsl(0 85% 45% / 0.15)",
               }}
             >
-              <span className="live-dot" />
+              <motion.span
+                className="w-2 h-2 rounded-full"
+                style={{ background: "hsl(0 85% 58%)" }}
+                animate={{
+                  boxShadow: [
+                    "0 0 0 0 hsl(0 85% 58% / 0.4)",
+                    "0 0 0 6px hsl(0 85% 58% / 0)",
+                    "0 0 0 0 hsl(0 85% 58% / 0)",
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
               <span
                 className="text-[11px] font-bold tracking-[0.18em] uppercase"
-                style={{ color: "hsl(0 85% 62%)" }}
+                style={{ color: "hsl(0 85% 68%)" }}
               >
-                Monitoring Active · Houston, TX
+                24/7 Monitoring Active · Houston, TX
               </span>
-            </div>
+            </motion.div>
 
-            {/* Headline */}
-            <h1
-              className="font-display font-bold text-white animate-fade-up animate-delay-100"
+            {/* Ultra-scale headline with gradient animation */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: easeExpo, delay: 0.1 }}
+              className="font-display font-bold text-white"
               style={{
-                fontSize: "clamp(3.25rem, 7.5vw, 6.25rem)",
-                lineHeight: 1.0,
-                letterSpacing: "-0.04em",
+                fontSize: "clamp(3.5rem, 9vw, 9.5rem)",
+                lineHeight: 0.94,
+                letterSpacing: "-0.05em",
                 marginBottom: "1.75rem",
               }}
             >
-              Houston Security Systems
+              Houston Security
               <br />
-              <span
+              <motion.span
                 style={{
-                  background: "linear-gradient(135deg, hsl(0 85% 62%) 0%, hsl(0 85% 45%) 100%)",
+                  background: "linear-gradient(135deg, hsl(0 80% 72%) 0%, hsl(0 85% 52%) 50%, hsl(0 90% 42%) 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
+                  backgroundSize: "200% auto",
+                }}
+                animate={{
+                  backgroundPosition: ["0% center", "100% center", "0% center"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
                 }}
               >
-                Protecting What Matters Most.
-              </span>
-            </h1>
+                Systems.
+              </motion.span>
+            </motion.h1>
 
-            {/* Subtitle */}
-            <p
-              className="animate-fade-up animate-delay-200 mx-auto"
+            {/* Subtitle with typewriter effect */}
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: easeExpo, delay: 0.2 }}
+              className="mx-auto mb-3"
               style={{
-                fontSize: "clamp(1.0625rem, 2vw, 1.25rem)",
-                lineHeight: 1.6,
+                fontSize: "clamp(1.0625rem, 2vw, 1.35rem)",
+                lineHeight: 1.65,
                 color: "rgba(255,255,255,0.48)",
-                maxWidth: "34rem",
-                marginBottom: "0.75rem",
+                maxWidth: "38rem",
               }}
             >
               Houston's Trusted Security Experts for 30+ Years. Expert Alarm Installation, Security Cameras & 24/7 Local Monitoring.
-            </p>
-            <p
-              className="text-sm mb-12 animate-fade-up animate-delay-200"
-              style={{ color: "rgba(255,255,255,0.24)" }}
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-[12px] mb-12"
+              style={{ color: "rgba(255,255,255,0.28)" }}
             >
-              Serving Houston · Katy · Sugar Land · The Woodlands · Cypress · Pearland
-            </p>
+              Houston · Katy · Sugar Land · The Woodlands · Cypress · Pearland · League City
+            </motion.p>
 
-            {/* CTA buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 animate-fade-up animate-delay-300">
-              <Link
-                to="/free-analysis"
-                className="btn-primary-gradient inline-flex items-center gap-2 text-base px-10 py-4"
+            {/* CTAs with enhanced hover effects */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, ease: easeExpo, delay: 0.35 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+            >
+              <motion.div
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
-                Free Security Analysis <ArrowRight className="w-5 h-5" />
-              </Link>
-              <a
-                href="tel:7133879937"
-                className="btn-outline-light inline-flex items-center gap-2 text-base px-10 py-4"
+                <Link
+                  to="/free-analysis"
+                  className="btn-primary-gradient inline-flex items-center gap-2 text-base px-12 py-4.5 shadow-lg shadow-red-900/25"
+                  style={{
+                    boxShadow: "0 4px 24px hsl(0 85% 45% / 0.3)",
+                  }}
+                >
+                  <span className="relative">
+                    <span className="relative z-10">Get Your Free Security Analysis</span>
+                    <motion.span
+                      className="absolute inset-0 rounded-lg bg-white/20 blur-md"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                    />
+                  </span>
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <Phone className="w-5 h-5" /> (713) 387-9937
-              </a>
-            </div>
+                <a
+                  href="tel:7133879937"
+                  className="btn-outline-light inline-flex items-center gap-2 text-base px-10 py-4"
+                >
+                  <Phone className="w-5 h-5" /> (713) 387-9937
+                </a>
+              </motion.div>
+            </motion.div>
 
-            {/* Trust chips */}
-            <div className="flex flex-wrap items-center justify-center gap-2.5 animate-fade-up animate-delay-400">
-              {["Free Onsite Analysis", "No Long-Term Contracts", "24/7 Local Dispatch", "Licensed & Insured"].map((f) => (
-                <span
+            {/* Trust chips with staggered animation */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: easeExpo, delay: 0.45 }}
+              className="flex flex-wrap items-center justify-center gap-2.5"
+            >
+              {["Free Onsite Analysis", "No Long-Term Contracts", "24/7 Local Dispatch", "Licensed & Insured"].map((f, i) => (
+                <motion.span
                   key={f}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + i * 0.08 }}
                   className="inline-flex items-center gap-1.5 text-xs font-medium px-4 py-2 rounded-full"
                   style={{
                     background: "rgba(255,255,255,0.05)",
@@ -217,48 +417,87 @@ const Index = () => {
                     border: "1px solid rgba(255,255,255,0.08)",
                   }}
                 >
-                  <CheckCircle2 className="w-3 h-3" style={{ color: "hsl(0 85% 55%)" }} />
+                  <CheckCircle2 className="w-3 h-3" style={{ color: "hsl(0 85% 60%)" }} />
                   {f}
-                </span>
+                </motion.span>
               ))}
-            </div>
+            </motion.div>
+
+            {/* Quick scroll indicator */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2"
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5"
+              >
+                <motion.div
+                  className="w-1 h-2 rounded-full"
+                  style={{ background: "hsl(0 85% 60%)" }}
+                />
+              </motion.div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Stats strip */}
+        {/* Stats bar with glassmorphism */}
         <div
           className="relative z-10"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(0,0,0,0.35)", backdropFilter: "blur(16px)" }}
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            background: "rgba(0,0,0,0.45)",
+            backdropFilter: "blur(24px)",
+            boxShadow: "0 -20px 60px rgba(0,0,0,0.3)",
+          }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/5">
-              {[
-                { num: "30+",    label: "Years Protecting Houston" },
-                { num: "1,000s", label: "Systems Installed" },
-                { num: "24/7",   label: "Local Monitoring" },
-                { num: "100%",   label: "Locally Owned & Operated" },
-              ].map((s) => (
-                <div key={s.label} className="text-center lg:px-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/[0.06]">
+              {([
+                { countTo: 30,  suffix: "+",  label: "Years Protecting Houston", icon: Shield,  fixed: null },
+                { countTo: 10,  suffix: "K+", label: "Systems Installed",        icon: Camera,  fixed: null },
+                { countTo: null, suffix: "",  label: "Local Monitoring",          icon: Radio,   fixed: "24/7" },
+                { countTo: 100, suffix: "%",  label: "Locally Owned & Operated", icon: MapPin,  fixed: null },
+              ] as const).map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, ease: easeExpo, delay: 0.6 + i * 0.08 }}
+                  className="text-center lg:px-6 group"
+                >
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <motion.div
+                      className="w-8 h-8 rounded-lg flex items-center justify-center stat-icon-ring"
+                      style={{ background: "hsl(0 85% 45% / 0.1)" }}
+                      whileHover={{ scale: 1.1, background: "hsl(0 85% 45% / 0.2)" }}
+                    >
+                      <s.icon className="w-4 h-4" style={{ color: "hsl(0 85% 60%)" }} />
+                    </motion.div>
+                  </div>
                   <p
                     className="font-display font-bold mb-1.5"
                     style={{
                       fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-                      letterSpacing: "-0.04em",
-                      background: "linear-gradient(135deg, hsl(0 85% 62%) 0%, hsl(0 85% 48%) 100%)",
+                      letterSpacing: "-0.045em",
+                      background: "linear-gradient(135deg, hsl(0 80% 68%) 0%, hsl(0 85% 50%) 100%)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
                     }}
                   >
-                    {s.num}
+                    {s.fixed ?? <CountUp to={s.countTo as number} suffix={s.suffix} />}
                   </p>
                   <p
                     className="text-[10.5px] font-semibold uppercase tracking-[0.14em]"
-                    style={{ color: "rgba(255,255,255,0.28)" }}
+                    style={{ color: "rgba(255,255,255,0.32)" }}
                   >
                     {s.label}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -266,86 +505,165 @@ const Index = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          TRUST + TECH PARTNERS (merged strip)
+          TRUST STRIP — infinite marquee
       ══════════════════════════════════════════════════ */}
-      <div className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2.5 divide-x-0">
-            {[
-              "30+ Years Experience",
-              "Licensed & Insured · LIC# B03066901",
-              "24/7 Local Dispatch",
-              "Residential & Commercial",
-              ...techPartners,
-            ].map((item, i, arr) => (
-              <div key={item} className="flex items-center gap-3">
-                {i > 0 && (
-                  <span className="text-gray-200 hidden lg:inline select-none" aria-hidden>·</span>
-                )}
-                <span
-                  className="text-[11px] font-semibold uppercase tracking-[0.1em] whitespace-nowrap"
-                  style={{ color: i < 4 ? "rgb(107 114 128)" : "rgb(156 163 175)" }}
-                >
-                  {item}
+      <div className="bg-white border-b border-gray-100 py-3.5 marquee-outer">
+        {(() => {
+          const items = [
+            { label: "30+ Years Experience",            highlight: true  },
+            { label: "Licensed & Insured · LIC# B03066901", highlight: true  },
+            { label: "24/7 Local Dispatch",             highlight: true  },
+            { label: "Residential & Commercial",        highlight: true  },
+            { label: "Honeywell / Resideo",             highlight: false },
+            { label: "Alarm.com",                       highlight: false },
+            { label: "DMP",                             highlight: false },
+            { label: "DSC",                             highlight: false },
+            { label: "Hikvision",                       highlight: false },
+            { label: "Bosch Security",                  highlight: false },
+          ];
+          const row = [...items, ...items];
+          return (
+            <div className="marquee-track">
+              {row.map((item, i) => (
+                <span key={i} className="inline-flex items-center gap-4 px-6">
+                  <span
+                    className="text-[11px] font-semibold uppercase tracking-[0.1em] whitespace-nowrap"
+                    style={{ color: item.highlight ? "rgb(100 107 115)" : "rgb(163 170 178)" }}
+                  >
+                    {item.label}
+                  </span>
+                  <span className="text-gray-200 select-none" aria-hidden>·</span>
                 </span>
-              </div>
-            ))}
-          </div>
-        </div>
+              ))}
+            </div>
+          );
+        })()}
       </div>
 
       {/* ══════════════════════════════════════════════════
-          SERVICES — 6-card grid
+          SERVICES — editorial asymmetric list
       ══════════════════════════════════════════════════ */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-white overflow-hidden">
         <div className="container-tight px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="What We Do"
-            title="Complete Security for Every Property"
-            subtitle="From residential alarm systems to enterprise-grade commercial surveillance — every system is custom-designed, professionally installed, and locally monitored."
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <ServiceCard icon={Shield}    title="Alarm Systems"                  description="Custom alarm design, installation, and local monitoring. Hardwired, wireless, and hybrid solutions for any property." href="/alarm-systems" />
-            <ServiceCard icon={Camera}    title="Security Camera Systems"        description="HD surveillance, license plate cameras, PTZ, active deterrence, and full remote viewing — professionally installed." href="/security-cameras" />
-            <ServiceCard icon={Home}      title="Residential Security"           description="Whole-home protection with smart integration, environmental sensors, and 24/7 monitoring for your family." href="/residential" />
-            <ServiceCard icon={Building2} title="Commercial Security"            description="Scalable security for offices, retail, industrial sites, and multi-location businesses of any size." href="/commercial" />
-            <ServiceCard icon={Users}     title="HOA Security"                   description="Gate cameras, license plate recognition, common area surveillance, and community-wide security systems." href="/hoa-security" />
-            <ServiceCard icon={Radio}     title="Active Deterrence & Monitoring" description="Cameras with sirens, strobes, and two-way talk. Indoor/outdoor networking, WiFi, and 24/7 local dispatch." href="/monitoring-services" />
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.7fr] gap-12 lg:gap-24 items-start">
+
+            {/* Left — sticky heading */}
+            <motion.div
+              variants={fadeLeft}
+              initial="hidden"
+              whileInView="show"
+              viewport={vp}
+              transition={{ duration: 0.75, ease: easeExpo }}
+              className="lg:sticky lg:top-28"
+            >
+              <span className="eyebrow">What We Do</span>
+              <div className="divider-accent mb-6" />
+              <h2
+                className="font-display font-bold text-gray-900 mb-5"
+                style={{ fontSize: "clamp(2.25rem, 4vw, 3.5rem)", lineHeight: 1.05, letterSpacing: "-0.04em" }}
+              >
+                Complete Security for Every Property
+              </h2>
+              <p className="text-gray-500 leading-relaxed mb-8 text-base max-w-sm">
+                From residential alarm systems to enterprise-grade commercial surveillance — every system custom-designed, professionally installed, and locally monitored.
+              </p>
+              <Link to="/services" className="btn-outline-dark inline-flex items-center gap-2 text-[13.5px]">
+                View All Services <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+
+            {/* Right — numbered service list */}
+            <div className="border-t border-gray-100">
+              {services.map((service, i) => (
+                <motion.div
+                  key={service.href}
+                  variants={fadeRight}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={vp}
+                  transition={{ duration: 0.65, ease: easeExpo, delay: i * 0.07 }}
+                >
+                  <Link
+                    to={service.href}
+                    className="group flex items-center justify-between py-6 gap-5 border-b border-gray-100 -mx-4 px-4 rounded-xl hover:bg-gray-50/80 transition-colors duration-200"
+                  >
+                    <div className="flex items-center gap-5">
+                      <span
+                        className="font-display font-bold text-[11px] tracking-[0.2em] w-5 shrink-0 tabular-nums"
+                        style={{ color: "rgba(0,0,0,0.16)" }}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div
+                        className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-200 group-hover:scale-105"
+                        style={{
+                          background: "hsl(0 0% 96%)",
+                          border: "1px solid hsl(0 0% 91%)",
+                        }}
+                      >
+                        <service.icon
+                          className="w-5 h-5 transition-colors duration-200"
+                          style={{ color: "rgba(0,0,0,0.35)" }}
+                        />
+                      </div>
+                      <div>
+                        <h3
+                          className="font-display font-semibold text-[17px] text-gray-900 mb-0.5 leading-tight transition-colors duration-200 group-hover:text-accent"
+                        >
+                          {service.title}
+                        </h3>
+                        <p className="text-[13px] text-gray-400 leading-relaxed">{service.desc}</p>
+                      </div>
+                    </div>
+                    <ArrowRight
+                      className="w-5 h-5 shrink-0 transition-all duration-200 group-hover:translate-x-1"
+                      style={{ color: "rgba(0,0,0,0.18)" }}
+                    />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════
-          WHY CHOOSE TTS — dark, no images
+          WHY CHOOSE TTS — dark + photo split
       ══════════════════════════════════════════════════ */}
-      <section className="section-padding" style={{ background: "hsl(0 0% 5%)" }}>
-        <div className="container-tight px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <section className="overflow-hidden" style={{ background: "hsl(0 0% 4.5%)" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr]">
 
-            {/* Left — editorial block */}
-            <div>
+          {/* Left — editorial content */}
+          <div className="section-padding px-4 sm:px-6 lg:px-16 xl:px-20">
+            <motion.div
+              variants={fadeLeft}
+              initial="hidden"
+              whileInView="show"
+              viewport={vp}
+              transition={{ duration: 0.75, ease: easeExpo }}
+            >
               <span
                 className="block text-[11px] font-bold tracking-[0.18em] uppercase mb-5"
-                style={{ color: "hsl(0 85% 55%)" }}
+                style={{ color: "hsl(0 85% 58%)" }}
               >
                 Why Choose Us
               </span>
-              <div className="w-8 h-[2px] rounded-full mb-6" style={{ background: "hsl(var(--accent))" }} />
+              <div className="w-8 h-[2px] rounded-full mb-7" style={{ background: "hsl(var(--accent))" }} />
               <h2
-                className="font-display font-bold text-white mb-6 tracking-tight"
-                style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.06 }}
+                className="font-display font-bold text-white mb-7"
+                style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)", lineHeight: 1.0, letterSpacing: "-0.045em" }}
               >
                 Not a franchise.
                 <br />
-                Your neighbors.
+                <span style={{ color: "rgba(255,255,255,0.45)" }}>Your neighbors.</span>
               </h2>
-              <p className="text-base leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.45)" }}>
+              <p className="text-base leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.42)" }}>
                 We've been protecting Houston properties for over three decades. When you call us, you reach real people who know your system — not a national call center routing tickets to strangers.
               </p>
-              <p className="text-base leading-relaxed mb-10" style={{ color: "rgba(255,255,255,0.45)" }}>
+              <p className="text-base leading-relaxed mb-10" style={{ color: "rgba(255,255,255,0.42)" }}>
                 We never sell your contract to a national company. We never outsource your monitoring. Your account stays with the same local team that installed your system — for the life of your relationship with us.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 mb-14">
                 <Link to="/about" className="btn-primary-gradient inline-flex items-center gap-2">
                   About Our Company <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -353,58 +671,113 @@ const Index = () => {
                   <Phone className="w-4 h-4" /> (713) 387-9937
                 </a>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right — 6-point grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {whyUs.map((item) => (
-                <div
+            {/* Why-Us grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {whyUs.map((item, i) => (
+                <motion.div
                   key={item.title}
-                  className="rounded-2xl p-6 group"
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={vp}
+                  transition={{ duration: 0.6, ease: easeExpo, delay: i * 0.07 }}
+                  className="rounded-2xl p-6"
                   style={{
                     background: "rgba(255,255,255,0.03)",
                     border: "1px solid rgba(255,255,255,0.06)",
-                    transition: "background 0.25s ease, border-color 0.25s ease",
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.05)";
-                    (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.1)";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.03)";
-                    (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.06)";
                   }}
                 >
                   <div
                     className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
-                    style={{ background: "hsl(0 85% 45% / 0.12)", border: "1px solid hsl(0 85% 45% / 0.18)" }}
+                    style={{ background: "hsl(0 85% 45% / 0.11)", border: "1px solid hsl(0 85% 45% / 0.18)" }}
                   >
-                    <item.icon className="w-4.5 h-4.5" style={{ color: "hsl(0 85% 58%)" }} />
+                    <item.icon className="w-[18px] h-[18px]" style={{ color: "hsl(0 85% 60%)" }} />
                   </div>
                   <h3 className="font-display font-semibold text-white text-[14px] mb-2 leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-[13px] leading-relaxed" style={{ color: "rgba(255,255,255,0.38)" }}>
+                  <p className="text-[13px] leading-relaxed" style={{ color: "rgba(255,255,255,0.36)" }}>
                     {item.desc}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
+          </div>
+
+          {/* Right — office photo */}
+          <div className="relative min-h-[400px] lg:min-h-0 hidden lg:block">
+            <img
+              src="/imgi_12_Better-Picture-LOGO-on-Wall-at-Office2-scaled.jpg"
+              alt="Texas Total Security office"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              loading="lazy"
+            />
+            {/* Overlay fade from left */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(to right, hsl(0 0% 4.5%) 0%, hsl(0 0% 4.5% / 0.6) 40%, transparent 100%)",
+              }}
+            />
+            {/* Overlay fade from bottom */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(to top, hsl(0 0% 4.5%) 0%, transparent 35%)",
+              }}
+            />
+
+            {/* Floating trust card */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.7, ease: easeExpo, delay: 0.3 }}
+              className="absolute bottom-10 right-8 rounded-2xl p-5"
+              style={{
+                background: "rgba(8,8,8,0.82)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 8px 40px rgba(0,0,0,0.5)",
+                maxWidth: "220px",
+              }}
+            >
+              <div className="flex gap-0.5 mb-3">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5" style={{ fill: "hsl(var(--accent))", color: "hsl(var(--accent))" }} />
+                ))}
+              </div>
+              <p className="text-[13px] font-semibold text-white leading-snug mb-2">
+                "Delivered on every promise."
+              </p>
+              <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)" }}>
+                Homeowner — Bellaire, TX
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════
-          TESTIMONIALS — featured quote + cards
+          TESTIMONIALS — pull quote + supporting cards
       ══════════════════════════════════════════════════ */}
       <section className="section-padding" style={{ background: "hsl(0 0% 97%)" }}>
         <div className="container-tight px-4 sm:px-6 lg:px-8">
 
           {/* Google rating badge */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-14">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.6, ease: easeExpo }}
+            className="flex flex-wrap items-center justify-center gap-4 mb-14"
+          >
             <div
               className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-white rounded-full border border-gray-100"
-              style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}
+              style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.055)" }}
             >
               <div className="flex gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -423,30 +796,39 @@ const Index = () => {
             >
               Read all Google reviews →
             </a>
-          </div>
+          </motion.div>
 
           {/* Featured pull quote */}
-          <div
-            className="rounded-3xl p-10 sm:p-14 mb-8 text-center mx-auto"
-            style={{
-              maxWidth: "56rem",
-              background: "hsl(0 0% 4%)",
-              position: "relative",
-              overflow: "hidden",
-            }}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.75, ease: easeExpo, delay: 0.1 }}
+            className="rounded-3xl p-10 sm:p-14 mb-8 text-center mx-auto relative overflow-hidden"
+            style={{ maxWidth: "58rem", background: "hsl(0 0% 4%)" }}
           >
             {/* Ambient glow */}
             <div
               className="absolute inset-0 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, hsl(0 85% 45% / 0.08), transparent 65%)" }}
+              style={{ background: "radial-gradient(ellipse 80% 55% at 50% 0%, hsl(0 85% 45% / 0.09), transparent 65%)" }}
             />
-            {/* Large quote mark */}
+            {/* Fine grid */}
             <div
-              className="font-display font-bold leading-none select-none mb-6 relative z-10"
+              className="absolute inset-0 pointer-events-none"
               style={{
-                fontSize: "7rem",
-                lineHeight: 0.7,
-                background: "linear-gradient(135deg, hsl(0 85% 45% / 0.35) 0%, hsl(0 85% 45% / 0.12) 100%)",
+                opacity: 0.018,
+                backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+                backgroundSize: "56px 56px",
+              }}
+            />
+            {/* Quote mark */}
+            <div
+              className="font-display font-bold leading-none select-none mb-5 relative z-10"
+              style={{
+                fontSize: "6rem",
+                lineHeight: 0.75,
+                background: "linear-gradient(135deg, hsl(0 85% 45% / 0.38) 0%, hsl(0 85% 45% / 0.12) 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -458,18 +840,18 @@ const Index = () => {
               className="font-display font-medium text-white relative z-10"
               style={{ fontSize: "clamp(1.125rem, 2.5vw, 1.5rem)", lineHeight: 1.5, letterSpacing: "-0.01em", marginBottom: "2rem" }}
             >
-              {featuredTestimonial.text}
+              What really stood out was how Texas Total Security described in such detail and confidence the process and exactly what I would be getting. They delivered on every promise.
             </p>
             <div className="flex items-center justify-center gap-3 relative z-10">
               <div
                 className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold"
-                style={{ background: "hsl(0 85% 45% / 0.15)", color: "hsl(0 85% 60%)", border: "1px solid hsl(0 85% 45% / 0.2)" }}
+                style={{ background: "hsl(0 85% 45% / 0.14)", color: "hsl(0 85% 62%)", border: "1px solid hsl(0 85% 45% / 0.2)" }}
               >
-                {featuredTestimonial.name.charAt(0)}
+                H
               </div>
               <div className="text-left">
-                <p className="text-[13px] font-semibold text-white leading-none mb-1">{featuredTestimonial.name}</p>
-                <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.35)" }}>{featuredTestimonial.role}</p>
+                <p className="text-[13px] font-semibold text-white leading-none mb-1">Homeowner</p>
+                <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.32)" }}>Bellaire, TX</p>
               </div>
               <div className="flex gap-0.5 ml-2">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -477,83 +859,335 @@ const Index = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Supporting testimonial cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {testimonials.map((t, i) => (
-              <TestimonialCard key={i} {...t} />
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={vp}
+                transition={{ duration: 0.6, ease: easeExpo, delay: 0.1 + i * 0.09 }}
+                className="bg-white rounded-2xl p-6 border border-gray-100/80"
+                style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.05)" }}
+              >
+                <div className="flex gap-0.5 mb-4">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Star key={j} className="w-3.5 h-3.5" style={{ fill: "hsl(var(--accent))", color: "hsl(var(--accent))" }} />
+                  ))}
+                </div>
+                <p className="text-[14px] text-gray-600 leading-relaxed mb-5">{t.text}</p>
+                <div className="flex items-center gap-2.5">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                    style={{ background: "hsl(0 85% 45% / 0.08)", color: "hsl(var(--accent))" }}
+                  >
+                    {t.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="text-[13px] font-semibold text-gray-900 leading-none mb-0.5">{t.name}</p>
+                    <p className="text-[11px] text-gray-400">{t.role}</p>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.55, ease: easeExpo, delay: 0.2 }}
+            className="text-center mt-10"
+          >
             <Link
               to="/reviews"
-              className="inline-flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all duration-200"
+              className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 hover:gap-3"
               style={{ color: "hsl(var(--accent))" }}
             >
               View All Reviews <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════
-          PROCESS — dark section, 4 numbered steps
+          PROCESS — numbered steps with advanced animations
       ══════════════════════════════════════════════════ */}
-      <section className="section-padding" style={{ background: "hsl(0 0% 5%)" }}>
-        <div className="container-tight px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="How It Works"
-            title="From First Call to 24/7 Protection"
-            subtitle="Simple, transparent, and stress-free. Here's exactly what happens when you work with us."
-            light
+      <section className="section-padding relative overflow-hidden" style={{ background: "hsl(0 0% 5%)" }}>
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-30">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, hsl(0 85% 45% / 0.15) 1px, transparent 0)`,
+              backgroundSize: '40px 40px',
+            }}
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {processSteps.map((step, i) => (
-              <div
-                key={step.title}
-                className="relative rounded-2xl p-7"
-                style={{
-                  background: "rgba(255,255,255,0.025)",
-                  border: "1px solid rgba(255,255,255,0.055)",
+        </div>
+        
+        {/* Animated gradient orbs */}
+        <motion.div
+          className="absolute pointer-events-none"
+          style={{
+            top: "10%",
+            left: "5%",
+            width: "400px",
+            height: "400px",
+            background: "radial-gradient(circle, hsl(0 85% 45% / 0.08) 0%, transparent 70%)",
+          }}
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.5, 0.8, 0.5],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute pointer-events-none"
+          style={{
+            bottom: "10%",
+            right: "5%",
+            width: "300px",
+            height: "300px",
+            background: "radial-gradient(circle, hsl(0 85% 45% / 0.06) 0%, transparent 70%)",
+          }}
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+
+        <div className="container-tight px-4 sm:px-6 lg:px-8 relative z-10">
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.7, ease: easeExpo }}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
+            <motion.span
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+              style={{
+                background: "hsl(0 85% 45% / 0.1)",
+                border: "1px solid hsl(0 85% 45% / 0.2)",
+              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={vp}
+              transition={{ duration: 0.5 }}
+            >
+              <motion.span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{ background: "hsl(0 85% 58%)" }}
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [1, 0.7, 1],
                 }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <span className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: "hsl(0 85% 65%)" }}>
+                How It Works
+              </span>
+            </motion.span>
+            <div className="w-8 h-[2px] rounded-full mx-auto mb-6" style={{ background: "hsl(var(--accent))" }} />
+            <h2
+              className="font-display font-bold text-white mb-5"
+              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.08, letterSpacing: "-0.04em" }}
+            >
+              From First Call to 24/7 Protection
+            </h2>
+            <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.38)" }}>
+              Simple, transparent, and stress-free. Here's exactly what happens when you work with us.
+            </p>
+          </motion.div>
+
+          {/* Steps with animated connectors */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
+            {processSteps.map((step, i) => (
+              <motion.div
+                key={step.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={vp}
+                transition={{ duration: 0.65, ease: easeExpo, delay: i * 0.12 }}
+                className="relative group"
               >
-                <span
-                  className="font-display font-bold leading-none mb-4 block"
+                {/* Card */}
+                <motion.div
+                  className="relative rounded-2xl p-6 sm:p-7"
                   style={{
-                    fontSize: "2.75rem",
-                    letterSpacing: "-0.045em",
-                    background: "linear-gradient(135deg, hsl(0 85% 45% / 0.55) 0%, hsl(0 85% 45% / 0.22) 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
+                    background: "rgba(255,255,255,0.025)",
+                    border: "1px solid rgba(255,255,255,0.05)",
                   }}
+                  whileHover={{
+                    background: "rgba(255,255,255,0.04)",
+                    borderColor: "rgba(255,255,255,0.1)",
+                    y: -4,
+                  }}
+                  transition={{ duration: 0.3 }}
                 >
-                  {step.num}
-                </span>
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
-                  style={{ background: "hsl(0 85% 45% / 0.10)", border: "1px solid hsl(0 85% 45% / 0.15)" }}
-                >
-                  <step.icon className="w-5 h-5" style={{ color: "hsl(var(--accent))" }} />
-                </div>
-                <h3 className="font-display font-semibold text-white mb-2 text-[15px] tracking-tight">
-                  {step.title}
-                </h3>
-                <p className="text-[13.5px] leading-relaxed" style={{ color: "rgba(255,255,255,0.38)" }}>
-                  {step.desc}
-                </p>
-                {/* Step connector */}
+                  {/* Animated glow on hover */}
+                  <motion.div
+                    className="absolute inset-0 rounded-2xl pointer-events-none"
+                    style={{
+                      background: "radial-gradient(circle at 50% 0%, hsl(0 85% 45% / 0.15), transparent 60%)",
+                      opacity: 0,
+                    }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+
+                  {/* Step number */}
+                  <div className="relative mb-5">
+                    <div className="relative flex items-center gap-4">
+                      <div className="relative">
+                        <div
+                          className="w-12 h-12 rounded-xl flex items-center justify-center"
+                          style={{
+                            background: "hsl(0 85% 45% / 0.15)",
+                            border: "1px solid hsl(0 85% 45% / 0.25)",
+                          }}
+                        >
+                          <span
+                            className="font-display font-bold text-lg"
+                            style={{
+                              background: "linear-gradient(135deg, hsl(0 85% 65%) 0%, hsl(0 85% 45% 100%)",
+                              WebkitBackgroundClip: "text",
+                              WebkitTextFillColor: "transparent",
+                            }}
+                          >
+                            {step.num}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      {/* Connector line */}
+                      {i < processSteps.length - 1 && (
+                        <div className="hidden lg:block flex-1 relative">
+                          <motion.div
+                            className="h-0.5 rounded-full"
+                            style={{ background: "rgba(255,255,255,0.1)" }}
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "100%" }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.5 + i * 0.15, ease: "easeOut" }}
+                          />
+                          <motion.div
+                            className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
+                            style={{ 
+                              background: "hsl(0 85% 45% / 0.5)",
+                              boxShadow: "0 0 10px hsl(0 85% 45% / 0.5)",
+                            }}
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            animate={{
+                              boxShadow: [
+                                "0 0 10px hsl(0 85% 45% / 0.5)",
+                                "0 0 20px hsl(0 85% 45% / 0.8)",
+                                "0 0 10px hsl(0 85% 45% / 0.5)",
+                              ],
+                            }}
+                            transition={{
+                              duration: 0.3,
+                              delay: 0.8 + i * 0.15,
+                              repeat: Infinity,
+                              repeatDelay: 1 + i * 0.2,
+                            }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Icon with animated border */}
+                  <motion.div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                    style={{
+                      background: "hsl(0 85% 45% / 0.08)",
+                      border: "1px solid hsl(0 85% 45% / 0.12)",
+                    }}
+                    whileHover={{ 
+                      background: "hsl(0 85% 45% / 0.15)",
+                      borderColor: "hsl(0 85% 45% / 0.25)",
+                      scale: 1.05,
+                    }}
+                  >
+                    <step.icon className="w-5 h-5" style={{ color: "hsl(0 85% 60%)" }} />
+                  </motion.div>
+
+                  {/* Content */}
+                  <h3 className="font-display font-semibold text-white mb-2.5 text-[15px] tracking-tight group-hover:text-white transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-[13.5px] leading-relaxed" style={{ color: "rgba(255,255,255,0.36)" }}>
+                    {step.desc}
+                  </p>
+
+                  {/* Animated corner accent */}
+                  <motion.div
+                    className="absolute top-0 right-0 w-16 h-16 pointer-events-none"
+                    style={{
+                      background: "linear-gradient(135deg, transparent 50%, hsl(0 85% 45% / 0.1) 100%)",
+                      borderRadius: "0 1rem 0 100%",
+                    }}
+                    whileHover={{
+                      background: "linear-gradient(135deg, transparent 50%, hsl(0 85% 45% / 0.2) 100%)",
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
+
+                {/* Mobile connector (vertical) */}
                 {i < processSteps.length - 1 && (
-                  <div
-                    className="hidden lg:block absolute top-10 -right-2.5 z-10 w-5 h-px"
-                    style={{ background: "rgba(255,255,255,0.07)" }}
+                  <motion.div
+                    className="lg:hidden absolute left-1/2 -bottom-3 w-0.5 h-6"
+                    style={{ 
+                      background: "linear-gradient(to bottom, hsl(0 85% 45% / 0.3), transparent)",
+                    }}
+                    initial={{ height: 0 }}
+                    whileInView={{ height: 24 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 + i * 0.15 }}
                   />
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-center mt-16"
+          >
+            <Link
+              to="/free-analysis"
+              className="btn-primary-gradient inline-flex items-center gap-2 text-base px-8 py-4"
+            >
+              Start Your Free Analysis <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -562,21 +1196,28 @@ const Index = () => {
       ══════════════════════════════════════════════════ */}
       <section className="section-padding bg-white">
         <div className="container-tight px-4 sm:px-6 lg:px-8">
-          <div
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.75, ease: easeExpo }}
             className="rounded-3xl overflow-hidden"
             style={{
               border: "1px solid rgba(0,0,0,0.07)",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.04), 0 20px 48px rgba(0,0,0,0.07)",
+              boxShadow: "0 4px 8px rgba(0,0,0,0.03), 0 20px 48px rgba(0,0,0,0.07)",
             }}
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Left — content */}
               <div className="p-8 sm:p-12 lg:p-14 lg:border-r border-gray-100">
                 <div className="w-8 h-[2px] rounded-full mb-6" style={{ background: "hsl(var(--accent))" }} />
-                <h2 className="font-display font-bold text-gray-900 text-3xl sm:text-4xl tracking-tight leading-[1.08] mb-4">
+                <h2 className="font-display font-bold text-gray-900 tracking-tight leading-[1.07] mb-4"
+                  style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)", letterSpacing: "-0.04em" }}
+                >
                   Free Onsite Security Analysis
                 </h2>
-                <p className="text-gray-500 leading-relaxed mb-8">
+                <p className="text-gray-500 leading-relaxed mb-8 text-base">
                   Our security professionals visit your property at no cost. We evaluate your layout, identify every vulnerability, and provide expert recommendations — no pressure, no obligation.
                 </p>
                 <ul className="space-y-4">
@@ -599,16 +1240,16 @@ const Index = () => {
               {/* Right — CTA */}
               <div
                 className="p-8 sm:p-12 lg:p-14 flex flex-col items-center justify-center text-center"
-                style={{ background: "hsl(0 0% 98%)" }}
+                style={{ background: "hsl(0 0% 98.5%)" }}
               >
                 <img
                   src="/logo.png"
                   alt="Texas Total Security"
                   className="w-16 h-16 object-contain mb-6"
-                  style={{ opacity: 0.88 }}
+                  style={{ opacity: 0.85 }}
                   loading="lazy"
                 />
-                <h3 className="font-display font-bold text-gray-900 text-2xl tracking-tight mb-3">
+                <h3 className="font-display font-bold text-gray-900 text-2xl tracking-tight mb-3" style={{ letterSpacing: "-0.03em" }}>
                   Ready to Get Started?
                 </h3>
                 <p className="text-gray-500 text-sm mb-8 max-w-xs leading-relaxed">
@@ -621,9 +1262,7 @@ const Index = () => {
                   Schedule Free Analysis <ArrowRight className="w-5 h-5" />
                 </Link>
                 <p className="text-xs text-gray-400 mb-6">No obligation. No pressure. 100% free.</p>
-                <div
-                  className="flex items-center gap-2 pt-6 border-t border-gray-100 w-full justify-center"
-                >
+                <div className="flex items-center gap-2 pt-6 border-t border-gray-100 w-full justify-center">
                   <Phone className="w-4 h-4" style={{ color: "hsl(var(--accent))" }} />
                   <span className="text-sm text-gray-500">Or call: </span>
                   <a
@@ -636,33 +1275,88 @@ const Index = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════
-          FAQ
+          FAQ — animated accordion
       ══════════════════════════════════════════════════ */}
       <section className="section-padding" style={{ background: "hsl(0 0% 97%)" }}>
         <div className="container-tight px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="FAQ"
-            title="Frequently Asked Questions"
-            subtitle="Everything you need to know about working with Texas Total Security."
-          />
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.7, ease: easeExpo }}
+            className="text-center max-w-2xl mx-auto mb-14"
+          >
+            <span className="eyebrow">FAQ</span>
+            <div className="w-8 h-[2px] rounded-full mx-auto mb-5" style={{ background: "hsl(var(--accent))" }} />
+            <h2
+              className="font-display font-bold text-gray-900 mb-4"
+              style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)", lineHeight: 1.08, letterSpacing: "-0.04em" }}
+            >
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-500 leading-relaxed text-base">
+              Everything you need to know about working with Texas Total Security.
+            </p>
+          </motion.div>
+
           <div className="max-w-3xl mx-auto space-y-3">
-            {faqs.map((faq) => (
-              <div
-                key={faq.q}
-                className="rounded-2xl p-6 sm:p-7 bg-white border border-gray-100"
-                style={{ boxShadow: "0 1px 2px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.04)" }}
-              >
-                <h3 className="font-display font-semibold text-gray-900 mb-2.5 text-[15px] leading-snug">
-                  {faq.q}
-                </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{faq.a}</p>
-              </div>
-            ))}
+            {faqs.map((faq, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <motion.div
+                  key={faq.q}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={vp}
+                  transition={{ duration: 0.55, ease: easeExpo, delay: i * 0.07 }}
+                  className={`faq-item ${isOpen ? "open" : ""}`}
+                >
+                  <button
+                    className="faq-trigger"
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                  >
+                    <h3 className="font-display font-semibold text-gray-900 text-[15px] leading-snug text-left">
+                      {faq.q}
+                    </h3>
+                    <span
+                      className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200"
+                      style={{
+                        background: isOpen ? "hsl(var(--accent))" : "hsl(0 0% 93%)",
+                      }}
+                    >
+                      {isOpen
+                        ? <Minus className="w-3.5 h-3.5 text-white" />
+                        : <Plus  className="w-3.5 h-3.5 text-gray-500" />
+                      }
+                    </span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <div className="px-6 sm:px-7 pb-6 sm:pb-7">
+                          <p className="text-[14px] text-gray-500 leading-relaxed">{faq.a}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

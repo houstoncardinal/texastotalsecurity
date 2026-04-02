@@ -2,6 +2,8 @@ import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTABlock from "@/components/CTABlock";
 import SectionHeading from "@/components/SectionHeading";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateItemListSchema } from "@/lib/seo";
 import { Camera, Shield, CheckCircle2, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -40,8 +42,29 @@ const projects = [
   },
 ];
 
+const portfolioSchemas = [
+  generateLocalBusinessSchema(),
+  generateItemListSchema(
+    projects.map((p, i) => ({
+      name: p.title,
+      description: p.challenge,
+      url: "/portfolio",
+      position: i + 1,
+    }))
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Portfolio", href: "/portfolio" },
+  ]),
+];
+
 const Portfolio = () => (
   <Layout>
+    <SEOHead
+      title="Security System Portfolio | Houston Installations | Texas Total Security"
+      description="View completed security system installations by Texas Total Security across Houston, TX. HOA communities, commercial properties, residential homes & industrial sites. Results that speak for themselves."
+      schemas={portfolioSchemas}
+    />
     <PageHero
       title="Our Security Projects"
       subtitle="Real-world security solutions designed and installed by Texas Total Security. See how we protect Houston homes, businesses, and communities."

@@ -4,6 +4,8 @@ import CTABlock from "@/components/CTABlock";
 import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import {
   Home, Shield, Camera, Thermometer, Smartphone,
   Baby, Lock, Bell, CheckCircle2, ArrowRight, Phone,
@@ -84,8 +86,29 @@ const faqs = [
   },
 ];
 
+const residentialSchemas = [
+  generateLocalBusinessSchema(),
+  generateEnhancedServiceSchema(
+    "Residential Security Systems Houston TX",
+    "Complete home security for Houston homeowners. Custom alarm systems, HD cameras, smart home integration & 24/7 local monitoring. New homes, existing homes, condos & second homes.",
+    "/residential",
+    "Residential Security System Installation",
+    ["home security system Houston TX", "residential alarm system Houston", "home alarm installation Houston", "smart home security Houston"],
+    faqs
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Residential Security", href: "/residential" },
+  ]),
+];
+
 const ResidentialSecurity = () => (
   <Layout>
+    <SEOHead
+      title="Residential Security Systems Houston TX | Home Alarm & Camera Installation"
+      description="Complete home security systems in Houston, TX. Custom alarm installation, HD cameras, smart home integration & 24/7 local monitoring. Serving Houston homeowners since 1994. Free analysis: (713) 387-9937."
+      schemas={residentialSchemas}
+    />
 
     {/* ── HERO ─────────────────────────────────────────── */}
     <section className="relative overflow-hidden min-h-[88vh] flex items-center">

@@ -4,6 +4,8 @@ import CTABlock from "@/components/CTABlock";
 import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { Radio, MapPin, Clock, Shield, PhoneCall, CheckCircle2 } from "lucide-react";
 
 const benefits = [
@@ -29,8 +31,28 @@ const faqs = [
   { question: "Can you monitor my existing alarm system?", answer: "In most cases, yes. We can take over monitoring from another provider, saving you the cost of new equipment." },
 ];
 
+const monitoringSchemas = [
+  generateLocalBusinessSchema(),
+  generateEnhancedServiceSchema(
+    "24/7 Alarm Monitoring Houston TX — Local Dispatch Center",
+    "Local 24/7 alarm monitoring by Texas Total Security in Houston, TX. In-house monitoring center — not a distant national call center. Video monitoring, guard patrol & custom monitoring services.",
+    "/monitoring-services",
+    "Alarm Monitoring Service",
+    ["alarm monitoring Houston TX", "24/7 alarm monitoring Houston", "local alarm monitoring Houston", "video monitoring Houston", "security monitoring company Houston"]
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Monitoring Services", href: "/monitoring-services" },
+  ]),
+];
+
 const MonitoringServices = () => (
   <Layout>
+    <SEOHead
+      title="24/7 Alarm Monitoring Houston TX | Local Dispatch Center | Texas Total Security"
+      description="Local 24/7 alarm monitoring in Houston, TX. In-house dispatch center — not a national call center. Video monitoring, guard patrol & custom services. Never sells your contract. (713) 387-9937."
+      schemas={monitoringSchemas}
+    />
     <PageHero
       title="24/7 Local Monitoring Services"
       subtitle="Your alarm is only as good as the team watching it. Our Houston-based monitoring center delivers faster response, real accountability, and personal service."

@@ -4,6 +4,8 @@ import CTABlock from "@/components/CTABlock";
 import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { Shield, Radio, RefreshCw, Wifi, AlertTriangle, Keyboard, Lock, Bell, CheckCircle2 } from "lucide-react";
 
 const features = [
@@ -48,8 +50,30 @@ const faqs = [
   { question: "What happens during a power outage?", answer: "All our systems include battery backup. Cellular communication ensures your system stays connected even if phone or internet lines are down." },
 ];
 
+const alarmSchemas = [
+  generateLocalBusinessSchema(),
+  generateEnhancedServiceSchema(
+    "Alarm System Installation & Monitoring — Houston TX",
+    "Custom alarm system design, professional installation, and 24/7 local monitoring for homes and businesses in Houston, TX. System takeovers from ADT, Brinks, Vivint. Licensed & insured since 1994.",
+    "/alarm-systems",
+    "Alarm System Installation",
+    ["alarm system Houston TX", "burglar alarm Houston", "home alarm system Houston", "alarm monitoring Houston", "ADT alternative Houston"],
+    faqs
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "Alarm Systems", href: "/alarm-systems" },
+  ]),
+];
+
 const AlarmSystems = () => (
   <Layout>
+    <SEOHead
+      title="Alarm System Installation Houston TX | 24/7 Local Monitoring | Texas Total Security"
+      description="Expert alarm system installation & 24/7 local monitoring in Houston, TX. Hardwired, wireless & hybrid. System takeovers from ADT, Brinks & more. Licensed since 1994. Free analysis: (713) 387-9937."
+      schemas={alarmSchemas}
+    />
     <PageHero
       title="Alarm System Servicing in Houston, TX"
       subtitle="Custom-designed alarm systems with 24/7 local monitoring. Installation, takeover, and ongoing service for residential and commercial properties across Houston."

@@ -1,10 +1,26 @@
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateContactPageSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { Phone, Mail, MapPin, Clock, Shield, ExternalLink } from "lucide-react";
+
+const contactSchemas = [
+  generateLocalBusinessSchema(),
+  generateContactPageSchema(),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Contact", href: "/contact" },
+  ]),
+];
 
 const Contact = () => (
   <Layout>
+    <SEOHead
+      title="Contact Texas Total Security | Houston Security Company | (713) 387-9937"
+      description="Contact Houston's trusted security experts. Call (713) 387-9937 or email info@texastotalsecurity.com. Free onsite security analysis. Serving Houston & surrounding areas since 1994."
+      schemas={contactSchemas}
+    />
     <PageHero
       title="Reach Out to Texas Total Security"
       subtitle="Ready to protect your property? Get in touch for a free consultation, quote, or service request. We respond fast — because security doesn't wait."

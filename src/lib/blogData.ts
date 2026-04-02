@@ -395,3 +395,438 @@ export function getArticleBySlug(slug: string): BlogArticle | undefined {
 export function getArticlesByCategory(categorySlug: string): BlogArticle[] {
   return blogArticles.filter(a => a.category === categorySlug);
 }
+
+// Additional E-E-A-T focused articles for SEO authority
+export const additionalArticles: BlogArticle[] = [
+  {
+    slug: "30-years-houston-security-experience",
+    title: "30 Years Protecting Houston: What We've Learned About Security",
+    metaTitle: "30 Years Houston Security Experience | Texas Total Security",
+    metaDescription: "Three decades of security installations in Houston have taught us what really works. Expert insights from Texas Total Security's founder and team.",
+    category: "case-studies",
+    datePublished: "2025-12-01",
+    readTime: "12 min",
+    excerpt: "Since 1994, we've protected over 10,000 Houston homes and businesses. Here's what three decades of local security experience has taught us about protecting Texas properties.",
+    content: `As Houston's longest-running locally-owned security company, we've learned a few things about what actually works when it comes to protecting homes and businesses in our region. Here's our experience-based wisdom.
+
+## What 30 Years Has Taught Us
+
+### The Houston Factor
+Houston presents unique security challenges that out-of-town companies simply don't understand. Our humid climate affects equipment. Our expanding suburbs mean new construction considerations. Our diverse neighborhoods each have distinct risk profiles.
+
+We've installed security systems in every type of Houston property — from historic homes in the Heights to modern townhomes in Katy's master-planned communities, from small retail shops in the Galleria area to massive industrial facilities near the ship channel.
+
+### What Works
+After thousands of installations, here's what consistently works in Houston:
+
+**Local Monitoring Saves Lives**
+When your alarm triggers, seconds matter. Our Houston-based monitoring center provides average response times under 30 seconds — far faster than national competitors routing through distant call centers.
+
+**Visible Deterrence Matters**
+We've seen dramatic reductions in break-in attempts at properties with visible cameras, signage, and professional monitoring signs. Criminals look for easy targets — our systems make your property a hard target.
+
+**Professional Installation Beats DIY**
+Every system we've had to repair after a DIY installation reinforces this: professional installation ensures proper sensor placement, reliable connectivity, and system integrity that actually works when needed.
+
+### What Doesn't Work
+**Consumer-Grade Equipment**
+The security cameras and alarm systems sold at big box stores simply don't provide the reliability that Houston property owners need. False alarms, connectivity failures, and inadequate coverage are common complaints we address.
+
+**Unmonitored Systems**
+A security system that sends notifications to your phone but isn't professionally monitored is only half protected. When you're at work, sleeping, or traveling, who responds to an alarm?
+
+**Minimal Coverage**
+We've responded to too many incidents where a burglar entered through an unmonitored entrance. Comprehensive coverage — every entry point, key interior zones — is essential.
+
+## Our Commitment
+
+Our 30-year track record is built on every installation we complete. We don't sell contracts to national companies. We don't outsource monitoring. We're here, in Houston, protecting our neighbors.
+
+Call **(713) 387-9937** to discuss your security needs with our experienced team.`,
+    relatedServices: ["/residential", "/commercial", "/monitoring-services"],
+    tags: ["houston security", "experience", "local company", "30 years"],
+  },
+  {
+    slug: "texas-license-requirements-security-companies",
+    title: "Understanding Texas Security License Requirements: What You Need to Know",
+    metaTitle: "Texas Security License Requirements | Texas DPS License Guide",
+    metaDescription: "Texas requires security companies to hold specific licenses. Learn what credentials to look for and why hiring a licensed Texas security company matters.",
+    category: "alarm-education",
+    datePublished: "2025-11-25",
+    readTime: "8 min",
+    excerpt: "Not all security companies in Texas are legally qualified to install alarm systems. Here's what Houston property owners should know about Texas licensing requirements.",
+    content: `When choosing a security company in Texas, understanding licensing requirements helps you make an informed decision and avoid unqualified installers.
+
+## Texas Security Licensing Basics
+
+### Required Credentials
+The Texas Department of Public Safety (DPS) requires security companies to hold:
+- **Company License** — Required to legally operate a security business in Texas
+- **Individual Installer Licenses** — Technicians must hold valid credentials
+
+Texas Total Security holds DPS License #B03066901 — you can verify any company's license through the DPS website.
+
+### What Unlicensed Installers Risk
+Hiring an unlicensed installer can void equipment warranties, create insurance coverage issues, and result in unreliable installations that fail when needed most.
+
+## Why Credentials Matter
+
+### Experience Requirements
+To obtain a Texas security license, companies must demonstrate:
+- Relevant industry experience
+- Proof of insurance
+- Background checks for all key personnel
+- Financial responsibility
+
+### Continuing Education
+Licensed companies must maintain ongoing training and compliance with changing regulations.
+
+## What to Ask Any Security Company
+
+Before signing any contract, verify:
+1. Texas DPS License number — and verify it at dps.texas.gov
+2. Insurance coverage amounts and types
+3. Years of local experience
+4. References from local customers
+5. Service and warranty terms
+
+## Our Credentials
+
+Texas Total Security is fully licensed and insured:
+- DPS License #B03066901
+- General liability insurance
+- Workers' compensation coverage
+- 30+ years of continuous Texas operation
+
+We're proud to display our credentials and encourage any customer to verify them. Contact **(713) 387-9937** to discuss our qualifications.`,
+    relatedServices: ["/alarm-systems", "/security-cameras"],
+    tags: ["texas license", "security company", "DPS license", "credentials"],
+  },
+  {
+    slug: "choosing-security-company-houston",
+    title: "How to Choose the Right Security Company in Houston",
+    metaTitle: "How to Choose a Security Company in Houston | Expert Guide",
+    metaDescription: "Not all security companies deliver the same quality. Learn what questions to ask and what factors matter most when selecting a Houston security provider.",
+    category: "home-security",
+    datePublished: "2025-11-20",
+    readTime: "9 min",
+    excerpt: "Choosing a security company is one of the most important decisions you'll make for your property. Here's our expert guide to finding the right provider in Houston.",
+    content: `The security company you choose will be responsible for protecting your home, business, and everyone inside. Here's how to evaluate your options.
+
+## Key Factors to Consider
+
+### 1. Local Presence
+**Why it matters:** A local company can respond quickly, understands Houston-specific challenges, and has established relationships with local law enforcement.
+
+**What to ask:** Where is your monitoring center located? How quickly can you send a technician?
+
+### 2. Monitoring Quality
+**Why it matters:** Your system is only as good as the monitoring behind it. Local monitoring provides faster response and better accountability.
+
+**What to ask:** Is your monitoring center in Houston? What's your average response time? Do you handle dispatch directly?
+
+### 3. Contract Terms
+**Why it matters:** Long-term contracts with large cancellation fees can trap you with inferior service.
+
+**What to ask:** What's the contract length? What are cancellation terms? Can I switch to month-to-month monitoring?
+
+### 4. Experience
+**Why it matters:** Security systems require expertise. Companies with decades of experience have encountered and solved more challenges.
+
+**What to ask:** How long have you been in business? How many installations in Houston? Can I speak with existing customers?
+
+### 5. Credentials
+**Why it matters:** Unlicensed installers may void warranties and create insurance issues.
+
+**What to ask:** What's your Texas DPS license number? Can you provide insurance certificates?
+
+### 6. Service & Support
+**Why it matters:** Systems need maintenance, updates, and occasional repairs. Quality ongoing support matters.
+
+**What to ask:** Do you offer ongoing service? What's your response time for service calls? Are technicians local?
+
+## Questions to Ask Current Customers
+
+When speaking with existing customers, ask:
+- How long have they been with the company?
+- Have they had any issues with response times?
+- How easy is it to reach someone when they call?
+- Would they recommend this company to friends?
+
+## Our Commitment
+
+Texas Total Security has served Houston for over 30 years because we deliver on our promises:
+
+- Local Houston monitoring with sub-30-second response
+- No long-term contracts — month-to-month monitoring available
+- Fully licensed with Texas DPS #B03066901
+- In-house service team with fast response times
+
+Call **(713) 387-9937** for a free consultation.`,
+    relatedServices: ["/alarm-systems", "/security-cameras", "/monitoring-services"],
+    tags: ["choosing security company", "houston", "expert guide", "local"],
+  },
+  {
+    slug: "security-system-return-on-investment",
+    title: "The Real ROI of a Security System: More Than Crime Prevention",
+    metaTitle: "Security System ROI | Insurance, Property Value, Peace of Mind",
+    metaDescription: "A professional security system is an investment that pays dividends beyond crime prevention. Learn about insurance savings, property value, and ROI.",
+    category: "home-security",
+    datePublished: "2025-11-15",
+    readTime: "7 min",
+    excerpt: "A security system is one of the few home improvements that actually pays for itself. Here's the complete ROI breakdown for Houston property owners.",
+    content: `When evaluating home security investments, most homeowners focus only on crime prevention. But the financial benefits extend far beyond theft avoidance.
+
+## Insurance Savings
+
+### Homeowners Insurance Discounts
+Most insurance providers offer discounts of 5-20% for homes with professionally monitored security systems. Discount amounts vary by provider and policy, but a $3,000 annual premium could see $150-600 in annual savings.
+
+### Commercial Insurance Benefits
+Business insurance policies often provide similar discounts, with some industries offering even greater reductions due to higher risk profiles.
+
+## Property Value Impact
+
+### Increased Home Value
+Homes with integrated security systems typically appraise higher than comparable homes without systems. The added functionality and peace of mind are attractive to buyers.
+
+### Faster Sales
+Real estate agents report that security systems help homes sell faster — they're an attractive feature that differentiates your property.
+
+## Operational Savings
+
+### Business Loss Prevention
+For businesses, security systems prevent losses from theft, vandalism, and unauthorized access. The cost of a single break-in can far exceed years of monitoring fees.
+
+### Liability Reduction
+Video evidence protects against false liability claims — slip-and-fall lawsuits, workers' compensation disputes, and more.
+
+## Non-Financial ROI
+
+### Peace of Mind
+This is difficult to quantify but immense in value: knowing your family, home, and business are protected.
+
+### Daily Convenience
+Modern systems offer remote control, automation, and monitoring that simplify daily life.
+
+## Our Analysis
+
+A comprehensive residential security system with monitoring typically costs $30-60/month. Against insurance savings alone, this investment often pays for itself — plus you get protection, convenience, and peace of mind.
+
+[Request a free security analysis](/free-analysis) to discuss your specific situation and potential ROI.`,
+    relatedServices: ["/alarm-systems", "/residential", "/commercial"],
+    tags: ["ROI", "insurance savings", "home security", "investment"],
+  },
+  {
+    slug: "houston-crime-statistics-2025-neighborhood-guide",
+    title: "Houston Crime Statistics 2025: Neighborhood Security Guide",
+    metaTitle: "Houston Crime Statistics 2025 | Neighborhood Security Guide",
+    metaDescription: "Houston crime data and neighborhood-specific security recommendations. Which areas need security most and what protections work best.",
+    category: "crime-prevention",
+    datePublished: "2025-11-10",
+    readTime: "10 min",
+    excerpt: "Understanding crime patterns helps Houston property owners make informed security decisions. Here's our expert analysis of current Houston crime statistics and targeted recommendations.",
+    content: `Houston's crime landscape varies significantly by neighborhood. Understanding local patterns helps property owners prioritize security investments.
+
+## Houston Crime Overview
+
+### Property Crime Trends
+Property crimes — burglary, theft, motor vehicle theft — remain Houston's most common criminal activity. While some areas have improved, others continue to experience elevated risk.
+
+### Hot Spots
+Certain neighborhoods experience consistently higher crime rates:
+- Parts of Third Ward
+- East Houston areas
+- Some apartment complex areas
+- Specific commercial corridors
+
+## Neighborhood-Specific Recommendations
+
+### Higher-Risk Areas (Enhanced Security Recommended)
+Properties in areas with elevated crime rates benefit from:
+- Comprehensive camera coverage with active deterrence
+- Professional monitoring with fast dispatch
+- Multiple layers of protection (sensors, cameras, monitoring)
+- Visible security indicators (signs, decals)
+
+### Moderate-Risk Areas (Standard Protection)
+Most suburban neighborhoods benefit from:
+- Professional alarm system with monitoring
+- Cameras at entry points
+- Smart home integration for occupancy simulation
+
+### Lower-Risk Areas (Basic Protection Still Recommended)
+Even in lower-crime areas, we recommend:
+- At minimum, a monitored alarm system
+- Cameras covering major entry points
+- Visible security signage
+
+## What Actually Works
+
+Regardless of neighborhood, proven security measures include:
+
+**Professional Monitoring**
+Local monitoring with direct police dispatch provides the fastest response regardless of where you are when an incident occurs.
+
+**Visible Cameras**
+Visible cameras deter opportunistic criminals. Active deterrence cameras with sirens/strobes provide additional protection.
+
+**Comprehensive Coverage**
+Every entry point should be monitored. We've seen too many incidents where burglars entered through unmonitored locations.
+
+**Lighting & Landscaping**
+Good lighting and trimmed landscaping eliminate hiding spots around your property.
+
+## Local Knowledge Matters
+
+Every Houston neighborhood has specific characteristics. Our experience across thousands of installations gives us insight into what works in each area.
+
+[Get a neighborhood-specific security assessment](/free-analysis) from our local team.`,
+    relatedServices: ["/residential", "/security-cameras", "/monitoring-services"],
+    tags: ["houston crime", "neighborhood security", "crime statistics", "houston"],
+  },
+  {
+    slug: "security-cameras-night-vision-guide",
+    title: "Security Camera Night Vision: Complete Technical Guide",
+    metaTitle: "Security Camera Night Vision Guide | IR vs Color Night Vision",
+    metaDescription: "Understanding security camera night vision technology. IR vs color night vision, low-light performance, and choosing the right cameras for Houston properties.",
+    category: "surveillance-guides",
+    datePublished: "2025-11-05",
+    readTime: "8 min",
+    excerpt: "Night vision is essential for 24/7 security. This technical guide explains the differences between IR and color night vision and which option works best for different Houston properties.",
+    content: `Modern security cameras offer sophisticated night vision capabilities. Understanding the options helps you choose the right system for your property.
+
+## Night Vision Technologies
+
+### Infrared (IR) Night Vision
+
+**How it works:** Cameras emit infrared light invisible to the human eye but detectable by the camera sensor, creating black-and-white images in complete darkness.
+
+**Best for:**
+- Complete darkness coverage
+- Long-range monitoring
+- Budget-conscious installations
+- Areas where white light would be disruptive
+
+**Considerations:**
+- Black-and-white footage only
+- Can produce washed-out images in some cases
+- Limited ability to identify colors
+
+### Color Night Vision
+
+**How it works:** Advanced sensors and processing capture more light, enabling full-color images in very low light conditions. Some cameras use built-in spotlights to provide supplemental illumination.
+
+**Best for:**
+- Areas requiring color detail (faces, vehicles, clothing)
+- Residential front yards and entrances
+- Business areas where identification matters
+- Properties wanting the best image quality
+
+**Considerations:**
+- Higher cost than basic IR cameras
+- Requires some ambient light (moonlight, street lights, or supplemental lighting)
+- More sophisticated technology
+
+## What We Recommend for Houston
+
+### Residential Properties
+We typically recommend color night vision cameras for:
+- Front doors and porches
+- Driveways and garages
+- Pool areas
+- Backyards
+
+Color detail helps identify visitors, delivery personnel, and potential intruders.
+
+### Commercial Properties
+Mixed installations often work best:
+- Color night vision at entrances and exits
+- IR cameras for perimeter and remote areas
+- Active deterrence cameras with spotlights for high-risk zones
+
+## Additional Features to Consider
+
+**Wide Dynamic Range (WDR)**
+Handles challenging lighting conditions like bright sunlight and dark shadows in same frame.
+
+**Smart IR**
+Prevents over-exposure in close objects while maintaining detail at distance.
+
+**Analytics**
+Advanced cameras can trigger alerts based on human/vehicle detection regardless of lighting conditions.
+
+Our team can recommend optimal camera placement and technology for your specific property. [Schedule a consultation](/free-analysis).`,
+    relatedServices: ["/security-cameras", "/commercial", "/residential"],
+    tags: ["night vision", "security cameras", "IR", "color night vision", "technology"],
+  },
+  {
+    slug: "video-verification-alarm-monitoring",
+    title: "Video Verified Alarm Monitoring: The Gold Standard",
+    metaTitle: "Video Verified Alarm Monitoring | Reduce False Alarms",
+    metaDescription: "Video verification dramatically reduces false alarms and improves police response. Learn how video-verified monitoring works and why it's the gold standard.",
+    category: "alarm-education",
+    datePublished: "2025-10-30",
+    readTime: "7 min",
+    excerpt: "Video verified alarm monitoring dramatically improves response times and reduces false alarms. This technology is transforming how security systems protect Houston properties.",
+    content: `Traditional alarm monitoring has a significant weakness: false alarms. Video verification solves this problem by confirming actual events before dispatch.
+
+## The False Alarm Problem
+
+### Statistics
+Studies show that 94-98% of alarm activations turn out to be false alarms. This leads to:
+
+- Police frustration and slower response to actual alarms
+- Financial penalties for excessive false alarms in many jurisdictions
+- Wasted property owner resources
+- Potential for reduced police priority
+
+### Houston False Alarm Ordinance
+Houston and many surrounding areas have adopted false alarm ordinances with escalating fees for repeat false alarm occurrences.
+
+## How Video Verification Works
+
+### The Process
+1. Alarm triggers at your property
+2. Monitoring operator instantly views live video from triggered cameras
+3. Operator confirms actual intrusion, emergency, or verifies false alarm
+4. Verified alarms receive immediate dispatch with video evidence
+5. False alarms are resolved without police dispatch
+
+### Benefits
+
+**Faster Response**
+Verified alarms get priority dispatch. Police know they're responding to a confirmed event.
+
+**Fewer False Alarms**
+The verification step eliminates nearly all false alarm dispatches.
+
+**Better Evidence**
+Video evidence helps police identify suspects and understand what occurred.
+
+**Reduced Fees**
+No false alarm violations means no expensive penalty fees.
+
+## What You Need
+
+Video verified monitoring requires:
+- Cameras connected to your alarm system
+- Monitoring service that offers video verification
+- Proper camera placement covering key entry points and interior zones
+
+## Our Video Verification Service
+
+Texas Total Security offers video verified monitoring as part of our monitoring packages. When seconds matter, video verification ensures the right response every time.
+
+[Learn more about video verification monitoring](/monitoring-services) or call **(713) 387-9937**.`,
+    relatedServices: ["/monitoring-services", "/security-cameras", "/alarm-systems"],
+    tags: ["video verification", "alarm monitoring", "false alarms", "police dispatch"],
+  },
+];
+
+// Add additional articles to main array
+export const allArticles = [...blogArticles, ...additionalArticles];
+
+export function getAllArticles(): BlogArticle[] {
+  return allArticles;
+}

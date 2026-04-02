@@ -4,6 +4,8 @@ import CTABlock from "@/components/CTABlock";
 import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { Camera, Eye, Zap, Sun, Wifi, Video, MonitorSpeaker, Shield, CheckCircle2 } from "lucide-react";
 
 const cameraTypes = [
@@ -46,8 +48,30 @@ const faqs = [
   { question: "Can cameras integrate with my alarm system?", answer: "Yes. We specialize in integrated security systems where cameras, alarms, and monitoring work together." },
 ];
 
+const cameraSchemas = [
+  generateLocalBusinessSchema(),
+  generateEnhancedServiceSchema(
+    "Security Camera Installation Houston TX",
+    "Professional security camera and surveillance system installation in Houston, TX. 4K, HD, PTZ, license plate recognition, active deterrence, solar & wireless systems. Remote viewing from anywhere.",
+    "/security-cameras",
+    "Security Camera Installation",
+    ["security cameras Houston TX", "surveillance cameras Houston", "CCTV installation Houston", "4K security cameras Houston", "license plate cameras Houston"],
+    faqs
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "Security Cameras", href: "/security-cameras" },
+  ]),
+];
+
 const SecurityCameras = () => (
   <Layout>
+    <SEOHead
+      title="Security Camera Installation Houston TX | HD Surveillance Systems | Texas Total Security"
+      description="Professional security camera & surveillance system installation in Houston, TX. 4K, PTZ, license plate, active deterrence & remote viewing. Expert installation since 1994. Free analysis: (713) 387-9937."
+      schemas={cameraSchemas}
+    />
     <PageHero
       title="Security Camera Systems & Surveillance"
       subtitle="Professional surveillance design, installation, and support. From single-camera doorbell setups to enterprise-grade multi-site systems — custom-built for Houston properties."

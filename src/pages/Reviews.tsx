@@ -3,6 +3,8 @@ import PageHero from "@/components/PageHero";
 import CTABlock from "@/components/CTABlock";
 import SectionHeading from "@/components/SectionHeading";
 import TestimonialCard from "@/components/TestimonialCard";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateReviewSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { Star, ExternalLink } from "lucide-react";
 
 const homeownerReviews = [
@@ -49,8 +51,26 @@ const hoaReviews = [
   },
 ];
 
+const allReviews = [...homeownerReviews, ...businessReviews, ...hoaReviews];
+
+const reviewSchemas = [
+  generateLocalBusinessSchema(),
+  generateReviewSchema(
+    allReviews.map(r => ({ author: r.name, text: r.text, rating: 5, location: r.role }))
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Reviews", href: "/reviews" },
+  ]),
+];
+
 const Reviews = () => (
   <Layout>
+    <SEOHead
+      title="Customer Reviews | 5-Star Houston Security Company | Texas Total Security"
+      description="Read genuine 5-star reviews from Houston homeowners, businesses & HOAs. Texas Total Security rated #1 locally. 30+ years, 10,000+ systems installed. See why Houston trusts us."
+      schemas={reviewSchemas}
+    />
     <PageHero
       title="Reviews & Testimonials"
       subtitle="Hear from homeowners, business owners, and property managers who trust Texas Total Security to protect what matters most."

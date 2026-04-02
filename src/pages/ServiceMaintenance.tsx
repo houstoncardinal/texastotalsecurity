@@ -2,6 +2,8 @@ import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTABlock from "@/components/CTABlock";
 import SectionHeading from "@/components/SectionHeading";
+import SEOHead from "@/components/SEOHead";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { Wrench, RefreshCw, CheckCircle2, Clock, Camera, Shield } from "lucide-react";
 
 const services = [
@@ -13,8 +15,28 @@ const services = [
   { icon: CheckCircle2, title: "Support Plans", desc: "Priority service agreements with guaranteed response times and discounted rates for ongoing maintenance." },
 ];
 
+const maintenanceSchemas = [
+  generateLocalBusinessSchema(),
+  generateEnhancedServiceSchema(
+    "Security System Service & Maintenance Houston TX",
+    "Professional security system maintenance, repair, and service in Houston, TX. Fast local response, expert technicians for alarm faults, camera issues, firmware updates & system upgrades.",
+    "/service-maintenance",
+    "Security System Maintenance",
+    ["security system repair Houston TX", "alarm system maintenance Houston", "security camera repair Houston", "security system service Houston"]
+  ),
+  generateBreadcrumbSchema([
+    { name: "Home", href: "/" },
+    { name: "Service & Maintenance", href: "/service-maintenance" },
+  ]),
+];
+
 const ServiceMaintenance = () => (
   <Layout>
+    <SEOHead
+      title="Security System Service & Maintenance Houston TX | Texas Total Security"
+      description="Professional security system maintenance, repair & service in Houston, TX. Fast local response, expert technicians & ongoing support. Alarm faults, camera issues & system upgrades. (713) 387-9937."
+      schemas={maintenanceSchemas}
+    />
     <PageHero
       title="Service & Maintenance"
       subtitle="Your security system is an investment. Our ongoing service and maintenance programs ensure it performs at peak reliability — year after year."
