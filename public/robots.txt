@@ -1,7 +1,22 @@
+# Texas Total Security - robots.txt
+# Houston Security Systems | Alarm Installation | Security Cameras
+
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+User-agent: Yahoo-Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baidu
+Allow: /
+
+User-agent: Yandex
 Allow: /
 
 User-agent: Twitterbot
@@ -19,7 +34,14 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Applebot
+Allow: /
+
 User-agent: *
 Allow: /
 
+# Sitemap locations
 Sitemap: https://www.texastotalsecurity.com/sitemap.xml
+
+# Crawl-delay for polite crawlers
+Crawl-delay: 1

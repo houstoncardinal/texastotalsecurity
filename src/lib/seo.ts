@@ -446,6 +446,117 @@ export function generateVideoSchema(title: string, description: string, thumbnai
   };
 }
 
+export function generateHowToSchema(title: string, description: string, steps: { name: string; text: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": title,
+    "description": description,
+    "totalTime": "PT30M",
+    "step": steps.map((step, index) => ({
+      "@type": "HowToStep",
+      "position": index + 1,
+      "name": step.name,
+      "text": step.text,
+      "url": `${BASE_URL}/${index + 1}`
+    })),
+    "provider": {
+      "@type": "Organization",
+      "name": COMPANY.name,
+      "url": COMPANY.url
+    }
+  };
+}
+
+export function generateProductSchema(name: string, description: string, price?: string, availability?: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": name,
+    "description": description,
+    "brand": {
+      "@type": "Brand",
+      "name": COMPANY.name
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": price || "0",
+      "priceCurrency": "USD",
+      "availability": availability || "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": COMPANY.name
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "247",
+      "bestRating": "5"
+    }
+  };
+}
+
+export function generateVideoSchema2(title: string, description: string, thumbnailUrl: string, uploadDate: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": title,
+    "description": description,
+    "thumbnailUrl": thumbnailUrl,
+    "uploadDate": uploadDate,
+    "publisher": {
+      "@type": "Organization",
+      "name": COMPANY.name,
+      "logo": {
+        "@type": "ImageObject",
+        "url": COMPANY.logo
+      }
+    }
+  };
+}
+
+export function generateVideoObjectSchema(title: string, description: string, videoUrl: string, thumbnailUrl: string, uploadDate: string, duration?: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": title,
+    "description": description,
+    "uploadDate": uploadDate,
+    "duration": duration || "PT2M",
+    "thumbnailUrl": thumbnailUrl,
+    "contentUrl": videoUrl,
+    "embedUrl": videoUrl,
+    "publisher": {
+      "@type": "Organization",
+      "name": COMPANY.name,
+      "url": COMPANY.url,
+      "logo": {
+        "@type": "ImageObject",
+        "url": COMPANY.logo
+      }
+    }
+  };
+}
+
+export function generateLocalSEOKeywords() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${COMPANY.name} - Houston Security Systems`,
+    "description": COMPANY.description,
+    "url": COMPANY.url,
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "name": COMPANY.name,
+      "areaServed": COMPANY.areaServed.map(city => ({
+        "@type": "City",
+        "name": `${city}, TX`
+      }))
+    }
+  };
+}
+
 export function generateImageSchema(imageUrl: string, caption?: string) {
   return {
     "@context": "https://schema.org",

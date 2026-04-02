@@ -65,8 +65,8 @@ const Index = () => {
   return (
     <Layout>
       <SEOHead
-        title="Texas Total Security | #1 Security Systems for Homes & Businesses in Houston, TX"
-        description="Houston's trusted security experts for 30+ years. Custom alarm systems, security cameras, 24/7 local monitoring. Free onsite security analysis. Call (713) 387-9937."
+        title="Houston Security Systems | Alarm & Camera Installation | Texas Total Security"
+        description="Houston's #1 security company. Expert alarm systems, security cameras & 24/7 local monitoring for homes & businesses. Serving Houston 30+ years. Free analysis: (713) 387-9937."
         schemas={schemas}
       />
 
@@ -155,9 +155,8 @@ const Index = () => {
                 marginBottom: "1.75rem",
               }}
             >
-              Protecting
+              Houston Security Systems
               <br />
-              What Matters{" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, hsl(0 85% 62%) 0%, hsl(0 85% 45%) 100%)",
@@ -166,7 +165,7 @@ const Index = () => {
                   backgroundClip: "text",
                 }}
               >
-                Most.
+                Protecting What Matters Most.
               </span>
             </h1>
 
@@ -181,13 +180,13 @@ const Index = () => {
                 marginBottom: "0.75rem",
               }}
             >
-              #1 Security Systems for Homes and Businesses in Houston, TX.
+              Houston's Trusted Security Experts for 30+ Years. Expert Alarm Installation, Security Cameras & 24/7 Local Monitoring.
             </p>
             <p
               className="text-sm mb-12 animate-fade-up animate-delay-200"
               style={{ color: "rgba(255,255,255,0.24)" }}
             >
-              Also serving Katy · Sugar Land · The Woodlands · Cypress
+              Serving Houston · Katy · Sugar Land · The Woodlands · Cypress · Pearland
             </p>
 
             {/* CTA buttons */}
