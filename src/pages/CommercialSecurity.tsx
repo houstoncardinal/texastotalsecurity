@@ -114,8 +114,8 @@ const commercialSchemas = [
 const CommercialSecurity = () => (
   <Layout>
     <SEOHead
-      title="Commercial Security Systems Houston TX | Business Alarm & Surveillance"
-      description="Enterprise-grade commercial security systems in Houston, TX. Business alarms, surveillance cameras, access control & 24/7 monitoring. Serving all industries since 1994. Free analysis: (713) 387-9937."
+      title="Commercial Security Systems Houston TX | Apartment Complex Cameras & Business Alarm | Texas Total Security"
+      description="Commercial security systems for Houston businesses. Apartment complex security camera systems, HOA security, neighborhood security cameras, office alarm systems & 24/7 local monitoring. Expert installation since 1994. Free analysis: (713) 387-9937."
       schemas={commercialSchemas}
     />
 

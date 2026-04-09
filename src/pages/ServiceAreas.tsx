@@ -20,8 +20,8 @@ const ServiceAreas = () => {
   return (
     <Layout>
       <SEOHead
-        title="Service Areas | Houston & Surrounding Cities Security"
-        description="Texas Total Security serves Houston, Sugar Land, Katy, Pearland, Cypress, The Woodlands, Pasadena, Missouri City, League City, Richmond, Rosenberg, Bellaire and surrounding areas."
+        title="Security Service Areas Houston TX | Local Alarm Company Near Me | Texas Total Security"
+        description="Texas Total Security serves Houston, Katy, Sugar Land, The Woodlands, Cypress & surrounding areas. Local alarm company, HOA security cameras, security poles & 24/7 monitoring near you. Call (713) 387-9937."
         schemas={schemas}
       />
       <Breadcrumbs items={[{ name: "Service Areas" }]} />

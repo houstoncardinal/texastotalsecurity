@@ -164,8 +164,8 @@ const Services = () => {
   return (
     <Layout>
       <SEOHead
-        title="Security Services | Alarm Systems, Cameras, Monitoring | Houston TX"
-        description="Texas Total Security offers complete security solutions: alarm systems, security cameras, 24/7 local monitoring for homes and businesses in Houston, TX since 1994."
+        title="Security Services Houston TX | Local Alarm Company, HOA Cameras & Security Poles | Texas Total Security"
+        description="Complete security services in Houston, TX: local alarm systems, security camera installations, HOA security camera systems, security poles, CCTV pole installation, switch alarm companies & 24/7 local monitoring since 1994."
         schemas={schemas}
       />
 

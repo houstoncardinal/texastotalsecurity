@@ -19,8 +19,8 @@ const Blog = () => {
   return (
     <Layout>
       <SEOHead
-        title="Security Resources & Guides | Houston Security Blog"
-        description="Expert security guides, tips, and resources from Texas Total Security. Home security, business surveillance, alarm systems, crime prevention, and Houston-specific advice."
+        title="Security Resources & Guides | Houston Local Alarm Company Blog | Texas Total Security"
+        description="Expert security guides from Houston's top local alarm company. HOA security cameras, switch alarm companies, security poles, home security tips, commercial surveillance & Houston crime prevention advice."
         schemas={schemas}
       />
       <Breadcrumbs items={[{ name: "Security Resources" }]} />

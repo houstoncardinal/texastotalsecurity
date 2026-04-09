@@ -10,7 +10,7 @@ import {
   Shield, Camera, Home, Building2, Users, Radio,
   ArrowRight, Phone, CheckCircle2, Star,
   PhoneCall, ClipboardCheck, Wrench, HeadphonesIcon,
-  Award, Lock, MapPin, Plus, Minus,
+  Award, Lock, MapPin, Plus, Minus, AlertTriangle,
 } from "lucide-react";
 
 /* ─── Animation variants ────────────────────────────────────── */
@@ -35,12 +35,12 @@ const vp = { once: true, amount: 0.15 };
 
 /* ─── Data ──────────────────────────────────────────────────── */
 const services = [
-  { icon: Shield,    title: "Alarm Systems",                  desc: "Custom alarm design, installation & local monitoring. Hardwired, wireless, and hybrid solutions.",              href: "/alarm-systems" },
-  { icon: Camera,    title: "Security Camera Systems",        desc: "HD surveillance, license plate cameras, PTZ, active deterrence & full remote viewing.",                          href: "/security-cameras" },
-  { icon: Home,      title: "Residential Security",           desc: "Whole-home protection with smart integration, environmental sensors & 24/7 monitoring.",                        href: "/residential" },
-  { icon: Building2, title: "Commercial Security",            desc: "Scalable security for offices, retail, industrial sites & multi-location businesses of any size.",               href: "/commercial" },
-  { icon: Users,     title: "HOA Security",                   desc: "Gate cameras, license plate recognition, common area surveillance & community-wide systems.",                   href: "/hoa-security" },
-  { icon: Radio,     title: "Active Deterrence & Monitoring", desc: "Cameras with sirens, strobes & two-way talk. Indoor/outdoor networking & 24/7 local dispatch.",                href: "/monitoring-services" },
+  { icon: Shield,    title: "Alarm Systems",                  desc: "Local alarm company installation, 24/7 monitoring & system takeover. Switch from ADT, Brinks or Vivint to Houston's best local alarm.",   href: "/alarm-systems" },
+  { icon: Camera,    title: "Security Camera Systems",        desc: "HD surveillance, license plate cameras, security poles, CCTV pole installation, active deterrence & full remote viewing.",               href: "/security-cameras" },
+  { icon: Home,      title: "Residential Security",           desc: "Local home security systems — custom alarm, environmental sensors & 24/7 local monitoring for Houston homeowners.",                       href: "/residential" },
+  { icon: Building2, title: "Commercial Security",            desc: "Scalable security for offices, retail, apartment complexes, industrial sites & multi-location businesses of any size.",                    href: "/commercial" },
+  { icon: Users,     title: "HOA Security",                   desc: "HOA security camera systems, gate cameras, license plate recognition, HOA pool cameras & neighborhood security for Houston communities.",  href: "/hoa-security" },
+  { icon: Radio,     title: "Active Deterrence & Monitoring", desc: "Cameras with sirens, strobes & two-way talk. Local alarm monitoring company — in-house Houston dispatch, never outsourced.",             href: "/monitoring-services" },
 ];
 
 const processSteps = [
@@ -66,11 +66,11 @@ const testimonials = [
 ];
 
 const faqs = [
-  { q: "Do you handle alarm installation for older homes?",        a: "Yes. Our technicians are trained to install alarm systems in properties of all ages. We assess your structure, wiring, and layout to ensure your new system is installed safely and reliably." },
-  { q: "How quickly can you respond to service calls?",            a: "Because we're a local team, we provide fast support throughout Houston and surrounding communities — whether you need maintenance, troubleshooting, or an equipment check." },
+  { q: "How do I switch alarm companies to Texas Total Security?",  a: "Switching is easy. In most cases we take over your existing alarm equipment from ADT, Brinks, Vivint, or any other provider — saving you the cost of a full replacement. Call us and our local team handles the entire transition with minimal downtime." },
+  { q: "Do you install HOA security camera systems?",              a: "Yes. We specialize in HOA surveillance cameras, community gate camera systems, license plate recognition, and neighborhood-wide security for homeowner associations and apartment complexes throughout Houston." },
   { q: "Can I integrate alarms with cameras and smart devices?",   a: "Absolutely. Our systems integrate seamlessly with cameras, smart locks, mobile apps, and home automation — allowing you to monitor and manage your property from anywhere." },
-  { q: "What sets you apart from national alarm companies?",       a: "Personalized service, local expertise, and technology designed for Houston environments. You get professional installation and responsive support from a team that truly knows local security challenges." },
-  { q: "Do you serve both residential and commercial properties?", a: "Yes. From single-family homes to warehouses and retail spaces — every setup is customized to match your property's size, layout, and safety goals." },
+  { q: "What sets you apart from national alarm companies?",       a: "We are a true local alarm company — not a franchise. You get local Houston technicians, an in-house monitoring center, and we never sell your contract to a national company. Personalized service backed by 30+ years of Houston experience." },
+  { q: "Do you serve both residential and commercial properties?", a: "Yes. From single-family homes to warehouses, retail spaces, and HOA communities — every setup is customized to match your property's size, layout, and safety goals." },
 ];
 
 /* ─── CountUp ───────────────────────────────────────────────── */
@@ -164,8 +164,8 @@ const Index = () => {
       </AnimatePresence>
 
       <SEOHead
-        title="Houston Security Systems | Alarm & Camera Installation | Texas Total Security"
-        description="Houston's #1 security company. Expert alarm systems, security cameras & 24/7 local monitoring for homes & businesses. Serving Houston 30+ years. Free analysis: (713) 387-9937."
+        title="Local Alarm Company Houston TX | Security Cameras, HOA Systems & Alarm Installation | Texas Total Security"
+        description="Houston's #1 local alarm company. Switch from ADT & national providers. Expert alarm systems, security cameras, HOA security camera systems, security poles & 24/7 local monitoring. Serving Houston 30+ years. Free analysis: (713) 387-9937."
         schemas={schemas}
       />
 
@@ -342,7 +342,7 @@ const Index = () => {
                 maxWidth: "38rem",
               }}
             >
-              Houston's Trusted Security Experts for 30+ Years. Expert Alarm Installation, Security Cameras & 24/7 Local Monitoring.
+              Houston's #1 Local Alarm Company. Expert Alarm Installation, Security Cameras, HOA Security Systems & 24/7 Local Monitoring.
             </motion.p>
 
             <motion.p
@@ -404,7 +404,7 @@ const Index = () => {
               transition={{ duration: 0.6, ease: easeExpo, delay: 0.45 }}
               className="flex flex-wrap items-center justify-center gap-2.5"
             >
-              {["Free Onsite Analysis", "No Long-Term Contracts", "24/7 Local Dispatch", "Licensed & Insured"].map((f, i) => (
+              {["Free Onsite Analysis", "Local Alarm Company", "24/7 Local Dispatch", "Switch Alarm Companies"].map((f, i) => (
                 <motion.span
                   key={f}
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -510,16 +510,16 @@ const Index = () => {
       <div className="bg-white border-b border-gray-100 py-3.5 marquee-outer">
         {(() => {
           const items = [
-            { label: "30+ Years Experience",            highlight: true  },
-            { label: "Licensed & Insured · LIC# B03066901", highlight: true  },
-            { label: "24/7 Local Dispatch",             highlight: true  },
-            { label: "Residential & Commercial",        highlight: true  },
-            { label: "Honeywell / Resideo",             highlight: false },
-            { label: "Alarm.com",                       highlight: false },
-            { label: "DMP",                             highlight: false },
-            { label: "DSC",                             highlight: false },
-            { label: "Hikvision",                       highlight: false },
-            { label: "Bosch Security",                  highlight: false },
+            { label: "Local Alarm Company · Houston TX",       highlight: true  },
+            { label: "Licensed & Insured · LIC# B03066901",   highlight: true  },
+            { label: "Switch Alarm Companies",                 highlight: true  },
+            { label: "HOA Security Camera Systems",            highlight: true  },
+            { label: "Honeywell / Resideo",                    highlight: false },
+            { label: "Security Poles & CCTV Installation",     highlight: false },
+            { label: "Alarm.com",                              highlight: false },
+            { label: "DMP",                                    highlight: false },
+            { label: "Hikvision",                              highlight: false },
+            { label: "24/7 Local Dispatch",                    highlight: false },
           ];
           const row = [...items, ...items];
           return (
@@ -541,9 +541,28 @@ const Index = () => {
       </div>
 
       {/* ══════════════════════════════════════════════════
+          HOUSTON PROBLEM — alert banner
+      ══════════════════════════════════════════════════ */}
+      <Link
+        to="/houston-we-have-a-problem"
+        className="group flex items-center justify-between gap-4 px-5 py-3.5 hover:opacity-90 transition-opacity"
+        style={{ background: "hsl(0 85% 38%)" }}
+      >
+        <div className="flex items-center gap-3 min-w-0">
+          <AlertTriangle className="w-4 h-4 text-white/80 shrink-0" />
+          <span className="text-[12.5px] font-bold text-white tracking-wide truncate">
+            Houston, We Have a Problem — See Why Property Crime is Rising & What You Can Do About It
+          </span>
+        </div>
+        <span className="hidden sm:flex items-center gap-1 text-[12px] font-semibold text-white/80 shrink-0 group-hover:gap-2 transition-all">
+          Read More <ArrowRight className="w-3.5 h-3.5" />
+        </span>
+      </Link>
+
+      {/* ══════════════════════════════════════════════════
           SERVICES — editorial asymmetric list
       ══════════════════════════════════════════════════ */}
-      <section className="section-padding bg-white overflow-hidden">
+      <section className="section-padding overflow-hidden" style={{ background: "hsl(0 0% 97%)" }}>
         <div className="container-tight px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.7fr] gap-12 lg:gap-24 items-start">
 
@@ -565,7 +584,7 @@ const Index = () => {
                 Complete Security for Every Property
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8 text-base max-w-sm">
-                From residential alarm systems to enterprise-grade commercial surveillance — every system custom-designed, professionally installed, and locally monitored.
+                From local home security systems to HOA security cameras, security poles, and enterprise-grade commercial surveillance — every system custom-designed by Houston's top-rated local alarm company.
               </p>
               <Link to="/services" className="btn-outline-dark inline-flex items-center gap-2 text-[13.5px]">
                 View All Services <ArrowRight className="w-4 h-4" />
@@ -624,6 +643,198 @@ const Index = () => {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          HONEYWELL 6150 — premium product showcase
+      ══════════════════════════════════════════════════ */}
+      <section className="overflow-hidden bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+
+          {/* Left — white product stage */}
+          <motion.div
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.85, ease: easeExpo }}
+            className="relative flex items-center justify-center overflow-hidden"
+            style={{
+              background: "#ffffff",
+              minHeight: "520px",
+              borderRight: "1px solid hsl(0 0% 93%)",
+            }}
+          >
+            {/* Soft red radial accent — keeps depth without dark bg */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse 70% 55% at 50% 60%, hsl(0 85% 50% / 0.06) 0%, transparent 70%)",
+              }}
+            />
+            {/* Light corner accent */}
+            <div
+              className="absolute top-0 right-0 pointer-events-none"
+              style={{
+                width: "260px",
+                height: "260px",
+                background: "radial-gradient(circle at top right, hsl(0 85% 50% / 0.05), transparent 65%)",
+              }}
+            />
+
+            {/* Product badge — top left */}
+            <div
+              className="absolute top-7 left-7 rounded-xl px-4 py-3 z-20"
+              style={{
+                background: "#ffffff",
+                border: "1px solid hsl(0 0% 90%)",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+              }}
+            >
+              <p
+                className="text-[10px] font-bold uppercase tracking-[0.18em] mb-0.5"
+                style={{ color: "hsl(0 85% 48%)" }}
+              >
+                Pro-Grade Hardware
+              </p>
+              <p className="font-display font-bold text-gray-900 text-sm">Honeywell / Resideo</p>
+              <p className="text-[11px] mt-0.5 text-gray-400">
+                VISTA Series Compatible
+              </p>
+            </div>
+
+            {/* Keypad image */}
+            <div className="relative z-10 p-10 lg:p-14">
+              <motion.img
+                src="/honeywell.png"
+                alt="Honeywell 6150 Fixed-English Alphanumeric Keypad — Texas Total Security Houston TX"
+                className="max-w-[280px] w-full object-contain mx-auto"
+                style={{
+                  filter:
+                    "drop-shadow(0 8px 32px rgba(0,0,0,0.12)) drop-shadow(0 0 48px hsl(0 85% 50% / 0.12))",
+                }}
+                loading="lazy"
+                whileHover={{ scale: 1.03, y: -4 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              />
+            </div>
+
+            {/* Rating badge — bottom right */}
+            <div
+              className="absolute bottom-7 right-7 rounded-xl px-4 py-3 text-center z-20"
+              style={{
+                background: "#ffffff",
+                border: "1px solid hsl(0 0% 90%)",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+              }}
+            >
+              <p
+                className="font-display font-bold text-xl leading-none"
+                style={{ color: "hsl(0 85% 44%)" }}
+              >
+                5.0 ★
+              </p>
+              <p className="text-[10px] font-semibold uppercase tracking-wide mt-1 text-gray-400">
+                Google Rated
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Right — content */}
+          <motion.div
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.85, ease: easeExpo }}
+            className="flex flex-col justify-center p-8 sm:p-12 lg:p-14 xl:p-18"
+          >
+            <span
+              className="text-[11px] font-bold tracking-[0.18em] uppercase mb-4 block"
+              style={{ color: "hsl(0 85% 50%)" }}
+            >
+              Professional Alarm Keypads · Houston, TX
+            </span>
+            <div className="w-9 h-[3px] rounded-full mb-6" style={{ background: "hsl(var(--accent))" }} />
+            <h2
+              className="font-display font-bold text-gray-900 mb-4 leading-[1.06]"
+              style={{
+                fontSize: "clamp(1.875rem, 3.2vw, 2.6rem)",
+                letterSpacing: "-0.042em",
+              }}
+            >
+              Honeywell 6150 Keypad —{" "}
+              <span style={{ color: "hsl(var(--accent))" }}>The Pro Standard</span>
+            </h2>
+            <p className="text-gray-500 leading-relaxed mb-6 text-base">
+              Texas Total Security installs the industry-trusted Honeywell 6150 Fixed-English Alphanumeric Keypad — the gold standard for residential and commercial alarm systems in Houston. Paired with Honeywell VISTA series control panels, it delivers unmatched reliability, intuitive control, and real-time system status at a glance.
+            </p>
+
+            {/* Spec grid */}
+            <div className="grid grid-cols-2 gap-3 mb-7">
+              {[
+                { label: "Compatible Panels", value: "VISTA 10P · 15P · 20P · 21iP" },
+                { label: "User Codes",        value: "Up to 32 Users" },
+                { label: "Display Type",      value: "Fixed-English Alphanumeric" },
+                { label: "Panic Functions",   value: "Police · Fire · Medical" },
+                { label: "Arming Modes",      value: "Stay · Away · Night" },
+                { label: "Status LEDs",       value: "Ready · Armed · Power" },
+              ].map((spec) => (
+                <div
+                  key={spec.label}
+                  className="rounded-xl p-3.5"
+                  style={{
+                    background: "hsl(0 0% 98%)",
+                    border: "1px solid hsl(0 0% 92%)",
+                  }}
+                >
+                  <p
+                    className="text-[9.5px] font-bold uppercase tracking-[0.14em] mb-1"
+                    style={{ color: "hsl(0 0% 55%)" }}
+                  >
+                    {spec.label}
+                  </p>
+                  <p className="font-semibold text-gray-900 text-[13px] leading-tight">
+                    {spec.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Switch CTA callout */}
+            <div
+              className="rounded-2xl p-5 mb-7"
+              style={{
+                background: "linear-gradient(135deg, hsl(0 85% 45% / 0.05) 0%, transparent 100%)",
+                border: "1px solid hsl(0 85% 45% / 0.14)",
+              }}
+            >
+              <p className="text-[13px] font-semibold text-gray-800 mb-1">
+                Unhappy with ADT, Brinks, or Vivint?
+              </p>
+              <p className="text-[13px] text-gray-500 leading-relaxed">
+                Switch to a Honeywell Pro-Series system installed by Houston's #1 local alarm company. We take over most existing systems at no extra charge.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link
+                to="/alarm-systems"
+                className="btn-primary-gradient inline-flex items-center gap-2 text-[14.5px]"
+                style={{ boxShadow: "0 4px 20px hsl(0 85% 45% / 0.3)" }}
+              >
+                Switch to Honeywell Pro <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a
+                href="tel:7133879937"
+                className="btn-outline-dark inline-flex items-center gap-2 text-[13.5px]"
+              >
+                <Phone className="w-4 h-4" /> (713) 387-9937
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 

@@ -23,6 +23,7 @@ const navLinks = [
   { name: "Industries", href: "/industries" },
   { name: "Portfolio",  href: "/portfolio" },
   { name: "Reviews",    href: "/reviews" },
+  { name: "Houston Problem", href: "/houston-we-have-a-problem" },
   { name: "Contact",    href: "/contact" },
 ];
 

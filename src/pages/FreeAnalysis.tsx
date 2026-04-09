@@ -40,8 +40,8 @@ const FreeAnalysis = () => {
   return (
     <Layout>
       <SEOHead
-        title="Free Onsite Security Analysis | Texas Total Security"
-        description="Schedule your free onsite security analysis with Texas Total Security. A certified specialist will visit your Houston property, assess vulnerabilities, and design a custom protection plan — no obligation."
+        title="Free Security Analysis Houston TX | Local Alarm Company | Texas Total Security"
+        description="Get a free onsite security analysis from Houston's top local alarm company. We assess your home, business or HOA property at no cost. Switch alarm companies, add cameras or security poles — no obligation. (713) 387-9937."
         schemas={schemas}
       />
       <Breadcrumbs items={[{ name: "Free Security Analysis" }]} />

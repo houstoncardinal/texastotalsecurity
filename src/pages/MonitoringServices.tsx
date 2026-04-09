@@ -49,8 +49,8 @@ const monitoringSchemas = [
 const MonitoringServices = () => (
   <Layout>
     <SEOHead
-      title="24/7 Alarm Monitoring Houston TX | Local Dispatch Center | Texas Total Security"
-      description="Local 24/7 alarm monitoring in Houston, TX. In-house dispatch center — not a national call center. Video monitoring, guard patrol & custom services. Never sells your contract. (713) 387-9937."
+      title="Local Alarm Monitoring Houston TX | Switch Alarm Monitoring Companies | Texas Total Security"
+      description="Best local alarm monitoring company in Houston, TX. 24/7 in-house local dispatch center — not a national call center. Switch alarm monitoring companies today. Video monitoring, guard patrol & never sells your contract. (713) 387-9937."
       schemas={monitoringSchemas}
     />
     <PageHero

@@ -41,8 +41,8 @@ const About = () => {
   return (
     <Layout>
       <SEOHead
-        title="About Texas Total Security | Houston's Trusted Security Experts"
-        description="Learn about Texas Total Security — Houston's locally owned security company with 30+ years of experience."
+        title="About Texas Total Security | Houston's Best Local Alarm Company Since 1994"
+        description="Texas Total Security — Houston's top-rated local alarm company with 30+ years experience. Expert alarm installation, HOA security camera systems, security poles, CCTV pole installation & local monitoring. Licensed & insured."
         schemas={schemas}
       />
       <Breadcrumbs items={[{ name: "About Us" }]} />
@@ -139,6 +139,40 @@ const About = () => {
         </div>
       </section>
 
+      <section className="section-padding">
+        <div className="container-tight">
+          <div className="max-w-3xl mx-auto">
+            <div className="divider-accent" />
+            <h2 className="text-2xl font-display font-bold text-foreground text-center mb-3">
+              Our Company Signage
+            </h2>
+            <p className="text-muted-foreground text-center text-sm mb-8">
+              Texas Total Security is a licensed, insured, and locally recognized Houston security company.
+            </p>
+            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-white" style={{ height: "520px" }}>
+              <object
+                data="/Texas Total Security SIGN.pdf"
+                type="application/pdf"
+                width="100%"
+                height="100%"
+                className="w-full h-full"
+              >
+                <div className="flex flex-col items-center justify-center h-full text-center p-8">
+                  <p className="text-muted-foreground mb-4">View our company sign</p>
+                  <a
+                    href="/Texas Total Security SIGN.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary-gradient inline-flex items-center gap-2"
+                  >
+                    Open Company Sign (PDF)
+                  </a>
+                </div>
+              </object>
+            </div>
+          </div>
+        </div>
+      </section>
       <CTABlock />
     </Layout>
   );

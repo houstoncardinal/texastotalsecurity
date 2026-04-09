@@ -93,7 +93,7 @@ const residentialSchemas = [
     "Complete home security for Houston homeowners. Custom alarm systems, HD cameras, smart home integration & 24/7 local monitoring. New homes, existing homes, condos & second homes.",
     "/residential",
     "Residential Security System Installation",
-    ["home security system Houston TX", "residential alarm system Houston", "home alarm installation Houston", "smart home security Houston"],
+    ["local home security companies Houston TX", "local home security systems Houston", "local alarm system Houston", "local burglar alarm Houston", "local home alarm companies Houston", "local security system companies Houston", "home security systems local Houston", "residential alarm installation Houston"],
     faqs
   ),
   generateBreadcrumbSchema([
@@ -105,8 +105,8 @@ const residentialSchemas = [
 const ResidentialSecurity = () => (
   <Layout>
     <SEOHead
-      title="Residential Security Systems Houston TX | Home Alarm & Camera Installation"
-      description="Complete home security systems in Houston, TX. Custom alarm installation, HD cameras, smart home integration & 24/7 local monitoring. Serving Houston homeowners since 1994. Free analysis: (713) 387-9937."
+      title="Local Home Security Systems Houston TX | Best Local Alarm Company Near Me | Texas Total Security"
+      description="Best local home security company near you in Houston, TX. Local home security systems, residential alarm installation, home cameras & 24/7 local monitoring. Local alarm companies near you since 1994. Free analysis: (713) 387-9937."
       schemas={residentialSchemas}
     />
 

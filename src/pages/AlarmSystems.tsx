@@ -48,6 +48,8 @@ const faqs = [
   { question: "Can you take over my existing alarm system?", answer: "Yes. We regularly take over systems from ADT, Brinks, Vivint, and other providers." },
   { question: "What's the difference between hardwired and wireless alarms?", answer: "Hardwired systems use physical wiring — extremely reliable for new construction. Wireless systems use radio signals and are ideal for existing homes. We also install hybrid systems." },
   { question: "What happens during a power outage?", answer: "All our systems include battery backup. Cellular communication ensures your system stays connected even if phone or internet lines are down." },
+  { question: "What is the cost of switching alarm companies?", answer: "In many cases, there is minimal cost to switch. We often take over your existing alarm equipment at no charge, eliminating the need for new hardware. Contact us for a free assessment and we'll provide transparent pricing with no surprises." },
+  { question: "How long does it take to switch alarm companies?", answer: "Most alarm company switches are completed in a single visit. Our technicians reprogram your existing panel, test all sensors, and connect your system to our local Houston monitoring center — typically within a few hours." },
 ];
 
 const alarmSchemas = [
@@ -57,7 +59,7 @@ const alarmSchemas = [
     "Custom alarm system design, professional installation, and 24/7 local monitoring for homes and businesses in Houston, TX. System takeovers from ADT, Brinks, Vivint. Licensed & insured since 1994.",
     "/alarm-systems",
     "Alarm System Installation",
-    ["alarm system Houston TX", "burglar alarm Houston", "home alarm system Houston", "alarm monitoring Houston", "ADT alternative Houston"],
+    ["switch alarm company Houston TX", "local alarm company Houston", "cancel ADT Houston", "local alarm system Houston", "local burglar alarm Houston", "alarm companies near me Houston", "best alarm companies Houston", "local alarm monitoring Houston", "change alarm company Houston", "Honeywell alarm installation Houston"],
     faqs
   ),
   generateBreadcrumbSchema([
@@ -70,14 +72,14 @@ const alarmSchemas = [
 const AlarmSystems = () => (
   <Layout>
     <SEOHead
-      title="Alarm System Installation Houston TX | 24/7 Local Monitoring | Texas Total Security"
-      description="Expert alarm system installation & 24/7 local monitoring in Houston, TX. Hardwired, wireless & hybrid. System takeovers from ADT, Brinks & more. Licensed since 1994. Free analysis: (713) 387-9937."
+      title="Switch Alarm Companies Houston TX | Local Alarm Installation & Monitoring | Texas Total Security"
+      description="Ready to switch alarm companies? Houston's best local alarm company. Cancel ADT, Brinks or Vivint & switch to expert Honeywell installation with 24/7 local monitoring. System takeovers available. (713) 387-9937."
       schemas={alarmSchemas}
     />
     <PageHero
-      title="Alarm System Servicing in Houston, TX"
-      subtitle="Custom-designed alarm systems with 24/7 local monitoring. Installation, takeover, and ongoing service for residential and commercial properties across Houston."
-      ctaText="Schedule a Free Alarm Survey"
+      title="Local Alarm Company in Houston, TX"
+      subtitle="Switch alarm companies with zero hassle. Houston's top-rated local alarm company installs Honeywell systems, takes over from ADT, Brinks & Vivint, and provides 24/7 local monitoring — never outsourced."
+      ctaText="Switch Your Alarm Today — Free Survey"
     />
 
     <section className="section-padding">
@@ -86,9 +88,9 @@ const AlarmSystems = () => (
           <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
           <div className="relative z-10">
             <div className="divider-accent !mx-0" />
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-foreground mb-4">Unhappy With Your Existing Alarm Company?</h2>
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-foreground mb-4">Switching Alarm Companies? We Make It Easy.</h2>
             <p className="text-muted-foreground leading-relaxed max-w-3xl">
-              Finding the right alarm company is important. When switching to Texas Total Security, we make the process simple. In most cases, we can take over your existing alarm system, saving you time and money. Have one of our local security professionals come out to provide a FREE ONSITE SECURITY SURVEY.
+              Finding the right local alarm company is critical for real protection. Texas Total Security is one of Houston's top-rated local alarm companies — and switching is simpler than you think. Whether you want to cancel ADT, change from Brinks, drop Vivint, or just find the best local alarm company near you, our team handles the entire takeover process. We keep your existing equipment in most cases, saving you time and money. Schedule your FREE onsite security survey today.
             </p>
           </div>
         </div>

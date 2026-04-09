@@ -28,6 +28,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const BlogCategory = lazy(() => import("./pages/BlogCategory"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const HoustonProblem = lazy(() => import("./pages/HoustonProblem"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
 const queryClient = new QueryClient();
@@ -70,6 +71,7 @@ const App = () => (
             {/* City SEO Landing Pages */}
             <Route path="/:citySlug-security-systems" element={<CityLanding />} />
             <Route path="/:citySlug-security" element={<CityLanding />} />
+            <Route path="/houston-we-have-a-problem" element={<HoustonProblem />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

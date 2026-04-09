@@ -55,7 +55,7 @@ const cameraSchemas = [
     "Professional security camera and surveillance system installation in Houston, TX. 4K, HD, PTZ, license plate recognition, active deterrence, solar & wireless systems. Remote viewing from anywhere.",
     "/security-cameras",
     "Security Camera Installation",
-    ["security cameras Houston TX", "surveillance cameras Houston", "CCTV installation Houston", "4K security cameras Houston", "license plate cameras Houston"],
+    ["security camera pole installation Houston TX", "CCTV pole installation Houston", "security poles Houston", "entrance gate camera Houston", "surveillance camera pole mount Houston", "outdoor security camera pole Houston", "security camera installation Houston", "HOA security cameras Houston", "license plate cameras Houston"],
     faqs
   ),
   generateBreadcrumbSchema([
@@ -68,14 +68,14 @@ const cameraSchemas = [
 const SecurityCameras = () => (
   <Layout>
     <SEOHead
-      title="Security Camera Installation Houston TX | HD Surveillance Systems | Texas Total Security"
-      description="Professional security camera & surveillance system installation in Houston, TX. 4K, PTZ, license plate, active deterrence & remote viewing. Expert installation since 1994. Free analysis: (713) 387-9937."
+      title="Security Camera Installation Houston TX | Security Poles, CCTV Pole Install | Texas Total Security"
+      description="Professional security camera installation & CCTV pole installation in Houston, TX. Security poles, entrance gate cameras, license plate recognition, outdoor security camera pole mounts & HD surveillance. Free analysis: (713) 387-9937."
       schemas={cameraSchemas}
     />
     <PageHero
-      title="Security Camera Systems & Surveillance"
-      subtitle="Professional surveillance design, installation, and support. From single-camera doorbell setups to enterprise-grade multi-site systems — custom-built for Houston properties."
-      ctaText="Get a Custom Surveillance Plan"
+      title="Security Camera Systems & Security Pole Installs"
+      subtitle="Professional surveillance design, CCTV pole installation, and security camera pole mounts in Houston, TX. From entrance gate cameras and security poles to enterprise-grade multi-site systems — custom-built for every property type."
+      ctaText="Get a Custom Camera & Pole Design"
     />
 
     <section className="section-padding">
@@ -116,6 +116,55 @@ const SecurityCameras = () => (
                   <span className="text-sm text-muted-foreground leading-relaxed">{item}</span>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="section-padding bg-white">
+      <div className="container-tight">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div>
+            <div className="divider-accent !mx-0" />
+            <h2 className="text-3xl font-display font-bold text-foreground mb-5">
+              Security Pole Installation Services
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Texas Total Security specializes in security camera pole installs throughout Houston and surrounding areas. We provide complete CCTV pole installation services — from selecting the right outdoor security camera pole mount to underground conduit runs and full wiring. Our security poles are ideal for HOA entrances, parking lots, construction sites, and commercial properties.
+            </p>
+            <div className="space-y-2.5">
+              {[
+                "Security camera pole installs — all hardware, wiring & conduit",
+                "CCTV pole installation with weatherproof camera housings",
+                "Entrance gate camera systems on custom security poles",
+                "Outdoor security camera pole mounts (rated for Houston weather)",
+                "Surveillance camera pole mount for parking lots & perimeters",
+                "Telescoping security camera poles for adjustable height",
+                "Metal pole for security camera with anti-climb treatment",
+                "Dome camera pole mount & PTZ pan-tilt-zoom installations",
+                "Security camera extension poles for elevated coverage",
+                "Ring camera pole mount & third-party pole solutions",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-1" />
+                  <span className="text-sm text-muted-foreground leading-relaxed">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="space-y-4">
+            <div className="glass-card p-6">
+              <h3 className="font-display font-semibold text-foreground mb-2 text-[15px]">Outdoor Camera Mounting Poles</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">We install outdoor camera poles in concrete with proper base plates, ensuring maximum stability in all weather conditions. Each outdoor security camera pole is custom-measured and positioned for optimal camera coverage angles.</p>
+            </div>
+            <div className="glass-card p-6">
+              <h3 className="font-display font-semibold text-foreground mb-2 text-[15px]">Entrance Gate Camera Poles</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">Our entrance gate camera installations combine security poles with wide-angle cameras and LPR (license plate recognition) cameras to capture every vehicle entering your HOA, apartment complex, or commercial property.</p>
+            </div>
+            <div className="glass-card p-6">
+              <h3 className="font-display font-semibold text-foreground mb-2 text-[15px]">CCTV Pole Installation Process</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">Our CCTV camera pole services include site survey, pole placement design, trenching, conduit installation, mounting, wiring, camera configuration, and remote viewing setup — all handled by our licensed Houston technicians.</p>
             </div>
           </div>
         </div>

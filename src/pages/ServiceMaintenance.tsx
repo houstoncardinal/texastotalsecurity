@@ -33,8 +33,8 @@ const maintenanceSchemas = [
 const ServiceMaintenance = () => (
   <Layout>
     <SEOHead
-      title="Security System Service & Maintenance Houston TX | Texas Total Security"
-      description="Professional security system maintenance, repair & service in Houston, TX. Fast local response, expert technicians & ongoing support. Alarm faults, camera issues & system upgrades. (713) 387-9937."
+      title="Security System Maintenance Houston TX | Local Alarm Company Service & Support | Texas Total Security"
+      description="Professional security system maintenance & service in Houston, TX. Alarm servicing, camera maintenance, local alarm system support & upgrades. Houston's trusted local alarm company. Call (713) 387-9937."
       schemas={maintenanceSchemas}
     />
     <PageHero

@@ -61,8 +61,8 @@ const portfolioSchemas = [
 const Portfolio = () => (
   <Layout>
     <SEOHead
-      title="Security System Portfolio | Houston Installations | Texas Total Security"
-      description="View completed security system installations by Texas Total Security across Houston, TX. HOA communities, commercial properties, residential homes & industrial sites. Results that speak for themselves."
+      title="Security System Portfolio | HOA Cameras, Security Poles & Alarm Installs | Texas Total Security"
+      description="Browse Texas Total Security's portfolio of HOA security camera systems, CCTV pole installations, residential alarms, and commercial surveillance projects across Houston, TX."
       schemas={portfolioSchemas}
     />
     <PageHero

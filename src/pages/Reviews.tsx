@@ -67,8 +67,8 @@ const reviewSchemas = [
 const Reviews = () => (
   <Layout>
     <SEOHead
-      title="Customer Reviews | 5-Star Houston Security Company | Texas Total Security"
-      description="Read genuine 5-star reviews from Houston homeowners, businesses & HOAs. Texas Total Security rated #1 locally. 30+ years, 10,000+ systems installed. See why Houston trusts us."
+      title="Customer Reviews | Houston's Best Local Alarm Company | Texas Total Security"
+      description="See why Houston homeowners, businesses, and HOA communities trust Texas Total Security — rated 5.0 stars on Google. Houston's top-rated local alarm company. Read real customer reviews."
       schemas={reviewSchemas}
     />
     <PageHero

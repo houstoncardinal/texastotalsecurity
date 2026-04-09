@@ -45,8 +45,8 @@ const industriesSchemas = [
 const IndustriesWeServe = () => (
   <Layout>
     <SEOHead
-      title="Industries We Serve | Security Systems for Every Business in Houston TX"
-      description="Texas Total Security serves every industry in Houston, TX. Retail, healthcare, schools, restaurants, warehouses, hotels & more. Custom security solutions designed for your specific industry needs."
+      title="Security Systems for Every Industry Houston TX | HOA, Apartment Complex & Commercial | Texas Total Security"
+      description="Security systems for every industry in Houston. HOA security camera systems, apartment complex surveillance, neighborhood security, commercial alarm systems & security poles. Expert installation since 1994."
       schemas={industriesSchemas}
     />
     <PageHero
