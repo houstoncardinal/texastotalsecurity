@@ -68,22 +68,6 @@ export const cities: CityData[] = [
     metaDescription: "Expert security system installation in Katy, TX. Alarms, cameras, monitoring & smart home security for Cinco Ranch, Cross Creek & more. Call (713) 387-9937.",
   },
   {
-    slug: "pearland",
-    name: "Pearland",
-    county: "Brazoria County",
-    population: "130,000+",
-    intro: "Pearland is one of the Houston metro's most rapidly growing cities, attracting families and businesses with its excellent schools, strong community values, and strategic location. As the city expands, so does the need for professional security solutions that protect homes, businesses, and community spaces.",
-    securityContext: "Pearland's growth along Highway 288 and the Sam Houston Tollway has brought new commercial development and residential construction. With this expansion comes increased traffic and evolving security needs — from residential break-in prevention to commercial asset protection and HOA common-area surveillance.",
-    neighborhoods: ["Shadow Creek Ranch", "Southwyck", "Silverlake", "Lakes of Highland Glen", "Pearland Town Center area", "Country Place"],
-    services: ["home alarm systems", "security cameras", "commercial security", "HOA surveillance", "alarm monitoring", "video doorbell installation"],
-    faqs: [
-      { question: "Do you provide security services in Pearland?", answer: "Yes. Texas Total Security serves all of Pearland and Brazoria County with professional alarm installation, security camera systems, and 24/7 local monitoring. We offer free onsite security assessments for both residential and commercial properties." },
-      { question: "What is the best alarm company in Pearland?", answer: "Texas Total Security is the trusted choice for Pearland residents who want local, accountable security service — not a national call center. We've served the greater Houston area for 30+ years with custom-designed systems and in-house monitoring." },
-    ],
-    metaTitle: "Pearland Security Systems | Alarm & Camera Installation | Texas Total Security",
-    metaDescription: "Trusted security systems in Pearland, TX. Alarm installation, cameras, 24/7 monitoring for Shadow Creek Ranch, Silverlake & more. Call (713) 387-9937.",
-  },
-  {
     slug: "cypress",
     name: "Cypress",
     county: "Harris County",
