@@ -657,68 +657,22 @@ const Index = () => {
       <section className="overflow-hidden bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-2">
 
-          {/* Left — white product stage */}
+          {/* Left — keypad collage on clean white */}
           <motion.div
             variants={fadeLeft}
             initial="hidden"
             whileInView="show"
             viewport={vp}
             transition={{ duration: 0.85, ease: easeExpo }}
-            className="relative flex items-center justify-center overflow-hidden"
-            style={{
-              background: "#ffffff",
-              minHeight: "520px",
-              borderRight: "1px solid hsl(0 0% 93%)",
-            }}
+            className="relative flex items-center justify-center bg-white p-6 sm:p-10 lg:p-12 lg:border-r border-gray-100"
+            style={{ minHeight: "420px" }}
           >
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: "radial-gradient(ellipse 70% 55% at 50% 60%, hsl(0 85% 50% / 0.06) 0%, transparent 70%)",
-              }}
+            <img
+              src="/keypads-collage.png"
+              alt="Various Honeywell alarm keypads compatible with Texas Total Security systems — Houston TX"
+              className="w-full max-w-[520px] h-auto object-contain mx-auto"
+              loading="lazy"
             />
-            <div
-              className="absolute top-0 right-0 pointer-events-none"
-              style={{ width: "260px", height: "260px", background: "radial-gradient(circle at top right, hsl(0 85% 50% / 0.05), transparent 65%)" }}
-            />
-
-            {/* Badge — top left */}
-            <div
-              className="absolute top-7 left-7 rounded-xl px-4 py-3 z-20"
-              style={{ background: "#ffffff", border: "1px solid hsl(0 0% 90%)", boxShadow: "0 2px 12px rgba(0,0,0,0.07)" }}
-            >
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] mb-0.5" style={{ color: "hsl(0 85% 48%)" }}>
-                Already Have a System?
-              </p>
-              <p className="font-display font-bold text-gray-900 text-sm">We Can Work With It</p>
-              <p className="text-[11px] mt-0.5 text-gray-400">Free Equipment Evaluation</p>
-            </div>
-
-            {/* Keypad image */}
-            <div className="relative z-10 p-10 lg:p-14">
-              <motion.img
-                src="/honeywell.png"
-                alt="Existing alarm keypad evaluation — Texas Total Security Houston TX"
-                className="max-w-[280px] w-full object-contain mx-auto"
-                style={{ filter: "drop-shadow(0 8px 32px rgba(0,0,0,0.12)) drop-shadow(0 0 48px hsl(0 85% 50% / 0.12))" }}
-                loading="lazy"
-                whileHover={{ scale: 1.03, y: -4 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              />
-            </div>
-
-            {/* Savings badge — bottom right */}
-            <div
-              className="absolute bottom-7 right-7 rounded-xl px-4 py-3 text-center z-20"
-              style={{ background: "#ffffff", border: "1px solid hsl(0 0% 90%)", boxShadow: "0 2px 12px rgba(0,0,0,0.07)" }}
-            >
-              <p className="font-display font-bold text-xl leading-none" style={{ color: "hsl(142 70% 38%)" }}>
-                Save $$$
-              </p>
-              <p className="text-[10px] font-semibold uppercase tracking-wide mt-1 text-gray-400">
-                Keep What Works
-              </p>
-            </div>
           </motion.div>
 
           {/* Right — content */}
