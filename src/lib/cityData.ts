@@ -180,22 +180,6 @@ export const cities: CityData[] = [
     metaDescription: "Security systems in Richmond, TX. Residential, commercial & ranch security with alarms, cameras & 24/7 local monitoring. Call (713) 387-9937.",
   },
   {
-    slug: "rosenberg",
-    name: "Rosenberg",
-    county: "Fort Bend County",
-    population: "40,000+",
-    intro: "Rosenberg is a growing Fort Bend County city that blends historic Texas charm with modern suburban development. As new neighborhoods and commercial centers expand, Rosenberg residents and businesses are increasingly investing in professional security systems to protect their properties and families.",
-    securityContext: "Rosenberg's position at the crossroads of US-59 and Highway 36 brings commercial opportunity along with higher traffic through residential areas. Professional alarm and camera systems provide the protection that Rosenberg's growing community needs.",
-    neighborhoods: ["Brazos Town Center", "Seabourne Creek", "Briarwood", "Reading Estates"],
-    services: ["home alarm systems", "security cameras", "commercial alarm systems", "alarm monitoring", "video surveillance"],
-    faqs: [
-      { question: "What security services do you offer in Rosenberg?", answer: "We offer complete security services in Rosenberg: custom alarm installation, security camera systems, 24/7 local monitoring, commercial security, and ongoing maintenance and support." },
-      { question: "How quickly can you install a security system in Rosenberg?", answer: "Most residential installations in Rosenberg can be completed within 1-2 business days after your free onsite consultation. Commercial projects are scheduled based on scope. Call (713) 387-9937 to get started." },
-    ],
-    metaTitle: "Rosenberg Security Systems | Alarm & Camera Installation | Texas Total Security",
-    metaDescription: "Professional security systems in Rosenberg, TX. Custom alarms, cameras & 24/7 local monitoring for homes and businesses. Call (713) 387-9937.",
-  },
-  {
     slug: "bellaire",
     name: "Bellaire",
     county: "Harris County",
