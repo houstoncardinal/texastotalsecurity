@@ -35,7 +35,7 @@ const COMPANY = {
     state: "TX",
     zip: "77082",
   },
-  areaServed: ["Houston", "Sugar Land", "Katy", "Pearland", "Cypress", "The Woodlands", "Pasadena", "Missouri City", "Richmond", "Rosenberg", "League City", "Bellaire", "Spring", "Tomball", "Humble", "Baytown", "Conroe", "Alvin", "Friendswood", "Dickinson", "La Porte", "Deer Park"],
+  areaServed: ["Houston", "Sugar Land", "Katy", "Cypress", "The Woodlands", "Richmond", "Bellaire", "Memorial", "River Oaks", "West University", "Spring", "Tomball", "Humble"],
   geo: { lat: 29.7604, lng: -95.3698 },
   hours: {
     weekday: { open: "07:00", close: "18:00" },

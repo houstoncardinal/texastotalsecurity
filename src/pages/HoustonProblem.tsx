@@ -87,8 +87,7 @@ const solutions = [
 const neighborhoods = [
   "Memorial", "River Oaks", "Bellaire", "West University Place",
   "The Heights", "Midtown", "Montrose", "Sugar Land",
-  "Katy", "Cypress", "The Woodlands", "Pearland",
-  "League City", "Friendswood", "Missouri City", "Richmond",
+  "Katy", "Cypress", "The Woodlands", "Richmond",
 ];
 
 const schemas = [
@@ -527,7 +526,7 @@ const HoustonProblem = () => (
             We Protect Every Corner of Houston
           </h2>
           <p style={{ color: "rgba(255,255,255,0.42)" }} className="text-base max-w-xl mx-auto leading-relaxed">
-            From River Oaks to Katy, from The Woodlands to Pearland — Texas Total Security covers every Houston neighborhood and suburb.
+            From River Oaks to Katy, from The Woodlands to Bellaire — Texas Total Security covers every premier Houston neighborhood and suburb.
           </p>
         </motion.div>
 
