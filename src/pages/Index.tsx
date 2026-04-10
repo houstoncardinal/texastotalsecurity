@@ -515,16 +515,16 @@ const Index = () => {
       <div className="bg-white border-b border-gray-100 py-3.5 marquee-outer">
         {(() => {
           const items = [
-            { label: "Local Alarm Company · Houston TX",       highlight: true  },
+            { label: "Switch From ADT / Vivint / Brinks",     highlight: true  },
+            { label: "Property Management Solutions",          highlight: true  },
             { label: "Licensed & Insured · LIC# B03066901",   highlight: true  },
-            { label: "Switch Alarm Companies",                 highlight: true  },
-            { label: "HOA Security Camera Systems",            highlight: true  },
-            { label: "Honeywell / Resideo",                    highlight: false },
-            { label: "Security Poles & CCTV Installation",     highlight: false },
+            { label: "HOA & Community Security",               highlight: true  },
+            { label: "Custom Security Poles",                  highlight: false },
+            { label: "License Plate Recognition",              highlight: false },
             { label: "Alarm.com",                              highlight: false },
-            { label: "DMP",                                    highlight: false },
-            { label: "Hikvision",                              highlight: false },
-            { label: "24/7 Local Dispatch",                    highlight: false },
+            { label: "24/7 Local Monitoring Center",           highlight: false },
+            { label: "Honeywell / Resideo",                    highlight: false },
+            { label: "30+ Years in Houston",                   highlight: false },
           ];
           const row = [...items, ...items];
           return (
@@ -586,11 +586,11 @@ const Index = () => {
                 className="font-display font-bold text-gray-900 mb-5"
                 style={{ fontSize: "clamp(2.25rem, 4vw, 3.5rem)", lineHeight: 1.05, letterSpacing: "-0.04em" }}
               >
-                Complete Security for Every Property
-              </h2>
-              <p className="text-gray-500 leading-relaxed mb-8 text-base max-w-sm">
-                From local home security systems to HOA security cameras, security poles, and enterprise-grade commercial surveillance — every system custom-designed by Houston's top-rated local alarm company.
-              </p>
+                 Complete Security for Every Property Type
+               </h2>
+               <p className="text-gray-500 leading-relaxed mb-8 text-base max-w-sm">
+                 From alarm takeovers to custom security poles, enterprise surveillance, and 24/7 local monitoring — engineered for property managers, HOA boards, and business owners across Greater Houston.
+               </p>
               <Link to="/services" className="btn-outline-dark inline-flex items-center gap-2 text-[13.5px]">
                 View All Services <ArrowRight className="w-4 h-4" />
               </Link>
@@ -695,9 +695,9 @@ const Index = () => {
               Already Have a Keypad Like This?{" "}
               <span style={{ color: "hsl(var(--accent))" }}>We'll Use It.</span>
             </h2>
-            <p className="text-gray-500 leading-relaxed mb-6 text-base">
-              If you already have an alarm system installed — whether it's from ADT, Brinks, Vivint, or a previous provider — there's a good chance your existing keypads, sensors, and wiring are still perfectly functional. Our process starts with a <strong className="text-gray-700">free equipment evaluation</strong> to determine what can stay and what needs upgrading.
-            </p>
+             <p className="text-gray-500 leading-relaxed mb-6 text-base">
+               If your property already has an alarm system — whether from ADT, Brinks, Vivint, or a previous provider — there's a good chance your existing keypads, sensors, and wiring are still perfectly functional. Our process starts with a <strong className="text-gray-700">free equipment evaluation</strong> to determine what can be reused across your property portfolio.
+             </p>
 
             {/* What we evaluate */}
             <div className="grid grid-cols-2 gap-3 mb-7">
@@ -717,14 +717,14 @@ const Index = () => {
             </div>
 
             {/* Switch CTA callout */}
-            <div className="rounded-2xl p-5 mb-7" style={{ background: "linear-gradient(135deg, hsl(0 85% 45% / 0.05) 0%, transparent 100%)", border: "1px solid hsl(0 85% 45% / 0.14)" }}>
-              <p className="text-[13px] font-semibold text-gray-800 mb-1">
-                Why replace what already works?
-              </p>
-              <p className="text-[13px] text-gray-500 leading-relaxed">
-                Many homeowners don't realize their existing equipment is compatible with modern monitoring. We evaluate everything onsite and only recommend replacements when truly necessary — saving you money while upgrading your protection.
-              </p>
-            </div>
+             <div className="rounded-2xl p-5 mb-7" style={{ background: "linear-gradient(135deg, hsl(0 85% 45% / 0.05) 0%, transparent 100%)", border: "1px solid hsl(0 85% 45% / 0.14)" }}>
+               <p className="text-[13px] font-semibold text-gray-800 mb-1">
+                 Why replace what already works?
+               </p>
+               <p className="text-[13px] text-gray-500 leading-relaxed">
+                 Property managers and business owners don't need to pay for a full system replacement when switching alarm companies. We evaluate everything onsite and only recommend replacements when truly necessary — saving your budget while upgrading protection across every property.
+               </p>
+             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
@@ -772,12 +772,12 @@ const Index = () => {
                 <br />
                 <span style={{ color: "rgba(255,255,255,0.45)" }}>Your neighbors.</span>
               </h2>
-              <p className="text-base leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.42)" }}>
-                We've been protecting Houston properties for over three decades. When you call us, you reach real people who know your system — not a national call center routing tickets to strangers.
-              </p>
-              <p className="text-base leading-relaxed mb-10" style={{ color: "rgba(255,255,255,0.42)" }}>
-                We never sell your contract to a national company. We never outsource your monitoring. Your account stays with the same local team that installed your system — for the life of your relationship with us.
-              </p>
+               <p className="text-base leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.42)" }}>
+                 We've been protecting Houston's commercial properties, apartment communities, and businesses for over three decades. When you call us, you reach real people who know your system — not a national call center routing tickets to strangers.
+               </p>
+               <p className="text-base leading-relaxed mb-10" style={{ color: "rgba(255,255,255,0.42)" }}>
+                 We never sell your contract to a national company. We never outsource your monitoring. Your account stays with the same local team that installed your system — giving property managers and business owners a single point of accountability.
+               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-14">
                 <Link to="/about" className="btn-primary-gradient inline-flex items-center gap-2">
                   About Our Company <ArrowRight className="w-4 h-4" />
@@ -864,12 +864,12 @@ const Index = () => {
                   <Star key={i} className="w-3.5 h-3.5" style={{ fill: "hsl(var(--accent))", color: "hsl(var(--accent))" }} />
                 ))}
               </div>
-              <p className="text-[13px] font-semibold text-white leading-snug mb-2">
-                "Delivered on every promise."
-              </p>
-              <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)" }}>
-                Homeowner — Bellaire, TX
-              </p>
+               <p className="text-[13px] font-semibold text-white leading-snug mb-2">
+                 "Delivered on every promise."
+               </p>
+               <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)" }}>
+                 Property Manager — Sugar Land, TX
+               </p>
             </motion.div>
           </div>
         </div>
