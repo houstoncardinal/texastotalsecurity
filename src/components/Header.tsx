@@ -9,13 +9,14 @@ import {
 import { LANGUAGES } from "@/i18n";
 
 const mainServices = [
-  { name: "Alarm Systems",          href: "/alarm-systems",        icon: Shield,    desc: "Custom design, installation & local monitoring" },
-  { name: "Security Camera Systems", href: "/security-cameras",    icon: Camera,    desc: "HD surveillance & remote viewing" },
-  { name: "Residential Security",   href: "/residential",          icon: Home,      desc: "Whole-home protection systems" },
-  { name: "Commercial Security",    href: "/commercial",           icon: Building2, desc: "Scalable business security solutions" },
-  { name: "HOA Security Solutions", href: "/hoa-security",         icon: Users,     desc: "Gate cameras & community-wide security" },
-  { name: "Monitoring Services",    href: "/monitoring-services",  icon: Radio,     desc: "24/7 local dispatch center" },
-  { name: "Service & Maintenance",  href: "/service-maintenance",  icon: Wrench,    desc: "Ongoing system support & upkeep" },
+  { name: "Alarm Systems & Takeovers", href: "/alarm-systems",        icon: Shield,    desc: "Switch providers & keep your equipment" },
+  { name: "Security Camera Systems",   href: "/security-cameras",    icon: Camera,    desc: "4K surveillance & LPR systems" },
+  { name: "Commercial Security",       href: "/commercial",           icon: Building2, desc: "Enterprise-grade business solutions" },
+  { name: "Property Management",       href: "/property-management-security", icon: Users, desc: "Multifamily & managed property security" },
+  { name: "HOA Security Solutions",    href: "/hoa-security",         icon: Users,     desc: "Gate cameras & community-wide security" },
+  { name: "Monitoring Services",       href: "/monitoring-services",  icon: Radio,     desc: "24/7 local dispatch center" },
+  { name: "Security Pole Configurator", href: "/security-pole-configurator", icon: Camera, desc: "Design your custom pole setup in 3D" },
+  { name: "Service & Maintenance",     href: "/service-maintenance",  icon: Wrench,    desc: "Ongoing system support & upkeep" },
 ];
 
 const navLinks = [
@@ -108,7 +109,7 @@ const Header = () => {
             className="text-[11px] font-medium tracking-wide"
             style={{ color: "rgba(255,255,255,0.32)" }}
           >
-            Houston's Trusted Security Experts — Serving Greater Houston Since 1994
+            Houston's Trusted Security Company — Serving Property Managers, HOAs & Businesses Since 1994
           </span>
           <div className="flex items-center gap-7">
             <span
