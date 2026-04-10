@@ -9,13 +9,14 @@ import {
 import { LANGUAGES } from "@/i18n";
 
 const mainServices = [
-  { name: "Alarm Systems",          href: "/alarm-systems",        icon: Shield,    desc: "Custom design, installation & local monitoring" },
-  { name: "Security Camera Systems", href: "/security-cameras",    icon: Camera,    desc: "HD surveillance & remote viewing" },
-  { name: "Residential Security",   href: "/residential",          icon: Home,      desc: "Whole-home protection systems" },
-  { name: "Commercial Security",    href: "/commercial",           icon: Building2, desc: "Scalable business security solutions" },
-  { name: "HOA Security Solutions", href: "/hoa-security",         icon: Users,     desc: "Gate cameras & community-wide security" },
-  { name: "Monitoring Services",    href: "/monitoring-services",  icon: Radio,     desc: "24/7 local dispatch center" },
-  { name: "Service & Maintenance",  href: "/service-maintenance",  icon: Wrench,    desc: "Ongoing system support & upkeep" },
+  { name: "Alarm Systems & Takeovers", href: "/alarm-systems",        icon: Shield,    desc: "Switch providers & keep your equipment" },
+  { name: "Security Camera Systems",   href: "/security-cameras",    icon: Camera,    desc: "4K surveillance & LPR systems" },
+  { name: "Commercial Security",       href: "/commercial",           icon: Building2, desc: "Enterprise-grade business solutions" },
+  { name: "Property Management",       href: "/property-management-security", icon: Users, desc: "Multifamily & managed property security" },
+  { name: "HOA Security Solutions",    href: "/hoa-security",         icon: Users,     desc: "Gate cameras & community-wide security" },
+  { name: "Monitoring Services",       href: "/monitoring-services",  icon: Radio,     desc: "24/7 local dispatch center" },
+  { name: "Security Pole Configurator", href: "/security-pole-configurator", icon: Camera, desc: "Design your custom pole setup in 3D" },
+  { name: "Service & Maintenance",     href: "/service-maintenance",  icon: Wrench,    desc: "Ongoing system support & upkeep" },
 ];
 
 const navLinks = [
@@ -108,7 +109,7 @@ const Header = () => {
             className="text-[11px] font-medium tracking-wide"
             style={{ color: "rgba(255,255,255,0.32)" }}
           >
-            Houston's Trusted Security Experts — Serving Greater Houston Since 1994
+            Houston's Trusted Security Company — Serving Property Managers, HOAs & Businesses Since 1994
           </span>
           <div className="flex items-center gap-7">
             <span
@@ -218,7 +219,7 @@ const Header = () => {
                       <h3 className="text-[10px] uppercase tracking-[0.16em] font-bold text-gray-400 mb-4">Property Type</h3>
 
                       <Link
-                        to="/residential"
+                        to="/commercial"
                         className="group flex items-start gap-3 p-4 rounded-xl transition-all duration-200"
                         style={{ background: "hsl(0 85% 45% / 0.04)", border: "1px solid hsl(0 85% 45% / 0.10)" }}
                         onMouseEnter={e => {
@@ -234,25 +235,25 @@ const Header = () => {
                           className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105"
                           style={{ background: "hsl(var(--accent))" }}
                         >
-                          <Home className="w-5 h-5 text-white" />
+                          <Building2 className="w-5 h-5 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-gray-900 text-sm mb-0.5">Residential</p>
-                          <p className="text-xs text-gray-500 leading-relaxed">Home security, alarms, cameras & smart home</p>
+                          <p className="font-semibold text-gray-900 text-sm mb-0.5">Commercial & Business</p>
+                          <p className="text-xs text-gray-500 leading-relaxed">Enterprise security, access control & multi-site</p>
                         </div>
                         <ArrowRight className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity mt-1 shrink-0" />
                       </Link>
 
                       <Link
-                        to="/commercial"
+                        to="/property-management-security"
                         className="group flex items-start gap-3 p-4 rounded-xl border border-gray-200 bg-gray-50/70 transition-all duration-200 hover:border-gray-300 hover:shadow-sm"
                       >
                         <div className="w-10 h-10 rounded-xl bg-gray-700 flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105">
-                          <Building2 className="w-5 h-5 text-white" />
+                          <Users className="w-5 h-5 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-gray-900 text-sm mb-0.5">Commercial</p>
-                          <p className="text-xs text-gray-500 leading-relaxed">Business security, access control & enterprise</p>
+                          <p className="font-semibold text-gray-900 text-sm mb-0.5">Property Management</p>
+                          <p className="text-xs text-gray-500 leading-relaxed">Multifamily, apartments & managed properties</p>
                         </div>
                         <ArrowRight className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity mt-1 shrink-0" />
                       </Link>
@@ -261,7 +262,7 @@ const Header = () => {
                         to="/free-analysis"
                         className="btn-primary-gradient flex items-center justify-center gap-2 w-full py-3 px-4 text-sm font-semibold"
                       >
-                        Get Free Analysis <ArrowRight className="w-4 h-4" />
+                        Get Free Property Assessment <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
 

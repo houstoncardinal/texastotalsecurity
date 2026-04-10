@@ -65,12 +65,12 @@ const Footer = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-9 flex flex-col md:flex-row items-center justify-between gap-5">
           <div>
-            <p className="font-display font-bold text-white text-xl mb-1 tracking-tight" style={{ letterSpacing: "-0.03em" }}>
-              Ready to Secure Your Property?
-            </p>
-            <p className="text-sm text-white/44">
-              Free onsite security analysis — no obligation, no pressure.
-            </p>
+             <p className="font-display font-bold text-white text-xl mb-1 tracking-tight" style={{ letterSpacing: "-0.03em" }}>
+               Ready to Secure Your Properties?
+             </p>
+             <p className="text-sm text-white/44">
+               Free property assessment for commercial, multifamily & HOA communities — no obligation.
+             </p>
           </div>
           <Link
             to="/free-analysis"
@@ -105,9 +105,9 @@ const Footer = () => {
                 Texas Total Security
               </span>
             </div>
-            <p className="text-[13px] leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.44)" }}>
-              Houston's trusted security experts for over 30 years. Custom alarm, camera, and monitoring solutions.
-            </p>
+             <p className="text-[13px] leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.44)" }}>
+               Houston's trusted commercial security company for property managers, HOAs, and business owners — for over 30 years.
+             </p>
             <ul className="space-y-3">
               {[
                 { icon: Shield,       text: "Licensed & Insured" },
@@ -145,15 +145,16 @@ const Footer = () => {
               Services
             </h4>
             <ul className="space-y-3.5">
-              {[
-                { name: "Alarm Systems",        href: "/alarm-systems" },
-                { name: "Security Cameras",     href: "/security-cameras" },
-                { name: "Residential Security", href: "/residential" },
-                { name: "Commercial Security",  href: "/commercial" },
-                { name: "HOA Solutions",        href: "/hoa-security" },
-                { name: "24/7 Monitoring",      href: "/monitoring-services" },
-                { name: "Service & Maintenance",href: "/service-maintenance" },
-              ].map((link) => (
+               {[
+                 { name: "Alarm Systems & Takeovers", href: "/alarm-systems" },
+                 { name: "Security Cameras",          href: "/security-cameras" },
+                 { name: "Commercial Security",       href: "/commercial" },
+                 { name: "Property Management",       href: "/property-management-security" },
+                 { name: "HOA Solutions",              href: "/hoa-security" },
+                 { name: "24/7 Monitoring",            href: "/monitoring-services" },
+                 { name: "Pole Configurator",          href: "/security-pole-configurator" },
+                 { name: "Residential Security",       href: "/residential" },
+               ].map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
