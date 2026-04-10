@@ -169,8 +169,8 @@ const Index = () => {
       </AnimatePresence>
 
       <SEOHead
-        title="Local Alarm Company Houston TX | Security Cameras, HOA Systems & Alarm Installation | Texas Total Security"
-        description="Houston's #1 local alarm company. Switch from ADT & national providers. Expert alarm systems, security cameras, HOA security camera systems, security poles & 24/7 local monitoring. Serving Houston 30+ years. Free analysis: (713) 387-9937."
+        title="Commercial Security Systems Houston | Property Management & HOA Security | Texas Total Security"
+        description="Houston's trusted commercial security company for property managers, HOAs & businesses. Alarm takeovers, 4K cameras, security poles, LPR & 24/7 local monitoring. Switch from ADT today. Free assessment: (713) 387-9937."
         schemas={schemas}
       />
 
@@ -294,7 +294,7 @@ const Index = () => {
                 className="text-[11px] font-bold tracking-[0.18em] uppercase"
                 style={{ color: "hsl(0 85% 68%)" }}
               >
-                24/7 Monitoring Active · Houston, TX
+                Serving Property Managers · HOAs · Businesses · Houston, TX
               </span>
             </motion.div>
 
@@ -311,7 +311,7 @@ const Index = () => {
                 marginBottom: "1.75rem",
               }}
             >
-              Houston Security
+              Houston's Commercial
               <br />
               <motion.span
                 style={{
@@ -330,7 +330,7 @@ const Index = () => {
                   ease: "easeInOut",
                 }}
               >
-                Systems.
+                Security Experts.
               </motion.span>
             </motion.h1>
 
@@ -347,7 +347,7 @@ const Index = () => {
                 maxWidth: "38rem",
               }}
             >
-              Houston's #1 Local Alarm Company. Expert Alarm Installation, Security Cameras, HOA Security Systems & 24/7 Local Monitoring.
+              Security solutions for property management companies, HOA boards, and business owners. Alarm takeovers, 4K surveillance, security poles & 24/7 local monitoring.
             </motion.p>
 
             <motion.p
@@ -409,7 +409,7 @@ const Index = () => {
               transition={{ duration: 0.6, ease: easeExpo, delay: 0.45 }}
               className="flex flex-wrap items-center justify-center gap-2.5"
             >
-              {["Free Onsite Analysis", "Local Alarm Company", "24/7 Local Dispatch", "Switch Alarm Companies"].map((f, i) => (
+              {["Switch Alarm Companies", "Property Management", "HOA & Communities", "Free Property Assessment"].map((f, i) => (
                 <motion.span
                   key={f}
                   initial={{ opacity: 0, scale: 0.9 }}
