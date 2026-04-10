@@ -1332,16 +1332,16 @@ const Index = () => {
                 >
                   Free Onsite Security Analysis
                 </h2>
-                <p className="text-gray-500 leading-relaxed mb-8 text-base">
-                  Our security professionals visit your property at no cost. We evaluate your layout, identify every vulnerability, and provide expert recommendations — no pressure, no obligation.
-                </p>
-                <ul className="space-y-4">
-                  {[
-                    "Security Pro meets with you onsite at your home or business",
-                    "Reviews your current system or plans for new installation",
-                    "Examines layout and identifies all vulnerability points",
-                    "Provides expert solutions and a clear, transparent plan",
-                  ].map((item) => (
+                 <p className="text-gray-500 leading-relaxed mb-8 text-base">
+                   Our security professionals visit your property at no cost. We evaluate your layout, assess existing equipment, identify every vulnerability, and provide a detailed proposal — designed for property managers and decision makers who need clear ROI justification.
+                 </p>
+                 <ul className="space-y-4">
+                   {[
+                     "Security specialist meets you onsite at your property",
+                     "Evaluates existing alarm and camera equipment for reuse",
+                     "Maps all entry points, common areas, and blind spots",
+                     "Delivers a detailed proposal with transparent pricing",
+                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <CheckCircle2
                         className="w-5 h-5 shrink-0 mt-0.5"
@@ -1367,9 +1367,9 @@ const Index = () => {
                 <h3 className="font-display font-bold text-gray-900 text-2xl tracking-tight mb-3" style={{ letterSpacing: "-0.03em" }}>
                   Ready to Get Started?
                 </h3>
-                <p className="text-gray-500 text-sm mb-8 max-w-xs leading-relaxed">
-                  Schedule your free analysis today. A security expert will contact you within 24 hours.
-                </p>
+                 <p className="text-gray-500 text-sm mb-8 max-w-xs leading-relaxed">
+                   Schedule your free property assessment today. A security specialist will contact you within 24 hours.
+                 </p>
                 <Link
                   to="/free-analysis"
                   className="btn-primary-gradient inline-flex items-center gap-2 text-base px-9 py-4 w-full sm:w-auto justify-center mb-3"
