@@ -35,47 +35,47 @@ const vp = { once: true, amount: 0.15 };
 
 /* ─── Data ──────────────────────────────────────────────────── */
 const services = [
-  { icon: Shield,    title: "Alarm Systems",                  desc: "Local alarm company installation, 24/7 monitoring & system takeover. Switch from ADT, Brinks or Vivint to Houston's best local alarm.",   href: "/alarm-systems" },
-  { icon: Camera,    title: "Security Camera Systems",        desc: "HD surveillance, license plate cameras, security poles, CCTV pole installation, active deterrence & full remote viewing.",               href: "/security-cameras" },
-  { icon: Home,      title: "Residential Security",           desc: "Local home security systems — custom alarm, environmental sensors & 24/7 local monitoring for Houston homeowners.",                       href: "/residential" },
-  { icon: Building2, title: "Commercial Security",            desc: "Scalable security for offices, retail, apartment complexes, industrial sites & multi-location businesses of any size.",                    href: "/commercial" },
-  { icon: Users,     title: "HOA Security",                   desc: "HOA security camera systems, gate cameras, license plate recognition, HOA pool cameras & neighborhood security for Houston communities.",  href: "/hoa-security" },
-  { icon: Radio,     title: "Active Deterrence & Monitoring", desc: "Cameras with sirens, strobes & two-way talk. Local alarm monitoring company — in-house Houston dispatch, never outsourced.",             href: "/monitoring-services" },
+  { icon: Shield,    title: "Alarm Systems & Takeovers",       desc: "Switching from ADT, Brinks, or Vivint? We take over your existing equipment and provide local monitoring — no long-term contracts.",   href: "/alarm-systems" },
+  { icon: Camera,    title: "Security Camera Systems",         desc: "4K IP cameras, LPR, security poles & active deterrence for apartment complexes, commercial properties, and HOA communities.",          href: "/security-cameras" },
+  { icon: Building2, title: "Commercial & Industrial Security", desc: "Enterprise-grade security for offices, retail, warehouses, and multi-site operations — scalable to any portfolio size.",               href: "/commercial" },
+  { icon: Users,     title: "Property Management Security",    desc: "Comprehensive surveillance solutions for multifamily communities, apartment complexes, and managed properties.",                       href: "/property-management-security" },
+  { icon: Users,     title: "HOA & Community Security",        desc: "Gate cameras, license plate recognition, common area surveillance & neighborhood-wide security systems for HOA boards.",              href: "/hoa-security" },
+  { icon: Radio,     title: "24/7 Monitoring & Active Deterrence", desc: "In-house Houston monitoring center with local dispatch. Cameras with sirens, strobes & two-way audio — never outsourced.",       href: "/monitoring-services" },
 ];
 
 const processSteps = [
-  { icon: PhoneCall,       num: "01", title: "Initial Call",         desc: "Speak with a security specialist about your needs and schedule your free onsite analysis." },
-  { icon: ClipboardCheck,  num: "02", title: "Free Onsite Analysis", desc: "We meet you onsite, examine your layout, and gather everything needed to build your solution." },
-  { icon: Wrench,          num: "03", title: "Expert Installation",  desc: "Certified technicians install your system with precision and clean, professional workmanship." },
-  { icon: HeadphonesIcon,  num: "04", title: "24/7 Monitoring",      desc: "Local dispatch, ongoing support, and fast response — for the life of your system." },
+  { icon: PhoneCall,       num: "01", title: "Discovery Call",          desc: "Speak with a security specialist about your property portfolio, pain points, and security goals." },
+  { icon: ClipboardCheck,  num: "02", title: "Free Property Assessment", desc: "We visit your property, evaluate existing equipment, map vulnerabilities, and design a tailored solution." },
+  { icon: Wrench,          num: "03", title: "Professional Deployment",  desc: "Licensed technicians install your system with minimal disruption to tenants and business operations." },
+  { icon: HeadphonesIcon,  num: "04", title: "Ongoing Monitoring & Support", desc: "24/7 local monitoring, remote diagnostics, and a dedicated account manager for the life of your system." },
 ];
 
 const whyUs = [
-  { icon: MapPin,          title: "Houston-Born & Operated",     desc: "Security techs working in Houston and surrounding areas for over 30 years. We live in the same communities we protect." },
-  { icon: Shield,          title: "We Don't Sell Your Contract",  desc: "We never sell alarm contracts to national companies. Your account stays with us — always." },
-  { icon: HeadphonesIcon,  title: "In-House Monitoring",          desc: "Our monitoring center is local. When an alarm triggers, local operators dispatch local authorities — fast." },
-  { icon: Users,           title: "Friendly, Local Service",      desc: "You'll know your technician by name, and they'll know your system inside and out." },
-  { icon: Award,           title: "30+ Years of Experience",      desc: "Trusted Houston security technicians serving the greater area since 1994." },
-  { icon: Lock,            title: "Latest Equipment & Tech",      desc: "Active deterrence, license plate recognition, and smart integrations backed by top-tier hardware." },
+  { icon: MapPin,          title: "Houston-Born & Operated",     desc: "30+ years serving Houston's commercial and residential communities. We know the neighborhoods, the crime patterns, and the infrastructure." },
+  { icon: Shield,          title: "We Never Sell Your Contract",  desc: "Unlike national providers, your account stays with our local team — permanently. No buyouts, no surprises." },
+  { icon: HeadphonesIcon,  title: "In-House Local Monitoring",    desc: "Our monitoring center is in Houston — not a national call center. Local operators dispatch local authorities within seconds." },
+  { icon: Building2,       title: "Built for Property Managers",  desc: "We understand multi-site operations, tenant liability concerns, and HOA compliance — because we've done it for 30+ years." },
+  { icon: Award,           title: "Trusted by Decision Makers",   desc: "Property management companies, HOA boards, and business owners across Greater Houston rely on us for their security infrastructure." },
+  { icon: Lock,            title: "Enterprise-Grade Technology",   desc: "Active deterrence, LPR cameras, custom security poles, and smart integrations — built for commercial-scale deployments." },
 ];
 
 const testimonials = [
-  { name: "Homeowner",        role: "Houston, TX",   text: "I love my new security cameras — the coverage and resolution is great! I can keep an eye on the kids while they play. Street and driveway coverage is excellent." },
-  { name: "Business Owner",   role: "Houston, TX",   text: "Texas Total Security installed surveillance in all the right locations. I can travel while getting remote access to my cameras on my phone. Exactly what I needed." },
-  { name: "Property Manager", role: "Houston, TX",   text: "They provided great coverage for our entrance and exit gates, plus active deterrence with strobe lights. Their license plate cameras are outstanding." },
+  { name: "Property Manager",   role: "Sugar Land, TX",   text: "They provided great coverage for our entrance and exit gates, plus active deterrence with strobe lights. Their license plate cameras are outstanding." },
+  { name: "Business Owner",     role: "Houston, TX",       text: "Texas Total Security installed surveillance in all the right locations. I can travel while getting remote access to my cameras on my phone. Exactly what I needed." },
+  { name: "HOA Board President", role: "Katy, TX",         text: "Our community needed a complete security overhaul. They handled everything — from the security poles to LPR cameras at every gate. Crime incidents dropped dramatically." },
 ];
 
 const faqs = [
-  { q: "How do I switch alarm companies to Texas Total Security?", a: "Switching is easy. In most cases we take over your existing alarm equipment from ADT, Brinks, Vivint, or any other provider — saving you the cost of a full replacement. Call us and our local team handles the entire transition with minimal downtime." },
-  { q: "Do you install HOA security camera systems?", a: "Yes. We specialize in HOA surveillance cameras, community gate camera systems, license plate recognition, and neighborhood-wide security for homeowner associations and apartment complexes throughout Houston." },
-  { q: "Can I integrate alarms with cameras and smart devices?", a: "Absolutely. Our systems integrate seamlessly with cameras, smart locks, mobile apps, and home automation — allowing you to monitor and manage your property from anywhere." },
-  { q: "What sets you apart from national alarm companies?", a: "We are a true local alarm company — not a franchise. You get local Houston technicians, an in-house monitoring center, and we never sell your contract to a national company. Personalized service backed by 30+ years of Houston experience." },
-  { q: "Do you serve both residential and commercial properties?", a: "Yes. From single-family homes to warehouses, retail spaces, and HOA communities — every setup is customized to match your property's size, layout, and safety goals." },
-  { q: "Can you use my existing alarm equipment?", a: "In many cases, yes. During our free onsite analysis, we evaluate your existing keypads, sensors, wiring, and panels. If your equipment is compatible with our monitoring systems — such as Honeywell VISTA panels and keypads — we can integrate it into your new setup, saving you money and avoiding unnecessary replacements." },
-  { q: "What does a free security analysis include?", a: "A certified security professional visits your property at no cost. We walk every entry point, evaluate existing equipment, identify blind spots and vulnerabilities, and provide a detailed recommendation with transparent pricing. There's zero obligation and zero pressure." },
-  { q: "How long does a typical security installation take?", a: "Most residential installations are completed in one day. Commercial and HOA projects vary by scope but typically take 1–5 days. We schedule around your availability and ensure clean, professional workmanship with zero mess." },
-  { q: "Do you offer 24/7 monitoring with local dispatch?", a: "Yes. Our monitoring center is based in Houston — not outsourced to a national call center. When an alarm triggers, local operators verify the signal and dispatch local authorities immediately. This means faster response times and real accountability." },
-  { q: "What areas in Houston do you serve?", a: "We serve Houston and the most sought-after surrounding communities including Sugar Land, Katy, The Woodlands, Cypress, Bellaire, Memorial, and Richmond. Contact us to confirm service availability in your specific area." },
+  { q: "How do property management companies switch alarm providers?", a: "Switching is straightforward. We evaluate your existing alarm equipment from ADT, Brinks, Vivint, or any other provider — and in most cases, take over your panels, sensors, and wiring without replacing them. Our local team handles the entire transition with zero downtime to your tenants and operations." },
+  { q: "Do you handle security for apartment complexes and multifamily properties?", a: "Yes — this is one of our core specialties. We provide comprehensive security for apartment communities including entrance/exit gate cameras, LPR systems, common area surveillance, package area monitoring, mailbox cameras, and dumpster area deterrence systems." },
+  { q: "What makes you different from national alarm companies?", a: "We are a locally owned Houston company — not a franchise. You get dedicated Houston technicians, an in-house monitoring center that never outsources, and we never sell your contract to a national company. Property managers get a single point of contact for every property in their portfolio." },
+  { q: "Can you install security poles with multiple cameras?", a: "Absolutely. We custom-fabricate security poles in heights from 10 to 25 feet, supporting 1–4 cameras per pole with integrated wiring, LED floodlights, IR illuminators, and active deterrence systems. Use our 3D configurator to design your exact setup." },
+  { q: "Do you serve commercial and industrial properties?", a: "Yes. From single retail locations to multi-site corporate campuses, warehouses, and industrial facilities — every system is custom-designed for your property's layout, liability requirements, and operational needs." },
+  { q: "Can you take over our existing alarm equipment?", a: "In most cases, yes. We evaluate your existing keypads, sensors, wiring, and panels during a free property assessment. If your equipment is compatible — such as Honeywell VISTA panels, DMP, or DSC systems — we integrate it into your new setup, saving significant replacement costs." },
+  { q: "What does a free property assessment include?", a: "A certified security professional visits your property at no cost. We map every entry point, evaluate existing equipment, identify blind spots and vulnerabilities, and provide a detailed proposal with transparent pricing. Zero obligation, zero pressure — designed for decision makers who need clear ROI justification." },
+  { q: "How long does a commercial security installation take?", a: "Commercial and HOA projects typically take 1–5 days depending on scope. Apartment complexes with multiple buildings may take 1–2 weeks. We schedule around your operations and coordinate with property management to minimize disruption to tenants." },
+  { q: "Do you offer 24/7 monitoring with local dispatch?", a: "Yes. Our monitoring center is based in Houston — not outsourced to a national call center. When an alarm triggers, local operators verify the signal and dispatch local authorities immediately. Property managers receive real-time notifications and incident reports." },
+  { q: "What areas in Houston do you serve?", a: "We serve Houston and premier surrounding communities including Sugar Land, Katy, The Woodlands, Cypress, Bellaire, Memorial, West University, and Richmond. Contact us to confirm service availability for your property portfolio." },
 ];
 
 /* ─── CountUp ───────────────────────────────────────────────── */
