@@ -305,13 +305,13 @@ const Index = () => {
               transition={{ duration: 0.8, ease: easeExpo, delay: 0.1 }}
               className="font-display font-bold text-white"
               style={{
-                fontSize: "clamp(3.5rem, 9vw, 9.5rem)",
+                fontSize: "clamp(3rem, 8vw, 8rem)",
                 lineHeight: 0.94,
                 letterSpacing: "-0.05em",
                 marginBottom: "1.75rem",
               }}
             >
-              Houston's Commercial
+              Stop Overpaying for
               <br />
               <motion.span
                 style={{
@@ -330,7 +330,7 @@ const Index = () => {
                   ease: "easeInOut",
                 }}
               >
-                Security Experts.
+                Security That Doesn't Perform.
               </motion.span>
             </motion.h1>
 
@@ -347,7 +347,7 @@ const Index = () => {
                 maxWidth: "38rem",
               }}
             >
-              Security solutions for property management companies, HOA boards, and business owners. Alarm takeovers, 4K surveillance, security poles & 24/7 local monitoring.
+              Switch your alarm company, upgrade your surveillance, or build a custom security system — designed for property managers, HOA boards, and business owners across Houston.
             </motion.p>
 
             <motion.p
@@ -372,14 +372,14 @@ const Index = () => {
                 whileTap={{ scale: 0.98 }}
               >
                 <Link
-                  to="/free-analysis"
+                  to="/qualify"
                   className="btn-primary-gradient inline-flex items-center gap-2 text-base px-12 py-4.5 shadow-lg shadow-red-900/25"
                   style={{
                     boxShadow: "0 4px 24px hsl(0 85% 45% / 0.3)",
                   }}
                 >
                   <span className="relative">
-                    <span className="relative z-10">Get Your Free Security Analysis</span>
+                    <span className="relative z-10">Check If You Qualify — 60 Seconds</span>
                     <motion.span
                       className="absolute inset-0 rounded-lg bg-white/20 blur-md"
                       initial={{ opacity: 0 }}

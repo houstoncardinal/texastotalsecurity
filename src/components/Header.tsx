@@ -433,11 +433,11 @@ const Header = () => {
             </div>
 
             <Link
-              to="/free-analysis"
+              to="/qualify"
               className="btn-primary-gradient text-[13.5px] whitespace-nowrap"
               style={{ padding: "0.55rem 1.25rem", borderRadius: "0.65rem" }}
             >
-              Free Security Analysis
+              Check If You Qualify
             </Link>
           </div>
 
