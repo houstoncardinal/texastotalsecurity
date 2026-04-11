@@ -537,10 +537,10 @@ const Header = () => {
             {/* CTA */}
             <div className="mt-auto pt-4 border-t border-gray-100 space-y-3">
               <Link
-                to="/free-analysis"
+                to="/qualify"
                 className="block btn-primary-gradient text-center text-sm py-3.5 font-semibold"
               >
-                Free Security Analysis
+                Check If You Qualify
               </Link>
               <a
                 href="tel:7133879937"
