@@ -31,6 +31,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const HoustonProblem = lazy(() => import("./pages/HoustonProblem"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const PoleConfigurator = lazy(() => import("./pages/PoleConfigurator"));
+const QualifyFunnel = lazy(() => import("./pages/QualifyFunnel"));
 
 const queryClient = new QueryClient();
 
@@ -74,6 +75,7 @@ const App = () => (
             <Route path="/:citySlug-security" element={<CityLanding />} />
             <Route path="/houston-we-have-a-problem" element={<HoustonProblem />} />
             <Route path="/security-pole-configurator" element={<PoleConfigurator />} />
+            <Route path="/qualify" element={<QualifyFunnel />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
