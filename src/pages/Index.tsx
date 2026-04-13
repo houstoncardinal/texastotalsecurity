@@ -267,7 +267,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: easeExpo }}
-              className="inline-flex items-center gap-2.5 mb-10 px-5 py-2.5 rounded-full border"
+              className="inline-flex items-center gap-2.5 mb-10 px-4 sm:px-5 py-2.5 rounded-full border max-w-[95vw]"
               style={{
                 background: "hsl(0 85% 45% / 0.12)",
                 borderColor: "hsl(0 85% 45% / 0.28)",
@@ -275,7 +275,7 @@ const Index = () => {
               }}
             >
               <motion.span
-                className="w-2 h-2 rounded-full"
+                className="w-2 h-2 rounded-full shrink-0"
                 style={{ background: "hsl(0 85% 58%)" }}
                 animate={{
                   boxShadow: [
@@ -291,10 +291,14 @@ const Index = () => {
                 }}
               />
               <span
-                className="text-[11px] font-bold tracking-[0.18em] uppercase"
-                style={{ color: "hsl(0 85% 68%)" }}
+                className="font-bold tracking-[0.12em] sm:tracking-[0.18em] uppercase whitespace-nowrap overflow-hidden text-ellipsis"
+                style={{ 
+                  color: "hsl(0 85% 68%)",
+                  fontSize: "clamp(9px, 2.5vw, 11px)",
+                }}
               >
-                Serving Property Managers · HOAs · Businesses · Houston, TX
+                <span className="hidden sm:inline">Serving Property Managers · HOAs · Businesses · Houston, TX</span>
+                <span className="sm:hidden">Houston's Trusted Security · Since 1994</span>
               </span>
             </motion.div>
 
@@ -303,17 +307,17 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: easeExpo, delay: 0.1 }}
-              className="font-display font-bold text-white"
+              className="font-display font-bold text-white px-4 max-w-6xl mx-auto"
               style={{
-                fontSize: "clamp(3rem, 8vw, 8rem)",
-                lineHeight: 0.94,
-                letterSpacing: "-0.05em",
+                fontSize: "clamp(2.5rem, 7vw, 8rem)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.04em",
                 marginBottom: "1.75rem",
               }}
             >
-              Stop Overpaying for
-              <br />
+              <span className="block">Stop Overpaying&nbsp;for</span>
               <motion.span
+                className="block"
                 style={{
                   background: "linear-gradient(135deg, hsl(0 80% 72%) 0%, hsl(0 85% 52%) 50%, hsl(0 90% 42%) 100%)",
                   WebkitBackgroundClip: "text",
@@ -330,7 +334,7 @@ const Index = () => {
                   ease: "easeInOut",
                 }}
               >
-                Security That Doesn't Perform.
+                Security That Doesn't&nbsp;Perform.
               </motion.span>
             </motion.h1>
 
@@ -339,11 +343,11 @@ const Index = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: easeExpo, delay: 0.2 }}
-              className="mx-auto mb-3"
+              className="mx-auto mb-3 text-white px-4"
               style={{
                 fontSize: "clamp(1.0625rem, 2vw, 1.35rem)",
                 lineHeight: 1.65,
-                color: "rgba(255,255,255,0.48)",
+                opacity: 0.85,
                 maxWidth: "38rem",
               }}
             >
@@ -365,7 +369,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: easeExpo, delay: 0.35 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <motion.div
                 whileHover={{ scale: 1.03, y: -2 }}
@@ -402,32 +406,6 @@ const Index = () => {
               </motion.div>
             </motion.div>
 
-            {/* Trust chips with staggered animation */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: easeExpo, delay: 0.45 }}
-              className="flex flex-wrap items-center justify-center gap-2.5"
-            >
-              {["Switch Alarm Companies", "Property Management", "HOA & Communities", "Free Property Assessment"].map((f, i) => (
-                <motion.span
-                  key={f}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5 + i * 0.08 }}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium px-4 py-2 rounded-full"
-                  style={{
-                    background: "rgba(255,255,255,0.05)",
-                    color: "rgba(255,255,255,0.42)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                  }}
-                >
-                  <CheckCircle2 className="w-3 h-3" style={{ color: "hsl(0 85% 60%)" }} />
-                  {f}
-                </motion.span>
-              ))}
-            </motion.div>
-
             {/* Quick scroll indicator */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -449,64 +427,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Stats bar with glassmorphism */}
-        <div
-          className="relative z-10"
-          style={{
-            borderTop: "1px solid rgba(255,255,255,0.06)",
-            background: "rgba(0,0,0,0.45)",
-            backdropFilter: "blur(24px)",
-            boxShadow: "0 -20px 60px rgba(0,0,0,0.3)",
-          }}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/[0.06]">
-              {([
-                { countTo: 30,  suffix: "+",  label: "Years Protecting Houston", icon: Shield,  fixed: null },
-                { countTo: 10,  suffix: "K+", label: "Systems Installed",        icon: Camera,  fixed: null },
-                { countTo: null, suffix: "",  label: "Local Monitoring",          icon: Radio,   fixed: "24/7" },
-                { countTo: 100, suffix: "%",  label: "Locally Owned & Operated", icon: MapPin,  fixed: null },
-              ] as const).map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, ease: easeExpo, delay: 0.6 + i * 0.08 }}
-                  className="text-center lg:px-6 group"
-                >
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <motion.div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center stat-icon-ring"
-                      style={{ background: "hsl(0 85% 45% / 0.1)" }}
-                      whileHover={{ scale: 1.1, background: "hsl(0 85% 45% / 0.2)" }}
-                    >
-                      <s.icon className="w-4 h-4" style={{ color: "hsl(0 85% 60%)" }} />
-                    </motion.div>
-                  </div>
-                  <p
-                    className="font-display font-bold mb-1.5"
-                    style={{
-                      fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-                      letterSpacing: "-0.045em",
-                      background: "linear-gradient(135deg, hsl(0 80% 68%) 0%, hsl(0 85% 50%) 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                    }}
-                  >
-                    {s.fixed ?? <CountUp to={s.countTo as number} suffix={s.suffix} />}
-                  </p>
-                  <p
-                    className="text-[10.5px] font-semibold uppercase tracking-[0.14em]"
-                    style={{ color: "rgba(255,255,255,0.32)" }}
-                  >
-                    {s.label}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════
@@ -565,89 +485,149 @@ const Index = () => {
       </Link>
 
       {/* ══════════════════════════════════════════════════
-          SERVICES — editorial asymmetric list
+          SERVICES — Masterfully Redesigned
       ══════════════════════════════════════════════════ */}
-      <section className="section-padding overflow-hidden" style={{ background: "hsl(0 0% 97%)" }}>
-        <div className="container-tight px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.7fr] gap-12 lg:gap-24 items-start">
-
-            {/* Left — sticky heading */}
+      <section className="section-padding overflow-hidden bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Header */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.75, ease: easeExpo }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
             <motion.div
-              variants={fadeLeft}
-              initial="hidden"
-              whileInView="show"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+              style={{
+                background: "hsl(0 85% 45% / 0.06)",
+                border: "1px solid hsl(0 85% 45% / 0.12)",
+              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={vp}
-              transition={{ duration: 0.75, ease: easeExpo }}
-              className="lg:sticky lg:top-28"
             >
-              <span className="eyebrow">What We Do</span>
-              <div className="divider-accent mb-6" />
-              <h2
-                className="font-display font-bold text-gray-900 mb-5"
-                style={{ fontSize: "clamp(2.25rem, 4vw, 3.5rem)", lineHeight: 1.05, letterSpacing: "-0.04em" }}
-              >
-                 Complete Security for Every Property Type
-               </h2>
-               <p className="text-gray-500 leading-relaxed mb-8 text-base max-w-sm">
-                 From alarm takeovers to custom security poles, enterprise surveillance, and 24/7 local monitoring — engineered for property managers, HOA boards, and business owners across Greater Houston.
-               </p>
-              <Link to="/services" className="btn-outline-dark inline-flex items-center gap-2 text-[13.5px]">
-                View All Services <ArrowRight className="w-4 h-4" />
-              </Link>
+              <Shield className="w-4 h-4" style={{ color: "hsl(0 85% 50%)" }} />
+              <span className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: "hsl(0 85% 45%)" }}>
+                What We Do
+              </span>
             </motion.div>
+            
+            <h2
+              className="font-display font-bold text-gray-900 mb-6"
+              style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", lineHeight: 1.05, letterSpacing: "-0.045em" }}
+            >
+              Complete Security for Every Property Type
+            </h2>
+            
+            <p className="text-gray-600 leading-relaxed text-lg max-w-2xl mx-auto">
+              From alarm takeovers to custom security poles, enterprise surveillance, and 24/7 local monitoring — engineered for property managers, HOA boards, and business owners across Greater Houston.
+            </p>
+          </motion.div>
 
-            {/* Right — numbered service list */}
-            <div className="border-t border-gray-100">
-              {services.map((service, i) => (
-                <motion.div
-                  key={service.href}
-                  variants={fadeRight}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={vp}
-                  transition={{ duration: 0.65, ease: easeExpo, delay: i * 0.07 }}
+          {/* Services Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {services.map((service, i) => (
+              <motion.div
+                key={service.href}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={vp}
+                transition={{ duration: 0.6, ease: easeExpo, delay: i * 0.08 }}
+              >
+                <Link
+                  to={service.href}
+                  className="group block h-full"
                 >
-                  <Link
-                    to={service.href}
-                    className="group flex items-center justify-between py-6 gap-5 border-b border-gray-100 -mx-4 px-4 rounded-xl hover:bg-gray-50/80 transition-colors duration-200"
+                  <div
+                    className="relative h-full rounded-2xl p-8 transition-all duration-300 hover:shadow-xl"
+                    style={{
+                      background: "white",
+                      border: "1px solid hsl(0 0% 92%)",
+                    }}
                   >
-                    <div className="flex items-center gap-5">
+                    {/* Hover gradient overlay */}
+                    <div
+                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{
+                        background: "linear-gradient(135deg, hsl(0 85% 45% / 0.03) 0%, transparent 100%)",
+                      }}
+                    />
+                    
+                    {/* Number badge */}
+                    <div className="absolute top-6 right-6">
                       <span
-                        className="font-display font-bold text-[11px] tracking-[0.2em] w-5 shrink-0 tabular-nums"
-                        style={{ color: "rgba(0,0,0,0.16)" }}
+                        className="font-display font-bold text-[11px] tracking-[0.2em] tabular-nums"
+                        style={{ color: "rgba(0,0,0,0.08)" }}
                       >
                         {String(i + 1).padStart(2, "0")}
                       </span>
+                    </div>
+
+                    {/* Icon */}
+                    <div className="relative mb-6">
                       <div
-                        className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-200 group-hover:scale-105"
+                        className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
                         style={{
-                          background: "hsl(0 0% 96%)",
-                          border: "1px solid hsl(0 0% 91%)",
+                          background: "linear-gradient(135deg, hsl(0 85% 45% / 0.08) 0%, hsl(0 85% 45% / 0.04) 100%)",
+                          border: "1px solid hsl(0 85% 45% / 0.12)",
                         }}
                       >
                         <service.icon
-                          className="w-5 h-5 transition-colors duration-200"
-                          style={{ color: "rgba(0,0,0,0.35)" }}
+                          className="w-7 h-7 transition-colors duration-300"
+                          style={{ color: "hsl(0 85% 50%)" }}
                         />
                       </div>
-                      <div>
-                        <h3
-                          className="font-display font-semibold text-[17px] text-gray-900 mb-0.5 leading-tight transition-colors duration-200 group-hover:text-accent"
-                        >
-                          {service.title}
-                        </h3>
-                        <p className="text-[13px] text-gray-400 leading-relaxed">{service.desc}</p>
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative">
+                      <h3 className="font-display font-bold text-gray-900 text-xl mb-3 leading-tight group-hover:text-accent transition-colors duration-300">
+                        {service.title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed text-[15px] mb-5">
+                        {service.desc}
+                      </p>
+                      
+                      {/* Arrow indicator */}
+                      <div className="flex items-center gap-2 text-sm font-semibold text-accent opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">
+                        <span>Learn More</span>
+                        <ArrowRight className="w-4 h-4" />
                       </div>
                     </div>
-                    <ArrowRight
-                      className="w-5 h-5 shrink-0 transition-all duration-200 group-hover:translate-x-1"
-                      style={{ color: "rgba(0,0,0,0.18)" }}
+
+                    {/* Bottom accent line */}
+                    <div
+                      className="absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"
+                      style={{
+                        background: "linear-gradient(90deg, hsl(0 85% 45%), hsl(0 85% 55%))",
+                      }}
                     />
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center"
+          >
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-semibold text-gray-700 border-2 border-gray-200 hover:border-accent hover:text-accent hover:shadow-lg transition-all duration-300"
+            >
+              View All Services <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -685,57 +665,45 @@ const Index = () => {
             className="flex flex-col justify-center p-8 sm:p-12 lg:p-14 xl:p-18"
           >
             <span className="text-[11px] font-bold tracking-[0.18em] uppercase mb-4 block" style={{ color: "hsl(0 85% 50%)" }}>
-              Equipment Evaluation · Houston, TX
+              System Takeover
             </span>
             <div className="w-9 h-[3px] rounded-full mb-6" style={{ background: "hsl(var(--accent))" }} />
             <h2
-              className="font-display font-bold text-gray-900 mb-4 leading-[1.06]"
+              className="font-display font-bold text-gray-900 mb-5 leading-tight"
               style={{ fontSize: "clamp(1.875rem, 3.2vw, 2.6rem)", letterSpacing: "-0.042em" }}
             >
               Already Have a Keypad Like This?{" "}
               <span style={{ color: "hsl(var(--accent))" }}>We'll Use It.</span>
             </h2>
-             <p className="text-gray-500 leading-relaxed mb-6 text-base">
-               If your property already has an alarm system — whether from ADT, Brinks, Vivint, or a previous provider — there's a good chance your existing keypads, sensors, and wiring are still perfectly functional. Our process starts with a <strong className="text-gray-700">free equipment evaluation</strong> to determine what can be reused across your property portfolio.
-             </p>
+            <p className="text-gray-600 leading-relaxed mb-8 text-lg">
+              Switching alarm companies doesn't mean replacing everything. We evaluate your existing equipment and reuse what works — saving you money while upgrading your protection.
+            </p>
 
-            {/* What we evaluate */}
-            <div className="grid grid-cols-2 gap-3 mb-7">
+            {/* Key Benefits */}
+            <div className="space-y-4 mb-8">
               {[
-                { label: "Keypads & Panels", value: "Honeywell, DSC, DMP & more" },
-                { label: "Door & Window Sensors", value: "Wired & wireless compatible" },
-                { label: "Existing Wiring", value: "Pre-wire & structured cabling" },
-                { label: "Motion Detectors", value: "Evaluated & recalibrated" },
-                { label: "Monitoring Transfer", value: "Seamless provider switch" },
-                { label: "Smart Integration", value: "Alarm.com & app control" },
-              ].map((spec) => (
-                <div key={spec.label} className="rounded-xl p-3.5" style={{ background: "hsl(0 0% 98%)", border: "1px solid hsl(0 0% 92%)" }}>
-                  <p className="text-[9.5px] font-bold uppercase tracking-[0.14em] mb-1" style={{ color: "hsl(0 0% 55%)" }}>{spec.label}</p>
-                  <p className="font-semibold text-gray-900 text-[13px] leading-tight">{spec.value}</p>
+                "Keep your existing keypads, sensors & wiring",
+                "Compatible with Honeywell, DSC, DMP & more",
+                "Seamless transfer to local Houston monitoring",
+                "Free onsite equipment evaluation",
+              ].map((benefit) => (
+                <div key={benefit} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "hsl(0 85% 50%)" }} />
+                  <span className="text-gray-700 leading-relaxed">{benefit}</span>
                 </div>
               ))}
             </div>
 
-            {/* Switch CTA callout */}
-             <div className="rounded-2xl p-5 mb-7" style={{ background: "linear-gradient(135deg, hsl(0 85% 45% / 0.05) 0%, transparent 100%)", border: "1px solid hsl(0 85% 45% / 0.14)" }}>
-               <p className="text-[13px] font-semibold text-gray-800 mb-1">
-                 Why replace what already works?
-               </p>
-               <p className="text-[13px] text-gray-500 leading-relaxed">
-                 Property managers and business owners don't need to pay for a full system replacement when switching alarm companies. We evaluate everything onsite and only recommend replacements when truly necessary — saving your budget while upgrading protection across every property.
-               </p>
-             </div>
-
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 to="/free-analysis"
-                className="btn-primary-gradient inline-flex items-center gap-2 text-[14.5px]"
+                className="btn-primary-gradient inline-flex items-center gap-2 text-base px-8 py-4"
                 style={{ boxShadow: "0 4px 20px hsl(0 85% 45% / 0.3)" }}
               >
-                Get Your Free Evaluation <ArrowRight className="w-4 h-4" />
+                Get Free Evaluation <ArrowRight className="w-5 h-5" />
               </Link>
-              <a href="tel:7133879937" className="btn-outline-dark inline-flex items-center gap-2 text-[13.5px]">
-                <Phone className="w-4 h-4" /> (713) 387-9937
+              <a href="tel:7133879937" className="btn-outline-dark inline-flex items-center gap-2 text-base px-8 py-4">
+                <Phone className="w-5 h-5" /> (713) 387-9937
               </a>
             </div>
           </motion.div>

@@ -1,60 +1,85 @@
-import { Phone, Shield } from "lucide-react";
+import { Phone, Shield, MessageCircle, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const MobileCTA = () => (
-  <motion.div 
-    initial={{ y: 80, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ type: "spring", stiffness: 120, damping: 18 }}
-    className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
-  >
-    {/* Sleek Gradient Bar */}
-    <div className="mx-3 mb-3 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-white/10">
-      <div className="flex items-center">
-        {/* Call Button */}
+  <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
+    {/* Main Navigation Bar */}
+    <div 
+      className="bg-white border-t border-gray-200"
+      style={{
+        boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.08)",
+      }}
+    >
+      <div className="grid grid-cols-4 h-16">
+        {/* Home */}
+        <Link
+          to="/"
+          className="flex flex-col items-center justify-center gap-1 hover:bg-gray-50 active:bg-gray-100 transition-colors"
+        >
+          <Home className="w-5 h-5 text-gray-700" />
+          <span className="text-[10px] font-semibold text-gray-600 tracking-wide">Home</span>
+        </Link>
+
+        {/* Call */}
         <a
           href="tel:7133879937"
-          className="flex items-center justify-center gap-2 py-4 px-5 bg-white/10 hover:bg-white/15 transition-colors active:bg-white/20"
+          className="flex flex-col items-center justify-center gap-1 hover:bg-gray-50 active:bg-gray-100 transition-colors relative group"
         >
-          <Phone className="w-5 h-5 text-white" />
-          <span className="text-white font-semibold text-sm">Call</span>
+          <div className="relative">
+            <Phone className="w-5 h-5 text-gray-700 group-active:scale-95 transition-transform" />
+            <motion.div
+              className="absolute -top-1 -right-1 w-2 h-2 rounded-full"
+              style={{ background: "hsl(0 85% 50%)" }}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [1, 0.7, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
+            />
+          </div>
+          <span className="text-[10px] font-semibold text-gray-600 tracking-wide">Call</span>
         </a>
-        
-        {/* Divider */}
-        <div className="w-px h-10 bg-white/10" />
-        
-        {/* Free Analysis CTA */}
-        <Link
-          to="/free-analysis"
-          className="flex-1 flex items-center justify-center gap-2.5 py-4 px-5 bg-gradient-to-r from-accent to-red-600 hover:from-red-600 hover:to-accent transition-all"
-        >
-          <Shield className="w-5 h-5 text-white" />
-          <span className="text-white font-bold text-sm">Free Analysis</span>
-        </Link>
-        
-        {/* Divider */}
-        <div className="w-px h-10 bg-white/10" />
-        
-        {/* Text Button */}
+
+        {/* Text/SMS */}
         <a
           href="sms:7133879937"
-          className="flex items-center justify-center gap-2 py-4 px-5 bg-white/10 hover:bg-white/15 transition-colors active:bg-white/20"
+          className="flex flex-col items-center justify-center gap-1 hover:bg-gray-50 active:bg-gray-100 transition-colors"
         >
-          <div className="w-5 h-5 rounded-full border-2 border-white/60 flex items-center justify-center">
-            <span className="text-white text-[8px] font-bold mt-0.5">...</span>
-          </div>
-          <span className="text-white font-semibold text-sm">Text</span>
+          <MessageCircle className="w-5 h-5 text-gray-700" />
+          <span className="text-[10px] font-semibold text-gray-600 tracking-wide">Text</span>
         </a>
+
+        {/* Free Analysis - Highlighted */}
+        <Link
+          to="/free-analysis"
+          className="flex flex-col items-center justify-center gap-1 relative overflow-hidden group"
+          style={{
+            background: "linear-gradient(135deg, hsl(0 85% 45%) 0%, hsl(0 85% 50%) 100%)",
+          }}
+        >
+          {/* Animated shine effect */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            animate={{
+              x: ["-100%", "200%"],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              repeatDelay: 2,
+            }}
+          />
+          
+          <Shield className="w-5 h-5 text-white relative z-10" />
+          <span className="text-[10px] font-bold text-white tracking-wide relative z-10">Free Quote</span>
+        </Link>
       </div>
     </div>
-    
-    {/* Ultra-thin Status Bar */}
-    <div className="flex items-center justify-center gap-2 pb-2">
-      <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-      <span className="text-white/40 text-[10px] tracking-wide">LOCAL MONITORING ACTIVE</span>
-    </div>
-  </motion.div>
+  </div>
 );
 
 export default MobileCTA;

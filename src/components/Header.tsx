@@ -24,8 +24,7 @@ const navLinks = [
   { name: "Industries", href: "/industries" },
   { name: "Portfolio",  href: "/portfolio" },
   { name: "Reviews",    href: "/reviews" },
-  { name: "Houston Problem", href: "/houston-we-have-a-problem" },
-  { name: "Contact",    href: "/contact" },
+    { name: "Contact",    href: "/contact" },
 ];
 
 const Header = () => {
@@ -178,7 +177,7 @@ const Header = () => {
             {/* Services Mega Menu */}
             <div
               ref={servicesRef}
-              className="relative pb-3"
+              className="relative"
               onMouseEnter={handleServicesEnter}
               onMouseLeave={handleServicesLeave}
             >

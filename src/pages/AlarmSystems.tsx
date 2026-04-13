@@ -1,12 +1,32 @@
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTABlock from "@/components/CTABlock";
 import FAQSection from "@/components/FAQSection";
-import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
 import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
-import { Shield, Radio, RefreshCw, Wifi, AlertTriangle, Keyboard, Lock, Bell, CheckCircle2 } from "lucide-react";
+import { Shield, Radio, RefreshCw, Wifi, AlertTriangle, Keyboard, Lock, Bell, CheckCircle2, ArrowRight, Phone, Star } from "lucide-react";
+import { Link } from "react-router-dom";
+
+/* ─── Animation variants ────────────────────────────────────── */
+const fadeUp = {
+  hidden: { opacity: 0, y: 36 },
+  show: { opacity: 1, y: 0 },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -32 },
+  show: { opacity: 1, x: 0 },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 32 },
+  show: { opacity: 1, x: 0 },
+};
+
+const easeExpo = [0.16, 1, 0.3, 1] as const;
+const vp = { once: true, amount: 0.15 };
 
 const features = [
   { icon: Shield, title: "Alarm Installation", desc: "Professional installation of hardwired, wireless, and hybrid alarm systems tailored to your property." },
@@ -76,74 +96,267 @@ const AlarmSystems = () => (
       description="Ready to switch alarm companies? Houston's best local alarm company. Cancel ADT, Brinks or Vivint & switch to expert Honeywell installation with 24/7 local monitoring. System takeovers available. (713) 387-9937."
       schemas={alarmSchemas}
     />
+    
     <PageHero
       title="Local Alarm Company in Houston, TX"
       subtitle="Switch alarm companies with zero hassle. Houston's top-rated local alarm company installs Honeywell systems, takes over from ADT, Brinks & Vivint, and provides 24/7 local monitoring — never outsourced."
       ctaText="Switch Your Alarm Today — Free Survey"
     />
 
-    <section className="section-padding">
-      <div className="container-tight">
-        <div className="glass-card-static p-8 sm:p-12 mb-16 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          <div className="relative z-10">
-            <div className="divider-accent !mx-0" />
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-foreground mb-4">Switching Alarm Companies? We Make It Easy.</h2>
-            <p className="text-muted-foreground leading-relaxed max-w-3xl">
-              Finding the right local alarm company is critical for real protection. Texas Total Security is one of Houston's top-rated local alarm companies — and switching is simpler than you think. Whether you want to cancel ADT, change from Brinks, drop Vivint, or just find the best local alarm company near you, our team handles the entire takeover process. We keep your existing equipment in most cases, saving you time and money. Schedule your FREE onsite security survey today.
-            </p>
-          </div>
-        </div>
-
-        <SectionHeading title="Protect What Matters Most" subtitle="You deserve more than a one-size-fits-all security solution." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((f) => (
-            <div key={f.title} className="glass-card p-7">
-              <div className="w-12 h-12 rounded-xl bg-accent/8 flex items-center justify-center mb-4">
-                <f.icon className="w-6 h-6 text-accent" />
-              </div>
-              <h3 className="font-display font-semibold text-foreground mb-2">{f.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+    {/* ══════════════════════════════════════════════════
+        INTRO SECTION — Switching Made Easy
+    ══════════════════════════════════════════════════ */}
+    <section className="section-padding bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={vp}
+          transition={{ duration: 0.75, ease: easeExpo }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-gray-100"
+            style={{ background: "linear-gradient(135deg, hsl(0 85% 45% / 0.02) 0%, white 100%)" }}
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full"
+              style={{ background: "radial-gradient(circle, hsl(0 85% 45% / 0.08) 0%, transparent 70%)" }}
+            />
+            <div className="relative z-10">
+              <div className="w-12 h-1 rounded-full mb-6" style={{ background: "hsl(0 85% 50%)" }} />
+              <h2 className="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6 leading-tight">
+                Switching Alarm Companies? We Make It Easy.
+              </h2>
+              <p className="text-gray-600 leading-relaxed text-lg mb-6">
+                Finding the right local alarm company is critical for real protection. Texas Total Security is one of Houston's top-rated local alarm companies — and switching is simpler than you think.
+              </p>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                Whether you want to cancel ADT, change from Brinks, drop Vivint, or just find the best local alarm company near you, our team handles the entire takeover process. We keep your existing equipment in most cases, saving you time and money.
+              </p>
             </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+
+    {/* ══════════════════════════════════════════════════
+        FEATURES GRID — Modern Card Design
+    ══════════════════════════════════════════════════ */}
+    <section className="section-padding" style={{ background: "hsl(0 0% 98%)" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={vp}
+          transition={{ duration: 0.7, ease: easeExpo }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+            style={{
+              background: "hsl(0 85% 45% / 0.06)",
+              border: "1px solid hsl(0 85% 45% / 0.12)",
+            }}
+          >
+            <Shield className="w-4 h-4" style={{ color: "hsl(0 85% 50%)" }} />
+            <span className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: "hsl(0 85% 45%)" }}>
+              Our Services
+            </span>
+          </motion.div>
+          
+          <h2 className="text-4xl sm:text-5xl font-display font-bold text-gray-900 mb-6 leading-tight">
+            Protect What Matters Most
+          </h2>
+          <p className="text-gray-600 leading-relaxed text-lg">
+            You deserve more than a one-size-fits-all security solution. Our alarm systems are custom-designed for your property.
+          </p>
+        </motion.div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((feature, i) => (
+            <motion.div
+              key={feature.title}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={vp}
+              transition={{ duration: 0.6, ease: easeExpo, delay: i * 0.08 }}
+              className="group"
+            >
+              <div className="h-full rounded-2xl p-7 bg-white border border-gray-200 hover:border-accent/30 hover:shadow-xl transition-all duration-300">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(0 85% 45% / 0.08) 0%, hsl(0 85% 45% / 0.04) 100%)",
+                    border: "1px solid hsl(0 85% 45% / 0.12)",
+                  }}
+                >
+                  <feature.icon className="w-7 h-7" style={{ color: "hsl(0 85% 50%)" }} />
+                </div>
+                <h3 className="font-display font-bold text-gray-900 text-lg mb-3 leading-tight">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed text-[15px]">
+                  {feature.desc}
+                </p>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
 
-    <section className="section-padding" style={{ background: "var(--gradient-surface)" }}>
-      <div className="container-tight">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
-          <div>
-            <div className="divider-accent !mx-0" />
-            <h2 className="text-3xl font-display font-bold text-foreground mb-6">Local Monitoring You Can Trust</h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>Unlike national providers that route alerts through distant call centers, Texas Total Security delivers alarm system monitoring backed by a local, in-house dispatch team right here in Houston, TX.</p>
-              <p>If you already have alarm equipment and are frustrated with your current provider, we make switching simple while maximizing the value of what you own.</p>
-              <p>We never sell your contract to a big national company — your security stays local.</p>
+    {/* ══════════════════════════════════════════════════
+        LOCAL MONITORING SPLIT — Content + Equipment List
+    ══════════════════════════════════════════════════ */}
+    <section className="section-padding bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          
+          {/* Left — Content */}
+          <motion.div
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.75, ease: easeExpo }}
+          >
+            <div className="w-12 h-1 rounded-full mb-6" style={{ background: "hsl(0 85% 50%)" }} />
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6 leading-tight">
+              Local Monitoring You Can Trust
+            </h2>
+            <div className="space-y-5 text-gray-600 leading-relaxed text-lg">
+              <p>
+                Unlike national providers that route alerts through distant call centers, Texas Total Security delivers alarm system monitoring backed by a local, in-house dispatch team right here in Houston, TX.
+              </p>
+              <p>
+                If you already have alarm equipment and are frustrated with your current provider, we make switching simple while maximizing the value of what you own.
+              </p>
+              <p className="font-semibold text-gray-900">
+                We never sell your contract to a big national company — your security stays local.
+              </p>
             </div>
-          </div>
-          <div>
-            <h3 className="text-xl font-display font-bold text-foreground mb-5">Alarm System Equipment</h3>
-            <div className="space-y-2.5 max-h-[500px] overflow-y-auto pr-2">
-              {alarmEquipment.map((item) => (
-                <div key={item} className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-1" />
-                  <span className="text-sm text-muted-foreground leading-relaxed">{item}</span>
+
+            {/* Trust Badges */}
+            <div className="mt-10 grid grid-cols-2 gap-4">
+              {[
+                { label: "30+ Years", sublabel: "Serving Houston" },
+                { label: "24/7", sublabel: "Local Monitoring" },
+                { label: "Licensed", sublabel: "#B03066901" },
+                { label: "5.0 ★", sublabel: "Google Rating" },
+              ].map((badge) => (
+                <div key={badge.label} className="rounded-xl p-4 border border-gray-200 bg-gray-50">
+                  <p className="font-display font-bold text-2xl text-gray-900 mb-1">{badge.label}</p>
+                  <p className="text-sm text-gray-500">{badge.sublabel}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
+
+          {/* Right — Equipment List */}
+          <motion.div
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.75, ease: easeExpo }}
+            className="lg:sticky lg:top-24"
+          >
+            <div className="rounded-2xl p-8 border border-gray-200 bg-white shadow-lg">
+              <h3 className="text-2xl font-display font-bold text-gray-900 mb-6">
+                Alarm System Equipment
+              </h3>
+              <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+                {alarmEquipment.map((item, i) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.03 }}
+                    className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "hsl(0 85% 50%)" }} />
+                    <span className="text-[15px] text-gray-700 leading-relaxed">{item}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
 
-    <section className="section-padding">
-      <div className="container-tight max-w-2xl mx-auto">
-        <LeadForm title="Get a Free Alarm System Quote" subtitle="Tell us about your property and we'll design a custom alarm solution." />
+    {/* ══════════════════════════════════════════════════
+        CTA BANNER — Switch Today
+    ══════════════════════════════════════════════════ */}
+    <section className="section-padding relative overflow-hidden" style={{ background: "hsl(0 0% 4%)" }}>
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, hsl(0 85% 45% / 0.15) 1px, transparent 0)`,
+            backgroundSize: '40px 40px',
+          }}
+        />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={vp}
+          transition={{ duration: 0.7, ease: easeExpo }}
+        >
+          <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-6 leading-tight">
+            Ready to Switch Alarm Companies?
+          </h2>
+          <p className="text-xl text-white/60 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Get a free onsite security survey. We'll evaluate your existing equipment and show you how much you can save.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to="/free-analysis"
+              className="btn-primary-gradient inline-flex items-center gap-2 text-base px-10 py-4"
+            >
+              Schedule Free Survey <ArrowRight className="w-5 h-5" />
+            </Link>
+            <a
+              href="tel:7133879937"
+              className="inline-flex items-center gap-2 px-10 py-4 rounded-xl text-base font-semibold text-white border-2 border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+            >
+              <Phone className="w-5 h-5" /> (713) 387-9937
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
 
+    {/* ══════════════════════════════════════════════════
+        LEAD FORM
+    ══════════════════════════════════════════════════ */}
+    <section className="section-padding bg-white">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <LeadForm
+          title="Get a Free Alarm System Quote"
+          subtitle="Tell us about your property and we'll design a custom alarm solution."
+        />
+      </div>
+    </section>
+
+    {/* ══════════════════════════════════════════════════
+        FAQ SECTION
+    ══════════════════════════════════════════════════ */}
     <FAQSection items={faqs} />
+
+    {/* ══════════════════════════════════════════════════
+        FINAL CTA
+    ══════════════════════════════════════════════════ */}
     <CTABlock />
   </Layout>
 );
