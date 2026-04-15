@@ -33,14 +33,14 @@
     "email": "info@texastotalsecurity.com",
     "address": "11331 Richmond Ave. #102, Houston, TX 77082",
     "license": "Texas DPS License #B03066901",
-    "years": "30+ Years",
-    "yearsServing": "Serving Houston Since 1994",
+    "years": "Local Team",
+    "yearsServing": "Serving Houston Locally",
     "freeQuote": "Free Quote",
     "scheduleConsultation": "Schedule a Free Consultation",
     "trustedBy": "Trusted by 10,000+ Houston Families & Businesses"
   },
   "home": {
-    "heroEyebrow": "Houston's Security Experts Since 1994",
+    "heroEyebrow": "Houston's Locally Owned Security Experts",
     "heroHeadline": "Total Security. Total Peace of Mind.",
     "heroSub": "Custom alarm systems, HD security cameras, and 24/7 local monitoring — built for Houston homes and businesses.",
     "heroCta": "Get a Free Security Analysis",
@@ -61,7 +61,7 @@
     "service6Title": "Commercial Security",
     "service6Desc": "Enterprise-grade protection for retail, office, industrial, and multi-site business operations.",
     "whyEyebrow": "Why Texas Total Security",
-    "whyTitle": "30+ Years Protecting Greater Houston",
+    "whyTitle": "Houston's Trusted Local Security Team",
     "whySub": "Family-owned. Licensed. Local. We're not a national chain — we're your neighbors.",
     "why1Title": "Local Experts",
     "why1Desc": "Born and raised in Houston. We know the neighborhoods, the crime patterns, and the infrastructure.",
@@ -104,7 +104,7 @@
   },
   "about": {
     "heroTitle": "About Texas Total Security",
-    "heroSub": "Houston's family-owned security company for over 30 years.",
+    "heroSub": "Houston's family-owned, locally operated security company.",
     "storyTitle": "Our Story",
     "storyP1": "Texas Total Security was founded in Houston in 1994 with a single mission: provide honest, expert security solutions to the families and businesses that make Houston great.",
     "storyP2": "Over three decades, we've protected more than 10,000 homes and businesses across Greater Houston. We've grown — but we've never lost the personal touch that makes us different from the national chains.",
@@ -113,7 +113,7 @@
     "value1Title": "Integrity",
     "value1Desc": "We tell you what you need, not what makes us the most money. Honest assessments, fair prices, no upselling.",
     "value2Title": "Expertise",
-    "value2Desc": "30+ years of hands-on experience. Certified technicians. Continuous training on the latest security technology.",
+    "value2Desc": "Deep hands-on experience. Certified technicians. Continuous training on the latest security technology.",
     "value3Title": "Community",
     "value3Desc": "We live and work in Houston. Your safety is our neighborhood's safety. We're invested in this community.",
     "value4Title": "Reliability",
@@ -212,7 +212,7 @@
     "faqTitle": "Monitoring FAQs"
   },
   "footer": {
-    "tagline": "Houston's most trusted security company since 1994.",
+    "tagline": "Houston's most trusted locally owned security company.",
     "servicesHeading": "Services",
     "companyHeading": "Company",
     "contactHeading": "Contact",

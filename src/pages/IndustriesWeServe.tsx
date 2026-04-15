@@ -46,7 +46,7 @@ const IndustriesWeServe = () => (
   <Layout>
     <SEOHead
       title="Security Systems for Every Industry Houston TX | HOA, Apartment Complex & Commercial | Texas Total Security"
-      description="Security systems for every industry in Houston. HOA security camera systems, apartment complex surveillance, neighborhood security, commercial alarm systems & security poles. Expert installation since 1994."
+      description="Security systems for every industry in Houston. HOA security camera systems, apartment complex surveillance, neighborhood security, commercial alarm systems & security poles. Locally owned & operated."
       schemas={industriesSchemas}
     />
     <PageHero
@@ -56,7 +56,7 @@ const IndustriesWeServe = () => (
 
     <section className="section-padding">
       <div className="container-tight">
-        <SectionHeading title="Security for Every Industry" subtitle="Over 30 years of experience protecting Houston's diverse business landscape." />
+        <SectionHeading title="Security for Every Industry" subtitle="Expert security solutions protecting Houston's diverse business landscape." />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {industries.map((ind) => (
             <div key={ind.name} className="glass-card p-6 group">

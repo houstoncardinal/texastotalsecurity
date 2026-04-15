@@ -105,7 +105,7 @@ const SEOHead = ({ title, description, canonical, schemas = [], ogImage }: SEOHe
       "@type": "WebSite",
       "name": COMPANY_NAME,
       "url": BASE_URL,
-      "description": "Houston's trusted security experts for 30+ years. Custom alarm systems, security cameras, 24/7 local monitoring.",
+      "description": "Houston's trusted locally owned security experts. Custom alarm systems, security cameras, 24/7 local monitoring.",
       "publisher": {
         "@type": "Organization",
         "name": COMPANY_NAME,

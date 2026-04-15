@@ -70,7 +70,7 @@ const CTABlock = ({
           {/* Right — Compact Trust Badges */}
           <div className="flex lg:flex-col gap-4 lg:gap-3">
             {[
-              { label: "30+ Years", icon: Shield },
+              { label: "Local Team", icon: Shield },
               { label: "24/7 Local", icon: Phone },
               { label: "5.0 ★ Rated", icon: Star },
             ].map((item, i) => (

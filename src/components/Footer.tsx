@@ -106,12 +106,12 @@ const Footer = () => {
               </span>
             </div>
              <p className="text-[13px] leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.44)" }}>
-               Houston's trusted commercial security company for property managers, HOAs, and business owners — for over 30 years.
+               Houston's trusted commercial security company for property managers, HOAs, and business owners — locally owned and operated.
              </p>
             <ul className="space-y-3">
               {[
                 { icon: Shield,       text: "Licensed & Insured" },
-                { icon: Clock,        text: "30+ Years in Business" },
+                { icon: Clock,        text: "Locally Owned & Operated" },
                 { icon: Star,         text: "5-Star Google Rating" },
                 { icon: CheckCircle2, text: "Locally Owned" },
               ].map((item) => (

@@ -76,7 +76,7 @@ const alarmSchemas = [
   generateLocalBusinessSchema(),
   generateEnhancedServiceSchema(
     "Alarm System Installation & Monitoring — Houston TX",
-    "Custom alarm system design, professional installation, and 24/7 local monitoring for homes and businesses in Houston, TX. System takeovers from ADT, Brinks, Vivint. Licensed & insured since 1994.",
+    "Custom alarm system design, professional installation, and 24/7 local monitoring for homes and businesses in Houston, TX. System takeovers from ADT, Brinks, Vivint. Licensed & insured.",
     "/alarm-systems",
     "Alarm System Installation",
     ["switch alarm company Houston TX", "local alarm company Houston", "cancel ADT Houston", "local alarm system Houston", "local burglar alarm Houston", "alarm companies near me Houston", "best alarm companies Houston", "local alarm monitoring Houston", "change alarm company Houston", "Honeywell alarm installation Houston"],
@@ -244,7 +244,7 @@ const AlarmSystems = () => (
             {/* Trust Badges */}
             <div className="mt-10 grid grid-cols-2 gap-4">
               {[
-                { label: "30+ Years", sublabel: "Serving Houston" },
+                { label: "Local Team", sublabel: "Houston-Based" },
                 { label: "24/7", sublabel: "Local Monitoring" },
                 { label: "Licensed", sublabel: "#B03066901" },
                 { label: "5.0 ★", sublabel: "Google Rating" },

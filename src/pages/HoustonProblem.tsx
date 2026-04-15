@@ -216,7 +216,7 @@ const HoustonProblem = () => (
           className="mb-10 max-w-2xl"
           style={{ fontSize: "clamp(1.05rem, 2vw, 1.3rem)", lineHeight: 1.65, color: "rgba(255,255,255,0.62)" }}
         >
-          Property crime, vehicle theft, and home burglaries are real threats in the Greater Houston area. Most are preventable. Texas Total Security has been protecting Houston homes, businesses, and communities for over 30 years — with the alarm systems, security cameras, and 24/7 local monitoring that actually work.
+          Property crime, vehicle theft, and home burglaries are real threats in the Greater Houston area. Most are preventable. Texas Total Security protects Houston homes, businesses, and communities — with the alarm systems, security cameras, and 24/7 local monitoring that actually work.
         </motion.p>
 
         <motion.div
@@ -339,7 +339,7 @@ const HoustonProblem = () => (
             Houston Deserves Better Security. We Deliver It.
           </h2>
           <p className="text-gray-500 leading-relaxed text-base">
-            Texas Total Security has protected Houston properties for 30+ years. Every system is custom-designed for your property — not a one-size-fits-all package from a national company.
+            Texas Total Security protects Houston properties with custom-designed security systems — not one-size-fits-all packages from a national company.
           </p>
         </motion.div>
 
@@ -418,7 +418,7 @@ const HoustonProblem = () => (
                 "Local Houston technicians who know your system",
                 "System takeover from ADT, Brinks & Vivint",
                 "No long-term contracts required",
-                "Serving Houston since 1994 — 30+ years",
+                "Locally owned & operated Houston company",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 shrink-0" style={{ color: "hsl(var(--accent))" }} />

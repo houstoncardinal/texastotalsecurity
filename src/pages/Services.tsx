@@ -93,7 +93,7 @@ const services = [
 ];
 
 const whyChooseUs = [
-  { icon: Clock, title: "Since 1994", desc: "30+ years protecting Houston" },
+  { icon: Clock, title: "Locally Owned", desc: "Houston-based & operated" },
   { icon: MapPin, title: "Locally Owned", desc: "Never sell your contract" },
   { icon: Headphones, title: "Local Monitoring", desc: "Our own dispatch center" },
   { icon: Shield, title: "Licensed & Insured", desc: "LIC# B03066901" },
@@ -165,7 +165,7 @@ const Services = () => {
     <Layout>
       <SEOHead
         title="Security Services Houston TX | Local Alarm Company, HOA Cameras & Security Poles | Texas Total Security"
-        description="Complete security services in Houston, TX: local alarm systems, security camera installations, HOA security camera systems, security poles, CCTV pole installation, switch alarm companies & 24/7 local monitoring since 1994."
+        description="Complete security services in Houston, TX: local alarm systems, security camera installations, HOA security camera systems, security poles, CCTV pole installation, switch alarm companies & 24/7 local monitoring. Locally owned & operated."
         schemas={schemas}
       />
 
@@ -197,7 +197,7 @@ const Services = () => {
             </h1>
             
             <p className="text-lg sm:text-xl text-white/60 leading-relaxed mb-8 max-w-xl">
-              From alarm systems to surveillance cameras — professional installation, 24/7 local monitoring, and ongoing support for Houston homes and businesses since 1994.
+              From alarm systems to surveillance cameras — professional installation, 24/7 local monitoring, and ongoing support for Houston homes and businesses.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-10">

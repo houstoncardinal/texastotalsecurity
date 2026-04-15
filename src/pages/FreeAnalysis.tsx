@@ -78,7 +78,7 @@ const FreeAnalysis = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-5 h-5 text-accent" />
-                  <span className="text-sm font-semibold opacity-80">30+ years of experience</span>
+                  <span className="text-sm font-semibold opacity-80">Locally owned & operated</span>
                 </div>
               </div>
             </div>

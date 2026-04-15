@@ -9,7 +9,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { CheckCircle2, Shield, Users, MapPin, Clock, HeadphonesIcon } from "lucide-react";
 
 const values = [
-  { icon: MapPin, title: "Houston-Born & Operated", desc: "Trustworthy security techs working in Houston and surrounding areas for over 30 years. We live and work in the same communities we protect." },
+  { icon: MapPin, title: "Houston-Born & Operated", desc: "Locally owned and operated security technicians working in Houston and surrounding areas. We live and work in the same communities we protect." },
   { icon: Shield, title: "We Don't Sell Alarm Contracts", desc: "We don't sell our alarm contracts to big national companies. Your account stays with us — always." },
   { icon: HeadphonesIcon, title: "In-House Monitoring", desc: "Our monitoring center is local. When an alarm triggers, local operators dispatch local authorities — fast." },
   { icon: Users, title: "Friendly, Local Service", desc: "You'll know your technician by name, and they'll know your system inside and out." },
@@ -41,8 +41,8 @@ const About = () => {
   return (
     <Layout>
       <SEOHead
-        title="About Texas Total Security | Houston's Best Local Alarm Company Since 1994"
-        description="Texas Total Security — Houston's top-rated local alarm company with 30+ years experience. Expert alarm installation, HOA security camera systems, security poles, CCTV pole installation & local monitoring. Licensed & insured."
+        title="About Texas Total Security | Houston's Best Locally Owned Alarm Company"
+        description="Texas Total Security — Houston's top-rated locally owned alarm company. Expert alarm installation, HOA security camera systems, security poles, CCTV pole installation & local monitoring. Licensed & insured."
         schemas={schemas}
       />
       <Breadcrumbs items={[{ name: "About Us" }]} />
@@ -70,7 +70,7 @@ const About = () => {
               <h3 className="font-display font-bold text-xl text-foreground mb-8">By the Numbers</h3>
               <div className="grid grid-cols-2 gap-8">
                 {[
-                  { num: "30+", label: "Years in Business" },
+                  { num: "100%", label: "Locally Owned" },
                   { num: "1000s", label: "Systems Installed" },
                   { num: "24/7", label: "Local Monitoring" },
                   { num: "100%", label: "Locally Owned" },
@@ -88,7 +88,7 @@ const About = () => {
 
       <section className="section-padding" style={{ background: "var(--gradient-surface)" }}>
         <div className="container-tight">
-          <SectionHeading title="Why We're the Best" subtitle="The principles that have guided our company for over 30 years." />
+          <SectionHeading title="Why We're the Best" subtitle="The principles that guide everything we do for Houston properties." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {values.map((v) => (
               <div key={v.title} className="flex gap-4 group">

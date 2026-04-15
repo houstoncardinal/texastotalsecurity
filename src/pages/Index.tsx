@@ -11,6 +11,7 @@ import {
   ArrowRight, Phone, CheckCircle2, Star,
   PhoneCall, ClipboardCheck, Wrench, HeadphonesIcon,
   Award, Lock, MapPin, Plus, Minus, AlertTriangle,
+  ChevronLeft, ChevronRight,
 } from "lucide-react";
 
 /* ─── Animation variants ────────────────────────────────────── */
@@ -33,6 +34,50 @@ const easeExpo = [0.16, 1, 0.3, 1] as const;
 
 const vp = { once: true, amount: 0.15 };
 
+/* ─── Hero slides ───────────────────────────────────────────── */
+const heroSlides = [
+  {
+    eyebrow: "Property Managers · HOA Boards · Businesses",
+    headline: ["Stop Overpaying for", "Security That Doesn't Perform."],
+    sub: "Switch your alarm company, upgrade your surveillance, or build a custom security system — engineered for Houston's commercial properties.",
+    cta: { label: "Check If You Qualify — 60 Seconds", href: "/qualify" },
+    bg: "/imgi_11_Security-Camera-with-Buildings-in-background-Commercial.jpg_1675696598-scaled.jpg",
+    overlay: "linear-gradient(135deg, rgba(0,0,0,0.91) 0%, rgba(0,0,0,0.76) 50%, rgba(0,0,0,0.58) 100%)",
+  },
+  {
+    eyebrow: "Alarm Takeovers · No Long-Term Contracts",
+    headline: ["Ditch ADT.", "Switch to Local Monitoring."],
+    sub: "We take over your existing panels and sensors from ADT, Brinks, or Vivint — same hardware, local monitoring, no contracts, better rates.",
+    cta: { label: "See If We Can Take Over — Free", href: "/alarm-systems" },
+    bg: "/imgi_13_gd9131.jpg",
+    overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
+  },
+  {
+    eyebrow: "4K IP Surveillance · License Plate Recognition",
+    headline: ["See Everything.", "Miss Nothing."],
+    sub: "Commercial-grade 4K cameras, LPR systems, and custom security poles for apartment complexes, HOAs, and businesses across Greater Houston.",
+    cta: { label: "Design Your Camera System", href: "/security-cameras" },
+    bg: "/imgi_10_com15.jpg",
+    overlay: "linear-gradient(135deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.52) 100%)",
+  },
+  {
+    eyebrow: "HOA Boards · Property Management · Communities",
+    headline: ["Complete Gate &", "Community Protection."],
+    sub: "License plate cameras, gate access control, common area surveillance, and active deterrence — custom-engineered for HOA boards and property managers.",
+    cta: { label: "Get a Free Property Assessment", href: "/hoa-security" },
+    bg: "/imgi_14_upscale_gate_TTS.jpg",
+    overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
+  },
+  {
+    eyebrow: "In-House Houston Monitoring Center",
+    headline: ["Local Operators.", "Real Response. Never Outsourced."],
+    sub: "Our monitoring center is in Houston — not a national call center. Active deterrence cameras with sirens, strobes & two-way audio. Local dispatch within seconds.",
+    cta: { label: "Learn About Our Monitoring", href: "/monitoring-services" },
+    bg: "/imgi_8_qtq80-BdoLjp-2048x1367.jpg",
+    overlay: "linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 50%, rgba(0,0,0,0.60) 100%)",
+  },
+];
+
 /* ─── Data ──────────────────────────────────────────────────── */
 const services = [
   { icon: Shield,    title: "Alarm Systems & Takeovers",       desc: "Switching from ADT, Brinks, or Vivint? We take over your existing equipment and provide local monitoring — no long-term contracts.",   href: "/alarm-systems" },
@@ -51,10 +96,10 @@ const processSteps = [
 ];
 
 const whyUs = [
-  { icon: MapPin,          title: "Houston-Born & Operated",     desc: "30+ years serving Houston's commercial and residential communities. We know the neighborhoods, the crime patterns, and the infrastructure." },
+  { icon: MapPin,          title: "Houston-Born & Operated",     desc: "Locally owned and operated, serving Houston's commercial and residential communities. We know the neighborhoods, the crime patterns, and the infrastructure." },
   { icon: Shield,          title: "We Never Sell Your Contract",  desc: "Unlike national providers, your account stays with our local team — permanently. No buyouts, no surprises." },
   { icon: HeadphonesIcon,  title: "In-House Local Monitoring",    desc: "Our monitoring center is in Houston — not a national call center. Local operators dispatch local authorities within seconds." },
-  { icon: Building2,       title: "Built for Property Managers",  desc: "We understand multi-site operations, tenant liability concerns, and HOA compliance — because we've done it for 30+ years." },
+  { icon: Building2,       title: "Built for Property Managers",  desc: "We understand multi-site operations, tenant liability concerns, and HOA compliance — because property management security is what we do." },
   { icon: Award,           title: "Trusted by Decision Makers",   desc: "Property management companies, HOA boards, and business owners across Greater Houston rely on us for their security infrastructure." },
   { icon: Lock,            title: "Enterprise-Grade Technology",   desc: "Active deterrence, LPR cameras, custom security poles, and smart integrations — built for commercial-scale deployments." },
 ];
@@ -102,6 +147,8 @@ const Index = () => {
   const { t } = useTranslation();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isHeroPaused, setIsHeroPaused] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
@@ -112,6 +159,15 @@ const Index = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Hero slider auto-advance — resets to 8s every time slide changes
+  useEffect(() => {
+    if (isHeroPaused) return;
+    const timer = setTimeout(() => {
+      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
+    }, 8000);
+    return () => clearTimeout(timer);
+  }, [currentSlide, isHeroPaused]);
 
   const schemas = [
     generateSiteLinksSearchBoxSchema(),
@@ -175,257 +231,244 @@ const Index = () => {
       />
 
       {/* ══════════════════════════════════════════════════
-          HERO — cinematic, full-height, ultra-scale type WITH VIDEO BACKGROUND
+          HERO — enterprise cinematic slider, 5 slides, 8s auto-advance
       ══════════════════════════════════════════════════ */}
       <section
         className="relative overflow-hidden"
-        style={{
-          background: "hsl(0 0% 3%)",
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-        }}
+        style={{ background: "hsl(0 0% 4%)", display: "flex", flexDirection: "column" }}
+        onMouseEnter={() => setIsHeroPaused(true)}
+        onMouseLeave={() => setIsHeroPaused(false)}
       >
-        {/* Video Background Layer */}
-        <div className="absolute inset-0 z-0">
-          {/* Primary video - security camera footage */}
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-            poster="/imgi_11_Security-Camera-with-Buildings-in-background-Commercial.jpg_1675696598-scaled.jpg"
-          >
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-security-camera-view-of-a-city-street-at-night-34556-large.mp4" type="video/mp4" />
-          </video>
-          
-          {/* Fallback image if video fails */}
-          <img
-            src="/imgi_11_Security-Camera-with-Buildings-in-background-Commercial.jpg_1675696598-scaled.jpg"
-            alt="Houston commercial security installation"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          
-          {/* Layered overlays for depth - darker for video */}
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.80) 45%, rgba(0,0,0,0.65) 100%)" }}
-          />
-          
-          {/* Animated gradient overlay for visual interest */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: "radial-gradient(ellipse 60% 50% at 30% 40%, hsl(0 85% 45% / 0.08), transparent 70%)",
-            }}
-            animate={{
-              opacity: [0.6, 1, 0.6],
-              scale: [1, 1.05, 1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          
-          {/* Upper center bloom */}
-          <div
-            className="absolute pointer-events-none"
-            style={{
-              top: "-10%", left: "50%", transform: "translateX(-50%)",
-              width: "1200px", height: "700px",
-              background: "radial-gradient(ellipse at center, hsl(0 85% 45% / 0.06) 0%, transparent 65%)",
-            }}
-          />
-          
-          {/* Bottom fade to bg */}
-          <div
-            className="absolute bottom-0 inset-x-0 h-64 pointer-events-none"
-            style={{ background: "linear-gradient(to top, hsl(0 0% 3%) 0%, transparent 100%)" }}
-          />
-        </div>
 
-        {/* Fine grid texture */}
+        {/* ── Background images — crossfade ── */}
+        <AnimatePresence initial={false}>
+          {heroSlides.map((slide, i) =>
+            i === currentSlide ? (
+              <motion.div
+                key={`hero-bg-${i}`}
+                className="absolute inset-0 z-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.6, ease: "easeInOut" }}
+              >
+                <img
+                  src={slide.bg}
+                  alt=""
+                  aria-hidden
+                  className="w-full h-full object-cover"
+                  style={{ transform: "scale(1.06)" }}
+                />
+                {/* Primary cinematic overlay */}
+                <div className="absolute inset-0" style={{ background: slide.overlay }} />
+                {/* Left vignette */}
+                <div
+                  className="absolute inset-y-0 left-0 w-2/5 pointer-events-none"
+                  style={{ background: "linear-gradient(to right, rgba(0,0,0,0.55) 0%, transparent 100%)" }}
+                />
+                {/* Right vignette */}
+                <div
+                  className="absolute inset-y-0 right-0 w-2/5 pointer-events-none"
+                  style={{ background: "linear-gradient(to left, rgba(0,0,0,0.45) 0%, transparent 100%)" }}
+                />
+                {/* Top red bloom */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: "radial-gradient(ellipse 70% 35% at 50% 0%, hsl(0 85% 45% / 0.08), transparent 70%)" }}
+                />
+                {/* Bottom fade to section bg */}
+                <div
+                  className="absolute bottom-0 inset-x-0 h-24 pointer-events-none"
+                  style={{ background: "linear-gradient(to top, hsl(0 0% 4%) 0%, transparent 100%)" }}
+                />
+              </motion.div>
+            ) : null
+          )}
+        </AnimatePresence>
+
+        {/* Subtle grid overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-[1]"
           style={{
-            opacity: 0.018,
+            opacity: 0.016,
             backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
+            backgroundSize: "80px 80px",
           }}
         />
 
-
-        {/* Hero content */}
+        {/* ── Slide content ── */}
         <div className="relative z-10 flex-1 flex items-center">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-28 lg:py-36 text-center">
+          <div className="max-w-5xl mx-auto w-full px-5 sm:px-8 lg:px-10 py-11 sm:py-14 text-center">
 
-            {/* Live badge with pulse animation */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: easeExpo }}
-              className="inline-flex items-center gap-2.5 mb-10 px-4 sm:px-5 py-2.5 rounded-full border max-w-[95vw]"
-              style={{
-                background: "hsl(0 85% 45% / 0.12)",
-                borderColor: "hsl(0 85% 45% / 0.28)",
-                boxShadow: "0 0 30px hsl(0 85% 45% / 0.15)",
-              }}
-            >
-              <motion.span
-                className="w-2 h-2 rounded-full shrink-0"
-                style={{ background: "hsl(0 85% 58%)" }}
-                animate={{
-                  boxShadow: [
-                    "0 0 0 0 hsl(0 85% 58% / 0.4)",
-                    "0 0 0 6px hsl(0 85% 58% / 0)",
-                    "0 0 0 0 hsl(0 85% 58% / 0)",
-                  ],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              <span
-                className="font-bold tracking-[0.12em] sm:tracking-[0.18em] uppercase whitespace-nowrap overflow-hidden text-ellipsis"
-                style={{ 
-                  color: "hsl(0 85% 68%)",
-                  fontSize: "clamp(9px, 2.5vw, 11px)",
-                }}
-              >
-                <span className="hidden sm:inline">Serving Property Managers · HOAs · Businesses · Houston, TX</span>
-                <span className="sm:hidden">Houston's Trusted Security · Since 1994</span>
-              </span>
-            </motion.div>
-
-            {/* Ultra-scale headline with gradient animation */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: easeExpo, delay: 0.1 }}
-              className="font-display font-bold text-white px-4 max-w-6xl mx-auto"
-              style={{
-                fontSize: "clamp(2.5rem, 7vw, 8rem)",
-                lineHeight: 1.1,
-                letterSpacing: "-0.04em",
-                marginBottom: "1.75rem",
-              }}
-            >
-              <span className="block">Stop Overpaying&nbsp;for</span>
-              <motion.span
-                className="block"
-                style={{
-                  background: "linear-gradient(135deg, hsl(0 80% 72%) 0%, hsl(0 85% 52%) 50%, hsl(0 90% 42%) 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  backgroundSize: "200% auto",
-                }}
-                animate={{
-                  backgroundPosition: ["0% center", "100% center", "0% center"],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                Security That Doesn't&nbsp;Perform.
-              </motion.span>
-            </motion.h1>
-
-            {/* Subtitle with typewriter effect */}
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: easeExpo, delay: 0.2 }}
-              className="mx-auto mb-3 text-white px-4"
-              style={{
-                fontSize: "clamp(1.0625rem, 2vw, 1.35rem)",
-                lineHeight: 1.65,
-                opacity: 0.85,
-                maxWidth: "38rem",
-              }}
-            >
-              Switch your alarm company, upgrade your surveillance, or build a custom security system — designed for property managers, HOA boards, and business owners across Houston.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-[12px] mb-12"
-              style={{ color: "rgba(255,255,255,0.28)" }}
-            >
-              Houston · Katy · Sugar Land · The Woodlands · Cypress · Bellaire · Memorial
-            </motion.p>
-
-            {/* CTAs with enhanced hover effects */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, ease: easeExpo, delay: 0.35 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
+            <AnimatePresence mode="wait">
               <motion.div
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                key={`hero-content-${currentSlide}`}
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.6, ease: easeExpo }}
               >
-                <Link
-                  to="/qualify"
-                  className="btn-primary-gradient inline-flex items-center gap-2 text-base px-12 py-4.5 shadow-lg shadow-red-900/25"
+
+                {/* ── Eyebrow — editorial horizontal rule style ── */}
+                <div className="flex items-center justify-center gap-3 mb-5">
+                  <motion.div
+                    className="h-px"
+                    style={{ width: "2.5rem", background: "linear-gradient(to right, transparent, hsl(0 85% 54%))" }}
+                    initial={{ scaleX: 0, originX: 1 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.5, delay: 0.1, ease: easeExpo }}
+                  />
+                  <motion.span
+                    className="font-bold uppercase tracking-[0.22em] whitespace-nowrap overflow-hidden text-ellipsis max-w-[80vw]"
+                    style={{ color: "hsl(0 75% 64%)", fontSize: "10px", letterSpacing: "0.22em" }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.15 }}
+                  >
+                    {heroSlides[currentSlide].eyebrow}
+                  </motion.span>
+                  <motion.div
+                    className="h-px"
+                    style={{ width: "2.5rem", background: "linear-gradient(to left, transparent, hsl(0 85% 54% / 0.4))" }}
+                    initial={{ scaleX: 0, originX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.5, delay: 0.1, ease: easeExpo }}
+                  />
+                </div>
+
+                {/* ── Headline — large, bold ── */}
+                <h1
+                  className="font-display font-bold text-white px-2 mx-auto"
                   style={{
-                    boxShadow: "0 4px 24px hsl(0 85% 45% / 0.3)",
+                    fontSize: "clamp(2.35rem, 5.5vw, 4.75rem)",
+                    lineHeight: 1.07,
+                    letterSpacing: "-0.04em",
+                    marginBottom: "1.1rem",
+                    maxWidth: "52rem",
                   }}
                 >
-                  <span className="relative">
-                    <span className="relative z-10">Check If You Qualify — 60 Seconds</span>
-                    <motion.span
-                      className="absolute inset-0 rounded-lg bg-white/20 blur-md"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                    />
+                  <span className="block">{heroSlides[currentSlide].headline[0]}</span>
+                  <span
+                    className="block"
+                    style={{
+                      background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 40%, hsl(0 90% 44%) 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    {heroSlides[currentSlide].headline[1]}
                   </span>
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <a
-                  href="tel:7133879937"
-                  className="btn-outline-light inline-flex items-center gap-2 text-base px-10 py-4"
-                >
-                  <Phone className="w-5 h-5" /> (713) 387-9937
-                </a>
-              </motion.div>
-            </motion.div>
+                </h1>
 
-            {/* Quick scroll indicator */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2"
-            >
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5"
-              >
-                <motion.div
-                  className="w-1 h-2 rounded-full"
-                  style={{ background: "hsl(0 85% 60%)" }}
-                />
+                {/* ── Accent rule under headline ── */}
+                <div className="flex items-center justify-center gap-2 mb-5">
+                  <div className="h-px w-12" style={{ background: "linear-gradient(to right, transparent, hsl(0 85% 50% / 0.5))" }} />
+                  <div className="h-[2px] w-8 rounded-full" style={{ background: "hsl(0 85% 52%)" }} />
+                  <div className="h-px w-12" style={{ background: "linear-gradient(to left, transparent, hsl(0 85% 50% / 0.5))" }} />
+                </div>
+
+                {/* ── Subtitle ── */}
+                <p
+                  className="mx-auto mb-5 text-white px-2 leading-relaxed"
+                  style={{ fontSize: "clamp(0.94rem, 1.55vw, 1.08rem)", opacity: 0.76, maxWidth: "38rem" }}
+                >
+                  {heroSlides[currentSlide].sub}
+                </p>
+
+                {/* ── CTAs ── */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+                  <motion.div whileHover={{ scale: 1.025, y: -2 }} whileTap={{ scale: 0.975 }}>
+                    <Link
+                      to={heroSlides[currentSlide].cta.href}
+                      className="btn-primary-gradient inline-flex items-center gap-2.5 font-semibold px-7 py-3.5"
+                      style={{ fontSize: "0.9rem", boxShadow: "0 6px 28px hsl(0 85% 45% / 0.38), 0 2px 8px rgba(0,0,0,0.3)" }}
+                    >
+                      {heroSlides[currentSlide].cta.label}
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <a
+                      href="tel:7133879937"
+                      className="btn-outline-light inline-flex items-center gap-2.5 font-semibold px-7 py-3.5"
+                      style={{ fontSize: "0.9rem" }}
+                    >
+                      <Phone className="w-4 h-4" /> (713) 387-9937
+                    </a>
+                  </motion.div>
+                </div>
+
+                {/* ── Trust authority strip ── */}
+                <div className="flex items-center justify-center flex-wrap gap-x-5 gap-y-1">
+                  {[
+                    { icon: Star,         label: "Top Rated" },
+                    { icon: Shield,       label: "LIC# B03066901" },
+                    { icon: CheckCircle2, label: "No Contracts" },
+                    { icon: MapPin,       label: "Houston-Based" },
+                  ].map(({ icon: Icon, label }, idx, arr) => (
+                    <span key={label} className="flex items-center gap-4">
+                      <span className="flex items-center gap-1.5" style={{ color: "rgba(255,255,255,0.32)" }}>
+                        <Icon className="w-3 h-3" style={{ color: "hsl(0 85% 52% / 0.65)" }} />
+                        <span className="text-[10px] font-semibold tracking-[0.1em] uppercase">{label}</span>
+                      </span>
+                      {idx < arr.length - 1 && (
+                        <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.12)" }}>·</span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+
               </motion.div>
-            </motion.div>
+            </AnimatePresence>
+
+            {/* ── Slide navigation dots ── */}
+            <div className="flex items-center justify-center gap-2.5 mt-7">
+              {heroSlides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className="relative overflow-hidden rounded-full transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                  style={{
+                    width: i === currentSlide ? "2.25rem" : "0.4rem",
+                    height: "0.4rem",
+                    background: i === currentSlide ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.22)",
+                  }}
+                >
+                  {i === currentSlide && !isHeroPaused && (
+                    <motion.span
+                      className="absolute inset-y-0 left-0 rounded-full"
+                      style={{ background: "hsl(0 85% 54%)" }}
+                      initial={{ width: "0%" }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: 8, ease: "linear" }}
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+
           </div>
         </div>
+
+        {/* ── Prev / Next arrows ── */}
+        {[
+          { dir: "prev", icon: ChevronLeft,  pos: "left-4 sm:left-6",  fn: () => setCurrentSlide(p => (p - 1 + heroSlides.length) % heroSlides.length) },
+          { dir: "next", icon: ChevronRight, pos: "right-4 sm:right-6", fn: () => setCurrentSlide(p => (p + 1) % heroSlides.length) },
+        ].map(({ dir, icon: Icon, pos, fn }) => (
+          <button
+            key={dir}
+            onClick={fn}
+            aria-label={dir === "prev" ? "Previous slide" : "Next slide"}
+            className={`absolute ${pos} top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40`}
+            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(8px)" }}
+            onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.13)")}
+            onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}
+          >
+            <Icon className="w-4 h-4 text-white/60" />
+          </button>
+        ))}
 
       </section>
 
@@ -444,7 +487,7 @@ const Index = () => {
             { label: "Alarm.com",                              highlight: false },
             { label: "24/7 Local Monitoring Center",           highlight: false },
             { label: "Honeywell / Resideo",                    highlight: false },
-            { label: "30+ Years in Houston",                   highlight: false },
+            { label: "Locally Owned & Operated",                 highlight: false },
           ];
           const row = [...items, ...items];
           return (
@@ -648,7 +691,7 @@ const Index = () => {
             style={{ minHeight: "420px" }}
           >
             <img
-              src="/keypads-collage.png"
+              src="/keypads-collage.jpg"
               alt="Various Honeywell alarm keypads compatible with Texas Total Security systems — Houston TX"
               className="w-full max-w-[520px] h-auto object-contain mx-auto"
               loading="lazy"

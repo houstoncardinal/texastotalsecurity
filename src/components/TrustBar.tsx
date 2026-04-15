@@ -1,5 +1,5 @@
 const items = [
-  "30+ Years Experience",
+  "Locally Owned & Operated",
   "Houston Local",
   "Licensed & Insured — LIC# B03066901",
   "Residential & Commercial",

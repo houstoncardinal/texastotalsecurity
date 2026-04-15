@@ -31,7 +31,7 @@ const Blog = () => {
             Security Resources & Guides
           </h1>
           <p className="text-lg opacity-70">
-            Expert advice on alarm systems, security cameras, crime prevention, and protecting your Houston property — from the team with 30+ years of experience.
+            Expert advice on alarm systems, security cameras, crime prevention, and protecting your Houston property — from Houston's locally owned security experts.
           </p>
         </div>
       </section>

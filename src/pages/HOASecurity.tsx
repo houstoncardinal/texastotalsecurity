@@ -53,7 +53,7 @@ const HOASecurity = () => (
   <Layout>
     <SEOHead
       title="HOA Security Camera Systems Houston TX | Gate Cameras & Community Surveillance | Texas Total Security"
-      description="Expert HOA security camera systems in Houston, TX. HOA gate cameras, community surveillance, HOA pool cameras, license plate recognition & neighborhood security camera systems. Trusted by Houston HOAs since 1994. Call (713) 387-9937."
+      description="Expert HOA security camera systems in Houston, TX. HOA gate cameras, community surveillance, HOA pool cameras, license plate recognition & neighborhood security camera systems. Locally owned & trusted. Call (713) 387-9937."
       schemas={hoaSchemas}
     />
     <PageHero

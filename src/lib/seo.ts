@@ -27,8 +27,8 @@ const COMPANY = {
   license: "B03066901",
   url: BASE_URL,
   logo: `${BASE_URL}/logo.png`,
-  foundingYear: 1994,
-  description: "Houston's trusted security experts for 30+ years. Custom alarm systems, security cameras, 24/7 local monitoring for homes, businesses, and HOAs.",
+
+  description: "Houston's trusted locally owned security experts. Custom alarm systems, security cameras, 24/7 local monitoring for homes, businesses, and HOAs.",
   address: {
     street: "11331 Richmond Ave. #102",
     city: "Houston",
@@ -101,7 +101,6 @@ export function generateOrganizationSchema() {
       "latitude": COMPANY.geo.lat,
       "longitude": COMPANY.geo.lng
     },
-    "foundingDate": String(COMPANY.foundingYear),
     "foundingLocation": {
       "@type": "Place",
       "address": {
@@ -299,7 +298,7 @@ export function generateLocalBusinessSchema(city?: string) {
     ],
     "image": [`${BASE_URL}/logo.png`, `${BASE_URL}/hero-image.jpg`],
     "description": city
-      ? `${COMPANY.name} provides professional alarm systems, security cameras, and 24/7 local monitoring in ${city}, TX and surrounding areas. Serving homeowners and businesses since ${COMPANY.foundingYear}.`
+      ? `${COMPANY.name} provides professional alarm systems, security cameras, and 24/7 local monitoring in ${city}, TX and surrounding areas. Locally owned and operated.`
       : COMPANY.description,
     "telephone": COMPANY.phoneTel,
     "email": COMPANY.email,
@@ -387,7 +386,6 @@ export function generateLocalBusinessSchema(city?: string) {
       "name": "Texas State Security License",
       "identifier": COMPANY.license
     },
-    "foundingDate": String(COMPANY.foundingYear),
     "numberOfEmployees": {
       "@type": "QuantitativeValue",
       "value": "15-50"
@@ -588,11 +586,10 @@ export function generateAboutPageSchema() {
     "@type": "AboutPage",
     "name": `About ${COMPANY.name}`,
     "url": `${BASE_URL}/about`,
-    "description": `Learn about ${COMPANY.name} - Houston's trusted security experts since ${COMPANY.foundingYear}. Family-owned, locally operated, with in-house monitoring.`,
+    "description": `Learn about ${COMPANY.name} - Houston's locally owned and operated security experts. Family-owned, locally operated, with in-house monitoring.`,
     "mainEntity": {
       "@type": ["Organization", "LocalBusiness"],
       "name": COMPANY.name,
-      "foundingDate": String(COMPANY.foundingYear),
       "foundingLocation": {
         "@type": "City",
         "name": "Houston",

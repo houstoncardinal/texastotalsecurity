@@ -108,7 +108,7 @@ const Header = () => {
             className="text-[11px] font-medium tracking-wide"
             style={{ color: "rgba(255,255,255,0.32)" }}
           >
-            Houston's Trusted Security Company — Serving Property Managers, HOAs & Businesses Since 1994
+            Houston's Trusted Security Company — Serving Property Managers, HOAs & Businesses
           </span>
           <div className="flex items-center gap-7">
             <span
@@ -310,7 +310,7 @@ const Header = () => {
 
                       <div className="mt-5 pt-5 border-t border-gray-100 space-y-2.5">
                         {[
-                          "Serving Houston Since 1994",
+                          "Locally Owned & Operated",
                           "Licensed & Insured · #B03066901",
                           "Locally Owned & Operated",
                           "5.0 ★ Google Rating",

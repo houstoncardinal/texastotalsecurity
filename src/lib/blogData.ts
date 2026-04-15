@@ -88,12 +88,12 @@ Call **(713) 387-9937** or [schedule your free analysis](/free-analysis) today.`
     slug: "top-security-camera-setups-businesses",
     title: "Top 7 Security Camera Setups for Houston Businesses",
     metaTitle: "7 Best Security Camera Setups for Businesses | Texas Total Security",
-    metaDescription: "Professional security camera configurations for retail, office, industrial, and commercial properties in Houston. Expert recommendations from 30+ years of experience.",
+    metaDescription: "Professional security camera configurations for retail, office, industrial, and commercial properties in Houston. Expert recommendations from Houston's locally owned security team.",
     category: "business-security",
     datePublished: "2025-10-28",
     readTime: "10 min",
     excerpt: "Not all business security camera systems are created equal. Here are the top 7 camera configurations we recommend for Houston businesses — from small retail shops to large industrial facilities.",
-    content: `Choosing the right security camera configuration for your business depends on your industry, facility layout, risk factors, and operational needs. After 30+ years of installing commercial surveillance systems across Houston, here are the seven most effective setups we recommend.
+    content: `Choosing the right security camera configuration for your business depends on your industry, facility layout, risk factors, and operational needs. After installing commercial surveillance systems across Houston, here are the seven most effective setups we recommend.
 
 ## 1. Retail Loss Prevention System
 
@@ -400,16 +400,16 @@ export function getArticlesByCategory(categorySlug: string): BlogArticle[] {
 export const additionalArticles: BlogArticle[] = [
   {
     slug: "30-years-houston-security-experience",
-    title: "30 Years Protecting Houston: What We've Learned About Security",
-    metaTitle: "30 Years Houston Security Experience | Texas Total Security",
-    metaDescription: "Three decades of security installations in Houston have taught us what really works. Expert insights from Texas Total Security's founder and team.",
+    title: "Protecting Houston: What We've Learned About Security",
+    metaTitle: "Houston Security Experience | Texas Total Security",
+    metaDescription: "Extensive security installations across Houston have taught us what really works. Expert insights from Texas Total Security's founder and team.",
     category: "case-studies",
     datePublished: "2025-12-01",
     readTime: "12 min",
-    excerpt: "Since 1994, we've protected over 10,000 Houston homes and businesses. Here's what three decades of local security experience has taught us about protecting Texas properties.",
-    content: `As Houston's longest-running locally-owned security company, we've learned a few things about what actually works when it comes to protecting homes and businesses in our region. Here's our experience-based wisdom.
+    excerpt: "We've protected thousands of Houston homes and businesses. Here's what our local security experience has taught us about protecting Texas properties.",
+    content: `As Houston's locally-owned security company, we've learned a few things about what actually works when it comes to protecting homes and businesses in our region. Here's our experience-based wisdom.
 
-## What 30 Years Has Taught Us
+## What Experience Has Taught Us
 
 ### The Houston Factor
 Houston presents unique security challenges that out-of-town companies simply don't understand. Our humid climate affects equipment. Our expanding suburbs mean new construction considerations. Our diverse neighborhoods each have distinct risk profiles.
@@ -440,11 +440,11 @@ We've responded to too many incidents where a burglar entered through an unmonit
 
 ## Our Commitment
 
-Our 30-year track record is built on every installation we complete. We don't sell contracts to national companies. We don't outsource monitoring. We're here, in Houston, protecting our neighbors.
+Our track record is built on every installation we complete. We don't sell contracts to national companies. We don't outsource monitoring. We're here, in Houston, protecting our neighbors.
 
 Call **(713) 387-9937** to discuss your security needs with our experienced team.`,
     relatedServices: ["/residential", "/commercial", "/monitoring-services"],
-    tags: ["houston security", "experience", "local company", "30 years"],
+    tags: ["houston security", "experience", "local company", "locally owned"],
   },
   {
     slug: "texas-license-requirements-security-companies",
@@ -496,7 +496,7 @@ Texas Total Security is fully licensed and insured:
 - DPS License #B03066901
 - General liability insurance
 - Workers' compensation coverage
-- 30+ years of continuous Texas operation
+- Locally owned and continuously operated in Texas
 
 We're proud to display our credentials and encourage any customer to verify them. Contact **(713) 387-9937** to discuss our qualifications.`,
     relatedServices: ["/alarm-systems", "/security-cameras"],
@@ -555,7 +555,7 @@ When speaking with existing customers, ask:
 
 ## Our Commitment
 
-Texas Total Security has served Houston for over 30 years because we deliver on our promises:
+Texas Total Security has served Houston because we deliver on our promises:
 
 - Local Houston monitoring with sub-30-second response
 - No long-term contracts — month-to-month monitoring available

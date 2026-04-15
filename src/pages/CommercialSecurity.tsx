@@ -67,7 +67,7 @@ const industries = [
 ];
 
 const whyUs = [
-  { icon: Building2, title: "30+ Years in Houston", desc: "Decades of commercial security experience across virtually every industry type in the greater Houston area." },
+  { icon: Building2, title: "Houston's Local Experts", desc: "Deep commercial security experience across virtually every industry type in the greater Houston area — locally owned and operated." },
   { icon: Shield, title: "We Own Your Contract", desc: "We never sell your monitoring contract to a national company. Your account stays with our local team — always." },
   { icon: Eye, title: "Local Monitoring Center", desc: "Our Houston-based dispatch center operates 24/7 — faster response, direct contact with local authorities." },
   { icon: CheckCircle2, title: "Custom-Engineered Systems", desc: "Every commercial system is designed specifically for your facility layout, risk profile, and operational needs." },
@@ -115,7 +115,7 @@ const CommercialSecurity = () => (
   <Layout>
     <SEOHead
       title="Commercial Security Systems Houston TX | Apartment Complex Cameras & Business Alarm | Texas Total Security"
-      description="Commercial security systems for Houston businesses. Apartment complex security camera systems, HOA security, neighborhood security cameras, office alarm systems & 24/7 local monitoring. Expert installation since 1994. Free analysis: (713) 387-9937."
+      description="Commercial security systems for Houston businesses. Apartment complex security camera systems, HOA security, neighborhood security cameras, office alarm systems & 24/7 local monitoring. Locally owned & operated. Free analysis: (713) 387-9937."
       schemas={commercialSchemas}
     />
 
@@ -179,7 +179,7 @@ const CommercialSecurity = () => (
                 Commercial security is fundamentally different from residential protection. Your business operates on a schedule, involves employees and customers, holds valuable assets, and faces threats that demand professional-grade solutions.
               </p>
               <p>
-                Texas Total Security has spent over 30 years designing and installing security systems for Houston's commercial properties — from neighborhood small businesses to large industrial facilities and government buildings. We understand what your operation requires: reliable coverage, scalable infrastructure, and a monitoring partner you can trust.
+                Texas Total Security designs and installs security systems for Houston's commercial properties — from neighborhood small businesses to large industrial facilities and government buildings. We understand what your operation requires: reliable coverage, scalable infrastructure, and a monitoring partner you can trust.
               </p>
               <p>
                 We handle everything — system design, professional installation, and ongoing local monitoring — under one roof, by one team that never sells your contract away.

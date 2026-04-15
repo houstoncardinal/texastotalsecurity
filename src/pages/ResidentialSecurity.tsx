@@ -106,7 +106,7 @@ const ResidentialSecurity = () => (
   <Layout>
     <SEOHead
       title="Local Home Security Systems Houston TX | Best Local Alarm Company Near Me | Texas Total Security"
-      description="Best local home security company near you in Houston, TX. Local home security systems, residential alarm installation, home cameras & 24/7 local monitoring. Local alarm companies near you since 1994. Free analysis: (713) 387-9937."
+      description="Best local home security company near you in Houston, TX. Local home security systems, residential alarm installation, home cameras & 24/7 local monitoring. Locally owned & operated. Free analysis: (713) 387-9937."
       schemas={residentialSchemas}
     />
 
