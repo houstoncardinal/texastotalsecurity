@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   LayoutDashboard, Users, FileText, BarChart3, Settings, Bell,
@@ -8,13 +8,20 @@ import {
   ArrowUpRight, ArrowDownRight, MessageSquare, Target, Zap,
   Plus, Filter, Download, MoreHorizontal, Check, XCircle,
   ChevronLeft, ChevronRight, Pencil, Trash2, Send, Globe,
+  UserCheck, Briefcase, Timer, AtSign, Lock, ToggleLeft, ToggleRight,
+  CheckCircle2, AlertCircle, RefreshCw, Layers, Tag, Inbox,
+  ClipboardList, UserPlus, CreditCard, PieChart as PieChartIcon,
+  Megaphone, BarChart2, ChevronUp, Box,
 } from "lucide-react";
+import { loadPoleQuotes, PoleQuote } from "./PoleConfigurator";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, PieChart, Pie, Cell, AreaChart, Area,
 } from "recharts";
+import { useChatContext } from "../context/ChatContext";
 
-// Mock data
+// ─── Mock Data ────────────────────────────────────────────────────────────────
+
 const revenueData = [
   { month: "Jan", revenue: 42000, leads: 85 },
   { month: "Feb", revenue: 48000, leads: 92 },
@@ -48,512 +55,265 @@ const trafficData = [
   { day: "Sun", visitors: 210, pageViews: 630 },
 ];
 
-const allLeads = [
-  { id: 1, name: "Robert Chen", email: "rchen@gmail.com", type: "Residential", service: "Alarm System", city: "Sugar Land", status: "New", time: "12 min ago", phone: "(832) 555-0142", value: "$3,200" },
-  { id: 2, name: "Martinez Properties", email: "martinez@corp.com", type: "Commercial", service: "Camera System", city: "Houston", status: "Contacted", time: "45 min ago", phone: "(713) 555-0198", value: "$12,500" },
-  { id: 3, name: "Cypress HOA Board", email: "board@cypresshoa.org", type: "HOA", service: "Gate Cameras", city: "Cypress", status: "Scheduled", time: "2 hours ago", phone: "(281) 555-0167", value: "$28,000" },
-  { id: 4, name: "Sarah Williams", email: "swilliams@email.com", type: "Residential", service: "Monitoring", city: "Katy", status: "New", time: "3 hours ago", phone: "(832) 555-0234", value: "$1,200" },
-  { id: 5, name: "Pacific Retail Group", email: "ops@pacificretail.com", type: "Commercial", service: "Full System", city: "Pearland", status: "Proposal Sent", time: "5 hours ago", phone: "(713) 555-0312", value: "$45,000" },
-  { id: 6, name: "Tom Jackson", email: "tom.j@email.com", type: "Residential", service: "Camera Install", city: "The Woodlands", status: "New", time: "6 hours ago", phone: "(281) 555-0456", value: "$4,800" },
-  { id: 7, name: "Katy ISD Admin", email: "facilities@katyisd.edu", type: "Commercial", service: "Full System", city: "Katy", status: "Contacted", time: "1 day ago", phone: "(281) 555-0789", value: "$85,000" },
-  { id: 8, name: "James & Linda Park", email: "parks@email.com", type: "Residential", service: "Alarm + Cameras", city: "Bellaire", status: "Won", time: "2 days ago", phone: "(713) 555-0543", value: "$6,400" },
+const mockLeads = [
+  { id: 1, name: "Marcus Johnson", phone: "(713) 555-0192", email: "marcus@email.com", service: "Alarm System", status: "hot", value: "$3,200", source: "Google", date: "Apr 14" },
+  { id: 2, name: "Sarah Williams", phone: "(832) 555-0344", email: "sarah@email.com", service: "Camera System", status: "warm", value: "$5,800", source: "Referral", date: "Apr 13" },
+  { id: 3, name: "David Chen", phone: "(281) 555-0571", email: "david@email.com", service: "Commercial Bundle", status: "new", value: "$18,400", source: "Website", date: "Apr 13" },
+  { id: 4, name: "Amanda Torres", phone: "(713) 555-0823", email: "amanda@email.com", service: "Monitoring", status: "warm", value: "$1,200/yr", source: "Facebook", date: "Apr 12" },
+  { id: 5, name: "Robert Kim", phone: "(832) 555-0116", email: "robert@email.com", service: "HOA Package", status: "hot", value: "$42,000", source: "Google", date: "Apr 12" },
+  { id: 6, name: "Linda Nguyen", phone: "(281) 555-0987", email: "linda@email.com", service: "Residential", status: "cold", value: "$2,600", source: "Yelp", date: "Apr 11" },
 ];
 
-const proposals = [
-  { id: 1, client: "Cypress HOA Board", type: "HOA", value: "$28,000", status: "Sent", date: "Mar 22, 2026", expires: "Apr 5, 2026" },
-  { id: 2, client: "Pacific Retail Group", type: "Commercial", value: "$45,000", status: "Viewed", date: "Mar 20, 2026", expires: "Apr 3, 2026" },
-  { id: 3, client: "Katy ISD Admin", type: "Commercial", value: "$85,000", status: "Draft", date: "Mar 23, 2026", expires: "—" },
-  { id: 4, client: "James & Linda Park", type: "Residential", value: "$6,400", status: "Accepted", date: "Mar 15, 2026", expires: "—" },
-  { id: 5, client: "Riverside Apartments", type: "Commercial", value: "$22,000", status: "Sent", date: "Mar 18, 2026", expires: "Apr 1, 2026" },
+const mockClients = [
+  { id: 1, name: "Riverside HOA", type: "HOA", contact: "Tom Garza", phone: "(713) 555-0101", plan: "Enterprise", mrr: "$3,400", since: "2022", status: "active", cameras: 24, alarms: 8 },
+  { id: 2, name: "Greenway Medical", type: "Commercial", contact: "Dr. Lisa Park", phone: "(832) 555-0202", plan: "Pro", mrr: "$1,800", since: "2023", status: "active", cameras: 12, alarms: 4 },
+  { id: 3, name: "The Martinez Family", type: "Residential", contact: "Carlos Martinez", phone: "(281) 555-0303", plan: "Standard", mrr: "$89", since: "2021", status: "active", cameras: 4, alarms: 1 },
+  { id: 4, name: "Oakwood Church", type: "Commercial", contact: "Pastor Reed", phone: "(713) 555-0404", plan: "Pro", mrr: "$620", since: "2023", status: "active", cameras: 8, alarms: 2 },
+  { id: 5, name: "Westfield Retail", type: "Commercial", contact: "Amy Chu", phone: "(832) 555-0505", plan: "Enterprise", mrr: "$2,100", since: "2022", status: "pending", cameras: 18, alarms: 6 },
 ];
 
-const scheduleEvents = [
-  { id: 1, title: "Install — Robert Chen", type: "Installation", time: "8:00 AM - 12:00 PM", date: "Today", city: "Sugar Land", tech: "Mike R." },
-  { id: 2, title: "Survey — Cypress HOA", type: "Survey", time: "1:00 PM - 2:30 PM", date: "Today", city: "Cypress", tech: "Tim S." },
-  { id: 3, title: "Service Call — Bellaire Residence", type: "Service", time: "3:00 PM - 4:00 PM", date: "Today", city: "Bellaire", tech: "Carlos V." },
-  { id: 4, title: "Install — Martinez Properties", type: "Installation", time: "8:00 AM - 4:00 PM", date: "Tomorrow", city: "Houston", tech: "Mike R. + Carlos V." },
-  { id: 5, title: "Survey — Pacific Retail Group", type: "Survey", time: "10:00 AM - 11:30 AM", date: "Tomorrow", city: "Pearland", tech: "Tim S." },
-  { id: 6, title: "Follow-up — Tom Jackson", type: "Follow-up", time: "2:00 PM - 2:30 PM", date: "Mar 26", city: "The Woodlands", tech: "Tim S." },
+const mockEmployees = [
+  { id: 1, name: "Jake Morales", role: "Lead Technician", phone: "(713) 555-1001", email: "jake@tts.com", status: "active", dept: "Field Ops", hire: "Jan 2021", jobs: 312, rating: 4.9 },
+  { id: 2, name: "Chris Owens", role: "Technician", phone: "(832) 555-1002", email: "chris@tts.com", status: "active", dept: "Field Ops", hire: "Mar 2022", jobs: 187, rating: 4.7 },
+  { id: 3, name: "Maria Santos", role: "Sales Rep", phone: "(281) 555-1003", email: "maria@tts.com", status: "active", dept: "Sales", hire: "Jun 2022", jobs: 94, rating: 4.8 },
+  { id: 4, name: "Devon Price", role: "Dispatcher", phone: "(713) 555-1004", email: "devon@tts.com", status: "active", dept: "Operations", hire: "Sep 2021", jobs: 0, rating: 4.6 },
+  { id: 5, name: "Tanya Brooks", role: "Technician", phone: "(832) 555-1005", email: "tanya@tts.com", status: "off", dept: "Field Ops", hire: "Nov 2023", jobs: 98, rating: 4.5 },
 ];
 
-const recentReviews = [
-  { name: "Michael T.", rating: 5, text: "Best security company in Houston. Professional installation and monitoring.", date: "2 days ago" },
-  { name: "Lisa R.", rating: 5, text: "Switched from ADT and couldn't be happier with the local service.", date: "4 days ago" },
-  { name: "David K.", rating: 4, text: "Great camera system for our warehouse. Very responsive team.", date: "1 week ago" },
+const mockSchedule = [
+  { id: 1, time: "8:00 AM", client: "Marcus Johnson", address: "4521 Westheimer Rd, Houston", tech: "Jake Morales", type: "Installation", status: "confirmed" },
+  { id: 2, time: "10:30 AM", client: "Greenway Medical", address: "9800 Bellaire Blvd, Houston", tech: "Chris Owens", type: "Maintenance", status: "en-route" },
+  { id: 3, time: "1:00 PM", client: "Riverside HOA", address: "2200 Memorial Dr, Houston", tech: "Jake Morales", type: "Inspection", status: "confirmed" },
+  { id: 4, time: "3:30 PM", client: "Linda Nguyen", address: "7712 Fondren Rd, Houston", tech: "Tanya Brooks", type: "Installation", status: "pending" },
+  { id: 5, time: "5:00 PM", client: "Westfield Retail", address: "12520 Memorial Dr, Houston", tech: "Chris Owens", type: "Camera Upgrade", status: "confirmed" },
 ];
 
-const topPages = [
-  { page: "/", views: 4520, conversion: 3.2 },
-  { page: "/security-cameras", views: 2180, conversion: 4.1 },
-  { page: "/alarm-systems", views: 1950, conversion: 3.8 },
-  { page: "/free-analysis", views: 1420, conversion: 8.5 },
-  { page: "/commercial", views: 1100, conversion: 5.2 },
+const mockCampaigns = [
+  { id: 1, name: "Spring Security Promo", status: "active", sent: 4820, opened: 1832, clicked: 412, segment: "All Leads", date: "Apr 10" },
+  { id: 2, name: "HOA Outreach Q2", status: "active", sent: 320, opened: 156, clicked: 48, segment: "HOA Contacts", date: "Apr 8" },
+  { id: 3, name: "Client Check-In Newsletter", status: "sent", sent: 1240, opened: 891, clicked: 203, segment: "Active Clients", date: "Apr 1" },
+  { id: 4, name: "Referral Program Invite", status: "draft", sent: 0, opened: 0, clicked: 0, segment: "Past Clients", date: "—" },
+  { id: 5, name: "Camera Bundle Flash Sale", status: "scheduled", sent: 0, opened: 0, clicked: 0, segment: "Residential Leads", date: "Apr 20" },
 ];
 
-type NavItem = {
-  icon: typeof LayoutDashboard;
-  label: string;
-  id: string;
-  badge?: number;
-};
-
-const navItems: NavItem[] = [
-  { icon: LayoutDashboard, label: "Dashboard", id: "dashboard" },
-  { icon: Users, label: "Leads", id: "leads", badge: 12 },
-  { icon: FileText, label: "Proposals", id: "proposals", badge: 3 },
-  { icon: Calendar, label: "Schedule", id: "schedule" },
-  { icon: BarChart3, label: "Analytics", id: "analytics" },
-  { icon: Star, label: "Reviews", id: "reviews" },
-  { icon: MessageSquare, label: "Messages", id: "messages", badge: 5 },
-  { icon: MapPin, label: "Service Areas", id: "areas" },
-  { icon: Globe, label: "Go to Website", id: "website" },
-  { icon: Settings, label: "Settings", id: "settings" },
+const mockUsers = [
+  { id: 1, name: "Admin User", email: "admin@tts.com", role: "Owner", lastLogin: "Today", status: "active" },
+  { id: 2, name: "Maria Santos", email: "maria@tts.com", role: "Sales", lastLogin: "Today", status: "active" },
+  { id: 3, name: "Devon Price", email: "devon@tts.com", role: "Dispatcher", lastLogin: "Yesterday", status: "active" },
+  { id: 4, name: "Jake Morales", email: "jake@tts.com", role: "Technician", lastLogin: "Today", status: "active" },
+  { id: 5, name: "Chris Owens", email: "chris@tts.com", role: "Technician", lastLogin: "3 days ago", status: "active" },
 ];
 
-const statusColors: Record<string, string> = {
-  "New": "bg-accent/10 text-accent",
-  "Contacted": "bg-blue-500/10 text-blue-600",
-  "Scheduled": "bg-emerald-500/10 text-emerald-600",
-  "Proposal Sent": "bg-amber-500/10 text-amber-600",
-  "Won": "bg-emerald-500/10 text-emerald-600",
-  "Lost": "bg-red-500/10 text-red-500",
-  "Sent": "bg-blue-500/10 text-blue-600",
-  "Viewed": "bg-amber-500/10 text-amber-600",
-  "Draft": "bg-secondary text-muted-foreground",
-  "Accepted": "bg-emerald-500/10 text-emerald-600",
-  "Installation": "bg-accent/10 text-accent",
-  "Survey": "bg-blue-500/10 text-blue-600",
-  "Service": "bg-amber-500/10 text-amber-600",
-  "Follow-up": "bg-purple-500/10 text-purple-600",
-};
+// ─── Status Badge ─────────────────────────────────────────────────────────────
 
-const AdminDashboard = () => {
-  const [activeNav, setActiveNav] = useState("dashboard");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [leadFilter, setLeadFilter] = useState("All");
-
-  const handleNavClick = (id: string) => {
-    if (id === "website") {
-      window.open("/", "_blank");
-      return;
-    }
-    setActiveNav(id);
+function Badge({ status }: { status: string }) {
+  const map: Record<string, string> = {
+    hot: "bg-red-500/20 text-red-400 border border-red-500/30",
+    warm: "bg-orange-500/20 text-orange-400 border border-orange-500/30",
+    new: "bg-blue-500/20 text-blue-400 border border-blue-500/30",
+    cold: "bg-gray-500/20 text-gray-400 border border-gray-500/30",
+    active: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30",
+    pending: "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30",
+    off: "bg-gray-500/20 text-gray-400 border border-gray-500/30",
+    confirmed: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30",
+    "en-route": "bg-blue-500/20 text-blue-400 border border-blue-500/30",
+    sent: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30",
+    draft: "bg-gray-500/20 text-gray-400 border border-gray-500/30",
+    scheduled: "bg-blue-500/20 text-blue-400 border border-blue-500/30",
   };
-
-  const filteredLeads = leadFilter === "All" ? allLeads : allLeads.filter(l => l.status === leadFilter);
-
-  const renderContent = () => {
-    switch (activeNav) {
-      case "leads":
-        return <LeadsPage leads={filteredLeads} filter={leadFilter} setFilter={setLeadFilter} />;
-      case "proposals":
-        return <ProposalsPage />;
-      case "schedule":
-        return <SchedulePage />;
-      case "analytics":
-        return <AnalyticsPage />;
-      case "reviews":
-        return <ReviewsPage />;
-      default:
-        return <DashboardPage />;
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-background flex">
-      {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 z-50 flex flex-col bg-primary text-primary-foreground transition-all duration-300 ${sidebarOpen ? "w-64" : "w-[72px]"}`}>
-        <div className="flex items-center gap-3 px-4 py-5 border-b border-primary-foreground/10">
-          <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shrink-0">
-            <Shield className="w-6 h-6 text-accent-foreground" />
-          </div>
-          {sidebarOpen && (
-            <div className="leading-tight overflow-hidden">
-              <span className="font-display font-bold text-sm block">Texas Total</span>
-              <span className="text-[10px] tracking-wider uppercase opacity-60">Security Admin</span>
-            </div>
-          )}
+    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium capitalize ${map[status] || map.cold}`}>
+      {status}
+    </span>
+  );
+}
+
+// ─── Stat Card ────────────────────────────────────────────────────────────────
+
+function StatCard({ label, value, sub, icon: Icon, trend, trendDir }: {
+  label: string; value: string; sub?: string; icon: React.ElementType; trend?: string; trendDir?: "up" | "down";
+}) {
+  return (
+    <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5 flex flex-col gap-4">
+      <div className="flex items-start justify-between">
+        <span style={{ color: "hsl(0 0% 55%)" }} className="text-sm">{label}</span>
+        <div style={{ background: "hsl(0 0% 12%)" }} className="w-9 h-9 rounded-lg flex items-center justify-center">
+          <Icon size={18} style={{ color: "hsl(0 75% 50%)" }} />
         </div>
-
-        <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                activeNav === item.id
-                  ? "bg-accent text-accent-foreground"
-                  : "text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground"
-              }`}
-            >
-              <item.icon className="w-5 h-5 shrink-0" />
-              {sidebarOpen && (
-                <>
-                  <span className="flex-1 text-left">{item.label}</span>
-                  {item.badge && (
-                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${activeNav === item.id ? "bg-accent-foreground/20" : "bg-accent text-accent-foreground"}`}>
-                      {item.badge}
-                    </span>
-                  )}
-                </>
-              )}
-            </button>
-          ))}
-        </nav>
-
-        <div className="px-3 py-4 border-t border-primary-foreground/10">
-          <Link to="/" className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-primary-foreground/60 hover:text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
-            <LogOut className="w-5 h-5 shrink-0" />
-            {sidebarOpen && <span>Back to Site</span>}
-          </Link>
+      </div>
+      <div>
+        <div className="text-2xl font-bold text-white">{value}</div>
+        {sub && <div style={{ color: "hsl(0 0% 50%)" }} className="text-xs mt-1">{sub}</div>}
+      </div>
+      {trend && (
+        <div className="flex items-center gap-1.5">
+          {trendDir === "up"
+            ? <ArrowUpRight size={14} className="text-emerald-400" />
+            : <ArrowDownRight size={14} className="text-red-400" />}
+          <span className={`text-xs ${trendDir === "up" ? "text-emerald-400" : "text-red-400"}`}>{trend}</span>
         </div>
-      </aside>
-
-      {/* Main Content */}
-      <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-[72px]"}`}>
-        <header className="sticky top-0 z-40 bg-card/95 backdrop-blur-md border-b border-border px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 rounded-lg hover:bg-secondary transition-colors">
-              {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-            <div className="relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <input type="text" placeholder="Search leads, pages, analytics..." className="w-80 pl-10 pr-4 py-2 rounded-lg bg-secondary border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50" />
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="relative p-2 rounded-lg hover:bg-secondary transition-colors">
-              <Bell className="w-5 h-5" />
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-accent text-accent-foreground text-[9px] font-bold rounded-full flex items-center justify-center">7</span>
-            </button>
-            <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-              <span className="text-xs font-bold text-accent">TT</span>
-            </div>
-          </div>
-        </header>
-
-        <div className="p-6 space-y-6">
-          {renderContent()}
-        </div>
-      </main>
+      )}
     </div>
   );
-};
+}
 
-/* ======================== DASHBOARD PAGE ======================== */
-const DashboardPage = () => (
-  <>
-    <div className="flex items-center justify-between">
+// ─── Pages ────────────────────────────────────────────────────────────────────
+
+function DashboardPage() {
+  return (
+    <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-display font-bold text-foreground">Dashboard</h1>
-        <p className="text-sm text-muted-foreground mt-1">Welcome back. Here's your business overview.</p>
+        <h1 className="text-2xl font-bold text-white">Overview</h1>
+        <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">Texas Total Security — Dashboard · April 2026</p>
       </div>
-      <select className="px-3 py-2 rounded-lg bg-secondary border border-border text-sm">
-        <option>Last 30 days</option>
-        <option>Last 7 days</option>
-        <option>Last 90 days</option>
-        <option>This year</option>
-      </select>
-    </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard label="Monthly Revenue" value="$88,400" sub="+12.4% vs last month" icon={DollarSign} trend="12.4% this month" trendDir="up" />
+        <StatCard label="New Leads" value="176" sub="67 qualified this week" icon={Target} trend="8.2% vs last week" trendDir="up" />
+        <StatCard label="Active Clients" value="412" sub="18 added this month" icon={Users} trend="4.5% growth" trendDir="up" />
+        <StatCard label="Jobs Scheduled" value="34" sub="Today's pipeline" icon={Calendar} trend="2 pending confirm" trendDir="down" />
+      </div>
 
-    {/* KPI Cards */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {[
-        { label: "Total Revenue", value: "$88,000", change: "+12.5%", up: true, icon: DollarSign, sub: "This month" },
-        { label: "New Leads", value: "176", change: "+8.2%", up: true, icon: Target, sub: "This month" },
-        { label: "Active Installs", value: "42", change: "+5", up: true, icon: Zap, sub: "In progress" },
-        { label: "Site Visitors", value: "12,480", change: "-3.1%", up: false, icon: Eye, sub: "This month" },
-      ].map((kpi) => (
-        <div key={kpi.label} className="bg-card border border-border rounded-xl p-5 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-sm text-muted-foreground">{kpi.label}</span>
-            <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center">
-              <kpi.icon className="w-4 h-4 text-accent" />
-            </div>
+      <div className="grid lg:grid-cols-3 gap-6">
+        <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="lg:col-span-2 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-white font-semibold">Revenue &amp; Lead Trend</h2>
+            <span style={{ color: "hsl(0 0% 45%)" }} className="text-xs">Last 12 months</span>
           </div>
-          <div className="flex items-end gap-3">
-            <span className="text-2xl font-display font-bold text-foreground">{kpi.value}</span>
-            <span className={`flex items-center gap-0.5 text-xs font-semibold mb-1 ${kpi.up ? "text-emerald-600" : "text-red-500"}`}>
-              {kpi.up ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-              {kpi.change}
-            </span>
-          </div>
-          <span className="text-[11px] text-muted-foreground">{kpi.sub}</span>
-        </div>
-      ))}
-    </div>
-
-    {/* Charts Row */}
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="lg:col-span-2 bg-card border border-border rounded-xl p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h3 className="font-display font-semibold text-foreground">Revenue & Leads</h3>
-            <p className="text-sm text-muted-foreground">Monthly performance overview</p>
-          </div>
-          <div className="flex items-center gap-4 text-xs">
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-accent" /> Revenue</span>
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-foreground/30" /> Leads</span>
-          </div>
-        </div>
-        <div className="h-72">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={revenueData}>
               <defs>
-                <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="hsl(0 85% 46%)" stopOpacity={0.2} />
-                  <stop offset="100%" stopColor="hsl(0 85% 46%)" stopOpacity={0} />
+                <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="hsl(0 75% 50%)" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="hsl(0 75% 50%)" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 90%)" />
-              <XAxis dataKey="month" tick={{ fill: 'hsl(0 0% 40%)', fontSize: 12 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: 'hsl(0 0% 40%)', fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v / 1000}k`} />
-              <Tooltip contentStyle={{ background: 'hsl(0 0% 100%)', border: '1px solid hsl(0 0% 90%)', borderRadius: '8px', fontSize: '12px' }} />
-              <Area type="monotone" dataKey="revenue" stroke="hsl(0 85% 46%)" strokeWidth={2.5} fill="url(#revenueGrad)" />
-              <Line type="monotone" dataKey="leads" stroke="hsl(0 0% 40%)" strokeWidth={1.5} strokeDasharray="4 4" dot={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 14%)" />
+              <XAxis dataKey="month" tick={{ fill: "hsl(0 0% 45%)", fontSize: 11 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: "hsl(0 0% 45%)", fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
+              <Tooltip contentStyle={{ background: "hsl(0 0% 10%)", border: "1px solid hsl(0 0% 18%)", borderRadius: 8, color: "#fff" }} formatter={(v: number) => [`$${v.toLocaleString()}`, "Revenue"]} />
+              <Area type="monotone" dataKey="revenue" stroke="hsl(0 75% 50%)" strokeWidth={2} fill="url(#revGrad)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
-      </div>
 
-      <div className="bg-card border border-border rounded-xl p-6">
-        <h3 className="font-display font-semibold text-foreground mb-1">Service Breakdown</h3>
-        <p className="text-sm text-muted-foreground mb-6">Revenue by service type</p>
-        <div className="h-52 flex items-center justify-center">
-          <ResponsiveContainer width="100%" height="100%">
+        <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5">
+          <h2 className="text-white font-semibold mb-6">Services Breakdown</h2>
+          <ResponsiveContainer width="100%" height={160}>
             <PieChart>
-              <Pie data={serviceBreakdown} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">
+              <Pie data={serviceBreakdown} cx="50%" cy="50%" innerRadius={48} outerRadius={72} paddingAngle={3} dataKey="value">
                 {serviceBreakdown.map((entry, i) => <Cell key={i} fill={entry.color} />)}
               </Pie>
-              <Tooltip formatter={(value: number) => [`${value}%`, '']} />
+              <Tooltip contentStyle={{ background: "hsl(0 0% 10%)", border: "1px solid hsl(0 0% 18%)", borderRadius: 8, color: "#fff" }} />
             </PieChart>
           </ResponsiveContainer>
-        </div>
-        <div className="space-y-2 mt-4">
-          {serviceBreakdown.map((s) => (
-            <div key={s.name} className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full" style={{ background: s.color }} />
-                {s.name}
-              </span>
-              <span className="font-semibold">{s.value}%</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    {/* Recent Leads & Traffic */}
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="lg:col-span-2 bg-card border border-border rounded-xl p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h3 className="font-display font-semibold text-foreground">Recent Leads</h3>
-            <p className="text-sm text-muted-foreground">6 new leads this week</p>
-          </div>
-          <button className="text-sm font-semibold text-accent hover:underline">View All</button>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border">
-                <th className="text-left py-3 px-2 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Name</th>
-                <th className="text-left py-3 px-2 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Service</th>
-                <th className="text-left py-3 px-2 font-semibold text-muted-foreground text-xs uppercase tracking-wider">City</th>
-                <th className="text-left py-3 px-2 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Status</th>
-                <th className="text-left py-3 px-2 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {allLeads.slice(0, 6).map((lead) => (
-                <tr key={lead.id} className="border-b border-border/50 hover:bg-secondary/50 transition-colors cursor-pointer">
-                  <td className="py-3 px-2">
-                    <div>
-                      <span className="font-semibold text-foreground">{lead.name}</span>
-                      <span className="block text-[11px] text-muted-foreground">{lead.type}</span>
-                    </div>
-                  </td>
-                  <td className="py-3 px-2 text-muted-foreground">{lead.service}</td>
-                  <td className="py-3 px-2 text-muted-foreground">{lead.city}</td>
-                  <td className="py-3 px-2">
-                    <span className={`text-xs font-medium px-2 py-1 rounded-full ${statusColors[lead.status] || "bg-secondary text-muted-foreground"}`}>{lead.status}</span>
-                  </td>
-                  <td className="py-3 px-2 text-muted-foreground text-xs">{lead.time}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className="bg-card border border-border rounded-xl p-6">
-        <h3 className="font-display font-semibold text-foreground mb-1">Website Traffic</h3>
-        <p className="text-sm text-muted-foreground mb-6">This week's visitors</p>
-        <div className="h-48">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={trafficData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 90%)" />
-              <XAxis dataKey="day" tick={{ fill: 'hsl(0 0% 40%)', fontSize: 11 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: 'hsl(0 0% 40%)', fontSize: 11 }} axisLine={false} tickLine={false} />
-              <Tooltip contentStyle={{ background: 'hsl(0 0% 100%)', border: '1px solid hsl(0 0% 90%)', borderRadius: '8px', fontSize: '12px' }} />
-              <Bar dataKey="visitors" fill="hsl(0 85% 46%)" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="mt-6">
-          <h4 className="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-3">Top Pages</h4>
-          <div className="space-y-2.5">
-            {topPages.map((p) => (
-              <div key={p.page} className="flex items-center justify-between text-sm">
-                <span className="text-foreground font-mono text-xs truncate max-w-[140px]">{p.page}</span>
-                <div className="flex items-center gap-3">
-                  <span className="text-muted-foreground text-xs">{p.views.toLocaleString()}</span>
-                  <span className="text-accent text-xs font-semibold">{p.conversion}%</span>
+          <div className="space-y-2 mt-4">
+            {serviceBreakdown.map((s) => (
+              <div key={s.name} className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full" style={{ background: s.color }} />
+                  <span style={{ color: "hsl(0 0% 65%)" }}>{s.name}</span>
                 </div>
+                <span className="text-white font-medium">{s.value}%</span>
               </div>
             ))}
           </div>
         </div>
       </div>
-    </div>
-  </>
-);
 
-/* ======================== LEADS PAGE ======================== */
-const LeadsPage = ({ leads, filter, setFilter }: { leads: typeof allLeads; filter: string; setFilter: (f: string) => void }) => (
-  <>
-    <div className="flex items-center justify-between">
-      <div>
-        <h1 className="text-2xl font-display font-bold text-foreground">Lead Management</h1>
-        <p className="text-sm text-muted-foreground mt-1">{allLeads.length} total leads · {allLeads.filter(l => l.status === "New").length} new</p>
-      </div>
-      <div className="flex items-center gap-2">
-        <button className="btn-primary-gradient text-sm flex items-center gap-2"><Plus className="w-4 h-4" /> Add Lead</button>
-        <button className="px-4 py-2.5 rounded-lg bg-secondary border border-border text-sm flex items-center gap-2 hover:bg-muted transition-colors"><Download className="w-4 h-4" /> Export</button>
-      </div>
-    </div>
-
-    {/* Filters */}
-    <div className="flex items-center gap-2">
-      {["All", "New", "Contacted", "Scheduled", "Proposal Sent", "Won"].map((f) => (
-        <button
-          key={f}
-          onClick={() => setFilter(f)}
-          className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${filter === f ? "bg-accent text-accent-foreground" : "bg-secondary text-muted-foreground hover:bg-muted"}`}
-        >
-          {f} {f !== "All" && <span className="ml-1 opacity-60">({allLeads.filter(l => f === "All" || l.status === f).length})</span>}
-        </button>
-      ))}
-    </div>
-
-    {/* Leads Table */}
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-border bg-secondary/50">
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Lead</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Contact</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Service</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">City</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Value</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Status</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leads.map((lead) => (
-              <tr key={lead.id} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
-                <td className="py-4 px-4">
-                  <span className="font-semibold text-foreground block">{lead.name}</span>
-                  <span className="text-[11px] text-muted-foreground">{lead.type} · {lead.time}</span>
-                </td>
-                <td className="py-4 px-4">
-                  <span className="text-foreground block text-xs">{lead.phone}</span>
-                  <span className="text-muted-foreground text-[11px]">{lead.email}</span>
-                </td>
-                <td className="py-4 px-4 text-muted-foreground">{lead.service}</td>
-                <td className="py-4 px-4 text-muted-foreground">{lead.city}</td>
-                <td className="py-4 px-4 font-semibold text-foreground">{lead.value}</td>
-                <td className="py-4 px-4">
-                  <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${statusColors[lead.status]}`}>{lead.status}</span>
-                </td>
-                <td className="py-4 px-4">
-                  <div className="flex items-center gap-1">
-                    <button className="p-1.5 rounded-lg hover:bg-secondary transition-colors" title="Call"><Phone className="w-3.5 h-3.5 text-muted-foreground" /></button>
-                    <button className="p-1.5 rounded-lg hover:bg-secondary transition-colors" title="Email"><Mail className="w-3.5 h-3.5 text-muted-foreground" /></button>
-                    <button className="p-1.5 rounded-lg hover:bg-secondary transition-colors" title="Edit"><Pencil className="w-3.5 h-3.5 text-muted-foreground" /></button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </>
-);
-
-/* ======================== PROPOSALS PAGE ======================== */
-const ProposalsPage = () => (
-  <>
-    <div className="flex items-center justify-between">
-      <div>
-        <h1 className="text-2xl font-display font-bold text-foreground">Proposals</h1>
-        <p className="text-sm text-muted-foreground mt-1">Manage quotes and proposals for clients</p>
-      </div>
-      <button className="btn-primary-gradient text-sm flex items-center gap-2"><Plus className="w-4 h-4" /> New Proposal</button>
-    </div>
-
-    {/* Proposal Stats */}
-    <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-      {[
-        { label: "Total Pipeline", value: "$186,400", icon: DollarSign },
-        { label: "Sent", value: "3", icon: Send },
-        { label: "Accepted", value: "1", icon: Check },
-        { label: "Win Rate", value: "68%", icon: Target },
-      ].map((s) => (
-        <div key={s.label} className="bg-card border border-border rounded-xl p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-muted-foreground">{s.label}</span>
-            <s.icon className="w-4 h-4 text-accent" />
-          </div>
-          <span className="text-xl font-display font-bold text-foreground">{s.value}</span>
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-white font-semibold">Website Traffic</h2>
+          <span style={{ color: "hsl(0 0% 45%)" }} className="text-xs">This week</span>
         </div>
-      ))}
+        <ResponsiveContainer width="100%" height={180}>
+          <BarChart data={trafficData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 14%)" />
+            <XAxis dataKey="day" tick={{ fill: "hsl(0 0% 45%)", fontSize: 11 }} axisLine={false} tickLine={false} />
+            <YAxis tick={{ fill: "hsl(0 0% 45%)", fontSize: 11 }} axisLine={false} tickLine={false} />
+            <Tooltip contentStyle={{ background: "hsl(0 0% 10%)", border: "1px solid hsl(0 0% 18%)", borderRadius: 8, color: "#fff" }} />
+            <Bar dataKey="visitors" fill="hsl(0 75% 50%)" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="pageViews" fill="hsl(0 0% 22%)" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
+  );
+}
 
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
-      <div className="overflow-x-auto">
+function LeadsPage() {
+  const [search, setSearch] = useState("");
+  const filtered = mockLeads.filter(l =>
+    l.name.toLowerCase().includes(search.toLowerCase()) ||
+    l.service.toLowerCase().includes(search.toLowerCase())
+  );
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Leads</h1>
+          <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">{mockLeads.length} total leads in pipeline</p>
+        </div>
+        <button style={{ background: "hsl(0 75% 50%)" }} className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity">
+          <Plus size={16} /> Add Lead
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-4">
+        {[
+          { label: "Hot Leads", value: "12", color: "text-red-400" },
+          { label: "Warm", value: "28", color: "text-orange-400" },
+          { label: "New (Today)", value: "6", color: "text-blue-400" },
+          { label: "Closed This Month", value: "34", color: "text-emerald-400" },
+        ].map(s => (
+          <div key={s.label} style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-4">
+            <div style={{ color: "hsl(0 0% 50%)" }} className="text-xs mb-2">{s.label}</div>
+            <div className={`text-2xl font-bold ${s.color}`}>{s.value}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+        <div className="flex items-center gap-3 p-4 border-b" style={{ borderColor: "hsl(0 0% 14%)" }}>
+          <div className="relative flex-1 max-w-sm">
+            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "hsl(0 0% 40%)" }} />
+            <input
+              value={search} onChange={e => setSearch(e.target.value)}
+              placeholder="Search leads…"
+              style={{ background: "hsl(0 0% 5%)", border: "1px solid hsl(0 0% 16%)", color: "white" }}
+              className="w-full pl-9 pr-4 py-2 rounded-lg text-sm placeholder:text-gray-600 focus:outline-none"
+            />
+          </div>
+          <button style={{ background: "hsl(0 0% 12%)", border: "1px solid hsl(0 0% 18%)" }} className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm" style2={{ color: "hsl(0 0% 55%)" }}>
+            <Filter size={14} /> Filter
+          </button>
+          <button style={{ background: "hsl(0 0% 12%)", border: "1px solid hsl(0 0% 18%)" }} className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm">
+            <Download size={14} /> Export
+          </button>
+        </div>
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-border bg-secondary/50">
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Client</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Type</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Value</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Sent</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Expires</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Status</th>
-              <th className="text-left py-3 px-4 font-semibold text-muted-foreground text-xs uppercase tracking-wider">Actions</th>
+            <tr style={{ borderBottom: "1px solid hsl(0 0% 13%)" }}>
+              {["Name", "Service", "Value", "Status", "Source", "Date", ""].map(h => (
+                <th key={h} style={{ color: "hsl(0 0% 40%)" }} className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">{h}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {proposals.map((p) => (
-              <tr key={p.id} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
-                <td className="py-4 px-4 font-semibold text-foreground">{p.client}</td>
-                <td className="py-4 px-4 text-muted-foreground">{p.type}</td>
-                <td className="py-4 px-4 font-semibold text-foreground">{p.value}</td>
-                <td className="py-4 px-4 text-muted-foreground text-xs">{p.date}</td>
-                <td className="py-4 px-4 text-muted-foreground text-xs">{p.expires}</td>
-                <td className="py-4 px-4">
-                  <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${statusColors[p.status]}`}>{p.status}</span>
+            {filtered.map((lead, i) => (
+              <tr key={lead.id} style={{ borderBottom: i < filtered.length - 1 ? "1px solid hsl(0 0% 10%)" : "none" }} className="hover:bg-white/[0.02] transition-colors">
+                <td className="px-4 py-3">
+                  <div className="text-white font-medium">{lead.name}</div>
+                  <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{lead.phone}</div>
                 </td>
-                <td className="py-4 px-4">
-                  <div className="flex items-center gap-1">
-                    <button className="p-1.5 rounded-lg hover:bg-secondary transition-colors"><Eye className="w-3.5 h-3.5 text-muted-foreground" /></button>
-                    <button className="p-1.5 rounded-lg hover:bg-secondary transition-colors"><Pencil className="w-3.5 h-3.5 text-muted-foreground" /></button>
-                    <button className="p-1.5 rounded-lg hover:bg-secondary transition-colors"><Send className="w-3.5 h-3.5 text-muted-foreground" /></button>
-                  </div>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 65%)" }}>{lead.service}</td>
+                <td className="px-4 py-3 text-white font-medium">{lead.value}</td>
+                <td className="px-4 py-3"><Badge status={lead.status} /></td>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 55%)" }}>{lead.source}</td>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 45%)" }}>{lead.date}</td>
+                <td className="px-4 py-3">
+                  <button style={{ color: "hsl(0 0% 40%)" }} className="hover:text-white transition-colors">
+                    <MoreHorizontal size={16} />
+                  </button>
                 </td>
               </tr>
             ))}
@@ -561,287 +321,1293 @@ const ProposalsPage = () => (
         </table>
       </div>
     </div>
-  </>
-);
+  );
+}
 
-/* ======================== SCHEDULE PAGE ======================== */
-const SchedulePage = () => (
-  <>
-    <div className="flex items-center justify-between">
-      <div>
-        <h1 className="text-2xl font-display font-bold text-foreground">Schedule</h1>
-        <p className="text-sm text-muted-foreground mt-1">Installations, surveys, and service calls</p>
+function ClientsPage() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Clients</h1>
+          <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">Active accounts and service agreements</p>
+        </div>
+        <button style={{ background: "hsl(0 75% 50%)" }} className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity">
+          <Plus size={16} /> Add Client
+        </button>
       </div>
-      <button className="btn-primary-gradient text-sm flex items-center gap-2"><Plus className="w-4 h-4" /> Add Event</button>
-    </div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      {/* Schedule List */}
-      <div className="lg:col-span-2 space-y-4">
-        {["Today", "Tomorrow", "Mar 26"].map((day) => (
-          <div key={day}>
-            <h3 className="font-display font-semibold text-foreground text-sm mb-3 flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-accent" /> {day}
-            </h3>
-            <div className="space-y-2">
-              {scheduleEvents.filter(e => e.date === day).map((event) => (
-                <div key={event.id} className="bg-card border border-border rounded-xl p-4 hover:shadow-md transition-shadow">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${statusColors[event.type]}`}>{event.type}</span>
-                        <span className="text-xs text-muted-foreground">{event.time}</span>
-                      </div>
-                      <h4 className="font-semibold text-foreground text-sm">{event.title}</h4>
-                      <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                        <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {event.city}</span>
-                        <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {event.tech}</span>
-                      </div>
-                    </div>
-                    <button className="p-1.5 rounded-lg hover:bg-secondary transition-colors">
-                      <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
-                    </button>
-                  </div>
-                </div>
-              ))}
+      <div className="grid grid-cols-3 gap-4">
+        {[
+          { label: "Total MRR", value: "$12,840", icon: DollarSign },
+          { label: "Active Contracts", value: "38", icon: FileText },
+          { label: "Renewal This Month", value: "7", icon: RefreshCw },
+        ].map(s => (
+          <div key={s.label} style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-4 flex items-center gap-4">
+            <div style={{ background: "hsl(0 0% 12%)" }} className="w-10 h-10 rounded-lg flex items-center justify-center">
+              <s.icon size={18} style={{ color: "hsl(0 75% 50%)" }} />
+            </div>
+            <div>
+              <div style={{ color: "hsl(0 0% 50%)" }} className="text-xs">{s.label}</div>
+              <div className="text-xl font-bold text-white">{s.value}</div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Team Overview */}
-      <div className="bg-card border border-border rounded-xl p-6">
-        <h3 className="font-display font-semibold text-foreground mb-4">Team Today</h3>
-        <div className="space-y-4">
-          {[
-            { name: "Mike R.", role: "Lead Installer", jobs: 1, status: "On-site" },
-            { name: "Tim S.", role: "Sales / Survey", jobs: 2, status: "Available at 1 PM" },
-            { name: "Carlos V.", role: "Technician", jobs: 1, status: "On-site" },
-          ].map((t) => (
-            <div key={t.name} className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50">
-              <div className="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center">
-                <span className="text-xs font-bold text-accent">{t.name.charAt(0)}</span>
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+        <table className="w-full text-sm">
+          <thead>
+            <tr style={{ borderBottom: "1px solid hsl(0 0% 13%)" }}>
+              {["Client", "Type", "Plan", "MRR", "Cameras", "Alarms", "Since", "Status", ""].map(h => (
+                <th key={h} style={{ color: "hsl(0 0% 40%)" }} className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {mockClients.map((c, i) => (
+              <tr key={c.id} style={{ borderBottom: i < mockClients.length - 1 ? "1px solid hsl(0 0% 10%)" : "none" }} className="hover:bg-white/[0.02] transition-colors">
+                <td className="px-4 py-3">
+                  <div className="text-white font-medium">{c.name}</div>
+                  <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{c.contact}</div>
+                </td>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 55%)" }}>{c.type}</td>
+                <td className="px-4 py-3">
+                  <span style={{ background: "hsl(0 75% 50%/0.15)", color: "hsl(0 75% 60%)", border: "1px solid hsl(0 75% 50%/0.25)" }} className="px-2 py-0.5 rounded text-xs">{c.plan}</span>
+                </td>
+                <td className="px-4 py-3 text-white font-medium">{c.mrr}</td>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 55%)" }}>{c.cameras}</td>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 55%)" }}>{c.alarms}</td>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 45%)" }}>{c.since}</td>
+                <td className="px-4 py-3"><Badge status={c.status} /></td>
+                <td className="px-4 py-3">
+                  <button style={{ color: "hsl(0 0% 40%)" }} className="hover:text-white transition-colors">
+                    <MoreHorizontal size={16} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function SchedulePage() {
+  const today = new Date();
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Schedule</h1>
+          <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">{days[today.getDay()]}, {months[today.getMonth()]} {today.getDate()}, {today.getFullYear()}</p>
+        </div>
+        <button style={{ background: "hsl(0 75% 50%)" }} className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity">
+          <Plus size={16} /> Book Job
+        </button>
+      </div>
+
+      <div className="grid grid-cols-5 gap-3">
+        {[
+          { label: "Today's Jobs", value: "5" },
+          { label: "Confirmed", value: "3" },
+          { label: "Pending", value: "1" },
+          { label: "En Route", value: "1" },
+          { label: "Completed MTD", value: "47" },
+        ].map(s => (
+          <div key={s.label} style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-4 text-center">
+            <div className="text-2xl font-bold text-white">{s.value}</div>
+            <div style={{ color: "hsl(0 0% 50%)" }} className="text-xs mt-1">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+        <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: "hsl(0 0% 14%)" }}>
+          <h2 className="text-white font-semibold">Today's Appointments</h2>
+          <div className="flex items-center gap-2">
+            <button style={{ background: "hsl(0 0% 12%)", border: "1px solid hsl(0 0% 18%)" }} className="p-1.5 rounded-lg"><ChevronLeft size={14} style={{ color: "hsl(0 0% 55%)" }} /></button>
+            <button style={{ background: "hsl(0 0% 12%)", border: "1px solid hsl(0 0% 18%)" }} className="p-1.5 rounded-lg"><ChevronRight size={14} style={{ color: "hsl(0 0% 55%)" }} /></button>
+          </div>
+        </div>
+        <div className="divide-y" style={{ borderColor: "hsl(0 0% 10%)" }}>
+          {mockSchedule.map(job => (
+            <div key={job.id} className="flex items-center gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors">
+              <div className="w-20 text-right">
+                <span style={{ color: "hsl(0 75% 55%)" }} className="text-sm font-semibold">{job.time}</span>
               </div>
+              <div style={{ width: 1, height: 40, background: "hsl(0 0% 16%)" }} />
               <div className="flex-1">
-                <span className="font-semibold text-foreground text-sm block">{t.name}</span>
-                <span className="text-[11px] text-muted-foreground">{t.role} · {t.jobs} job(s)</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-white font-medium">{job.client}</span>
+                  <span style={{ background: "hsl(0 0% 12%)", color: "hsl(0 0% 55%)" }} className="text-xs px-2 py-0.5 rounded">{job.type}</span>
+                </div>
+                <div className="flex items-center gap-1 mt-1">
+                  <MapPin size={12} style={{ color: "hsl(0 0% 40%)" }} />
+                  <span style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{job.address}</span>
+                </div>
               </div>
-              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600">{t.status}</span>
+              <div className="text-right">
+                <div style={{ color: "hsl(0 0% 55%)" }} className="text-xs mb-1">Tech: {job.tech}</div>
+                <Badge status={job.status} />
+              </div>
             </div>
           ))}
         </div>
-
-        <div className="mt-6 pt-6 border-t border-border">
-          <h4 className="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-3">Quick Stats</h4>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { label: "This Week", value: "8 jobs" },
-              { label: "Next Week", value: "12 jobs" },
-              { label: "Avg/Day", value: "2.4" },
-              { label: "Utilization", value: "87%" },
-            ].map((s) => (
-              <div key={s.label} className="text-center p-2 rounded-lg bg-secondary/50">
-                <span className="text-lg font-display font-bold text-foreground block">{s.value}</span>
-                <span className="text-[10px] text-muted-foreground">{s.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
-  </>
-);
+  );
+}
 
-/* ======================== ANALYTICS PAGE ======================== */
-const AnalyticsPage = () => {
-  const conversionData = [
-    { month: "Jan", rate: 2.8 }, { month: "Feb", rate: 3.1 }, { month: "Mar", rate: 3.5 },
-    { month: "Apr", rate: 3.2 }, { month: "May", rate: 3.8 }, { month: "Jun", rate: 4.1 },
-    { month: "Jul", rate: 3.9 }, { month: "Aug", rate: 4.3 }, { month: "Sep", rate: 4.5 },
-    { month: "Oct", rate: 4.8 }, { month: "Nov", rate: 4.6 }, { month: "Dec", rate: 5.1 },
-  ];
+function EmployeesPage() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Employees</h1>
+          <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">{mockEmployees.length} team members</p>
+        </div>
+        <button style={{ background: "hsl(0 75% 50%)" }} className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity">
+          <UserPlus size={16} /> Add Employee
+        </button>
+      </div>
 
-  const sourceData = [
-    { name: "Google Organic", value: 45, color: "hsl(0 85% 46%)" },
-    { name: "Direct", value: 22, color: "hsl(0 0% 15%)" },
-    { name: "Google Maps", value: 18, color: "hsl(0 85% 56%)" },
-    { name: "Referral", value: 10, color: "hsl(0 0% 40%)" },
-    { name: "Social", value: 5, color: "hsl(0 0% 70%)" },
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: "Active Staff", value: "4", icon: Users },
+          { label: "Field Techs", value: "3", icon: Briefcase },
+          { label: "Avg Rating", value: "4.7", icon: Star },
+          { label: "Jobs Completed", value: "691", icon: CheckCircle2 },
+        ].map(s => (
+          <div key={s.label} style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-4 flex items-center gap-3">
+            <div style={{ background: "hsl(0 0% 12%)" }} className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0">
+              <s.icon size={16} style={{ color: "hsl(0 75% 50%)" }} />
+            </div>
+            <div>
+              <div style={{ color: "hsl(0 0% 50%)" }} className="text-xs">{s.label}</div>
+              <div className="text-xl font-bold text-white">{s.value}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid gap-4">
+        {mockEmployees.map(emp => (
+          <div key={emp.id} style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-4 flex items-center gap-5">
+            <div style={{ background: "hsl(0 75% 50%/0.15)", border: "1px solid hsl(0 75% 50%/0.25)" }} className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold" style2={{ color: "hsl(0 75% 60%)" }}>
+              {emp.name.split(" ").map(n => n[0]).join("")}
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-3">
+                <span className="text-white font-semibold">{emp.name}</span>
+                <Badge status={emp.status} />
+              </div>
+              <div style={{ color: "hsl(0 0% 50%)" }} className="text-xs mt-0.5">{emp.role} · {emp.dept} · Hired {emp.hire}</div>
+            </div>
+            <div className="hidden lg:flex items-center gap-8 text-center">
+              <div>
+                <div className="text-white font-semibold">{emp.jobs}</div>
+                <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">Jobs</div>
+              </div>
+              <div>
+                <div className="text-white font-semibold">{emp.rating} ★</div>
+                <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">Rating</div>
+              </div>
+              <div>
+                <div style={{ color: "hsl(0 0% 50%)" }} className="text-sm">{emp.phone}</div>
+                <div style={{ color: "hsl(0 0% 40%)" }} className="text-xs">{emp.email}</div>
+              </div>
+            </div>
+            <button style={{ color: "hsl(0 0% 40%)" }} className="hover:text-white transition-colors ml-2">
+              <MoreHorizontal size={18} />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TimeClockPage() {
+  const [clockedIn, setClockedIn] = useState<Record<number, boolean>>({
+    1: true, 2: true, 3: true, 4: false, 5: false,
+  });
+  const [times, setTimes] = useState<Record<number, string>>({
+    1: "7:52 AM", 2: "8:10 AM", 3: "8:30 AM",
+  });
+
+  const toggle = (id: number) => {
+    setClockedIn(prev => {
+      const next = { ...prev, [id]: !prev[id] };
+      if (next[id]) {
+        const now = new Date();
+        setTimes(t => ({ ...t, [id]: now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }));
+      }
+      return next;
+    });
+  };
+
+  const weeklyHours = [
+    { name: "Jake Morales", mon: 8.5, tue: 9, wed: 8, thu: 8.5, fri: 7, total: 41, ot: 1 },
+    { name: "Chris Owens", mon: 8, tue: 8.5, wed: 9, thu: 8, fri: 8.5, total: 42, ot: 2 },
+    { name: "Maria Santos", mon: 7.5, tue: 8, wed: 8, thu: 7.5, fri: 8, total: 39, ot: 0 },
+    { name: "Devon Price", mon: 8, tue: 8, wed: 8, thu: 8, fri: 8, total: 40, ot: 0 },
+    { name: "Tanya Brooks", mon: 0, tue: 8, wed: 8, thu: 8, fri: 0, total: 24, ot: 0 },
   ];
 
   return (
-    <>
+    <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-display font-bold text-foreground">Analytics</h1>
-        <p className="text-sm text-muted-foreground mt-1">Website performance and marketing insights</p>
+        <h1 className="text-2xl font-bold text-white">Time Clock</h1>
+        <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">Track clock-in/out, daily attendance, and weekly hours</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Page Views", value: "48,250", change: "+15%" },
-          { label: "Unique Visitors", value: "12,480", change: "+8%" },
-          { label: "Avg Session", value: "3m 42s", change: "+12%" },
-          { label: "Bounce Rate", value: "34.2%", change: "-5%" },
-        ].map((s) => (
-          <div key={s.label} className="bg-card border border-border rounded-xl p-4">
-            <span className="text-xs text-muted-foreground">{s.label}</span>
-            <div className="flex items-end gap-2 mt-1">
-              <span className="text-xl font-display font-bold text-foreground">{s.value}</span>
-              <span className="text-xs font-semibold text-emerald-600 mb-0.5">{s.change}</span>
-            </div>
+          { label: "Clocked In Now", value: "3" },
+          { label: "On Break", value: "0" },
+          { label: "Off Today", value: "2" },
+          { label: "Avg Hours / Week", value: "37.2" },
+        ].map(s => (
+          <div key={s.label} style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-4 text-center">
+            <div className="text-2xl font-bold text-white">{s.value}</div>
+            <div style={{ color: "hsl(0 0% 50%)" }} className="text-xs mt-1">{s.label}</div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-card border border-border rounded-xl p-6">
-          <h3 className="font-display font-semibold text-foreground mb-1">Conversion Rate</h3>
-          <p className="text-sm text-muted-foreground mb-6">Monthly website-to-lead conversion</p>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={conversionData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 90%)" />
-                <XAxis dataKey="month" tick={{ fill: 'hsl(0 0% 40%)', fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: 'hsl(0 0% 40%)', fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
-                <Tooltip contentStyle={{ background: 'hsl(0 0% 100%)', border: '1px solid hsl(0 0% 90%)', borderRadius: '8px', fontSize: '12px' }} />
-                <Line type="monotone" dataKey="rate" stroke="hsl(0 85% 46%)" strokeWidth={2.5} dot={{ r: 4, fill: "hsl(0 85% 46%)" }} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+        <div className="px-5 py-4 border-b" style={{ borderColor: "hsl(0 0% 14%)" }}>
+          <h2 className="text-white font-semibold">Today — Clock Status</h2>
         </div>
-
-        <div className="bg-card border border-border rounded-xl p-6">
-          <h3 className="font-display font-semibold text-foreground mb-1">Traffic Sources</h3>
-          <p className="text-sm text-muted-foreground mb-6">Where your visitors come from</p>
-          <div className="h-48 flex items-center justify-center">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie data={sourceData} cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={3} dataKey="value">
-                  {sourceData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
-                </Pie>
-                <Tooltip formatter={(value: number) => [`${value}%`, '']} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="space-y-2 mt-2">
-            {sourceData.map((s) => (
-              <div key={s.name} className="flex items-center justify-between text-sm">
-                <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full" style={{ background: s.color }} />
-                  {s.name}
-                </span>
-                <span className="font-semibold">{s.value}%</span>
+        <div className="divide-y" style={{ borderColor: "hsl(0 0% 10%)" }}>
+          {mockEmployees.map(emp => (
+            <div key={emp.id} className="flex items-center justify-between px-5 py-4">
+              <div className="flex items-center gap-3">
+                <div className={`w-2.5 h-2.5 rounded-full ${clockedIn[emp.id] ? "bg-emerald-400" : "bg-gray-600"}`} />
+                <span className="text-white">{emp.name}</span>
+                <span style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{emp.role}</span>
               </div>
-            ))}
-          </div>
+              <div className="flex items-center gap-4">
+                {clockedIn[emp.id] && times[emp.id] && (
+                  <span style={{ color: "hsl(0 0% 50%)" }} className="text-xs">In at {times[emp.id]}</span>
+                )}
+                <button
+                  onClick={() => toggle(emp.id)}
+                  style={{
+                    background: clockedIn[emp.id] ? "hsl(0 0% 14%)" : "hsl(0 75% 50%)",
+                    border: clockedIn[emp.id] ? "1px solid hsl(0 0% 20%)" : "none",
+                  }}
+                  className="px-3 py-1.5 rounded-lg text-xs font-medium text-white transition-all"
+                >
+                  {clockedIn[emp.id] ? "Clock Out" : "Clock In"}
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="bg-card border border-border rounded-xl p-6">
-        <h3 className="font-display font-semibold text-foreground mb-1">Top Performing Pages</h3>
-        <p className="text-sm text-muted-foreground mb-4">Ranked by conversion rate</p>
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+        <div className="px-5 py-4 border-b" style={{ borderColor: "hsl(0 0% 14%)" }}>
+          <h2 className="text-white font-semibold">Weekly Hours — This Week</h2>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border">
-                <th className="text-left py-3 px-2 text-xs uppercase tracking-wider font-semibold text-muted-foreground">Page</th>
-                <th className="text-right py-3 px-2 text-xs uppercase tracking-wider font-semibold text-muted-foreground">Views</th>
-                <th className="text-right py-3 px-2 text-xs uppercase tracking-wider font-semibold text-muted-foreground">Leads</th>
-                <th className="text-right py-3 px-2 text-xs uppercase tracking-wider font-semibold text-muted-foreground">Conv. Rate</th>
+              <tr style={{ borderBottom: "1px solid hsl(0 0% 13%)" }}>
+                {["Employee", "Mon", "Tue", "Wed", "Thu", "Fri", "Total", "OT"].map(h => (
+                  <th key={h} style={{ color: "hsl(0 0% 40%)" }} className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">{h}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {[
-                { page: "/free-analysis", views: 1420, leads: 121, rate: 8.5 },
-                { page: "/commercial", views: 1100, leads: 57, rate: 5.2 },
-                { page: "/security-cameras", views: 2180, leads: 89, rate: 4.1 },
-                { page: "/alarm-systems", views: 1950, leads: 74, rate: 3.8 },
-                { page: "/hoa-security", views: 890, leads: 31, rate: 3.5 },
-                { page: "/", views: 4520, leads: 145, rate: 3.2 },
-                { page: "/residential", views: 980, leads: 28, rate: 2.9 },
-              ].map((p) => (
-                <tr key={p.page} className="border-b border-border/50">
-                  <td className="py-3 px-2 font-mono text-xs text-foreground">{p.page}</td>
-                  <td className="py-3 px-2 text-right text-muted-foreground">{p.views.toLocaleString()}</td>
-                  <td className="py-3 px-2 text-right text-muted-foreground">{p.leads}</td>
-                  <td className="py-3 px-2 text-right font-semibold text-accent">{p.rate}%</td>
+              {weeklyHours.map((row, i) => (
+                <tr key={row.name} style={{ borderBottom: i < weeklyHours.length - 1 ? "1px solid hsl(0 0% 10%)" : "none" }}>
+                  <td className="px-4 py-3 text-white font-medium">{row.name}</td>
+                  {[row.mon, row.tue, row.wed, row.thu, row.fri].map((h, j) => (
+                    <td key={j} className="px-4 py-3" style={{ color: h === 0 ? "hsl(0 0% 35%)" : "hsl(0 0% 65%)" }}>{h > 0 ? `${h}h` : "—"}</td>
+                  ))}
+                  <td className="px-4 py-3 text-white font-semibold">{row.total}h</td>
+                  <td className="px-4 py-3">
+                    {row.ot > 0
+                      ? <span className="text-orange-400 text-xs font-medium">+{row.ot}h OT</span>
+                      : <span style={{ color: "hsl(0 0% 35%)" }} className="text-xs">—</span>}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-    </>
+    </div>
   );
-};
+}
 
-/* ======================== REVIEWS PAGE ======================== */
-const ReviewsPage = () => (
-  <>
-    <div className="flex items-center justify-between">
+function AnalyticsPage() {
+  return (
+    <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-display font-bold text-foreground">Review Management</h1>
-        <p className="text-sm text-muted-foreground mt-1">Monitor and respond to customer reviews</p>
+        <h1 className="text-2xl font-bold text-white">Analytics</h1>
+        <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">Performance metrics and growth tracking</p>
       </div>
-      <a href="https://maps.app.goo.gl/o4XYckgxB3B77AyW8" target="_blank" rel="noopener noreferrer" className="px-4 py-2.5 rounded-lg bg-secondary border border-border text-sm flex items-center gap-2 hover:bg-muted transition-colors">
-        <Globe className="w-4 h-4" /> View on Google
-      </a>
-    </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-      {[
-        { label: "Average Rating", value: "4.9", icon: Star },
-        { label: "Total Reviews", value: "284", icon: MessageSquare },
-        { label: "This Month", value: "12", icon: Calendar },
-        { label: "Response Rate", value: "95%", icon: Check },
-      ].map((s) => (
-        <div key={s.label} className="bg-card border border-border rounded-xl p-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-muted-foreground">{s.label}</span>
-            <s.icon className="w-4 h-4 text-accent" />
-          </div>
-          <span className="text-xl font-display font-bold text-foreground">{s.value}</span>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard label="Conversion Rate" value="19.3%" sub="Leads → Clients" icon={Target} trend="+2.1% vs last month" trendDir="up" />
+        <StatCard label="Avg Deal Size" value="$4,820" sub="All services" icon={DollarSign} trend="+$340 avg" trendDir="up" />
+        <StatCard label="Customer LTV" value="$11,200" sub="36-mo average" icon={TrendingUp} trend="+8% YoY" trendDir="up" />
+        <StatCard label="Churn Rate" value="2.1%" sub="Monthly" icon={TrendingDown} trend="-0.4% vs last month" trendDir="up" />
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5">
+        <h2 className="text-white font-semibold mb-6">Revenue vs Lead Volume</h2>
+        <ResponsiveContainer width="100%" height={260}>
+          <LineChart data={revenueData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 14%)" />
+            <XAxis dataKey="month" tick={{ fill: "hsl(0 0% 45%)", fontSize: 11 }} axisLine={false} tickLine={false} />
+            <YAxis yAxisId="left" tick={{ fill: "hsl(0 0% 45%)", fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
+            <YAxis yAxisId="right" orientation="right" tick={{ fill: "hsl(0 0% 45%)", fontSize: 11 }} axisLine={false} tickLine={false} />
+            <Tooltip contentStyle={{ background: "hsl(0 0% 10%)", border: "1px solid hsl(0 0% 18%)", borderRadius: 8, color: "#fff" }} />
+            <Line yAxisId="left" type="monotone" dataKey="revenue" stroke="hsl(0 75% 50%)" strokeWidth={2} dot={false} />
+            <Line yAxisId="right" type="monotone" dataKey="leads" stroke="hsl(210 80% 60%)" strokeWidth={2} dot={false} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-6">
+        <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5">
+          <h2 className="text-white font-semibold mb-6">Lead Sources</h2>
+          {[
+            { source: "Google Ads", pct: 42, count: 74 },
+            { source: "Referrals", pct: 28, count: 49 },
+            { source: "Facebook", pct: 15, count: 26 },
+            { source: "Website Organic", pct: 10, count: 18 },
+            { source: "Yelp / Other", pct: 5, count: 9 },
+          ].map(s => (
+            <div key={s.source} className="mb-4">
+              <div className="flex items-center justify-between mb-1.5">
+                <span style={{ color: "hsl(0 0% 65%)" }} className="text-sm">{s.source}</span>
+                <span className="text-white text-sm">{s.count} leads ({s.pct}%)</span>
+              </div>
+              <div style={{ background: "hsl(0 0% 14%)" }} className="h-1.5 rounded-full overflow-hidden">
+                <div style={{ width: `${s.pct}%`, background: "hsl(0 75% 50%)" }} className="h-full rounded-full" />
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
 
-    <div className="bg-card border border-border rounded-xl p-6">
-      <h3 className="font-display font-semibold text-foreground mb-4">Recent Reviews</h3>
-      <div className="space-y-4">
+        <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5">
+          <h2 className="text-white font-semibold mb-6">Website Traffic This Week</h2>
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={trafficData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 14%)" />
+              <XAxis dataKey="day" tick={{ fill: "hsl(0 0% 45%)", fontSize: 11 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: "hsl(0 0% 45%)", fontSize: 11 }} axisLine={false} tickLine={false} />
+              <Tooltip contentStyle={{ background: "hsl(0 0% 10%)", border: "1px solid hsl(0 0% 18%)", borderRadius: 8, color: "#fff" }} />
+              <Bar dataKey="visitors" fill="hsl(0 75% 50%)" radius={[4, 4, 0, 0]} name="Visitors" />
+              <Bar dataKey="pageViews" fill="hsl(0 0% 22%)" radius={[4, 4, 0, 0]} name="Page Views" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EmailPage() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Email Marketing</h1>
+          <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">Campaigns, automations, and subscriber segments</p>
+        </div>
+        <button style={{ background: "hsl(0 75% 50%)" }} className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity">
+          <Plus size={16} /> New Campaign
+        </button>
+      </div>
+
+      <div className="grid grid-cols-4 gap-4">
         {[
-          { name: "Michael T.", rating: 5, text: "Best security company in Houston. Professional installation and excellent monitoring service. Highly recommend!", date: "2 days ago", responded: true },
-          { name: "Lisa R.", rating: 5, text: "Switched from ADT and couldn't be happier. Local monitoring, real people, and they actually know our system.", date: "4 days ago", responded: true },
-          { name: "David K.", rating: 4, text: "Great camera system for our warehouse. Very responsive team. Minor delay on initial scheduling but everything else was perfect.", date: "1 week ago", responded: false },
-          { name: "Jennifer W.", rating: 5, text: "The HOA gate camera system is fantastic. Board loves the LPR footage and remote viewing capabilities.", date: "1 week ago", responded: true },
-          { name: "Robert M.", rating: 5, text: "Tim and his team are the best. They took over our alarm from Brinks and saved us money with better service.", date: "2 weeks ago", responded: false },
-        ].map((r, i) => (
-          <div key={i} className="flex gap-4 p-4 rounded-lg bg-secondary/50">
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-              <span className="text-xs font-bold text-accent">{r.name.charAt(0)}</span>
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-1">
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-sm text-foreground">{r.name}</span>
-                  {r.responded && <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600">Responded</span>}
-                </div>
-                <span className="text-xs text-muted-foreground">{r.date}</span>
-              </div>
-              <div className="flex gap-0.5 mb-2">
-                {Array.from({ length: r.rating }).map((_, j) => (
-                  <Star key={j} className="w-3 h-3 fill-accent text-accent" />
-                ))}
-              </div>
-              <p className="text-sm text-muted-foreground">{r.text}</p>
-              {!r.responded && (
-                <button className="mt-2 text-xs font-semibold text-accent hover:underline">Reply to Review</button>
-              )}
-            </div>
+          { label: "Total Subscribers", value: "6,840" },
+          { label: "Avg Open Rate", value: "38.2%" },
+          { label: "Avg Click Rate", value: "8.5%" },
+          { label: "Unsubscribes (30d)", value: "24" },
+        ].map(s => (
+          <div key={s.label} style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-4 text-center">
+            <div className="text-2xl font-bold text-white">{s.value}</div>
+            <div style={{ color: "hsl(0 0% 50%)" }} className="text-xs mt-1">{s.label}</div>
           </div>
         ))}
       </div>
-    </div>
-  </>
-);
 
-export default AdminDashboard;
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+        <div className="px-5 py-4 border-b" style={{ borderColor: "hsl(0 0% 14%)" }}>
+          <h2 className="text-white font-semibold">Campaigns</h2>
+        </div>
+        <table className="w-full text-sm">
+          <thead>
+            <tr style={{ borderBottom: "1px solid hsl(0 0% 13%)" }}>
+              {["Campaign", "Segment", "Status", "Sent", "Opened", "Clicked", "Date", ""].map(h => (
+                <th key={h} style={{ color: "hsl(0 0% 40%)" }} className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {mockCampaigns.map((c, i) => (
+              <tr key={c.id} style={{ borderBottom: i < mockCampaigns.length - 1 ? "1px solid hsl(0 0% 10%)" : "none" }} className="hover:bg-white/[0.02] transition-colors">
+                <td className="px-4 py-3 text-white font-medium">{c.name}</td>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 55%)" }}>{c.segment}</td>
+                <td className="px-4 py-3"><Badge status={c.status} /></td>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 65%)" }}>{c.sent > 0 ? c.sent.toLocaleString() : "—"}</td>
+                <td className="px-4 py-3">
+                  {c.opened > 0 ? (
+                    <span className="text-emerald-400">{c.opened.toLocaleString()} <span style={{ color: "hsl(0 0% 45%)" }} className="text-xs">({Math.round(c.opened / c.sent * 100)}%)</span></span>
+                  ) : "—"}
+                </td>
+                <td className="px-4 py-3">
+                  {c.clicked > 0 ? (
+                    <span style={{ color: "hsl(210 80% 60%)" }}>{c.clicked.toLocaleString()}</span>
+                  ) : "—"}
+                </td>
+                <td className="px-4 py-3" style={{ color: "hsl(0 0% 45%)" }}>{c.date}</td>
+                <td className="px-4 py-3">
+                  <button style={{ color: "hsl(0 0% 40%)" }} className="hover:text-white transition-colors">
+                    <MoreHorizontal size={16} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5">
+        <h2 className="text-white font-semibold mb-5">Automation Flows</h2>
+        <div className="grid lg:grid-cols-3 gap-4">
+          {[
+            { name: "New Lead Nurture", trigger: "Lead form submit", steps: 5, active: true },
+            { name: "Post-Install Follow-Up", trigger: "Job marked complete", steps: 3, active: true },
+            { name: "Renewal Reminder", trigger: "30 days before renewal", steps: 4, active: false },
+            { name: "Review Request", trigger: "7 days post-install", steps: 2, active: true },
+            { name: "Win-Back Campaign", trigger: "90 days inactive", steps: 6, active: false },
+            { name: "HOA Prospecting", trigger: "Manual trigger", steps: 8, active: false },
+          ].map(flow => (
+            <div key={flow.name} style={{ background: "hsl(0 0% 11%)", border: "1px solid hsl(0 0% 16%)" }} className="rounded-lg p-4">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-white text-sm font-medium">{flow.name}</span>
+                <div className={`w-8 h-4 rounded-full flex items-center transition-all ${flow.active ? "justify-end bg-red-600" : "justify-start bg-gray-700"}`}>
+                  <div className="w-3 h-3 rounded-full bg-white mx-0.5" />
+                </div>
+              </div>
+              <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{flow.trigger}</div>
+              <div style={{ color: "hsl(0 0% 40%)" }} className="text-xs mt-2">{flow.steps} steps</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LiveChatPage() {
+  const { sessions, addMessage, markAllRead } = useChatContext();
+  const [selected, setSelected] = useState<string | null>(sessions[0]?.id ?? null);
+  const [reply, setReply] = useState("");
+  const activeSession = sessions.find(s => s.id === selected);
+
+  const handleReply = () => {
+    if (!reply.trim() || !selected) return;
+    addMessage(selected, reply.trim(), "agent");
+    setReply("");
+  };
+
+  return (
+    <div className="space-y-4 h-full">
+      <div>
+        <h1 className="text-2xl font-bold text-white">Live Chat</h1>
+        <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">{sessions.length} session{sessions.length !== 1 ? "s" : ""} · {sessions.filter(s => s.status === "active").length} active</p>
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden flex" style2={{ minHeight: 520 }}>
+        {/* Session list */}
+        <div className="w-72 flex-shrink-0 border-r overflow-y-auto" style={{ borderColor: "hsl(0 0% 14%)" }}>
+          {sessions.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-16 gap-3">
+              <MessageSquare size={32} style={{ color: "hsl(0 0% 30%)" }} />
+              <p style={{ color: "hsl(0 0% 40%)" }} className="text-sm text-center px-4">No chat sessions yet.<br />Chats from the website appear here.</p>
+            </div>
+          ) : sessions.map(s => {
+            const unread = s.messages.filter(m => m.role === "visitor" && !m.read).length;
+            const last = s.messages[s.messages.length - 1];
+            return (
+              <button
+                key={s.id}
+                onClick={() => { setSelected(s.id); markAllRead(s.id); }}
+                className="w-full text-left px-4 py-3 transition-colors hover:bg-white/[0.03] border-b"
+                style={{
+                  borderColor: "hsl(0 0% 12%)",
+                  background: selected === s.id ? "hsl(0 0% 11%)" : "transparent",
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-white text-sm font-medium truncate">{s.visitorName}</span>
+                  {unread > 0 && (
+                    <span style={{ background: "hsl(0 75% 50%)" }} className="text-white text-xs font-bold px-1.5 py-0.5 rounded-full">{unread}</span>
+                  )}
+                </div>
+                <div style={{ color: "hsl(0 0% 40%)" }} className="text-xs mt-0.5 truncate">{last?.content ?? "No messages"}</div>
+                <div className="flex items-center gap-2 mt-1">
+                  <span style={{ color: "hsl(0 0% 35%)" }} className="text-xs">{s.page}</span>
+                  <Badge status={s.status} />
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Conversation */}
+        <div className="flex-1 flex flex-col">
+          {activeSession ? (
+            <>
+              <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: "hsl(0 0% 14%)" }}>
+                <div>
+                  <div className="text-white font-semibold">{activeSession.visitorName}</div>
+                  <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{activeSession.visitorEmail} · {activeSession.page}</div>
+                </div>
+                <Badge status={activeSession.status} />
+              </div>
+              <div className="flex-1 overflow-y-auto p-5 space-y-3" style={{ minHeight: 340 }}>
+                {activeSession.messages.length === 0 && (
+                  <p style={{ color: "hsl(0 0% 35%)" }} className="text-sm text-center py-8">No messages yet</p>
+                )}
+                {activeSession.messages.map(msg => (
+                  <div key={msg.id} className={`flex ${msg.role === "visitor" ? "justify-start" : "justify-end"}`}>
+                    <div
+                      style={{
+                        background: msg.role === "visitor" ? "hsl(0 0% 13%)" : msg.role === "agent" ? "hsl(0 75% 50%)" : "hsl(0 0% 16%)",
+                        maxWidth: "70%",
+                      }}
+                      className="rounded-xl px-4 py-2.5"
+                    >
+                      <div className="text-white text-sm">{msg.content}</div>
+                      <div style={{ color: msg.role === "agent" ? "rgba(255,255,255,0.6)" : "hsl(0 0% 40%)" }} className="text-xs mt-1">
+                        {msg.role === "agent" ? "You" : msg.role === "bot" ? "Bot" : activeSession.visitorName}
+                        {" · "}{new Date(msg.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="p-4 border-t flex gap-3" style={{ borderColor: "hsl(0 0% 14%)" }}>
+                <input
+                  value={reply}
+                  onChange={e => setReply(e.target.value)}
+                  onKeyDown={e => e.key === "Enter" && handleReply()}
+                  placeholder="Type a reply…"
+                  style={{ background: "hsl(0 0% 11%)", border: "1px solid hsl(0 0% 18%)", color: "white" }}
+                  className="flex-1 px-4 py-2.5 rounded-lg text-sm placeholder:text-gray-600 focus:outline-none"
+                />
+                <button
+                  onClick={handleReply}
+                  style={{ background: "hsl(0 75% 50%)" }}
+                  className="px-4 py-2.5 rounded-lg text-white flex items-center gap-2 text-sm font-medium hover:opacity-90 transition-opacity"
+                >
+                  <Send size={15} /> Send
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="flex-1 flex items-center justify-center">
+              <p style={{ color: "hsl(0 0% 35%)" }} className="text-sm">Select a conversation</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function UsersPage() {
+  const permissions = ["View Dashboard", "Manage Leads", "Manage Clients", "Manage Schedule", "Manage Employees", "View Analytics", "Email Marketing", "Admin Settings"];
+  const rolePerms: Record<string, boolean[]> = {
+    Owner:      [true, true, true, true, true, true, true, true],
+    Sales:      [true, true, true, false, false, true, true, false],
+    Dispatcher: [true, false, true, true, false, false, false, false],
+    Technician: [false, false, false, true, false, false, false, false],
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Users & Access</h1>
+          <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">Manage platform users and role permissions</p>
+        </div>
+        <button style={{ background: "hsl(0 75% 50%)" }} className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity">
+          <UserPlus size={16} /> Invite User
+        </button>
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+        <table className="w-full text-sm">
+          <thead>
+            <tr style={{ borderBottom: "1px solid hsl(0 0% 13%)" }}>
+              {["User", "Role", "Last Login", "Status", ""].map(h => (
+                <th key={h} style={{ color: "hsl(0 0% 40%)" }} className="text-left px-5 py-3 font-medium text-xs uppercase tracking-wider">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {mockUsers.map((u, i) => (
+              <tr key={u.id} style={{ borderBottom: i < mockUsers.length - 1 ? "1px solid hsl(0 0% 10%)" : "none" }} className="hover:bg-white/[0.02] transition-colors">
+                <td className="px-5 py-4">
+                  <div className="text-white font-medium">{u.name}</div>
+                  <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{u.email}</div>
+                </td>
+                <td className="px-5 py-4">
+                  <span style={{ background: "hsl(0 0% 13%)", color: "hsl(0 0% 65%)", border: "1px solid hsl(0 0% 20%)" }} className="px-2 py-0.5 rounded text-xs">{u.role}</span>
+                </td>
+                <td className="px-5 py-4" style={{ color: "hsl(0 0% 50%)" }}>{u.lastLogin}</td>
+                <td className="px-5 py-4"><Badge status={u.status} /></td>
+                <td className="px-5 py-4">
+                  <div className="flex items-center gap-2">
+                    <button style={{ color: "hsl(0 0% 40%)" }} className="hover:text-white transition-colors"><Pencil size={15} /></button>
+                    <button style={{ color: "hsl(0 0% 40%)" }} className="hover:text-red-400 transition-colors"><Trash2 size={15} /></button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+        <div className="px-5 py-4 border-b" style={{ borderColor: "hsl(0 0% 14%)" }}>
+          <h2 className="text-white font-semibold">Role Permissions Matrix</h2>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr style={{ borderBottom: "1px solid hsl(0 0% 13%)" }}>
+                <th style={{ color: "hsl(0 0% 40%)" }} className="text-left px-5 py-3 font-medium text-xs uppercase tracking-wider">Permission</th>
+                {Object.keys(rolePerms).map(role => (
+                  <th key={role} style={{ color: "hsl(0 0% 55%)" }} className="text-center px-5 py-3 font-medium text-xs uppercase tracking-wider">{role}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {permissions.map((perm, pi) => (
+                <tr key={perm} style={{ borderBottom: pi < permissions.length - 1 ? "1px solid hsl(0 0% 10%)" : "none" }}>
+                  <td className="px-5 py-3" style={{ color: "hsl(0 0% 65%)" }}>{perm}</td>
+                  {Object.values(rolePerms).map((perms, ri) => (
+                    <td key={ri} className="px-5 py-3 text-center">
+                      {perms[pi]
+                        ? <Check size={16} className="mx-auto text-emerald-400" />
+                        : <X size={16} className="mx-auto" style={{ color: "hsl(0 0% 25%)" }} />}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SettingsPage() {
+  const [notifs, setNotifs] = useState({ newLead: true, jobComplete: true, chat: true, review: false, billing: true });
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-white">Settings</h1>
+        <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">Company configuration and integrations</p>
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5">
+        <h2 className="text-white font-semibold mb-5">Company Information</h2>
+        <div className="grid grid-cols-2 gap-4">
+          {[
+            { label: "Company Name", value: "Texas Total Security" },
+            { label: "Phone", value: "(281) 407-0766" },
+            { label: "Email", value: "info@texastotalsecurity.com" },
+            { label: "Website", value: "texastotalsecurity.com" },
+            { label: "Address", value: "Houston, TX" },
+            { label: "License #", value: "ACR-1741234" },
+          ].map(f => (
+            <div key={f.label}>
+              <label style={{ color: "hsl(0 0% 45%)" }} className="text-xs block mb-1">{f.label}</label>
+              <input
+                defaultValue={f.value}
+                style={{ background: "hsl(0 0% 11%)", border: "1px solid hsl(0 0% 18%)", color: "white" }}
+                className="w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-red-600/50"
+              />
+            </div>
+          ))}
+        </div>
+        <button style={{ background: "hsl(0 75% 50%)" }} className="mt-5 px-5 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity">
+          Save Changes
+        </button>
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5">
+        <h2 className="text-white font-semibold mb-5">Integrations</h2>
+        <div className="grid lg:grid-cols-2 gap-4">
+          {[
+            { name: "ElevenLabs Voice AI", desc: "Live chat voice integration", connected: true },
+            { name: "Google Analytics", desc: "Website traffic and conversion tracking", connected: true },
+            { name: "Alarm.com", desc: "Monitoring and device management", connected: false },
+            { name: "QuickBooks", desc: "Invoicing and accounting sync", connected: false },
+            { name: "Google My Business", desc: "Reviews and local listings", connected: true },
+            { name: "Twilio SMS", desc: "Automated appointment reminders", connected: false },
+          ].map(intg => (
+            <div key={intg.name} style={{ background: "hsl(0 0% 11%)", border: "1px solid hsl(0 0% 16%)" }} className="rounded-lg p-4 flex items-center justify-between">
+              <div>
+                <div className="text-white text-sm font-medium">{intg.name}</div>
+                <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs mt-0.5">{intg.desc}</div>
+              </div>
+              <button
+                style={{
+                  background: intg.connected ? "hsl(145 60% 40%/0.2)" : "hsl(0 75% 50%)",
+                  border: intg.connected ? "1px solid hsl(145 60% 40%/0.35)" : "none",
+                  color: intg.connected ? "hsl(145 70% 55%)" : "white",
+                }}
+                className="px-3 py-1.5 rounded-lg text-xs font-medium"
+              >
+                {intg.connected ? "Connected" : "Connect"}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-5">
+        <h2 className="text-white font-semibold mb-5">Notifications</h2>
+        <div className="space-y-4">
+          {(Object.keys(notifs) as Array<keyof typeof notifs>).map(key => {
+            const labels: Record<keyof typeof notifs, string> = {
+              newLead: "New lead submitted via website",
+              jobComplete: "Job marked as complete by technician",
+              chat: "New live chat message received",
+              review: "New Google review posted",
+              billing: "Payment received or invoice due",
+            };
+            return (
+              <div key={key} className="flex items-center justify-between">
+                <span style={{ color: "hsl(0 0% 65%)" }} className="text-sm">{labels[key]}</span>
+                <button
+                  onClick={() => setNotifs(n => ({ ...n, [key]: !n[key] }))}
+                  style={{ background: notifs[key] ? "hsl(0 75% 50%)" : "hsl(0 0% 18%)" }}
+                  className="w-10 h-5 rounded-full transition-colors relative flex items-center"
+                >
+                  <div className={`w-3.5 h-3.5 rounded-full bg-white absolute transition-all ${notifs[key] ? "left-[22px]" : "left-[3px]"}`} />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Pole Quotes Page ─────────────────────────────────────────────────────────
+
+const QUOTE_STATUSES: PoleQuote["status"][] = ["new", "contacted", "quoted", "won", "lost"];
+
+function PoleQuotesPage() {
+  const [quotes, setQuotes] = useState<PoleQuote[]>([]);
+  const [selected, setSelected] = useState<PoleQuote | null>(null);
+  const [filter, setFilter] = useState<PoleQuote["status"] | "all">("all");
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    setQuotes(loadPoleQuotes());
+  }, []);
+
+  const updateStatus = (id: string, status: PoleQuote["status"]) => {
+    setQuotes(prev => {
+      const next = prev.map(q => q.id === id ? { ...q, status } : q);
+      localStorage.setItem("tts_pole_quotes", JSON.stringify(next));
+      if (selected?.id === id) setSelected(s => s ? { ...s, status } : s);
+      return next;
+    });
+  };
+
+  const deleteQuote = (id: string) => {
+    setQuotes(prev => {
+      const next = prev.filter(q => q.id !== id);
+      localStorage.setItem("tts_pole_quotes", JSON.stringify(next));
+      if (selected?.id === id) setSelected(null);
+      return next;
+    });
+  };
+
+  const filtered = quotes.filter(q => {
+    const matchStatus = filter === "all" || q.status === filter;
+    const matchSearch = !search || q.name.toLowerCase().includes(search.toLowerCase()) ||
+      q.company?.toLowerCase().includes(search.toLowerCase()) ||
+      q.email.toLowerCase().includes(search.toLowerCase());
+    return matchStatus && matchSearch;
+  });
+
+  const totalEstimate = filtered.reduce((s, q) => s + q.estimatedTotal, 0);
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Pole Configurator Quotes</h1>
+          <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">
+            {quotes.length} quote{quotes.length !== 1 ? "s" : ""} submitted via /security-pole-configurator
+          </p>
+        </div>
+        <Link
+          to="/security-pole-configurator"
+          target="_blank"
+          style={{ background: "hsl(0 75% 50%)" }}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity"
+        >
+          <Box size={15} /> Open Configurator
+        </Link>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+        {[
+          { label: "All", key: "all" as const, count: quotes.length, color: "hsl(0 0% 55%)" },
+          { label: "New", key: "new" as const, count: quotes.filter(q => q.status === "new").length, color: "hsl(210 80% 60%)" },
+          { label: "Contacted", key: "contacted" as const, count: quotes.filter(q => q.status === "contacted").length, color: "hsl(40 90% 55%)" },
+          { label: "Quoted", key: "quoted" as const, count: quotes.filter(q => q.status === "quoted").length, color: "hsl(270 70% 60%)" },
+          { label: "Won", key: "won" as const, count: quotes.filter(q => q.status === "won").length, color: "hsl(145 60% 45%)" },
+        ].map(s => (
+          <button
+            key={s.key}
+            onClick={() => setFilter(s.key)}
+            style={{
+              background: filter === s.key ? "hsl(0 0% 12%)" : "hsl(0 0% 8%)",
+              border: `1px solid ${filter === s.key ? s.color : "hsl(0 0% 14%)"}`,
+            }}
+            className="rounded-xl p-3 text-left transition-all"
+          >
+            <div className="text-xl font-bold text-white">{s.count}</div>
+            <div className="text-xs mt-0.5" style={{ color: s.color }}>{s.label}</div>
+          </button>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-3">
+        <div className="relative flex-1 max-w-sm">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "hsl(0 0% 40%)" }} />
+          <input
+            value={search} onChange={e => setSearch(e.target.value)}
+            placeholder="Search by name, company, email…"
+            style={{ background: "hsl(0 0% 5%)", border: "1px solid hsl(0 0% 16%)", color: "white" }}
+            className="w-full pl-9 pr-4 py-2 rounded-lg text-sm placeholder:text-gray-600 focus:outline-none"
+          />
+        </div>
+        {filtered.length > 0 && (
+          <span style={{ color: "hsl(0 0% 45%)" }} className="text-sm ml-auto">
+            Pipeline est: <strong className="text-white">${totalEstimate.toLocaleString()}</strong>
+          </span>
+        )}
+      </div>
+
+      {quotes.length === 0 ? (
+        <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl p-16 text-center">
+          <Box size={36} className="mx-auto mb-3" style={{ color: "hsl(0 0% 28%)" }} />
+          <p className="text-white font-medium mb-1">No quotes yet</p>
+          <p style={{ color: "hsl(0 0% 45%)" }} className="text-sm">
+            Quotes submitted via the Pole Configurator appear here in real-time.
+          </p>
+          <Link to="/security-pole-configurator" target="_blank"
+            style={{ background: "hsl(0 75% 50%)" }}
+            className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity">
+            Try the Configurator
+          </Link>
+        </div>
+      ) : (
+        <div className="grid lg:grid-cols-[1fr_380px] gap-5">
+          {/* Quote list */}
+          <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+            <div className="overflow-y-auto" style={{ maxHeight: 600 }}>
+              {filtered.length === 0 ? (
+                <p style={{ color: "hsl(0 0% 40%)" }} className="text-sm text-center py-10">No quotes match your filter.</p>
+              ) : filtered.map((q, i) => (
+                <button
+                  key={q.id}
+                  onClick={() => setSelected(q)}
+                  className="w-full text-left px-5 py-4 transition-colors hover:bg-white/[0.03] border-b"
+                  style={{
+                    borderColor: "hsl(0 0% 12%)",
+                    background: selected?.id === q.id ? "hsl(0 0% 11%)" : "transparent",
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="text-white font-semibold text-sm truncate">{q.name}</span>
+                        <Badge status={q.status} />
+                      </div>
+                      {q.company && <div style={{ color: "hsl(0 0% 50%)" }} className="text-xs truncate">{q.company}</div>}
+                      <div className="flex items-center gap-3 mt-1.5">
+                        <span style={{ color: "hsl(0 75% 58%)" }} className="text-xs font-semibold">${q.estimatedTotal.toLocaleString()}</span>
+                        <span style={{ color: "hsl(0 0% 40%)" }} className="text-xs">{q.config.quantity}× {q.config.height}ft pole</span>
+                        <span style={{ color: "hsl(0 0% 40%)" }} className="text-xs">{q.config.cameraCount} cams</span>
+                      </div>
+                    </div>
+                    <div style={{ color: "hsl(0 0% 38%)" }} className="text-xs flex-shrink-0">
+                      {new Date(q.submittedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Detail panel */}
+          <div style={{ background: "hsl(0 0% 8%)", border: "1px solid hsl(0 0% 14%)" }} className="rounded-xl overflow-hidden">
+            {!selected ? (
+              <div className="flex items-center justify-center h-full py-20">
+                <p style={{ color: "hsl(0 0% 38%)" }} className="text-sm">Select a quote to view details</p>
+              </div>
+            ) : (
+              <div className="flex flex-col h-full">
+                <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: "hsl(0 0% 13%)" }}>
+                  <div>
+                    <div className="text-white font-semibold">{selected.name}</div>
+                    <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{selected.email} · {selected.phone}</div>
+                  </div>
+                  <button onClick={() => deleteQuote(selected.id)} style={{ color: "hsl(0 0% 40%)" }} className="hover:text-red-400 transition-colors p-1">
+                    <Trash2 size={15} />
+                  </button>
+                </div>
+
+                <div className="flex-1 overflow-y-auto p-5 space-y-5">
+                  {/* Status changer */}
+                  <div>
+                    <p style={{ color: "hsl(0 0% 45%)" }} className="text-xs mb-2 font-semibold uppercase tracking-wider">Status</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {QUOTE_STATUSES.map(s => (
+                        <button
+                          key={s}
+                          onClick={() => updateStatus(selected.id, s)}
+                          style={{
+                            background: selected.status === s ? "hsl(0 75% 50%)" : "hsl(0 0% 13%)",
+                            border: `1px solid ${selected.status === s ? "hsl(0 75% 50%)" : "hsl(0 0% 20%)"}`,
+                            color: selected.status === s ? "white" : "hsl(0 0% 55%)",
+                          }}
+                          className="px-3 py-1 rounded-lg text-xs font-medium capitalize transition-all"
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Contact info */}
+                  <div style={{ background: "hsl(0 0% 11%)", border: "1px solid hsl(0 0% 16%)" }} className="rounded-xl p-4 space-y-2">
+                    <p style={{ color: "hsl(0 0% 45%)" }} className="text-xs font-semibold uppercase tracking-wider mb-3">Contact</p>
+                    {[
+                      { label: "Company", val: selected.company || "—" },
+                      { label: "Property", val: selected.propertyAddress || "—" },
+                      { label: "Type", val: selected.propertyType || "—" },
+                      { label: "Submitted", val: new Date(selected.submittedAt).toLocaleString() },
+                    ].map(r => (
+                      <div key={r.label} className="flex items-start justify-between gap-3">
+                        <span style={{ color: "hsl(0 0% 42%)" }} className="text-xs">{r.label}</span>
+                        <span style={{ color: "hsl(0 0% 70%)" }} className="text-xs text-right">{r.val}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Config details */}
+                  <div style={{ background: "hsl(0 0% 11%)", border: "1px solid hsl(0 0% 16%)" }} className="rounded-xl p-4">
+                    <p style={{ color: "hsl(0 0% 45%)" }} className="text-xs font-semibold uppercase tracking-wider mb-3">Configuration</p>
+                    <div className="grid grid-cols-2 gap-y-2 gap-x-4">
+                      {[
+                        ["Height", `${selected.config.height} ft`],
+                        ["Quantity", `${selected.config.quantity} pole${selected.config.quantity > 1 ? "s" : ""}`],
+                        ["Cameras", `${selected.config.cameraCount}× ${selected.config.cameraType.toUpperCase()}`],
+                        ["Lighting", selected.config.lighting],
+                        ["Arms", selected.config.armConfig],
+                        ["Mount", selected.config.mountType],
+                        ["Finish", selected.config.color],
+                        ["Add-ons", selected.config.accessories.length > 0 ? selected.config.accessories.join(", ") : "None"],
+                      ].map(([k, v]) => (
+                        <div key={k}>
+                          <div style={{ color: "hsl(0 0% 40%)" }} className="text-[10px] uppercase tracking-wider">{k}</div>
+                          <div style={{ color: "hsl(0 0% 75%)" }} className="text-xs font-medium capitalize mt-0.5 truncate">{v}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Estimate */}
+                  <div style={{ background: "hsl(0 75% 50%/0.08)", border: "1px solid hsl(0 75% 50%/0.2)" }} className="rounded-xl p-4">
+                    <div className="flex items-center justify-between">
+                      <span style={{ color: "hsl(0 0% 55%)" }} className="text-sm">Estimated Total</span>
+                      <span style={{ color: "hsl(0 75% 60%)" }} className="text-xl font-bold">${selected.estimatedTotal.toLocaleString()}</span>
+                    </div>
+                  </div>
+
+                  {/* Notes */}
+                  {selected.notes && (
+                    <div style={{ background: "hsl(0 0% 11%)", border: "1px solid hsl(0 0% 16%)" }} className="rounded-xl p-4">
+                      <p style={{ color: "hsl(0 0% 45%)" }} className="text-xs font-semibold uppercase tracking-wider mb-2">Notes</p>
+                      <p style={{ color: "hsl(0 0% 65%)" }} className="text-xs leading-relaxed">{selected.notes}</p>
+                    </div>
+                  )}
+
+                  {/* Action buttons */}
+                  <div className="flex gap-2 pt-1">
+                    <a
+                      href={`tel:${selected.phone.replace(/\D/g, "")}`}
+                      style={{ background: "hsl(0 75% 50%)" }}
+                      className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white text-sm font-medium hover:opacity-90 transition-opacity"
+                    >
+                      <Phone size={14} /> Call
+                    </a>
+                    <a
+                      href={`mailto:${selected.email}`}
+                      style={{ background: "hsl(0 0% 14%)", border: "1px solid hsl(0 0% 20%)" }}
+                      className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white text-sm font-medium hover:bg-white/5 transition-colors"
+                    >
+                      <Mail size={14} /> Email
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Sidebar Config ──────────────────────────────────────────────────────────
+
+type PageKey =
+  | "dashboard" | "leads" | "clients"
+  | "schedule" | "employees" | "timeclock"
+  | "analytics" | "email" | "livechat"
+  | "polequotes" | "users" | "settings";
+
+interface NavItem {
+  key: PageKey;
+  label: string;
+  icon: React.ElementType;
+  badge?: boolean;
+}
+
+interface NavGroup {
+  label: string;
+  items: NavItem[];
+}
+
+const navGroups: NavGroup[] = [
+  {
+    label: "Overview",
+    items: [{ key: "dashboard", label: "Dashboard", icon: LayoutDashboard }],
+  },
+  {
+    label: "Sales",
+    items: [
+      { key: "leads", label: "Leads", icon: Target },
+      { key: "clients", label: "Clients", icon: Users },
+      { key: "polequotes", label: "Pole Quotes", icon: Box },
+    ],
+  },
+  {
+    label: "Operations",
+    items: [
+      { key: "schedule", label: "Schedule", icon: Calendar },
+      { key: "employees", label: "Employees", icon: Briefcase },
+      { key: "timeclock", label: "Time Clock", icon: Timer },
+    ],
+  },
+  {
+    label: "Marketing",
+    items: [
+      { key: "analytics", label: "Analytics", icon: BarChart3 },
+      { key: "email", label: "Email Marketing", icon: Megaphone },
+    ],
+  },
+  {
+    label: "Support",
+    items: [{ key: "livechat", label: "Live Chat", icon: MessageSquare, badge: true }],
+  },
+  {
+    label: "Admin",
+    items: [
+      { key: "users", label: "Users & Access", icon: Lock },
+      { key: "settings", label: "Settings", icon: Settings },
+    ],
+  },
+];
+
+// ─── Main Admin Shell ─────────────────────────────────────────────────────────
+
+export default function AdminDashboard() {
+  const [page, setPage] = useState<PageKey>("dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { unreadCount } = useChatContext();
+
+  const pageComponents: Record<PageKey, React.ReactNode> = {
+    dashboard: <DashboardPage />,
+    leads: <LeadsPage />,
+    clients: <ClientsPage />,
+    polequotes: <PoleQuotesPage />,
+    schedule: <SchedulePage />,
+    employees: <EmployeesPage />,
+    timeclock: <TimeClockPage />,
+    analytics: <AnalyticsPage />,
+    email: <EmailPage />,
+    livechat: <LiveChatPage />,
+    users: <UsersPage />,
+    settings: <SettingsPage />,
+  };
+
+  const SidebarContent = () => (
+    <div className="flex flex-col h-full">
+      {/* Logo */}
+      <div className="px-5 py-5 border-b" style={{ borderColor: "hsl(0 0% 12%)" }}>
+        <div className="flex items-center gap-3">
+          <div style={{ background: "hsl(0 75% 50%)" }} className="w-8 h-8 rounded-lg flex items-center justify-center">
+            <Shield size={16} className="text-white" />
+          </div>
+          <div>
+            <div className="text-white text-sm font-bold leading-tight">Texas Total Security</div>
+            <div style={{ color: "hsl(0 0% 40%)" }} className="text-xs">Admin Portal</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Nav */}
+      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-5">
+        {navGroups.map(group => (
+          <div key={group.label}>
+            <div style={{ color: "hsl(0 0% 32%)" }} className="px-2 mb-1.5 text-xs font-semibold uppercase tracking-widest">{group.label}</div>
+            {group.items.map(item => {
+              const isActive = page === item.key;
+              const badge = item.badge && unreadCount > 0 ? unreadCount : null;
+              return (
+                <button
+                  key={item.key}
+                  onClick={() => { setPage(item.key); setSidebarOpen(false); }}
+                  style={{
+                    background: isActive ? "hsl(0 75% 50%/0.12)" : "transparent",
+                    color: isActive ? "hsl(0 75% 60%)" : "hsl(0 0% 55%)",
+                    border: isActive ? "1px solid hsl(0 75% 50%/0.2)" : "1px solid transparent",
+                  }}
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all hover:bg-white/[0.04] mb-0.5"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <item.icon size={16} />
+                    {item.label}
+                  </div>
+                  {badge && (
+                    <span style={{ background: "hsl(0 75% 50%)" }} className="text-white text-xs font-bold px-1.5 py-0.5 rounded-full">{badge}</span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        ))}
+      </nav>
+
+      {/* Footer */}
+      <div className="px-3 py-4 border-t" style={{ borderColor: "hsl(0 0% 12%)" }}>
+        <Link
+          to="/"
+          style={{ color: "hsl(0 0% 45%)" }}
+          className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm hover:bg-white/[0.04] transition-colors hover:text-white"
+        >
+          <Globe size={16} /> View Website
+        </Link>
+        <button
+          style={{ color: "hsl(0 0% 45%)" }}
+          className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm hover:bg-white/[0.04] transition-colors hover:text-white mt-1"
+        >
+          <LogOut size={16} /> Sign Out
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="flex min-h-screen" style={{ background: "hsl(0 0% 5%)" }}>
+      {/* Desktop Sidebar */}
+      <aside
+        className="hidden lg:flex flex-col w-56 flex-shrink-0 sticky top-0 h-screen overflow-hidden"
+        style={{ background: "hsl(0 0% 6%)", borderRight: "1px solid hsl(0 0% 11%)" }}
+      >
+        <SidebarContent />
+      </aside>
+
+      {/* Mobile Sidebar Overlay */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-50 flex lg:hidden">
+          <div className="absolute inset-0 bg-black/70" onClick={() => setSidebarOpen(false)} />
+          <aside
+            className="relative w-64 flex flex-col h-full"
+            style={{ background: "hsl(0 0% 6%)", borderRight: "1px solid hsl(0 0% 11%)" }}
+          >
+            <SidebarContent />
+          </aside>
+        </div>
+      )}
+
+      {/* Main content */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Top bar */}
+        <header
+          className="sticky top-0 z-40 flex items-center justify-between px-5 h-14 border-b flex-shrink-0"
+          style={{ background: "hsl(0 0% 6%)", borderColor: "hsl(0 0% 11%)" }}
+        >
+          <div className="flex items-center gap-3">
+            <button
+              className="lg:hidden p-1.5 rounded-lg hover:bg-white/[0.05] transition-colors"
+              style={{ color: "hsl(0 0% 55%)" }}
+              onClick={() => setSidebarOpen(true)}
+            >
+              <Menu size={20} />
+            </button>
+            <div className="hidden sm:flex items-center gap-2" style={{ background: "hsl(0 0% 9%)", border: "1px solid hsl(0 0% 15%)" , borderRadius: 8 }}>
+              <Search size={14} className="ml-3" style={{ color: "hsl(0 0% 40%)" }} />
+              <input
+                placeholder="Quick search…"
+                style={{ background: "transparent", color: "white", width: 200 }}
+                className="py-1.5 pr-3 pl-1 text-sm placeholder:text-gray-600 focus:outline-none"
+              />
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              style={{ background: "hsl(0 0% 10%)", border: "1px solid hsl(0 0% 16%)" }}
+              className="relative w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white/[0.06] transition-colors"
+            >
+              <Bell size={15} style={{ color: "hsl(0 0% 55%)" }} />
+              {unreadCount > 0 && (
+                <span style={{ background: "hsl(0 75% 50%)" }} className="absolute -top-1 -right-1 w-4 h-4 rounded-full text-white text-[10px] font-bold flex items-center justify-center">{unreadCount}</span>
+              )}
+            </button>
+            <div style={{ background: "hsl(0 75% 50%)" }} className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold">A</div>
+          </div>
+        </header>
+
+        {/* Page content */}
+        <main className="flex-1 p-5 sm:p-6 overflow-y-auto">
+          {pageComponents[page]}
+        </main>
+      </div>
+    </div>
+  );
+}

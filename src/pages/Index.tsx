@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useSpring, useInView } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import CTABlock from "@/components/CTABlock";
@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { generateLocalBusinessSchema, generateFAQSchema, generateOrganizationSchema, generateSiteLinksSearchBoxSchema, generateItemListSchema } from "@/lib/seo";
 import {
-  Shield, Camera, Home, Building2, Users, Radio,
+  Shield, Camera, Building2, Users, Radio,
   ArrowRight, Phone, CheckCircle2, Star,
   PhoneCall, ClipboardCheck, Wrench, HeadphonesIcon,
-  Award, Lock, MapPin, Plus, Minus, AlertTriangle,
+  Award, Lock, MapPin, Plus, Minus,
   ChevronLeft, ChevronRight,
 } from "lucide-react";
 
@@ -123,42 +123,15 @@ const faqs = [
   { q: "What areas in Houston do you serve?", a: "We serve Houston and premier surrounding communities including Sugar Land, Katy, The Woodlands, Cypress, Bellaire, Memorial, West University, and Richmond. Contact us to confirm service availability for your property portfolio." },
 ];
 
-/* ─── CountUp ───────────────────────────────────────────────── */
-function CountUp({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.8 });
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    const t0 = performance.now();
-    const tick = (t: number) => {
-      const p = Math.min((t - t0) / (duration * 1000), 1);
-      const eased = 1 - Math.pow(1 - p, 4);
-      setVal(Math.round(eased * to));
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [inView, to, duration]);
-  return <span ref={ref}>{val}{suffix}</span>;
-}
 
 /* ─── Page ──────────────────────────────────────────────────── */
 const Index = () => {
-  const { t } = useTranslation();
+  useTranslation();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHeroPaused, setIsHeroPaused] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowFloatingCTA(window.scrollY > window.innerHeight * 0.35);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Hero slider auto-advance — resets to 8s every time slide changes
   useEffect(() => {
@@ -191,38 +164,6 @@ const Index = () => {
         className="scroll-progress"
         style={{ scaleX }}
       />
-
-      {/* ── Floating Call CTA ── */}
-      <AnimatePresence>
-        {showFloatingCTA && (
-          <motion.div
-            className="floating-cta"
-            initial={{ opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 80 }}
-            transition={{ duration: 0.45, ease: easeExpo }}
-          >
-            <motion.a
-              href="tel:7133879937"
-              className="flex items-center gap-3 px-5 py-3.5 rounded-full font-semibold text-white text-sm shadow-2xl"
-              style={{
-                background: "linear-gradient(135deg, hsl(0 85% 38%) 0%, hsl(0 85% 50%) 100%)",
-                boxShadow: "0 8px 32px hsl(0 85% 45% / 0.45), 0 2px 8px rgba(0,0,0,0.3)",
-              }}
-              whileHover={{ scale: 1.04, y: -2, boxShadow: "0 12px 40px hsl(0 85% 45% / 0.55), 0 4px 12px rgba(0,0,0,0.3)" }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <motion.span
-                className="w-2 h-2 rounded-full bg-white/80"
-                animate={{ opacity: [1, 0.4, 1] }}
-                transition={{ duration: 1.6, repeat: Infinity }}
-              />
-              <Phone className="w-4 h-4" />
-              <span>(713) 387-9937</span>
-            </motion.a>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <SEOHead
         title="Commercial Security Systems Houston | Property Management & HOA Security | Texas Total Security"
@@ -473,34 +414,59 @@ const Index = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          TRUST STRIP — infinite marquee
+          TRUST STRIP — luxury dark marquee
       ══════════════════════════════════════════════════ */}
-      <div className="bg-white border-b border-gray-100 py-3.5 marquee-outer">
+      <div
+        className="marquee-outer overflow-hidden"
+        style={{
+          background: "hsl(0 0% 5%)",
+          borderTop: "1px solid rgba(255,255,255,0.05)",
+          borderBottom: "1px solid rgba(255,255,255,0.05)",
+          padding: "11px 0",
+        }}
+      >
         {(() => {
           const items = [
-            { label: "Switch From ADT / Vivint / Brinks",     highlight: true  },
-            { label: "Property Management Solutions",          highlight: true  },
-            { label: "Licensed & Insured · LIC# B03066901",   highlight: true  },
-            { label: "HOA & Community Security",               highlight: true  },
-            { label: "Custom Security Poles",                  highlight: false },
-            { label: "License Plate Recognition",              highlight: false },
-            { label: "Alarm.com",                              highlight: false },
-            { label: "24/7 Local Monitoring Center",           highlight: false },
-            { label: "Honeywell / Resideo",                    highlight: false },
-            { label: "Locally Owned & Operated",                 highlight: false },
+            { label: "Switch From ADT · Vivint · Brinks", accent: true  },
+            { label: "Property Management Security",       accent: false },
+            { label: "LIC# B03066901 · Licensed & Insured", accent: true  },
+            { label: "HOA & Community Security",           accent: false },
+            { label: "Custom Security Poles",              accent: false },
+            { label: "License Plate Recognition",          accent: true  },
+            { label: "Alarm.com Authorized Dealer",        accent: false },
+            { label: "24/7 In-House Houston Monitoring",   accent: true  },
+            { label: "Honeywell · Resideo Systems",        accent: false },
+            { label: "Locally Owned & Operated",           accent: false },
           ];
           const row = [...items, ...items];
           return (
             <div className="marquee-track">
               {row.map((item, i) => (
-                <span key={i} className="inline-flex items-center gap-4 px-6">
-                  <span
-                    className="text-[11px] font-semibold uppercase tracking-[0.1em] whitespace-nowrap"
-                    style={{ color: item.highlight ? "rgb(100 107 115)" : "rgb(163 170 178)" }}
-                  >
-                    {item.label}
-                  </span>
-                  <span className="text-gray-200 select-none" aria-hidden>·</span>
+                <span key={i} className="inline-flex items-center gap-5 px-5 select-none">
+                  {item.accent ? (
+                    <span className="inline-flex items-center gap-2">
+                      <motion.span
+                        className="w-[5px] h-[5px] rounded-full shrink-0"
+                        style={{ background: "hsl(0 85% 52%)" }}
+                        animate={{ opacity: [0.6, 1, 0.6] }}
+                        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
+                      />
+                      <span
+                        className="text-[10.5px] font-bold uppercase tracking-[0.18em] whitespace-nowrap"
+                        style={{ color: "rgba(255,255,255,0.88)" }}
+                      >
+                        {item.label}
+                      </span>
+                    </span>
+                  ) : (
+                    <span
+                      className="text-[10.5px] font-medium uppercase tracking-[0.15em] whitespace-nowrap"
+                      style={{ color: "rgba(255,255,255,0.32)" }}
+                    >
+                      {item.label}
+                    </span>
+                  )}
+                  <span style={{ color: "rgba(255,255,255,0.08)", fontSize: "16px", lineHeight: 1 }} aria-hidden>╌</span>
                 </span>
               ))}
             </div>
@@ -509,23 +475,112 @@ const Index = () => {
       </div>
 
       {/* ══════════════════════════════════════════════════
-          HOUSTON PROBLEM — alert banner
+          PRE-QUALIFICATION CTA — luxury split section
       ══════════════════════════════════════════════════ */}
-      <Link
-        to="/houston-we-have-a-problem"
-        className="group flex items-center justify-between gap-4 px-5 py-3.5 hover:opacity-90 transition-opacity"
-        style={{ background: "hsl(0 85% 38%)" }}
+      <section
+        className="relative overflow-hidden"
+        style={{ background: "linear-gradient(125deg, hsl(0 0% 5%) 0%, hsl(0 70% 8%) 55%, hsl(0 0% 5%) 100%)" }}
       >
-        <div className="flex items-center gap-3 min-w-0">
-          <AlertTriangle className="w-4 h-4 text-white/80 shrink-0" />
-          <span className="text-[12.5px] font-bold text-white tracking-wide truncate">
-            Houston, We Have a Problem — See Why Property Crime is Rising & What You Can Do About It
-          </span>
+        {/* Left red glow bloom */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 55% 100% at 2% 50%, hsl(0 85% 38% / 0.22), transparent 65%)" }}
+        />
+        {/* Right subtle bloom */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 40% 80% at 98% 50%, hsl(0 85% 30% / 0.10), transparent 65%)" }}
+        />
+        {/* Top/bottom hairlines */}
+        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(to right, transparent 5%, hsl(0 85% 44% / 0.35) 40%, hsl(0 85% 44% / 0.35) 60%, transparent 95%)" }} />
+        <div className="absolute inset-x-0 bottom-0 h-px" style={{ background: "linear-gradient(to right, transparent 5%, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.06) 60%, transparent 95%)" }} />
+
+        <div className="relative max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-9 sm:py-11">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-14">
+
+            {/* ── Left: headline copy ── */}
+            <div className="flex-1 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 mb-3">
+                <span className="h-px w-5 rounded-full" style={{ background: "hsl(0 85% 52%)" }} />
+                <span className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: "hsl(0 75% 60%)" }}>
+                  Pre-Qualification
+                </span>
+              </div>
+              <h2
+                className="font-display font-bold text-white mb-3"
+                style={{ fontSize: "clamp(1.55rem, 3.2vw, 2.4rem)", lineHeight: 1.1, letterSpacing: "-0.03em" }}
+              >
+                See If Your Property<br className="hidden sm:block" /> Qualifies — 60 Seconds.
+              </h2>
+              <p
+                className="leading-relaxed"
+                style={{ fontSize: "clamp(0.85rem, 1.4vw, 0.97rem)", color: "rgba(255,255,255,0.52)", maxWidth: "30rem" }}
+              >
+                Answer 5 quick questions. We'll tell you exactly which security program fits your property, your budget, and your goals.
+              </p>
+            </div>
+
+            {/* ── Vertical divider (desktop) ── */}
+            <div
+              className="hidden lg:block w-px self-stretch"
+              style={{ background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.10) 30%, rgba(255,255,255,0.10) 70%, transparent)" }}
+            />
+
+            {/* ── Right: qualifiers + CTA ── */}
+            <div className="flex-1 w-full max-w-sm lg:max-w-none">
+              <ul className="space-y-2.5 mb-6">
+                {[
+                  "Property managers, HOA boards & commercial properties",
+                  "Free onsite assessment included — no hidden costs",
+                  "No long-term contracts · Local Houston team",
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-3">
+                    <CheckCircle2
+                      className="w-4 h-4 mt-0.5 shrink-0"
+                      style={{ color: "hsl(0 85% 54%)" }}
+                    />
+                    <span className="text-[13px] leading-snug" style={{ color: "rgba(255,255,255,0.68)" }}>
+                      {point}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center gap-3">
+                <motion.div
+                  whileHover={{ scale: 1.025, y: -1 }}
+                  whileTap={{ scale: 0.975 }}
+                  className="w-full sm:w-auto lg:w-full xl:w-auto"
+                >
+                  <Link
+                    to="/qualify"
+                    className="btn-primary-gradient w-full sm:w-auto inline-flex items-center justify-center gap-2.5 font-bold px-8 py-3.5 whitespace-nowrap"
+                    style={{
+                      fontSize: "0.88rem",
+                      letterSpacing: "0.01em",
+                      boxShadow: "0 6px 32px hsl(0 85% 44% / 0.40), 0 2px 8px rgba(0,0,0,0.4)",
+                    }}
+                  >
+                    Check If I Qualify — Free
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </motion.div>
+                <a
+                  href="tel:7133879937"
+                  className="flex items-center gap-2 text-[13px] font-semibold whitespace-nowrap transition-colors duration-200"
+                  style={{ color: "rgba(255,255,255,0.45)" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.8)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  Or call (713) 387-9937
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <span className="hidden sm:flex items-center gap-1 text-[12px] font-semibold text-white/80 shrink-0 group-hover:gap-2 transition-all">
-          Read More <ArrowRight className="w-3.5 h-3.5" />
-        </span>
-      </Link>
+      </section>
 
       {/* ══════════════════════════════════════════════════
           SERVICES — Masterfully Redesigned
