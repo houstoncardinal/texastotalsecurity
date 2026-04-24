@@ -5,13 +5,13 @@ import SEOHead from "@/components/SEOHead";
 import CTABlock from "@/components/CTABlock";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { generateLocalBusinessSchema, generateFAQSchema, generateOrganizationSchema, generateSiteLinksSearchBoxSchema, generateItemListSchema } from "@/lib/seo";
+import { generateItemListSchema, generateComprehensiveHomepageSchema } from "@/lib/seo";
 import {
-  Shield, Camera, Building2, Users, Radio,
+  Shield, Camera, Building2, Users, Radio, Home,
   ArrowRight, Phone, CheckCircle2, Star,
   PhoneCall, ClipboardCheck, Wrench, HeadphonesIcon,
   Award, Lock, MapPin, Plus, Minus,
-  ChevronLeft, ChevronRight,
+  ChevronLeft, ChevronRight, Briefcase,
 } from "lucide-react";
 
 /* ─── Animation variants ────────────────────────────────────── */
@@ -35,20 +35,34 @@ const easeExpo = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.15 };
 
 /* ─── Hero slides ───────────────────────────────────────────── */
-const heroSlides = [
+type HeroSlide = {
+  eyebrow: string;
+  headline: string[];
+  sub: string;
+  cta: { label: string; href: string };
+  ctas?: { label: string; href: string }[];
+  bg: string;
+  overlay: string;
+};
+
+const heroSlides: HeroSlide[] = [
   {
-    eyebrow: "Property Managers · HOA Boards · Businesses",
-    headline: ["Stop Overpaying for", "Security That Doesn't Perform."],
-    sub: "Switch your alarm company, upgrade your surveillance, or build a custom security system — engineered for Houston's commercial properties.",
-    cta: { label: "Check If You Qualify — 60 Seconds", href: "/qualify" },
-    bg: "/imgi_11_Security-Camera-with-Buildings-in-background-Commercial.jpg_1675696598-scaled.jpg",
-    overlay: "linear-gradient(135deg, rgba(0,0,0,0.91) 0%, rgba(0,0,0,0.76) 50%, rgba(0,0,0,0.58) 100%)",
+    eyebrow: "Houston Homeowners · Property Managers · HOA Boards",
+    headline: ["Protecting Houston Homes,", "Communities & Properties."],
+    sub: "Whether you're a homeowner looking for peace of mind or a property manager securing your portfolio — we build security that fits your life.",
+    cta: { label: "Get a Free Assessment", href: "/free-analysis" },
+    ctas: [
+      { label: "Protect My Home", href: "/residential" },
+      { label: "Protect My Property", href: "/commercial" },
+    ],
+    bg: "/residential/imgi_33_luxury-home-6886153_1280.jpg",
+    overlay: "linear-gradient(135deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.50) 100%)",
   },
   {
     eyebrow: "Alarm Takeovers · No Long-Term Contracts",
-    headline: ["Ditch ADT.", "Switch to Local Monitoring."],
-    sub: "We take over your existing panels and sensors from ADT, Brinks, or Vivint — same hardware, local monitoring, no contracts, better rates.",
-    cta: { label: "See If We Can Take Over — Free", href: "/alarm-systems" },
+    headline: ["Go Local.", "Better Service. No Contracts."],
+    sub: "We take over your existing alarm from ADT, Brinks, Vivint, or any provider. Keep your hardware, lower your rate. Monitored from our in-house San Antonio dispatch center — never a national call center.",
+    cta: { label: "Switch My Alarm Today", href: "/alarm-systems" },
     bg: "/imgi_13_gd9131.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
   },
@@ -69,9 +83,9 @@ const heroSlides = [
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
   },
   {
-    eyebrow: "In-House Houston Monitoring Center",
+    eyebrow: "In-House San Antonio Dispatch Center",
     headline: ["Local Operators.", "Real Response. Never Outsourced."],
-    sub: "Our monitoring center is in Houston — not a national call center. Active deterrence cameras with sirens, strobes & two-way audio. Local dispatch within seconds.",
+    sub: "Our in-house dispatch center is based in San Antonio — never outsourced to a national call center. Active deterrence cameras with sirens, strobes & two-way audio. Local dispatch within seconds.",
     cta: { label: "Learn About Our Monitoring", href: "/monitoring-services" },
     bg: "/imgi_8_qtq80-BdoLjp-2048x1367.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 50%, rgba(0,0,0,0.60) 100%)",
@@ -80,12 +94,12 @@ const heroSlides = [
 
 /* ─── Data ──────────────────────────────────────────────────── */
 const services = [
-  { icon: Shield,    title: "Alarm Systems & Takeovers",       desc: "Switching from ADT, Brinks, or Vivint? We take over your existing equipment and provide local monitoring — no long-term contracts.",   href: "/alarm-systems" },
+  { icon: Shield,    title: "Alarm Systems & Takeovers",       desc: "Switching from your current provider? We take over your existing equipment and provide local monitoring — no long-term contracts.",   href: "/alarm-systems" },
   { icon: Camera,    title: "Security Camera Systems",         desc: "4K IP cameras, LPR, security poles & active deterrence for apartment complexes, commercial properties, and HOA communities.",          href: "/security-cameras" },
   { icon: Building2, title: "Commercial & Industrial Security", desc: "Enterprise-grade security for offices, retail, warehouses, and multi-site operations — scalable to any portfolio size.",               href: "/commercial" },
   { icon: Users,     title: "Property Management Security",    desc: "Comprehensive surveillance solutions for multifamily communities, apartment complexes, and managed properties.",                       href: "/property-management-security" },
   { icon: Users,     title: "HOA & Community Security",        desc: "Gate cameras, license plate recognition, common area surveillance & neighborhood-wide security systems for HOA boards.",              href: "/hoa-security" },
-  { icon: Radio,     title: "24/7 Monitoring & Active Deterrence", desc: "In-house Houston monitoring center with local dispatch. Cameras with sirens, strobes & two-way audio — never outsourced.",       href: "/monitoring-services" },
+  { icon: Radio,     title: "24/7 Monitoring & Active Deterrence", desc: "In-house San Antonio dispatch center — never outsourced to a national call center. Active deterrence cameras with sirens, strobes & two-way audio.",       href: "/monitoring-services" },
 ];
 
 const processSteps = [
@@ -98,7 +112,7 @@ const processSteps = [
 const whyUs = [
   { icon: MapPin,          title: "Houston-Born & Operated",     desc: "Locally owned and operated, serving Houston's commercial and residential communities. We know the neighborhoods, the crime patterns, and the infrastructure." },
   { icon: Shield,          title: "We Never Sell Your Contract",  desc: "Unlike national providers, your account stays with our local team — permanently. No buyouts, no surprises." },
-  { icon: HeadphonesIcon,  title: "In-House Local Monitoring",    desc: "Our monitoring center is in Houston — not a national call center. Local operators dispatch local authorities within seconds." },
+  { icon: HeadphonesIcon,  title: "San Antonio Dispatch Center",   desc: "Our in-house monitoring center is in San Antonio — never outsourced to a national call center. Real operators dispatch local authorities within seconds." },
   { icon: Building2,       title: "Built for Property Managers",  desc: "We understand multi-site operations, tenant liability concerns, and HOA compliance — because property management security is what we do." },
   { icon: Award,           title: "Trusted by Decision Makers",   desc: "Property management companies, HOA boards, and business owners across Greater Houston rely on us for their security infrastructure." },
   { icon: Lock,            title: "Enterprise-Grade Technology",   desc: "Active deterrence, LPR cameras, custom security poles, and smart integrations — built for commercial-scale deployments." },
@@ -111,15 +125,15 @@ const testimonials = [
 ];
 
 const faqs = [
-  { q: "How do property management companies switch alarm providers?", a: "Switching is straightforward. We evaluate your existing alarm equipment from ADT, Brinks, Vivint, or any other provider — and in most cases, take over your panels, sensors, and wiring without replacing them. Our local team handles the entire transition with zero downtime to your tenants and operations." },
+  { q: "How do property management companies switch alarm providers?", a: "Switching is straightforward. We evaluate your existing alarm equipment from any provider — and in most cases, take over your panels, sensors, and wiring without replacing them. Our local team handles the entire transition with zero downtime to your tenants and operations." },
   { q: "Do you handle security for apartment complexes and multifamily properties?", a: "Yes — this is one of our core specialties. We provide comprehensive security for apartment communities including entrance/exit gate cameras, LPR systems, common area surveillance, package area monitoring, mailbox cameras, and dumpster area deterrence systems." },
-  { q: "What makes you different from national alarm companies?", a: "We are a locally owned Houston company — not a franchise. You get dedicated Houston technicians, an in-house monitoring center that never outsources, and we never sell your contract to a national company. Property managers get a single point of contact for every property in their portfolio." },
+  { q: "What makes you different from national alarm companies?", a: "We are a locally owned Houston company — not a franchise. You get dedicated Houston technicians, an in-house San Antonio dispatch center that never outsources to a national call center, and we never sell your contract. Property managers get a single point of contact for every property in their portfolio." },
   { q: "Can you install security poles with multiple cameras?", a: "Absolutely. We custom-fabricate security poles in heights from 10 to 25 feet, supporting 1–4 cameras per pole with integrated wiring, LED floodlights, IR illuminators, and active deterrence systems. Use our 3D configurator to design your exact setup." },
   { q: "Do you serve commercial and industrial properties?", a: "Yes. From single retail locations to multi-site corporate campuses, warehouses, and industrial facilities — every system is custom-designed for your property's layout, liability requirements, and operational needs." },
   { q: "Can you take over our existing alarm equipment?", a: "In most cases, yes. We evaluate your existing keypads, sensors, wiring, and panels during a free property assessment. If your equipment is compatible — such as Honeywell VISTA panels, DMP, or DSC systems — we integrate it into your new setup, saving significant replacement costs." },
   { q: "What does a free property assessment include?", a: "A certified security professional visits your property at no cost. We map every entry point, evaluate existing equipment, identify blind spots and vulnerabilities, and provide a detailed proposal with transparent pricing. Zero obligation, zero pressure — designed for decision makers who need clear ROI justification." },
   { q: "How long does a commercial security installation take?", a: "Commercial and HOA projects typically take 1–5 days depending on scope. Apartment complexes with multiple buildings may take 1–2 weeks. We schedule around your operations and coordinate with property management to minimize disruption to tenants." },
-  { q: "Do you offer 24/7 monitoring with local dispatch?", a: "Yes. Our monitoring center is based in Houston — not outsourced to a national call center. When an alarm triggers, local operators verify the signal and dispatch local authorities immediately. Property managers receive real-time notifications and incident reports." },
+  { q: "Do you offer 24/7 monitoring with local dispatch?", a: "Yes. Our in-house dispatch center is based in San Antonio — never outsourced to a national call center. When an alarm triggers, our operators verify the signal and dispatch local authorities immediately. Property managers receive real-time notifications and incident reports." },
   { q: "What areas in Houston do you serve?", a: "We serve Houston and premier surrounding communities including Sugar Land, Katy, The Woodlands, Cypress, Bellaire, Memorial, West University, and Richmond. Contact us to confirm service availability for your property portfolio." },
 ];
 
@@ -143,10 +157,7 @@ const Index = () => {
   }, [currentSlide, isHeroPaused]);
 
   const schemas = [
-    generateSiteLinksSearchBoxSchema(),
-    generateOrganizationSchema(),
-    generateLocalBusinessSchema(),
-    generateFAQSchema(faqs.map(f => ({ question: f.q, answer: f.a }))),
+    generateComprehensiveHomepageSchema(),
     generateItemListSchema([
       { name: "Alarm Systems", description: "Custom alarm design, installation & local monitoring", url: "/alarm-systems", position: 1 },
       { name: "Security Camera Systems", description: "HD surveillance, license plate cameras, PTZ & remote viewing", url: "/security-cameras", position: 2 },
@@ -166,8 +177,8 @@ const Index = () => {
       />
 
       <SEOHead
-        title="Commercial Security Systems Houston | Property Management & HOA Security | Texas Total Security"
-        description="Houston's trusted commercial security company for property managers, HOAs & businesses. Alarm takeovers, 4K cameras, security poles, LPR & 24/7 local monitoring. Switch from ADT today. Free assessment: (713) 387-9937."
+        title="Local Alarm Company Houston TX | Security Cameras & HOA Systems | Texas Total Security"
+        description="Houston's trusted local security company. Alarm systems, security cameras, HOA & commercial security. Serving Houston & surrounding areas for 30+ years. Call (713) 387-9937."
         schemas={schemas}
       />
 
@@ -281,8 +292,8 @@ const Index = () => {
                 <h1
                   className="font-display font-bold text-white px-2 mx-auto"
                   style={{
-                    fontSize: "clamp(2.35rem, 5.5vw, 4.75rem)",
-                    lineHeight: 1.07,
+                    fontSize: "clamp(1.75rem, 4.5vw, 3.5rem)",
+                    lineHeight: 1.1,
                     letterSpacing: "-0.04em",
                     marginBottom: "1.1rem",
                     maxWidth: "52rem",
@@ -319,25 +330,41 @@ const Index = () => {
 
                 {/* ── CTAs ── */}
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
-                  <motion.div whileHover={{ scale: 1.025, y: -2 }} whileTap={{ scale: 0.975 }}>
-                    <Link
-                      to={heroSlides[currentSlide].cta.href}
-                      className="btn-primary-gradient inline-flex items-center gap-2.5 font-semibold px-7 py-3.5"
-                      style={{ fontSize: "0.9rem", boxShadow: "0 6px 28px hsl(0 85% 45% / 0.38), 0 2px 8px rgba(0,0,0,0.3)" }}
-                    >
-                      {heroSlides[currentSlide].cta.label}
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </motion.div>
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <a
-                      href="tel:7133879937"
-                      className="btn-outline-light inline-flex items-center gap-2.5 font-semibold px-7 py-3.5"
-                      style={{ fontSize: "0.9rem" }}
-                    >
-                      <Phone className="w-4 h-4" /> (713) 387-9937
-                    </a>
-                  </motion.div>
+                  {heroSlides[currentSlide].ctas ? (
+                    heroSlides[currentSlide].ctas!.map((cta, idx) => (
+                      <motion.div key={cta.href} whileHover={{ scale: 1.025, y: -2 }} whileTap={{ scale: 0.975 }}>
+                        <Link
+                          to={cta.href}
+                          className={idx === 0 ? "btn-primary-gradient inline-flex items-center gap-2.5 font-semibold px-7 py-3.5" : "btn-outline-light inline-flex items-center gap-2.5 font-semibold px-7 py-3.5"}
+                          style={idx === 0 ? { fontSize: "0.9rem", boxShadow: "0 6px 28px hsl(0 85% 45% / 0.38), 0 2px 8px rgba(0,0,0,0.3)" } : { fontSize: "0.9rem" }}
+                        >
+                          {cta.label} <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      </motion.div>
+                    ))
+                  ) : (
+                    <>
+                      <motion.div whileHover={{ scale: 1.025, y: -2 }} whileTap={{ scale: 0.975 }}>
+                        <Link
+                          to={heroSlides[currentSlide].cta.href}
+                          className="btn-primary-gradient inline-flex items-center gap-2.5 font-semibold px-7 py-3.5"
+                          style={{ fontSize: "0.9rem", boxShadow: "0 6px 28px hsl(0 85% 45% / 0.38), 0 2px 8px rgba(0,0,0,0.3)" }}
+                        >
+                          {heroSlides[currentSlide].cta.label}
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      </motion.div>
+                      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        <a
+                          href="tel:7133879937"
+                          className="btn-outline-light inline-flex items-center gap-2.5 font-semibold px-7 py-3.5"
+                          style={{ fontSize: "0.9rem" }}
+                        >
+                          <Phone className="w-4 h-4" /> (713) 387-9937
+                        </a>
+                      </motion.div>
+                    </>
+                  )}
                 </div>
 
                 {/* ── Trust authority strip ── */}
@@ -427,14 +454,14 @@ const Index = () => {
       >
         {(() => {
           const items = [
-            { label: "Switch From ADT · Vivint · Brinks", accent: true  },
+            { label: "Switch Alarm Providers", accent: true  },
             { label: "Property Management Security",       accent: false },
             { label: "LIC# B03066901 · Licensed & Insured", accent: true  },
             { label: "HOA & Community Security",           accent: false },
             { label: "Custom Security Poles",              accent: false },
             { label: "License Plate Recognition",          accent: true  },
             { label: "Alarm.com Authorized Dealer",        accent: false },
-            { label: "24/7 In-House Houston Monitoring",   accent: true  },
+            { label: "24/7 Monitoring · San Antonio Dispatch Center", accent: true  },
             { label: "Honeywell · Resideo Systems",        accent: false },
             { label: "Locally Owned & Operated",           accent: false },
           ];
@@ -473,6 +500,385 @@ const Index = () => {
           );
         })()}
       </div>
+
+      {/* ══════════════════════════════════════════════════
+          WHO WE SERVE — two-column split cards
+      ══════════════════════════════════════════════════ */}
+      <section className="section-padding" style={{ background: "hsl(0 0% 97%)" }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.75, ease: easeExpo }}
+            className="text-center max-w-2xl mx-auto mb-12"
+          >
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-5"
+              style={{ background: "hsl(0 85% 45% / 0.06)", border: "1px solid hsl(0 85% 45% / 0.12)" }}
+            >
+              <Users className="w-4 h-4" style={{ color: "hsl(0 85% 50%)" }} />
+              <span className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: "hsl(0 85% 45%)" }}>
+                Who We Serve
+              </span>
+            </div>
+            <h2
+              className="font-display font-bold text-gray-900 mb-4"
+              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.08, letterSpacing: "-0.04em" }}
+            >
+              Security Built for Your Life
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              From first-time homeowners to multi-property managers — we design systems tailored to your needs.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Homeowners card — light */}
+            <motion.div
+              variants={fadeLeft}
+              initial="hidden"
+              whileInView="show"
+              viewport={vp}
+              transition={{ duration: 0.75, ease: easeExpo }}
+            >
+              <Link to="/residential" className="group block h-full">
+                <div className="relative h-full rounded-3xl p-8 bg-white border border-gray-200 hover:border-accent/30 hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ background: "linear-gradient(135deg, hsl(0 85% 45% / 0.03) 0%, transparent 100%)" }} />
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3" style={{ background: "linear-gradient(135deg, hsl(0 85% 45% / 0.08) 0%, hsl(0 85% 45% / 0.04) 100%)", border: "1px solid hsl(0 85% 45% / 0.12)" }}>
+                    <Home className="w-7 h-7" style={{ color: "hsl(0 85% 50%)" }} />
+                  </div>
+                  <h3 className="font-display font-bold text-gray-900 text-xl mb-3 leading-tight group-hover:text-accent transition-colors duration-300">Homeowners</h3>
+                  <p className="text-gray-600 leading-relaxed mb-5 text-sm">
+                    Your home is your family's sanctuary. Custom alarm and camera systems backed by 24/7 monitoring — with real people who answer the phone.
+                  </p>
+                  <ul className="space-y-2 mb-6">
+                    {["Custom alarm & smart home integration", "HD indoor & outdoor cameras", "No long-term contracts", "Local technicians — real people, real answers"].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(0 85% 50%)" }} />
+                        <span className="text-sm text-gray-700">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="inline-flex items-center gap-2 font-semibold text-accent group-hover:gap-3 transition-all duration-300 text-sm">
+                    Protect My Home <ArrowRight className="w-4 h-4" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 h-1 rounded-b-3xl transition-all duration-300 opacity-0 group-hover:opacity-100" style={{ background: "linear-gradient(90deg, hsl(0 85% 45%), hsl(0 85% 55%))" }} />
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Business Owners card — medium dark */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={vp}
+              transition={{ duration: 0.75, ease: easeExpo, delay: 0.08 }}
+            >
+              <Link to="/commercial" className="group block h-full">
+                <div className="relative h-full rounded-3xl p-8 overflow-hidden" style={{ background: "hsl(220 18% 11%)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(220 60% 50% / 0.10), transparent 65%)" }} />
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 relative z-10" style={{ background: "hsl(220 60% 50% / 0.14)", border: "1px solid hsl(220 60% 50% / 0.22)" }}>
+                    <Briefcase className="w-7 h-7" style={{ color: "hsl(220 70% 72%)" }} />
+                  </div>
+                  <h3 className="font-display font-bold text-white text-xl mb-3 leading-tight relative z-10">Business Owners</h3>
+                  <p className="leading-relaxed mb-5 relative z-10 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    From single storefronts to multi-site operations — we design commercial security that protects your assets, employees, and bottom line.
+                  </p>
+                  <ul className="space-y-2 mb-6 relative z-10">
+                    {["Commercial alarm systems & cameras", "Access control & active deterrence", "24/7 in-house dispatch monitoring", "Service & support — not just install"].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(220 70% 68%)" }} />
+                        <span className="text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="inline-flex items-center gap-2 font-semibold group-hover:gap-3 transition-all duration-300 relative z-10 text-sm" style={{ color: "hsl(220 70% 72%)" }}>
+                    Protect My Business <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Property Managers & HOAs card — darkest */}
+            <motion.div
+              variants={fadeRight}
+              initial="hidden"
+              whileInView="show"
+              viewport={vp}
+              transition={{ duration: 0.75, ease: easeExpo, delay: 0.16 }}
+            >
+              <Link to="/hoa-security" className="group block h-full">
+                <div className="relative h-full rounded-3xl p-8 overflow-hidden" style={{ background: "hsl(0 0% 6%)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 50% at 20% 50%, hsl(0 85% 45% / 0.12), transparent 65%)" }} />
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 relative z-10" style={{ background: "hsl(0 85% 45% / 0.15)", border: "1px solid hsl(0 85% 45% / 0.25)" }}>
+                    <Building2 className="w-7 h-7" style={{ color: "hsl(0 85% 60%)" }} />
+                  </div>
+                  <h3 className="font-display font-bold text-white text-xl mb-3 leading-tight relative z-10">Property Managers, HOA Boards & Board Members</h3>
+                  <p className="leading-relaxed mb-5 relative z-10 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    Gate access, community cameras, centralized reporting, and a single point of contact for your entire portfolio — built for how you actually manage properties.
+                  </p>
+                  <ul className="space-y-2 mb-6 relative z-10">
+                    {["Gate access control & LPR cameras", "Community-wide surveillance", "Multi-unit alarm monitoring", "HOA board-friendly reporting"].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(0 85% 58%)" }} />
+                        <span className="text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="inline-flex items-center gap-2 font-semibold group-hover:gap-3 transition-all duration-300 relative z-10 text-sm" style={{ color: "hsl(0 85% 62%)" }}>
+                    Protect My Property <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          SWITCH YOUR ALARM COMPANY — residential warm tone
+      ══════════════════════════════════════════════════ */}
+      <section className="overflow-hidden bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+
+          {/* Left — warm residential image */}
+          <motion.div
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.85, ease: easeExpo }}
+            className="relative min-h-[400px] lg:min-h-[580px]"
+          >
+            <img
+              src="/residential/imgi_33_luxury-home-6886153_1280.jpg"
+              alt="Houston family home protected by Texas Total Security alarm system"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              loading="lazy"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(to right, transparent 55%, white 100%)" }}
+            />
+            {/* Floating review badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={vp}
+              transition={{ duration: 0.7, ease: easeExpo, delay: 0.3 }}
+              className="absolute bottom-8 left-8 rounded-2xl p-5"
+              style={{
+                background: "rgba(255,255,255,0.96)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid rgba(0,0,0,0.08)",
+                boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
+                maxWidth: "240px",
+              }}
+            >
+              <div className="flex gap-0.5 mb-2">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5" style={{ fill: "hsl(var(--accent))", color: "hsl(var(--accent))" }} />
+                ))}
+              </div>
+              <p className="text-[13px] font-semibold text-gray-900 leading-snug mb-1">
+                "Switching was so easy. Done in one afternoon."
+              </p>
+              <p className="text-[11px] text-gray-500">Homeowner — Bellaire, TX</p>
+            </motion.div>
+          </motion.div>
+
+          {/* Right — warm residential copy */}
+          <motion.div
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.85, ease: easeExpo }}
+            className="flex flex-col justify-center p-8 sm:p-12 lg:p-14 xl:p-16"
+          >
+            <div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 w-fit"
+              style={{ background: "hsl(0 85% 45% / 0.06)", border: "1px solid hsl(0 85% 45% / 0.12)" }}
+            >
+              <Home className="w-3.5 h-3.5" style={{ color: "hsl(0 85% 50%)" }} />
+              <span className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: "hsl(0 85% 45%)" }}>
+                No Contracts · Local Service
+              </span>
+            </div>
+            <div className="w-9 h-[3px] rounded-full mb-6" style={{ background: "hsl(var(--accent))" }} />
+            <h2
+              className="font-display font-bold text-gray-900 mb-5 leading-tight"
+              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", letterSpacing: "-0.04em" }}
+            >
+              Tired of Your Current Alarm Company?{" "}
+              <span style={{ color: "hsl(var(--accent))" }}>Switching Is Easier Than You Think.</span>
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-7 text-lg">
+              If you're paying too much, getting poor service, or just can't reach a real person when something goes wrong — you don't have to stay stuck. Switching to a local Houston alarm company is faster and simpler than most homeowners expect.
+            </p>
+
+            <div className="space-y-4 mb-8">
+              {[
+                { title: "We use your existing equipment", desc: "In most cases we take over your current keypads, sensors, and wiring — no ripping anything out." },
+                { title: "Real people answer the phone", desc: "Our local team is based right here in Houston. No national call center, no tickets, no waiting." },
+                { title: "No long-term contracts", desc: "Month-to-month service. You stay because you love it, not because you're locked in." },
+                { title: "Done in a single visit", desc: "Most switches are completed in a few hours. We handle everything — you just enjoy better service." },
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "hsl(0 85% 50%)" }} />
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm leading-snug mb-0.5">{item.title}</p>
+                    <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link
+                to="/alarm-systems"
+                className="btn-primary-gradient inline-flex items-center gap-2 text-base px-8 py-4"
+                style={{ boxShadow: "0 4px 20px hsl(0 85% 45% / 0.3)" }}
+              >
+                Switch My Alarm Today <ArrowRight className="w-5 h-5" />
+              </Link>
+              <a href="tel:7133879937" className="btn-outline-dark inline-flex items-center gap-2 text-base px-8 py-4">
+                <Phone className="w-5 h-5" /> (713) 387-9937
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          COMMERCIAL MULTI-FAMILY & HOA — professional dark
+      ══════════════════════════════════════════════════ */}
+      <section className="section-padding relative overflow-hidden" style={{ background: "hsl(0 0% 4.5%)" }}>
+        {/* Background decorations */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 60% 50% at 80% 50%, hsl(0 85% 38% / 0.12), transparent 65%)" }}
+        />
+        <div
+          className="absolute inset-x-0 top-0 h-px"
+          style={{ background: "linear-gradient(to right, transparent 5%, hsl(0 85% 44% / 0.35) 40%, hsl(0 85% 44% / 0.35) 60%, transparent 95%)" }}
+        />
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.018]"
+          style={{
+            backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.75, ease: easeExpo }}
+            className="text-center max-w-3xl mx-auto mb-14"
+          >
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+              style={{ background: "hsl(0 85% 45% / 0.1)", border: "1px solid hsl(0 85% 45% / 0.2)" }}
+            >
+              <Building2 className="w-4 h-4" style={{ color: "hsl(0 85% 60%)" }} />
+              <span className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: "hsl(0 85% 65%)" }}>
+                Multi-Family & HOA Security
+              </span>
+            </div>
+            <div className="w-8 h-[2px] rounded-full mx-auto mb-6" style={{ background: "hsl(var(--accent))" }} />
+            <h2
+              className="font-display font-bold text-white mb-5"
+              style={{ fontSize: "clamp(1.875rem, 3.8vw, 3rem)", lineHeight: 1.1, letterSpacing: "-0.04em" }}
+            >
+              Securing Multi-Family Communities & HOA Properties Across Houston
+            </h2>
+            <p className="text-base leading-relaxed mb-3" style={{ color: "rgba(255,255,255,0.45)" }}>
+              From gate access control and license plate recognition to community-wide cameras and alarm monitoring for every unit — we build security ecosystems that property managers and HOA boards can trust and report on.
+            </p>
+            <p className="text-sm font-semibold" style={{ color: "hsl(0 85% 62%)" }}>
+              Trusted by Property Managers and HOA Boards throughout Greater Houston
+            </p>
+          </motion.div>
+
+          {/* Feature cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+            {[
+              {
+                icon: Lock,
+                title: "Gate Access Control",
+                desc: "Automated gate systems with remote access, resident credentials, and visitor management for gated communities.",
+              },
+              {
+                icon: Camera,
+                title: "Community Camera Systems",
+                desc: "4K IP cameras covering entries, parking lots, common areas, and perimeter — with remote viewing for management.",
+              },
+              {
+                icon: Shield,
+                title: "Alarm Monitoring for Multiple Units",
+                desc: "Centralized alarm monitoring across every building. Instant dispatch with incident reports delivered to your inbox.",
+              },
+              {
+                icon: ClipboardCheck,
+                title: "HOA Board-Friendly Reporting",
+                desc: "Monthly security reports, incident logs, and system health summaries designed for board review and liability protection.",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={vp}
+                transition={{ duration: 0.6, ease: easeExpo, delay: i * 0.08 }}
+                className="group rounded-2xl p-7"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
+                  style={{ background: "hsl(0 85% 45% / 0.12)", border: "1px solid hsl(0 85% 45% / 0.2)" }}
+                >
+                  <item.icon className="w-6 h-6" style={{ color: "hsl(0 85% 60%)" }} />
+                </div>
+                <h3 className="font-display font-semibold text-white text-[15px] mb-2.5 leading-snug">
+                  {item.title}
+                </h3>
+                <p className="text-[13px] leading-relaxed" style={{ color: "rgba(255,255,255,0.38)" }}>
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="text-center"
+          >
+            <Link
+              to="/free-analysis"
+              className="btn-primary-gradient inline-flex items-center gap-2 text-base px-10 py-4"
+              style={{ boxShadow: "0 6px 32px hsl(0 85% 44% / 0.40), 0 2px 8px rgba(0,0,0,0.4)" }}
+            >
+              Request a Property Assessment <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════════════════
           PRE-QUALIFICATION CTA — luxury split section
@@ -585,7 +991,7 @@ const Index = () => {
       {/* ══════════════════════════════════════════════════
           SERVICES — Masterfully Redesigned
       ══════════════════════════════════════════════════ */}
-      <section className="section-padding overflow-hidden bg-white">
+      <section className="section-padding overflow-hidden" style={{ background: "hsl(0 0% 98%)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Section Header */}
@@ -745,12 +1151,14 @@ const Index = () => {
             className="relative flex items-center justify-center bg-white p-6 sm:p-10 lg:p-12 lg:border-r border-gray-100"
             style={{ minHeight: "420px" }}
           >
-            <img
-              src="/keypads-collage.jpg"
-              alt="Various Honeywell alarm keypads compatible with Texas Total Security systems — Houston TX"
-              className="w-full max-w-[520px] h-auto object-contain mx-auto"
-              loading="lazy"
-            />
+            <Link to="/alarm-systems">
+              <img
+                src="/keypads-collage.jpg"
+                alt="Various Honeywell alarm keypads compatible with Texas Total Security systems — Houston TX"
+                className="w-full max-w-[520px] h-auto object-contain mx-auto hover:opacity-90 transition-opacity duration-200"
+                loading="lazy"
+              />
+            </Link>
           </motion.div>
 
           {/* Right — content */}
@@ -763,27 +1171,30 @@ const Index = () => {
             className="flex flex-col justify-center p-8 sm:p-12 lg:p-14 xl:p-18"
           >
             <span className="text-[11px] font-bold tracking-[0.18em] uppercase mb-4 block" style={{ color: "hsl(0 85% 50%)" }}>
-              System Takeover
+              System Takeover · Service & Support
             </span>
             <div className="w-9 h-[3px] rounded-full mb-6" style={{ background: "hsl(var(--accent))" }} />
             <h2
               className="font-display font-bold text-gray-900 mb-5 leading-tight"
               style={{ fontSize: "clamp(1.875rem, 3.2vw, 2.6rem)", letterSpacing: "-0.042em" }}
             >
-              Already Have a Keypad Like This?{" "}
-              <span style={{ color: "hsl(var(--accent))" }}>We'll Use It.</span>
+              Do You Have a Hardwired System?{" "}
+              <span style={{ color: "hsl(var(--accent))" }}>We'll Take It Over.</span>
             </h2>
-            <p className="text-gray-600 leading-relaxed mb-8 text-lg">
-              Switching alarm companies doesn't mean replacing everything. We evaluate your existing equipment and reuse what works — saving you money while upgrading your protection.
+            <p className="text-gray-600 leading-relaxed mb-3 text-lg">
+              If you have an existing hardwired alarm system, we can take it over and monitor it — no full replacement needed. We also support wireless and hybrid systems from all major manufacturers.
+            </p>
+            <p className="text-gray-600 leading-relaxed mb-8">
+              We don't just install and disappear. Our local team provides ongoing service, maintenance, and support so your system stays sharp year after year.
             </p>
 
             {/* Key Benefits */}
             <div className="space-y-4 mb-8">
               {[
-                "Keep your existing keypads, sensors & wiring",
+                "Hardwired, wireless & hybrid systems all supported",
                 "Compatible with Honeywell, DSC, DMP & more",
-                "Seamless transfer to local Houston monitoring",
-                "Free onsite equipment evaluation",
+                "Ongoing service & maintenance — not just install",
+                "Free onsite equipment evaluation — no obligation",
               ].map((benefit) => (
                 <div key={benefit} className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "hsl(0 85% 50%)" }} />
@@ -815,7 +1226,7 @@ const Index = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr]">
 
           {/* Left — editorial content */}
-          <div className="section-padding px-4 sm:px-6 lg:px-16 xl:px-20">
+          <div className="py-10 sm:py-12 lg:py-14 px-4 sm:px-6 lg:px-16 xl:px-20">
             <motion.div
               variants={fadeLeft}
               initial="hidden"
@@ -824,27 +1235,26 @@ const Index = () => {
               transition={{ duration: 0.75, ease: easeExpo }}
             >
               <span
-                className="block text-[11px] font-bold tracking-[0.18em] uppercase mb-5"
+                className="block text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
                 style={{ color: "hsl(0 85% 58%)" }}
               >
                 Why Choose Us
               </span>
-              <div className="w-8 h-[2px] rounded-full mb-7" style={{ background: "hsl(var(--accent))" }} />
               <h2
-                className="font-display font-bold text-white mb-7"
-                style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)", lineHeight: 1.0, letterSpacing: "-0.045em" }}
+                className="font-display font-bold text-white mb-4"
+                style={{ fontSize: "clamp(2.1rem, 4vw, 3.4rem)", lineHeight: 1.05, letterSpacing: "-0.045em" }}
               >
                 Not a franchise.
                 <br />
                 <span style={{ color: "rgba(255,255,255,0.45)" }}>Your neighbors.</span>
               </h2>
-               <p className="text-base leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.42)" }}>
-                 We've been protecting Houston's commercial properties, apartment communities, and businesses for over three decades. When you call us, you reach real people who know your system — not a national call center routing tickets to strangers.
-               </p>
-               <p className="text-base leading-relaxed mb-10" style={{ color: "rgba(255,255,255,0.42)" }}>
-                 We never sell your contract to a national company. We never outsource your monitoring. Your account stays with the same local team that installed your system — giving property managers and business owners a single point of accountability.
-               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-14">
+              <p className="text-base leading-relaxed mb-3" style={{ color: "rgba(255,255,255,0.5)" }}>
+                Over three decades protecting Houston homes, businesses, and communities. When you call, you reach real people who know your system — not a national call center. We monitor through our own San Antonio dispatch center, never sell your contract, and stay with you long after the install.
+              </p>
+              <p className="text-[13px] font-medium mb-7" style={{ color: "rgba(255,255,255,0.28)" }}>
+                We genuinely care about the people and properties we protect — and your neighbors can tell the difference.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Link to="/about" className="btn-primary-gradient inline-flex items-center gap-2">
                   About Our Company <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -855,7 +1265,7 @@ const Index = () => {
             </motion.div>
 
             {/* Why-Us grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {whyUs.map((item, i) => (
                 <motion.div
                   key={item.title}
@@ -864,22 +1274,22 @@ const Index = () => {
                   whileInView="show"
                   viewport={vp}
                   transition={{ duration: 0.6, ease: easeExpo, delay: i * 0.07 }}
-                  className="rounded-2xl p-6"
+                  className="rounded-2xl p-5"
                   style={{
                     background: "rgba(255,255,255,0.03)",
                     border: "1px solid rgba(255,255,255,0.06)",
                   }}
                 >
                   <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
+                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
                     style={{ background: "hsl(0 85% 45% / 0.11)", border: "1px solid hsl(0 85% 45% / 0.18)" }}
                   >
                     <item.icon className="w-[18px] h-[18px]" style={{ color: "hsl(0 85% 60%)" }} />
                   </div>
-                  <h3 className="font-display font-semibold text-white text-[14px] mb-2 leading-snug">
+                  <h3 className="font-display font-semibold text-white text-[13px] mb-1.5 leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-[13px] leading-relaxed" style={{ color: "rgba(255,255,255,0.36)" }}>
+                  <p className="text-[12px] leading-relaxed" style={{ color: "rgba(255,255,255,0.36)" }}>
                     {item.desc}
                   </p>
                 </motion.div>

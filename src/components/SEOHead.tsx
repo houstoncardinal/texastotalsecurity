@@ -37,9 +37,9 @@ const SEOHead = ({ title, description, canonical, schemas = [], ogImage }: SEOHe
 
     // Core meta tags
     setMeta("description", description);
-    setMeta("keywords", "security systems, alarm systems, security cameras, Houston TX, home security, business security, 24/7 monitoring, commercial security, residential security, HOA security");
-    setMeta("robots", "index, follow");
+    setMeta("robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
     setMeta("author", COMPANY_NAME);
+    setMeta("format-detection", "telephone=no");
     
     // Open Graph / Facebook
     setMeta("og:title", fullTitle, "property");
@@ -103,11 +103,13 @@ const SEOHead = ({ title, description, canonical, schemas = [], ogImage }: SEOHe
     const websiteSchema = {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": `${BASE_URL}/#website`,
       "name": COMPANY_NAME,
       "url": BASE_URL,
       "description": "Houston's trusted locally owned security experts. Custom alarm systems, security cameras, 24/7 local monitoring.",
       "publisher": {
         "@type": "Organization",
+        "@id": `${BASE_URL}/#organization`,
         "name": COMPANY_NAME,
         "url": BASE_URL,
         "logo": {
@@ -120,14 +122,6 @@ const SEOHead = ({ title, description, canonical, schemas = [], ogImage }: SEOHe
           "contactType": "customer service",
           "availableLanguage": ["English", "Spanish"]
         }
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": `${BASE_URL}/search?q={search_term_string}`
-        },
-        "query-input": "required name=search_term_string"
       }
     };
 

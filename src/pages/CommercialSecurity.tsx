@@ -5,9 +5,9 @@ import FAQSection from "@/components/FAQSection";
 import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
-import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas } from "@/lib/seo";
 import {
-  Building2, Camera, Shield, Lock, Wifi, Zap,
+  Building2, Camera, Shield, Wifi, Zap,
   Eye, Users, CheckCircle2, ArrowRight, Phone,
 } from "lucide-react";
 
@@ -26,11 +26,6 @@ const solutions = [
     icon: Zap,
     title: "Active Deterrence",
     desc: "Cameras equipped with sirens, strobes, and two-way talk that actively confront and deter trespassers in real time.",
-  },
-  {
-    icon: Lock,
-    title: "Access Control Systems",
-    desc: "Manage who enters your facility with keycard, fob, PIN, and mobile credential systems — fully logged and auditable.",
   },
   {
     icon: Wifi,
@@ -80,11 +75,11 @@ const faqs = [
   },
   {
     question: "Can you integrate surveillance with our existing alarm system?",
-    answer: "Yes. We specialize in integrating security cameras, alarms, access control, and monitoring into a single unified system. In many cases we can take over and upgrade existing infrastructure to avoid unnecessary replacement costs.",
+    answer: "Yes. We specialize in integrating security cameras, alarms, and monitoring into a single unified system. In many cases we can take over and upgrade existing infrastructure to avoid unnecessary replacement costs.",
   },
   {
     question: "Do you provide 24/7 monitoring for commercial properties?",
-    answer: "Absolutely. Our local Houston-based monitoring center provides 24/7 alarm and video monitoring, including video guard patrol services — where live operators actively review your cameras on a schedule.",
+    answer: "Absolutely. Our in-house San Antonio dispatch center provides 24/7 alarm and video monitoring, including video guard patrol services — where live operators actively review your cameras on a schedule.",
   },
   {
     question: "How does your commercial security consultation work?",
@@ -100,22 +95,25 @@ const commercialSchemas = [
   generateLocalBusinessSchema(),
   generateEnhancedServiceSchema(
     "Commercial Security Systems Houston TX",
-    "Enterprise-grade security for Houston businesses. Commercial alarms, HD surveillance, access control, active deterrence & 24/7 video monitoring. Scalable for any industry or business size.",
+    "Enterprise-grade security for Houston businesses. Commercial alarms, HD surveillance, active deterrence & 24/7 video monitoring. Scalable for any industry or business size.",
     "/commercial",
     "Commercial Security System Installation",
-    ["commercial security systems Houston TX", "business alarm system Houston", "commercial surveillance Houston", "access control Houston TX", "commercial CCTV Houston"]
+    ["commercial security systems Houston TX", "business alarm system Houston", "commercial surveillance Houston", "commercial CCTV Houston", "business security cameras Houston"],
+    faqs
   ),
   generateBreadcrumbSchema([
     { name: "Home", href: "/" },
     { name: "Commercial Security", href: "/commercial" },
   ]),
+  generateAllServicesSchemas()[1],
+  generateFAQSchema(faqs),
 ];
 
 const CommercialSecurity = () => (
   <Layout>
     <SEOHead
-      title="Commercial Security Systems Houston TX | Apartment Complex Cameras & Business Alarm | Texas Total Security"
-      description="Commercial security systems for Houston businesses. Apartment complex security camera systems, HOA security, neighborhood security cameras, office alarm systems & 24/7 local monitoring. Locally owned & operated. Free analysis: (713) 387-9937."
+      title="Commercial Security Systems Houston TX | Business Alarms & Cameras | Texas Total Security"
+      description="Custom commercial alarm systems, security cameras & active deterrence for Houston businesses. Licensed local experts. Call (713) 387-9937 for a free assessment."
       schemas={commercialSchemas}
     />
 
@@ -151,7 +149,7 @@ const CommercialSecurity = () => (
             <span style={{ color: "hsl(var(--accent))" }}>Houston, TX</span>
           </h1>
           <p className="text-lg text-white/60 leading-relaxed mb-8 max-w-xl">
-            Contact Texas Total Security to discuss your commercial security project. Enterprise-grade alarm, surveillance, access control, and monitoring solutions designed for Houston businesses of every size.
+            Contact Texas Total Security to discuss your commercial security project. Enterprise-grade alarm, surveillance, and monitoring solutions designed for Houston businesses of every size.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/free-analysis" className="btn-primary-gradient inline-flex items-center gap-2">

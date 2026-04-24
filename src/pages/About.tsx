@@ -42,7 +42,7 @@ const About = () => {
     <Layout>
       <SEOHead
         title="About Texas Total Security | Houston's Best Locally Owned Alarm Company"
-        description="Texas Total Security — Houston's top-rated locally owned alarm company. Expert alarm installation, HOA security camera systems, security poles, CCTV pole installation & local monitoring. Licensed & insured."
+        description="Houston's locally owned alarm company since 1994. Expert alarm installation, security cameras, HOA security systems & 24/7 monitoring. Licensed & insured."
         schemas={schemas}
       />
       <Breadcrumbs items={[{ name: "About Us" }]} />

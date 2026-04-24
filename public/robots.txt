@@ -39,9 +39,8 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/
 
 # Sitemap locations
 Sitemap: https://www.texastotalsecurity.com/sitemap.xml
-
-# Crawl-delay for polite crawlers
-Crawl-delay: 1

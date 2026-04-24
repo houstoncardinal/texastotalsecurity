@@ -68,7 +68,7 @@ const Reviews = () => (
   <Layout>
     <SEOHead
       title="Customer Reviews | Houston's Best Local Alarm Company | Texas Total Security"
-      description="See why Houston homeowners, businesses, and HOA communities trust Texas Total Security — rated 5.0 stars on Google. Houston's top-rated local alarm company. Read real customer reviews."
+      description="Texas Total Security — rated 5 stars by Houston homeowners, businesses & HOA communities. See real reviews about our alarm systems, cameras & local monitoring."
       schemas={reviewSchemas}
     />
     <PageHero

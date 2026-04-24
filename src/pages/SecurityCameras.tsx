@@ -5,7 +5,7 @@ import CTABlock from "@/components/CTABlock";
 import FAQSection from "@/components/FAQSection";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
-import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas } from "@/lib/seo";
 import { Camera, Eye, Zap, Sun, Wifi, Video, MonitorSpeaker, Shield, CheckCircle2, ArrowRight, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -86,13 +86,15 @@ const cameraSchemas = [
     { name: "Services", href: "/services" },
     { name: "Security Cameras", href: "/security-cameras" },
   ]),
+  generateAllServicesSchemas()[2],
+  generateFAQSchema(faqs),
 ];
 
 const SecurityCameras = () => (
   <Layout>
     <SEOHead
-      title="Security Camera Installation Houston TX | 4K Surveillance Systems | License Plate Recognition | Texas Total Security"
-      description="Professional security camera installation in Houston. 4K IP cameras, license plate recognition (LPR), active deterrence, solar systems & remote viewing. Custom surveillance for homes, businesses & HOAs. Free site survey: (713) 387-9937."
+      title="Security Camera Installation Houston TX | CCTV & Surveillance | Texas Total Security"
+      description="HD security camera installation for Houston homes, businesses & communities. Indoor, outdoor, license plate cameras & remote viewing."
       schemas={cameraSchemas}
     />
     

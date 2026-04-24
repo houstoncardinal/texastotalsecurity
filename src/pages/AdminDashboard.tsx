@@ -14,6 +14,7 @@ import {
   Megaphone, BarChart2, ChevronUp, Box,
 } from "lucide-react";
 import { loadPoleQuotes, PoleQuote } from "./PoleConfigurator";
+import { loadQualifyLeads, QualifyLead } from "./QualifyFunnel";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, PieChart, Pie, Cell, AreaChart, Area,
@@ -242,16 +243,36 @@ function DashboardPage() {
 
 function LeadsPage() {
   const [search, setSearch] = useState("");
-  const filtered = mockLeads.filter(l =>
+  const [qualifyLeads, setQualifyLeads] = useState<QualifyLead[]>(() => loadQualifyLeads());
+
+  const allLeads = [
+    ...qualifyLeads,
+    ...mockLeads,
+  ];
+
+  const filtered = allLeads.filter((l) =>
     l.name.toLowerCase().includes(search.toLowerCase()) ||
     l.service.toLowerCase().includes(search.toLowerCase())
   );
+
+  const clearQualifyLeads = () => {
+    localStorage.removeItem("tts_qualify_leads");
+    setQualifyLeads([]);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Leads</h1>
-          <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">{mockLeads.length} total leads in pipeline</p>
+          <p style={{ color: "hsl(0 0% 50%)" }} className="text-sm mt-1">
+            {allLeads.length} total leads
+            {qualifyLeads.length > 0 && (
+              <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                {qualifyLeads.length} new from funnel
+              </span>
+            )}
+          </p>
         </div>
         <button style={{ background: "hsl(0 75% 50%)" }} className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity">
           <Plus size={16} /> Add Lead
@@ -283,40 +304,88 @@ function LeadsPage() {
               className="w-full pl-9 pr-4 py-2 rounded-lg text-sm placeholder:text-gray-600 focus:outline-none"
             />
           </div>
-          <button style={{ background: "hsl(0 0% 12%)", border: "1px solid hsl(0 0% 18%)" }} className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm" style2={{ color: "hsl(0 0% 55%)" }}>
+          <button style={{ background: "hsl(0 0% 12%)", border: "1px solid hsl(0 0% 18%)", color: "hsl(0 0% 55%)" }} className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm">
             <Filter size={14} /> Filter
           </button>
-          <button style={{ background: "hsl(0 0% 12%)", border: "1px solid hsl(0 0% 18%)" }} className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm">
-            <Download size={14} /> Export
-          </button>
+          {qualifyLeads.length > 0 && (
+            <button
+              onClick={clearQualifyLeads}
+              style={{ background: "hsl(0 0% 12%)", border: "1px solid hsl(0 0% 18%)", color: "hsl(0 0% 55%)" }}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm hover:text-red-400 transition-colors"
+              title="Clear funnel leads from local storage"
+            >
+              <Trash2 size={14} /> Clear Funnel
+            </button>
+          )}
         </div>
+
+        {qualifyLeads.length > 0 && (
+          <div className="px-4 py-2 border-b flex items-center gap-2" style={{ borderColor: "hsl(0 0% 14%)", background: "hsl(220 60% 50% / 0.06)" }}>
+            <Bell size={13} style={{ color: "hsl(220 70% 65%)" }} />
+            <span className="text-[12px] font-semibold" style={{ color: "hsl(220 70% 65%)" }}>
+              {qualifyLeads.length} new submission{qualifyLeads.length !== 1 ? "s" : ""} from the qualify funnel — shown at top
+            </span>
+          </div>
+        )}
+
         <table className="w-full text-sm">
           <thead>
             <tr style={{ borderBottom: "1px solid hsl(0 0% 13%)" }}>
-              {["Name", "Service", "Value", "Status", "Source", "Date", ""].map(h => (
+              {["Name", "Service / Needs", "Status", "Source", "Date", ""].map(h => (
                 <th key={h} style={{ color: "hsl(0 0% 40%)" }} className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {filtered.map((lead, i) => (
-              <tr key={lead.id} style={{ borderBottom: i < filtered.length - 1 ? "1px solid hsl(0 0% 10%)" : "none" }} className="hover:bg-white/[0.02] transition-colors">
-                <td className="px-4 py-3">
-                  <div className="text-white font-medium">{lead.name}</div>
-                  <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{lead.phone}</div>
-                </td>
-                <td className="px-4 py-3" style={{ color: "hsl(0 0% 65%)" }}>{lead.service}</td>
-                <td className="px-4 py-3 text-white font-medium">{lead.value}</td>
-                <td className="px-4 py-3"><Badge status={lead.status} /></td>
-                <td className="px-4 py-3" style={{ color: "hsl(0 0% 55%)" }}>{lead.source}</td>
-                <td className="px-4 py-3" style={{ color: "hsl(0 0% 45%)" }}>{lead.date}</td>
-                <td className="px-4 py-3">
-                  <button style={{ color: "hsl(0 0% 40%)" }} className="hover:text-white transition-colors">
-                    <MoreHorizontal size={16} />
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {filtered.map((lead, i) => {
+              const isFunnel = lead.source === "Qualify Funnel";
+              const ql = isFunnel ? (lead as QualifyLead) : null;
+              return (
+                <tr
+                  key={lead.id}
+                  style={{
+                    borderBottom: i < filtered.length - 1 ? "1px solid hsl(0 0% 10%)" : "none",
+                    background: isFunnel ? "hsl(220 60% 50% / 0.04)" : undefined,
+                  }}
+                  className="hover:bg-white/[0.02] transition-colors"
+                >
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <div className="text-white font-medium">{lead.name}</div>
+                      {isFunnel && (
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/20">NEW</span>
+                      )}
+                    </div>
+                    <div style={{ color: "hsl(0 0% 45%)" }} className="text-xs">{lead.phone}</div>
+                    {ql?.email && <div style={{ color: "hsl(0 0% 40%)" }} className="text-xs">{ql.email}</div>}
+                    {ql?.role && <div style={{ color: "hsl(220 60% 60%)" }} className="text-[11px] mt-0.5 capitalize">{ql.role.replace("-", " ")}</div>}
+                  </td>
+                  <td className="px-4 py-3 max-w-[200px]">
+                    <div style={{ color: "hsl(0 0% 65%)" }} className="text-xs leading-relaxed">{lead.service}</div>
+                    {ql?.timeline && (
+                      <div style={{ color: "hsl(0 0% 45%)" }} className="text-[11px] mt-1">
+                        Timeline: {ql.timeline === "asap" ? "Right now 🔥" : ql.timeline === "soon" ? "Within 3 months" : "Just exploring"}
+                      </div>
+                    )}
+                    {ql?.address && <div style={{ color: "hsl(0 0% 40%)" }} className="text-[11px]">📍 {ql.address}</div>}
+                  </td>
+                  <td className="px-4 py-3"><Badge status={lead.status} /></td>
+                  <td className="px-4 py-3" style={{ color: isFunnel ? "hsl(220 60% 60%)" : "hsl(0 0% 55%)" }} className="text-xs">{lead.source}</td>
+                  <td className="px-4 py-3" style={{ color: "hsl(0 0% 45%)" }}>{lead.date}</td>
+                  <td className="px-4 py-3">
+                    {isFunnel ? (
+                      <a href={`tel:${lead.phone?.replace(/\D/g, "")}`} style={{ color: "hsl(120 55% 55%)" }} className="text-xs font-semibold hover:opacity-80 transition-opacity">
+                        Call
+                      </a>
+                    ) : (
+                      <button style={{ color: "hsl(0 0% 40%)" }} className="hover:text-white transition-colors">
+                        <MoreHorizontal size={16} />
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

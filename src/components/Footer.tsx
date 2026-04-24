@@ -320,6 +320,28 @@ const Footer = () => {
           </motion.div>
         </div>
 
+        {/* Service areas — full plain-text block for Google local SEO */}
+        <div
+          className="py-7 text-center"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+        >
+          <p className="text-[10px] uppercase tracking-[0.22em] font-bold mb-3" style={{ color: "rgba(255,255,255,0.22)" }}>
+            Proudly Serving Greater Houston
+          </p>
+          <p className="text-[12px] leading-relaxed max-w-4xl mx-auto" style={{ color: "rgba(255,255,255,0.30)" }}>
+            Houston, TX &nbsp;·&nbsp; Bellaire, TX &nbsp;·&nbsp; West University Place, TX &nbsp;·&nbsp; Southside Place, TX &nbsp;·&nbsp;
+            Hunters Creek Village, TX &nbsp;·&nbsp; Piney Point Village, TX &nbsp;·&nbsp; Bunker Hill Village, TX &nbsp;·&nbsp;
+            Hedwig Village, TX &nbsp;·&nbsp; Hilshire Village, TX &nbsp;·&nbsp; Spring Valley Village, TX &nbsp;·&nbsp;
+            Katy, TX &nbsp;·&nbsp; Sugar Land, TX &nbsp;·&nbsp; The Woodlands, TX &nbsp;·&nbsp; Spring, TX &nbsp;·&nbsp;
+            Cypress, TX &nbsp;·&nbsp; Pearland, TX &nbsp;·&nbsp; Pasadena, TX &nbsp;·&nbsp; Humble, TX &nbsp;·&nbsp;
+            Conroe, TX &nbsp;·&nbsp; Baytown, TX &nbsp;·&nbsp; Missouri City, TX &nbsp;·&nbsp; Friendswood, TX &nbsp;·&nbsp;
+            League City, TX &nbsp;·&nbsp; Stafford, TX &nbsp;·&nbsp; Richmond, TX &nbsp;·&nbsp; Tomball, TX
+          </p>
+          <p className="text-[11px] mt-3 font-medium" style={{ color: "rgba(255,255,255,0.22)" }}>
+            Licensed & Insured · Texas DPS Alarm License #B03066901 · Locally owned &amp; operated for 30+ years
+          </p>
+        </div>
+
         {/* Bottom bar */}
         <div
           className="flex flex-col sm:flex-row items-center justify-between py-6 gap-4"

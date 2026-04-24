@@ -6,7 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import LeadForm from "@/components/LeadForm";
 import TestimonialCard from "@/components/TestimonialCard";
 import SEOHead from "@/components/SEOHead";
-import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas } from "@/lib/seo";
 import { Camera, Eye, Zap, Shield, Smartphone, FileText, Users, MonitorSpeaker } from "lucide-react";
 
 const solutions = [
@@ -41,19 +41,22 @@ const hoaSchemas = [
     "Professional HOA and community security solutions in Houston, TX. Gate cameras, license plate recognition, common area surveillance, active deterrence & 24/7 monitoring for residential communities.",
     "/hoa-security",
     "HOA Security System Installation",
-    ["HOA security camera systems Houston TX", "HOA gate cameras Houston", "HOA surveillance cameras Houston", "neighborhood security camera systems", "HOA pool cameras Houston", "apartment complex security camera systems", "community security cameras Houston", "homeowners association security camera"]
+    ["HOA security camera systems Houston TX", "HOA gate cameras Houston", "HOA surveillance cameras Houston", "neighborhood security camera systems", "HOA pool cameras Houston", "apartment complex security camera systems", "community security cameras Houston", "homeowners association security camera"],
+    faqs
   ),
   generateBreadcrumbSchema([
     { name: "Home", href: "/" },
     { name: "HOA Security", href: "/hoa-security" },
   ]),
+  generateAllServicesSchemas()[3],
+  generateFAQSchema(faqs),
 ];
 
 const HOASecurity = () => (
   <Layout>
     <SEOHead
-      title="HOA Security Camera Systems Houston TX | Gate Cameras & Community Surveillance | Texas Total Security"
-      description="Expert HOA security camera systems in Houston, TX. HOA gate cameras, community surveillance, HOA pool cameras, license plate recognition & neighborhood security camera systems. Locally owned & trusted. Call (713) 387-9937."
+      title="HOA Security Systems Houston TX | Community Cameras & Gate Access | Texas Total Security"
+      description="Secure your HOA community with professional cameras, gate cameras & alarm monitoring. Serving Property Managers & HOA Boards across Houston."
       schemas={hoaSchemas}
     />
     <PageHero

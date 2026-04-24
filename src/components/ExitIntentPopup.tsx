@@ -49,9 +49,11 @@ const ExitIntentPopup = () => {
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+            onClick={() => setShow(false)}
           >
             <div
               className="relative rounded-3xl overflow-hidden max-w-md w-full"
+              onClick={e => e.stopPropagation()}
               style={{
                 background: "hsl(0 0% 4%)",
                 border: "1px solid rgba(255,255,255,0.08)",

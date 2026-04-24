@@ -34,7 +34,7 @@ const ServiceMaintenance = () => (
   <Layout>
     <SEOHead
       title="Security System Maintenance Houston TX | Local Alarm Company Service & Support | Texas Total Security"
-      description="Professional security system maintenance & service in Houston, TX. Alarm servicing, camera maintenance, local alarm system support & upgrades. Houston's trusted local alarm company. Call (713) 387-9937."
+      description="Local security system service & maintenance in Houston. Alarm repairs, camera upkeep, panel upgrades & ongoing support. Licensed, trusted for 30+ years. Call (713) 387-9937."
       schemas={maintenanceSchemas}
     />
     <PageHero

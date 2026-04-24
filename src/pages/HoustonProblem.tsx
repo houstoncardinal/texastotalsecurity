@@ -49,7 +49,7 @@ const solutions = [
   {
     icon: Shield,
     title: "Local Alarm Systems",
-    desc: "Custom-designed alarm systems with 24/7 Houston-based monitoring. We never outsource your monitoring to a national call center.",
+    desc: "Custom-designed alarm systems with 24/7 in-house monitoring from our San Antonio dispatch center. We never outsource to a national call center.",
     href: "/alarm-systems",
   },
   {

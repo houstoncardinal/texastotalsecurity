@@ -18,7 +18,7 @@ const Contact = () => (
   <Layout>
     <SEOHead
       title="Contact Texas Total Security | Houston's Local Alarm Company | (713) 387-9937"
-      description="Contact Houston's #1 local alarm company. Switch alarm companies, get HOA security camera quotes, schedule a free security analysis or inquire about security poles. Call (713) 387-9937. Serving Houston, Katy, Sugar Land & more."
+      description="Contact Texas Total Security — Houston's trusted local alarm company. Get a free analysis, switch alarm companies, or request a camera quote. Call (713) 387-9937."
       schemas={contactSchemas}
     />
     <PageHero

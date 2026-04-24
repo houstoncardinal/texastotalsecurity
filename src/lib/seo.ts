@@ -27,18 +27,28 @@ const COMPANY = {
   license: "B03066901",
   url: BASE_URL,
   logo: `${BASE_URL}/logo.png`,
+  slogan: "Get the Protection You Deserve",
+  foundingDate: "1994",
 
-  description: "Houston's trusted locally owned security experts. Custom alarm systems, security cameras, 24/7 local monitoring for homes, businesses, and HOAs.",
+  description: "Houston-based local alarm company specializing in residential security systems, commercial alarm systems, security camera installation, HOA & multi-family community security, and 24/7 alarm monitoring. Serving Houston and all surrounding areas for 30+ years.",
   address: {
     street: "11331 Richmond Ave. #102",
     city: "Houston",
     state: "TX",
     zip: "77082",
   },
-  areaServed: ["Houston", "Sugar Land", "Katy", "Cypress", "The Woodlands", "Richmond", "Bellaire", "Memorial", "River Oaks", "West University", "Spring", "Tomball", "Humble"],
+  areaServed: [
+    "Houston", "Bellaire", "West University Place", "Southside Place",
+    "Hunters Creek Village", "Piney Point Village", "Bunker Hill Village",
+    "Hedwig Village", "Hilshire Village", "Spring Valley Village",
+    "Katy", "Sugar Land", "The Woodlands", "Spring",
+    "Cypress", "Pearland", "Pasadena", "Humble", "Conroe", "Baytown",
+    "Missouri City", "Friendswood", "League City", "Stafford", "Richmond",
+    "Tomball",
+  ],
   geo: { lat: 29.7604, lng: -95.3698 },
   hours: {
-    weekday: { open: "07:00", close: "18:00" },
+    weekday: { open: "08:00", close: "18:00" },
     saturday: { open: "08:00", close: "14:00" },
   },
   priceRange: "$$",
@@ -53,7 +63,6 @@ const COMPANY = {
     "Commercial Security Systems",
     "Residential Security Systems",
     "HOA Security Solutions",
-    "Access Control Systems",
     "Video Verification Monitoring",
     "System Takeover",
     "Service & Maintenance",
@@ -132,29 +141,21 @@ export function generateOrganizationSchema() {
     },
     "serviceType": COMPANY.services,
     "knowsLanguage": ["English", "Spanish", "Vietnamese", "Chinese"],
-    "hasCredential": [
-      {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "license",
-        "name": "Texas Department of Public Safety Security License",
-        "identifier": COMPANY.license,
-        "validIn": {
-          "@type": "State",
-          "name": "Texas"
-        },
-        "recognizedBy": {
-          "@type": "GovernmentOrganization",
-          "name": "Texas Department of Public Safety",
-          "url": "https://www.dps.texas.gov/"
-        }
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "license",
+      "name": "Texas Department of Public Safety Security License",
+      "identifier": COMPANY.license,
+      "validIn": {
+        "@type": "State",
+        "name": "Texas"
       },
-      {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "insurance",
-        "name": "General Liability Insurance",
-        "identifier": "GL-2024-TTS-001"
+      "recognizedBy": {
+        "@type": "GovernmentOrganization",
+        "name": "Texas Department of Public Safety",
+        "url": "https://www.dps.texas.gov/"
       }
-    ],
+    },
     "memberOf": [
       {
         "@type": "Organization",
@@ -165,17 +166,6 @@ export function generateOrganizationSchema() {
         "@type": "Organization",
         "name": "National Association of Security Dealers",
         "url": "https://www.nasda.com"
-      }
-    ],
-    "award": [
-      {
-        "@type": "Award",
-        "name": "Best Security Company in Houston",
-        "recognizedBy": {
-          "@type": "Organization",
-          "name": "Houston Business Journal"
-        },
-        "year": 2024
       }
     ],
     "sameAs": [
@@ -196,11 +186,10 @@ export function generateOrganizationSchema() {
         "contactType": "customer service",
         "availableLanguage": ["English", "Spanish", "Vietnamese"],
         "areaServed": "US",
-        "contactOption": ["TollFree", "HearingImpairedSupported"],
         "hoursAvailable": {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "07:00",
+          "opens": "08:00",
           "closes": "18:00"
         }
       },
@@ -230,8 +219,7 @@ export function generateOrganizationSchema() {
         "contactType": "emergency",
         "description": "24/7 Emergency Monitoring Center",
         "availableLanguage": ["English", "Spanish"],
-        "areaServed": "US",
-        "contactOption": ["TollFree"]
+        "areaServed": "US"
       }
     ],
     "potentialAction": [
@@ -271,7 +259,6 @@ export function generateLocalBusinessSchema(city?: string) {
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial Security Systems", "description": "Enterprise-grade security for businesses" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Security Systems", "description": "Whole-home protection with smart home integration" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HOA Security Solutions", "description": "Gate cameras, community surveillance, LPR systems" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Access Control Systems", "description": "Keycard, fob, PIN, and mobile credential systems" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Video Verification Monitoring", "description": "Double-verified video monitoring for alarm events" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "System Takeover", "description": "Take over existing systems from other providers" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Service & Maintenance", "description": "Ongoing system support and troubleshooting" } },
@@ -279,26 +266,29 @@ export function generateLocalBusinessSchema(city?: string) {
 
   return {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "HomeAndConstructionBusiness", "SecurityService", "ProfessionalService"],
+    "@type": ["LocalBusiness", "SecurityService"],
     "@id": `${BASE_URL}/#localbusiness`,
     "name": COMPANY.name,
     "url": COMPANY.url,
     "logo": COMPANY.logo,
+    "slogan": COMPANY.slogan,
+    "foundingDate": COMPANY.foundingDate,
     "hasMap": "https://maps.app.goo.gl/o4XYckgxB3B77AyW8",
     "speakable": {
       "@type": "SpeakableSpecification",
       "cssSelector": ["h1", ".page-description", ".eyebrow"]
     },
     "sameAs": [
+      "https://maps.app.goo.gl/o4XYckgxB3B77AyW8",
       "https://www.facebook.com/texastotalsecurity",
       "https://www.linkedin.com/company/texastotalsecurity",
-      "https://maps.app.goo.gl/o4XYckgxB3B77AyW8",
+      "https://www.instagram.com/texastotalsecurity",
       "https://www.bbb.org/us/tx/houston/profile/security-systems-monitors",
       "https://www.yelp.com/biz/texas-total-security-houston"
     ],
-    "image": [`${BASE_URL}/logo.png`, `${BASE_URL}/hero-image.jpg`],
+    "image": [COMPANY.logo, `${BASE_URL}/og-image.jpg`],
     "description": city
-      ? `${COMPANY.name} provides professional alarm systems, security cameras, and 24/7 local monitoring in ${city}, TX and surrounding areas. Locally owned and operated.`
+      ? `${COMPANY.name} provides professional alarm systems, security cameras, and 24/7 local monitoring in ${city}, TX and surrounding areas. Locally owned and operated for 30+ years.`
       : COMPANY.description,
     "telephone": COMPANY.phoneTel,
     "email": COMPANY.email,
@@ -314,13 +304,7 @@ export function generateLocalBusinessSchema(city?: string) {
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": COMPANY.geo.lat,
-      "longitude": COMPANY.geo.lng,
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": COMPANY.address.city,
-        "addressRegion": COMPANY.address.state,
-        "addressCountry": "US"
-      }
+      "longitude": COMPANY.geo.lng
     },
     "areaServed": city
       ? [{ "@type": "City", "name": `${city}, TX` }]
@@ -365,6 +349,7 @@ export function generateLocalBusinessSchema(city?: string) {
         "reviewBody": "They took over our existing alarm system from ADT and it was seamless. Better monitoring, better service, and no new equipment costs."
       }
     ],
+    "openingHours": ["Mo-Fr 08:00-18:00", "Sa 08:00-14:00"],
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -383,8 +368,9 @@ export function generateLocalBusinessSchema(city?: string) {
     "hasCredential": {
       "@type": "EducationalOccupationalCredential",
       "credentialCategory": "license",
-      "name": "Texas State Security License",
-      "identifier": COMPANY.license
+      "name": "Texas DPS Alarm License",
+      "identifier": COMPANY.license,
+      "validIn": { "@type": "State", "name": "Texas" }
     },
     "numberOfEmployees": {
       "@type": "QuantitativeValue",
@@ -534,14 +520,6 @@ export function generateWebSiteSchema() {
     "name": COMPANY.name,
     "url": COMPANY.url,
     "description": COMPANY.description,
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `${BASE_URL}/search?q={search_term_string}`
-      },
-      "query-input": "required name=search_term_string"
-    },
     "publisher": {
       "@type": "Organization",
       "name": COMPANY.name,
@@ -852,7 +830,7 @@ export function generateAggregateOfferSchema() {
     "@context": "https://schema.org",
     "@type": "AggregateOffer",
     "name": "Professional Security System Installation — Houston TX",
-    "description": "Custom security systems for homes and businesses. Alarm systems, cameras, access control, and 24/7 monitoring.",
+    "description": "Custom security systems for homes and businesses. Alarm systems, cameras, and 24/7 monitoring.",
     "priceCurrency": "USD",
     "lowPrice": "0",
     "offerCount": "10",
@@ -934,12 +912,7 @@ export function generateSiteLinksSearchBoxSchema() {
     "url": BASE_URL,
     "name": COMPANY.name,
     "description": COMPANY.description,
-    "publisher": { "@type": "Organization", "@id": `${BASE_URL}/#organization` },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": { "@type": "EntryPoint", "urlTemplate": `${BASE_URL}/search?q={search_term_string}` },
-      "query-input": "required name=search_term_string"
-    }
+    "publisher": { "@type": "Organization", "@id": `${BASE_URL}/#organization` }
   };
 }
 
@@ -948,7 +921,7 @@ export function generateComprehensiveHomepageSchema() {
   return {
     "@context": "https://schema.org",
     "@graph": [
-      // 1. WebSite with SearchAction
+      // 1. WebSite
       {
         "@type": "WebSite",
         "@id": `${BASE_URL}/#website`,
@@ -956,11 +929,6 @@ export function generateComprehensiveHomepageSchema() {
         "name": COMPANY.name,
         "description": COMPANY.description,
         "publisher": { "@type": "Organization", "@id": `${BASE_URL}/#organization` },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": { "@type": "EntryPoint", "urlTemplate": `${BASE_URL}/search?q={search_term_string}` },
-          "query-input": "required name=search_term_string"
-        },
         "inLanguage": "en-US"
       },
       // 2. Organization (main entity)
@@ -996,7 +964,7 @@ export function generateComprehensiveHomepageSchema() {
           "result": { "@type": "Reservation", "name": "Free Security Analysis" }
         }
       },
-      // 5. FAQPage
+      // 5. FAQPage — expanded with all required questions
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -1004,40 +972,192 @@ export function generateComprehensiveHomepageSchema() {
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How much does a security system cost?",
+            "name": "Do you handle alarm system installation for older homes or buildings?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Systems range from $500 to $5,000+ depending on property size and features. We offer flexible financing and month-to-month monitoring from $29.99/month. Every quote is free."
+              "text": "Absolutely. We install wireless systems that require no new wiring, making them perfect for older homes and retrofits. Our licensed technicians work around existing walls, trim, and infrastructure with zero damage."
             }
           },
           {
             "@type": "Question",
-            "name": "Do you require long-term contracts?",
+            "name": "How quickly can you respond to service calls in the Houston area?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. We offer month-to-month monitoring. No multi-year contracts, no cancellation fees."
+              "text": "We typically respond to service calls within 24–48 hours in the Greater Houston area. Emergency monitoring response is immediate — our in-house San Antonio dispatch center contacts local authorities within seconds of a verified alarm."
             }
           },
           {
             "@type": "Question",
-            "name": "How long does installation take?",
+            "name": "Can I integrate my alarm systems with security cameras or smart devices?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Most residential systems are installed in 4–8 hours. Commercial projects vary."
+              "text": "Yes. We install fully integrated systems combining alarms, HD cameras, smart locks, doorbell cameras, and home automation on a single platform. Control everything from one mobile app."
             }
           },
           {
             "@type": "Question",
-            "name": "What areas do you serve?",
+            "name": "What makes your security systems different from national alarm companies?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": `We serve all of Greater Houston including ${COMPANY.areaServed.slice(0, 8).join(", ")}, and surrounding areas.`
+              "text": "We are locally owned and operated — not a franchise. We monitor through our own in-house San Antonio dispatch center, not an outsourced national call center. We never sell your contract. You get a dedicated local team that knows your system and your neighborhood."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer security solutions for both residential and commercial properties?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We serve Houston homeowners, businesses, HOA communities, apartment complexes, and property managers. Every system is custom-designed for the specific property, regardless of size."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer security for HOA communities and multi-family properties?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes — this is one of our core specialties. We provide gate cameras, LPR cameras, community-wide surveillance, alarm monitoring for multiple units, and HOA board-friendly reporting. We are trusted by property managers and HOA boards throughout Greater Houston."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I switch from my current alarm company to Texas Total Security?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Switching is simple. We evaluate your existing equipment during a free onsite visit. In most cases we take over your current keypads, sensors, and wiring — no replacements needed. Our technicians handle the full transition and activate local Houston monitoring in a single visit, typically within a few hours."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What areas do you serve around Houston?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": `We serve all of Greater Houston and the surrounding area including ${COMPANY.areaServed.join(", ")}. Contact us to confirm service availability for your specific address.`
             }
           }
         ]
       }
     ]
   };
+}
+
+/**
+ * Ten canonical Service schemas — one per core service offering.
+ * Import and spread into the schemas[] array on each relevant page.
+ */
+export function generateAllServicesSchemas() {
+  const provider = {
+    "@type": "LocalBusiness",
+    "@id": `${BASE_URL}/#localbusiness`,
+    "name": COMPANY.name,
+    "telephone": COMPANY.phoneTel,
+    "email": COMPANY.email,
+    "url": COMPANY.url,
+    "hasCredential": `Texas DPS Alarm License ${COMPANY.license}`,
+  };
+  const areaServed = COMPANY.areaServed.map(c => ({ "@type": "City", "name": `${c}, TX` }));
+  const freeOffer = { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free Onsite Security Analysis", "availability": "https://schema.org/InStock" };
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${BASE_URL}/residential/#service`,
+      "name": "Residential Alarm System Installation – Houston TX",
+      "serviceType": "Residential Security System Installation",
+      "description": "Custom residential alarm system installation for Houston homeowners. Hardwired, wireless & hybrid systems, smart home integration, and 24/7 local monitoring. No long-term contracts.",
+      "provider": provider,
+      "areaServed": areaServed,
+      "offers": [freeOffer, { "@type": "Offer", "name": "Professional Alarm Installation" }, { "@type": "Offer", "name": "24/7 Local Monitoring" }],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${BASE_URL}/commercial/#service`,
+      "name": "Commercial Alarm System Installation – Houston TX",
+      "serviceType": "Commercial Security System Installation",
+      "description": "Enterprise-grade commercial alarm systems for Houston businesses, offices, retail, and industrial facilities. Licensed installation, local monitoring, and system takeovers from any provider.",
+      "provider": provider,
+      "areaServed": areaServed,
+      "offers": [freeOffer, { "@type": "Offer", "name": "Commercial Alarm Installation" }, { "@type": "Offer", "name": "Multi-Site Management" }],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${BASE_URL}/security-cameras/#service`,
+      "name": "Security Camera System Installation – Houston TX",
+      "serviceType": "Security Camera Installation",
+      "description": "Professional HD and 4K security camera installation for Houston homes, businesses, and communities. Indoor/outdoor cameras, license plate recognition (LPR), active deterrence, and remote viewing.",
+      "provider": provider,
+      "areaServed": areaServed,
+      "offers": [freeOffer, { "@type": "Offer", "name": "4K IP Camera Installation" }, { "@type": "Offer", "name": "License Plate Recognition Systems" }],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${BASE_URL}/hoa-security/#service`,
+      "name": "HOA Community Security Systems – Houston TX",
+      "serviceType": "HOA Security System Installation",
+      "description": "Complete HOA security solutions including gate cameras, LPR cameras, common area surveillance, and community-wide alarm monitoring. Designed for HOA boards and property managers in Greater Houston.",
+      "provider": provider,
+      "areaServed": areaServed,
+      "offers": [freeOffer, { "@type": "Offer", "name": "Community Camera Systems" }, { "@type": "Offer", "name": "LPR Gate Camera Systems" }],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${BASE_URL}/property-management-security/#service`,
+      "name": "Multi-Family Property Security – Houston TX",
+      "serviceType": "Multi-Family Security System Installation",
+      "description": "Comprehensive security for apartment complexes and multi-family communities. Entrance/exit cameras, LPR, common area monitoring, package area surveillance, and alarm monitoring for multiple units.",
+      "provider": provider,
+      "areaServed": areaServed,
+      "offers": [freeOffer, { "@type": "Offer", "name": "Multi-Unit Alarm Monitoring" }, { "@type": "Offer", "name": "Community Surveillance Systems" }],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${BASE_URL}/monitoring-services/#service`,
+      "name": "24/7 Alarm Monitoring – Houston TX",
+      "serviceType": "Alarm Monitoring Service",
+      "description": "24/7 alarm monitoring through our in-house San Antonio dispatch center. Never outsourced to a national call center. Fast local dispatch, real-time notifications, and active deterrence support for homes and businesses.",
+      "provider": provider,
+      "areaServed": areaServed,
+      "offers": [{ "@type": "Offer", "name": "24/7 Local Monitoring", "priceCurrency": "USD" }, { "@type": "Offer", "name": "Video Verification Monitoring" }],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${BASE_URL}/monitoring-services/#active-deterrence`,
+      "name": "Active Deterrence & Notification Systems – Houston TX",
+      "serviceType": "Active Deterrence Security",
+      "description": "Cameras with built-in sirens, strobes, and two-way audio for real-time intruder deterrence. Backed by 24/7 local monitoring with instant local dispatch response.",
+      "provider": provider,
+      "areaServed": areaServed,
+      "offers": [freeOffer, { "@type": "Offer", "name": "Active Deterrence Camera Installation" }],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${BASE_URL}/alarm-systems/#service`,
+      "name": "Alarm Company Switch Service – Houston TX",
+      "serviceType": "Alarm System Takeover",
+      "description": "Switch your alarm company to Texas Total Security with zero hassle. We take over your existing keypads, sensors, and wiring from any provider — ADT, Brinks, Vivint, and more. No long-term contracts. Done in one visit.",
+      "provider": provider,
+      "areaServed": areaServed,
+      "offers": [freeOffer, { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free System Takeover Evaluation" }],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${BASE_URL}/free-analysis/#service`,
+      "name": "Free Onsite Security Analysis – Houston TX",
+      "serviceType": "Security Consultation",
+      "description": "Free onsite security analysis for Houston homes, businesses, and communities. A licensed security specialist visits your property, evaluates existing equipment, identifies vulnerabilities, and delivers a custom proposal — no obligation.",
+      "provider": provider,
+      "areaServed": areaServed,
+      "offers": [{ "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free Onsite Security Analysis", "availability": "https://schema.org/InStock" }],
+    },
+  ];
 }
 
 export { COMPANY, BASE_URL };

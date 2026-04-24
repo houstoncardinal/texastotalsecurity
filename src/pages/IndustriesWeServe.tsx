@@ -5,18 +5,19 @@ import SectionHeading from "@/components/SectionHeading";
 import SEOHead from "@/components/SEOHead";
 import { generateLocalBusinessSchema, generateBreadcrumbSchema, generateItemListSchema } from "@/lib/seo";
 import { Link } from "react-router-dom";
-import { ArrowRight, Home, Users, Building2, ShoppingBag, Stethoscope, GraduationCap, Hotel, UtensilsCrossed, Factory, Car, HardHat, Landmark, Plane, Anchor, Church, Star } from "lucide-react";
+import { ArrowRight, Home, Users, Building2, ShoppingBag, Stethoscope, GraduationCap, Hotel, UtensilsCrossed, Factory, Car, HardHat, Landmark, Plane, Anchor, Church, Star, Shield, Droplets, Store } from "lucide-react";
 
 const industries = [
   { icon: Home, name: "Residential", desc: "Custom alarm and camera systems for homes of all sizes." },
   { icon: Users, name: "HOA Communities", desc: "Gate cameras, LPR, and community-wide surveillance." },
-  { icon: Building2, name: "Apartment Complexes", desc: "Multi-unit security, access control, and common area cameras." },
-  { icon: ShoppingBag, name: "Retail Centers", desc: "Loss prevention, storefront cameras, and parking lot surveillance." },
-  { icon: Stethoscope, name: "Medical & Dental", desc: "HIPAA-aware security, access control, and waiting area monitoring." },
+  { icon: Building2, name: "Apartment Complexes", desc: "Multi-unit security and common area cameras." },
+  { icon: Store, name: "Shopping Centers", desc: "Mall and strip center loss prevention, storefront cameras, and parking lot surveillance." },
+  { icon: ShoppingBag, name: "Retail Stores", desc: "Storefront security, POS area cameras, employee entrance monitoring, and after-hours alerts." },
+  { icon: Stethoscope, name: "Medical & Dental", desc: "HIPAA-aware security and waiting area monitoring." },
   { icon: GraduationCap, name: "Schools & Daycare", desc: "Campus surveillance, entry control, and emergency notification." },
   { icon: Hotel, name: "Hotels & Hospitality", desc: "Guest safety, hallway cameras, and property perimeter security." },
   { icon: UtensilsCrossed, name: "Restaurants", desc: "Kitchen, dining, and exterior cameras with POS area monitoring." },
-  { icon: Factory, name: "Industrial Sites", desc: "Perimeter security, hazardous area monitoring, and access control." },
+  { icon: Factory, name: "Industrial Sites", desc: "Perimeter security and hazardous area monitoring." },
   { icon: Car, name: "Parking Garages", desc: "Level-by-level cameras, LPR, emergency call stations, and lighting." },
   { icon: HardHat, name: "Construction Sites", desc: "Solar-powered cameras, time-lapse, and temporary site security." },
   { icon: Landmark, name: "Government Buildings", desc: "High-security surveillance, restricted access, and compliance systems." },
@@ -24,6 +25,9 @@ const industries = [
   { icon: Anchor, name: "Marinas", desc: "Dock cameras, boat slip monitoring, and waterfront perimeter security." },
   { icon: Star, name: "Valet Operations", desc: "Vehicle tracking cameras, key management, and customer documentation." },
   { icon: Church, name: "Places of Worship", desc: "Interior/exterior cameras, entry monitoring, and event security." },
+  { icon: Shield, name: "Police & Fire Stations", desc: "Perimeter security, parking lot surveillance, and evidence room monitoring." },
+  { icon: Landmark, name: "Town Halls & Government", desc: "Council chamber cameras, public-facing counter monitoring, and 24/7 perimeter surveillance." },
+  { icon: Droplets, name: "Water Treatment Facilities", desc: "Critical infrastructure perimeter security and remote monitoring for water and utility plants." },
 ];
 
 const industriesSchemas = [

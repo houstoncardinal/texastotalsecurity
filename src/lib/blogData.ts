@@ -105,7 +105,7 @@ A retail-focused camera system prioritizes point-of-sale coverage, entrance/exit
 
 **Best for:** Corporate offices, co-working spaces, professional buildings
 
-Office security systems focus on access control integration, lobby monitoring, parking area coverage, and server room protection. We combine cameras with access control systems that log entry and exit activity for every door.
+Office security systems focus on lobby monitoring, parking area coverage, and server room protection. We design camera systems that provide complete visibility into every entry point and common area.
 
 ## 3. Industrial Perimeter Security
 
@@ -186,7 +186,7 @@ A professionally designed security system addresses every vulnerability that bur
 
 ## The Houston Context
 
-Houston's urban sprawl means that police response times can vary significantly by neighborhood. Professional alarm monitoring — especially local monitoring from a Houston-based center — ensures your system is always watched and response is as fast as possible.
+Houston's urban sprawl means that police response times can vary significantly by neighborhood. Professional alarm monitoring — especially from an in-house dispatch center that's never outsourced — ensures your system is always watched and response is as fast as possible.
 
 ## Get a Free Security Evaluation
 
@@ -353,7 +353,7 @@ export const futureArticleIdeas = [
   { title: "Ring vs Professional Security: What Houston Homeowners Should Know", category: "technology" },
   { title: "PTZ Cameras: When and Why You Need Pan-Tilt-Zoom", category: "surveillance-guides" },
   { title: "Solar-Powered Security Cameras for Remote Properties", category: "surveillance-guides" },
-  { title: "How Access Control Systems Protect Your Business", category: "business-security" },
+  { title: "Commercial Security Cameras: What Every Houston Business Owner Should Know", category: "business-security" },
   { title: "Commercial Security Checklist for Houston Business Owners", category: "business-security" },
   { title: "What to Do After a Break-In: Houston Homeowner Guide", category: "crime-prevention" },
   { title: "Security Camera Resolution Guide: 1080p vs 4K vs 4MP", category: "surveillance-guides" },
@@ -420,7 +420,7 @@ We've installed security systems in every type of Houston property — from hist
 After thousands of installations, here's what consistently works in Houston:
 
 **Local Monitoring Saves Lives**
-When your alarm triggers, seconds matter. Our Houston-based monitoring center provides average response times under 30 seconds — far faster than national competitors routing through distant call centers.
+When your alarm triggers, seconds matter. Our in-house San Antonio dispatch center provides average response times under 30 seconds — far faster than national competitors routing through distant call centers.
 
 **Visible Deterrence Matters**
 We've seen dramatic reductions in break-in attempts at properties with visible cameras, signage, and professional monitoring signs. Criminals look for easy targets — our systems make your property a hard target.

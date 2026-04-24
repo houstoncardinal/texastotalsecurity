@@ -81,7 +81,7 @@ const ServiceAreas = () => {
     <Layout>
       <SEOHead
         title="Security Service Areas Houston TX | Alarm & Camera Installation Near Me | Texas Total Security"
-        description="Texas Total Security serves Houston, Katy, Sugar Land, The Woodlands, Pearland, Cypress, Spring, Humble, League City & all surrounding Houston-area communities. Local alarm company with in-house monitoring. Call (713) 387-9937."
+        description="Security systems throughout Greater Houston — alarm installation, cameras & 24/7 monitoring in Katy, Sugar Land, The Woodlands, Pearland, Cypress & more. Licensed local alarm company."
         schemas={schemas}
       />
       <Breadcrumbs items={[{ name: "Service Areas" }]} />
@@ -266,7 +266,7 @@ const ServiceAreas = () => {
                   "4K Security Camera Systems",
                   "License Plate Recognition",
                   "Security Poles & Mounts",
-                  "HOA Gate & Access Control",
+                  "HOA Gate Camera Systems",
                   "Active Deterrence Systems",
                   "24/7 Local Monitoring",
                   "Commercial Multi-Site Systems",

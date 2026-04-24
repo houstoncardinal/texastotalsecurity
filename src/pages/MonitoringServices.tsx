@@ -9,7 +9,7 @@ import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBre
 import { Radio, MapPin, Clock, Shield, PhoneCall, CheckCircle2 } from "lucide-react";
 
 const benefits = [
-  { icon: MapPin, title: "Houston-Based Center", desc: "Our monitoring operators are right here in Houston — familiar with local geography and emergency services." },
+  { icon: MapPin, title: "In-House Dispatch Center", desc: "Our own San Antonio dispatch center — not a distant national call center. Local operators familiar with Houston geography and emergency services." },
   { icon: Clock, title: "Faster Response Times", desc: "Local monitoring means faster signal processing and quicker communication with law enforcement." },
   { icon: PhoneCall, title: "Real Human Operators", desc: "When your alarm triggers, a trained operator evaluates the situation and takes action." },
   { icon: Shield, title: "24/7/365 Coverage", desc: "Round-the-clock monitoring every day of the year. We never close." },
@@ -25,7 +25,7 @@ const monitoringTypes = [
 ];
 
 const faqs = [
-  { question: "How is local monitoring different from national monitoring?", answer: "Local monitoring means our operators are in the Houston area. They understand local geography, have direct relationships with local dispatch, and process alarm signals faster." },
+  { question: "How is local monitoring different from national monitoring?", answer: "Local monitoring means we run our own in-house dispatch center in San Antonio — not a distant national call center routing your alarm to strangers. Our operators understand Houston geography, have direct relationships with local law enforcement, and process alarm signals faster." },
   { question: "Do you sell monitoring contracts to other companies?", answer: "Never. Your account stays with us. We never sell our alarm contracts to big national companies." },
   { question: "What types of monitoring do you offer?", answer: "Standard alarm monitoring, video monitoring (double verified), video guard patrol, and custom monitoring services." },
   { question: "Can you monitor my existing alarm system?", answer: "In most cases, yes. We can take over monitoring from another provider, saving you the cost of new equipment." },
@@ -49,13 +49,13 @@ const monitoringSchemas = [
 const MonitoringServices = () => (
   <Layout>
     <SEOHead
-      title="Local Alarm Monitoring Houston TX | Switch Alarm Monitoring Companies | Texas Total Security"
-      description="Best local alarm monitoring company in Houston, TX. 24/7 in-house local dispatch center — not a national call center. Switch alarm monitoring companies today. Video monitoring, guard patrol & never sells your contract. (713) 387-9937."
+      title="Local Alarm Monitoring Houston TX | 24/7 In-House Dispatch Center | Texas Total Security"
+      description="In-house 24/7 alarm monitoring for Houston homes and businesses. San Antonio dispatch center — never a national call center. Video monitoring & guard patrol. We never sell your contract."
       schemas={monitoringSchemas}
     />
     <PageHero
       title="24/7 Local Monitoring Services"
-      subtitle="Your alarm is only as good as the team watching it. Our Houston-based monitoring center delivers faster response, real accountability, and personal service."
+      subtitle="Your alarm is only as good as the team watching it. Our in-house San Antonio dispatch center delivers faster response, real accountability, and personal service — never outsourced to a national call center."
     />
 
     <section className="section-padding">
@@ -85,7 +85,7 @@ const MonitoringServices = () => (
               <div className="glass-card-static p-6 border-accent/20">
                 <h3 className="font-display font-bold text-accent mb-4 text-sm">Texas Total Security</h3>
                 <ul className="space-y-3">
-                  {["Houston-based operators", "Direct local dispatch", "Know your neighborhood", "Personal accountability", "Video verification", "No contract selling"].map((item) => (
+                  {["In-house dispatch center", "Direct local dispatch", "Know your neighborhood", "Personal accountability", "Video verification", "No contract selling"].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm text-foreground">
                       <CheckCircle2 className="w-4 h-4 text-accent shrink-0" /> {item}
                     </li>

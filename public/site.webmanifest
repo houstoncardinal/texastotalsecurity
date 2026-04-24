@@ -1,0 +1,21 @@
+{
+  "name": "Texas Total Security",
+  "short_name": "TTS Security",
+  "description": "Houston's locally owned alarm company — alarm systems, security cameras & 24/7 monitoring.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#dc2626",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
