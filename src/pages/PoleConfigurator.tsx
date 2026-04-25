@@ -7,9 +7,9 @@ import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, Phone, CheckCircle2, Camera, Sun, Ruler,
-  ChevronLeft, ChevronRight, RotateCcw, Eye, Zap, Shield,
-  Box, Layers, Package, MapPin, Building2, Wrench, Star,
-  DollarSign, ClipboardList, Check, X,
+  ChevronLeft, ChevronRight, RotateCcw, Zap, Shield,
+  Box, Layers, Package, Wrench, Star,
+  ClipboardList, Check,
 } from "lucide-react";
 import * as THREE from "three";
 
@@ -755,9 +755,6 @@ function OptionCard({
           {subtitle && <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>}
         </div>
       </div>
-      {cost !== undefined && cost > 0 && (
-        <span className="text-xs font-semibold text-gray-500 ml-2 flex-shrink-0">+${cost.toLocaleString()}</span>
-      )}
     </button>
   );
 }
@@ -798,8 +795,6 @@ function QuoteForm({ config, estimatedTotal, onClose }: {
     propertyAddress: "", propertyType: PROPERTY_TYPES[0], notes: "",
   });
 
-  const { breakdown } = calcPrice(config);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const quote: PoleQuote = {
@@ -824,7 +819,7 @@ function QuoteForm({ config, estimatedTotal, onClose }: {
         <p className="text-gray-500 mb-2 max-w-sm mx-auto text-sm">
           Your custom pole configuration has been submitted. A specialist will call or email within <strong>2 business hours</strong>.
         </p>
-        <p className="text-xs text-gray-400 mb-7">Estimated: <strong className="text-gray-700">${estimatedTotal.toLocaleString()}</strong> · Confirmation sent to {form.email}</p>
+        <p className="text-xs text-gray-400 mb-7">A specialist will review your configuration and reach out with a custom estimate. Confirmation sent to {form.email}</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a href="tel:2814070766" className="btn-primary-gradient inline-flex items-center justify-center gap-2 px-6 py-3">
             <Phone className="w-4 h-4" /> Call Now
@@ -854,21 +849,6 @@ function QuoteForm({ config, estimatedTotal, onClose }: {
             <p className="text-xs font-semibold text-gray-800 mt-0.5">{s.val}</p>
           </div>
         ))}
-      </div>
-
-      {/* Price breakdown */}
-      <div className="rounded-xl p-4 mb-5" style={{ background: "hsl(0 75% 50%/0.04)", border: "1px solid hsl(0 75% 50%/0.15)" }}>
-        <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "hsl(0 75% 40%)" }}>Estimate Breakdown</p>
-        {breakdown.map(b => (
-          <div key={b.label} className="flex items-center justify-between py-0.5">
-            <span className="text-xs text-gray-600">{b.label}</span>
-            <span className="text-xs font-semibold text-gray-800">${b.amount.toLocaleString()}</span>
-          </div>
-        ))}
-        <div className="border-t mt-2 pt-2 flex items-center justify-between" style={{ borderColor: "hsl(0 75% 50%/0.2)" }}>
-          <span className="text-sm font-bold text-gray-900">Total ({config.quantity} pole{config.quantity > 1 ? "s" : ""})</span>
-          <span className="text-sm font-bold" style={{ color: "hsl(0 75% 40%)" }}>${estimatedTotal.toLocaleString()}</span>
-        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3.5">
@@ -921,7 +901,7 @@ function QuoteForm({ config, estimatedTotal, onClose }: {
         </div>
         <div className="flex gap-3 pt-1">
           <button type="submit" className="btn-primary-gradient flex-1 inline-flex items-center justify-center gap-2 py-3 text-sm font-semibold">
-            Submit Quote Request <ArrowRight className="w-4 h-4" />
+            Connect with Our Team <ArrowRight className="w-4 h-4" />
           </button>
           <button type="button" onClick={onClose} className="btn-outline-dark px-5 py-3 text-sm">
             Back
@@ -1001,7 +981,7 @@ const PoleConfigurator = () => {
             initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }}
             className="text-sm sm:text-base mx-auto max-w-xl mb-8" style={{ color: "rgba(255,255,255,0.42)" }}
           >
-            Configure height, arms, cameras, lighting, and finish. See your setup in real-time 3D and get an instant estimate — built for HOAs, commercial facilities, and property managers.
+            Configure height, arms, cameras, lighting, and finish. See your setup in real-time 3D then connect with our team for a custom estimate — built for HOAs, commercial facilities, and property managers.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }}
@@ -1051,12 +1031,6 @@ const PoleConfigurator = () => {
                 <span className="text-[11px] text-white/60">Drag · Scroll to zoom</span>
               </div>
 
-              {/* Price badge */}
-              <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-sm flex items-center gap-1.5">
-                <DollarSign className="w-3 h-3 text-white/60" />
-                <span className="text-[11px] font-semibold text-white">${total.toLocaleString()} est.</span>
-              </div>
-
               {/* Color swatch row */}
               <div className="absolute top-4 right-4 flex flex-col gap-1.5">
                 {FINISH_OPTIONS.map(f => (
@@ -1086,8 +1060,8 @@ const PoleConfigurator = () => {
                     className="rounded-3xl border border-gray-200 p-6 sm:p-8"
                     style={{ boxShadow: "0 4px 32px rgba(0,0,0,0.07)" }}
                   >
-                    <h3 className="font-display font-bold text-xl text-gray-900 mb-1">Request Your Custom Quote</h3>
-                    <p className="text-sm text-gray-400 mb-5">A specialist responds within 2 business hours.</p>
+                    <h3 className="font-display font-bold text-xl text-gray-900 mb-1">Get an Estimate — Connect with Our Team</h3>
+                    <p className="text-sm text-gray-400 mb-5">Share your configuration and a specialist will reach out with a custom estimate within 2 business hours.</p>
                     <QuoteForm config={config} estimatedTotal={total} onClose={() => { setShowQuote(false); setStep(0); }} />
                   </motion.div>
                 ) : (
@@ -1114,9 +1088,6 @@ const PoleConfigurator = () => {
                         </button>
                       ))}
                     </div>
-
-                    {/* Price ticker */}
-                    <PriceTicker total={total} perPole={perPole} qty={config.quantity} />
 
                     {/* Step title */}
                     <p className="text-[10px] uppercase tracking-[0.22em] font-bold text-gray-400 mb-1">
@@ -1284,7 +1255,6 @@ const PoleConfigurator = () => {
                                     </div>
                                     <span className="text-sm font-medium text-gray-800">{a.label}</span>
                                   </div>
-                                  <span className="text-xs font-semibold text-gray-500">+${a.cost}</span>
                                 </button>
                               ))}
                             </>
@@ -1308,7 +1278,7 @@ const PoleConfigurator = () => {
                           onClick={() => setShowQuote(true)}
                           className="btn-primary-gradient flex-1 inline-flex items-center justify-center gap-2 py-3 text-sm font-semibold"
                         >
-                          Get My Quote <ArrowRight className="w-4 h-4" />
+                          Get an Estimate <ArrowRight className="w-4 h-4" />
                         </button>
                       ) : (
                         <button
