@@ -255,7 +255,7 @@ export function generateLocalBusinessSchema(city?: string) {
   const serviceOfferings = [
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Alarm System Installation", "description": "Professional installation of hardwired, wireless, and hybrid alarm systems" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Security Camera Installation", "description": "HD and 4K surveillance camera systems with remote viewing" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "24/7 Alarm Monitoring", "description": "Local monitoring center with fast dispatch response" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "24/7 Alarm Monitoring", "description": "Professional 24/7 monitoring with fast dispatch response" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial Security Systems", "description": "Enterprise-grade security for businesses" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Security Systems", "description": "Whole-home protection with smart home integration" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HOA Security Solutions", "description": "Gate cameras, community surveillance, LPR systems" } },
@@ -564,7 +564,7 @@ export function generateAboutPageSchema() {
     "@type": "AboutPage",
     "name": `About ${COMPANY.name}`,
     "url": `${BASE_URL}/about`,
-    "description": `Learn about ${COMPANY.name} - Houston's locally owned and operated security experts. Family-owned, locally operated, with in-house monitoring.`,
+    "description": `Learn about ${COMPANY.name} - Houston's locally owned and operated security experts. Family-owned, locally operated, with professional 24/7 monitoring.`,
     "mainEntity": {
       "@type": ["Organization", "LocalBusiness"],
       "name": COMPANY.name,
@@ -983,7 +983,7 @@ export function generateComprehensiveHomepageSchema() {
             "name": "How quickly can you respond to service calls in the Houston area?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "We typically respond to service calls within 24–48 hours in the Greater Houston area. Emergency monitoring response is immediate — our in-house San Antonio dispatch center contacts local authorities within seconds of a verified alarm."
+              "text": "We typically respond to service calls within 24–48 hours in the Greater Houston area. Emergency monitoring response is immediate — our professional monitoring center contacts local authorities within seconds of a verified alarm."
             }
           },
           {
@@ -999,7 +999,7 @@ export function generateComprehensiveHomepageSchema() {
             "name": "What makes your security systems different from national alarm companies?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "We are locally owned and operated — not a franchise. We monitor through our own in-house San Antonio dispatch center, not an outsourced national call center. We never sell your contract. You get a dedicated local team that knows your system and your neighborhood."
+              "text": "We are locally owned and operated — not a franchise. We provide professional 24/7 monitoring and never sell your contract. You get a dedicated local team that knows your system and your neighborhood."
             }
           },
           {
@@ -1119,7 +1119,7 @@ export function generateAllServicesSchemas() {
       "@id": `${BASE_URL}/monitoring-services/#service`,
       "name": "24/7 Alarm Monitoring – Houston TX",
       "serviceType": "Alarm Monitoring Service",
-      "description": "24/7 alarm monitoring through our in-house San Antonio dispatch center. Never outsourced to a national call center. Fast local dispatch, real-time notifications, and active deterrence support for homes and businesses.",
+      "description": "Professional 24/7 alarm monitoring for Houston homes and businesses. Fast local dispatch, real-time notifications, and active deterrence support.",
       "provider": provider,
       "areaServed": areaServed,
       "offers": [{ "@type": "Offer", "name": "24/7 Local Monitoring", "priceCurrency": "USD" }, { "@type": "Offer", "name": "Video Verification Monitoring" }],

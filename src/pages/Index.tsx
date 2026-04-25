@@ -61,7 +61,7 @@ const heroSlides: HeroSlide[] = [
   {
     eyebrow: "Alarm Takeovers · No Long-Term Contracts",
     headline: ["Go Local.", "Better Service. No Contracts."],
-    sub: "We take over your existing alarm from ADT, Brinks, Vivint, or any provider. Keep your hardware, lower your rate. Monitored from our in-house San Antonio dispatch center — never a national call center.",
+    sub: "We take over your existing alarm from ADT, Brinks, Vivint, or any provider. Keep your hardware, lower your rate. Backed by 24/7 professional alarm monitoring.",
     cta: { label: "Switch My Alarm Today", href: "/alarm-systems" },
     bg: "/imgi_13_gd9131.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
@@ -77,15 +77,15 @@ const heroSlides: HeroSlide[] = [
   {
     eyebrow: "HOA Boards · Property Management · Communities",
     headline: ["Complete Gate &", "Community Protection."],
-    sub: "License plate cameras, gate access control, common area surveillance, and active deterrence — custom-engineered for HOA boards and property managers.",
+    sub: "License plate cameras, gate cameras, common area surveillance, and active deterrence — custom-engineered for HOA boards and property managers.",
     cta: { label: "Get a Free Property Assessment", href: "/hoa-security" },
     bg: "/imgi_14_upscale_gate_TTS.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
   },
   {
-    eyebrow: "In-House San Antonio Dispatch Center",
-    headline: ["Local Operators.", "Real Response. Never Outsourced."],
-    sub: "Our in-house dispatch center is based in San Antonio — never outsourced to a national call center. Active deterrence cameras with sirens, strobes & two-way audio. Local dispatch within seconds.",
+    eyebrow: "Professional 24/7 Alarm Monitoring",
+    headline: ["Always Watching.", "Fast Response. Real Accountability."],
+    sub: "Professional 24/7 monitoring with fast dispatch response. Active deterrence cameras with sirens, strobes & two-way audio — protecting Houston homes and businesses around the clock.",
     cta: { label: "Learn About Our Monitoring", href: "/monitoring-services" },
     bg: "/imgi_8_qtq80-BdoLjp-2048x1367.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 50%, rgba(0,0,0,0.60) 100%)",
@@ -94,25 +94,25 @@ const heroSlides: HeroSlide[] = [
 
 /* ─── Data ──────────────────────────────────────────────────── */
 const services = [
-  { icon: Shield,    title: "Alarm Systems & Takeovers",       desc: "Switching from your current provider? We take over your existing equipment and provide local monitoring — no long-term contracts.",   href: "/alarm-systems" },
+  { icon: Shield,    title: "Alarm Systems & Takeovers",       desc: "Switching from your current provider? We take over your existing equipment and provide professional 24/7 monitoring — no long-term contracts.",   href: "/alarm-systems" },
   { icon: Camera,    title: "Security Camera Systems",         desc: "4K IP cameras, LPR, security poles & active deterrence for apartment complexes, commercial properties, and HOA communities.",          href: "/security-cameras" },
   { icon: Building2, title: "Commercial & Industrial Security", desc: "Enterprise-grade security for offices, retail, warehouses, and multi-site operations — scalable to any portfolio size.",               href: "/commercial" },
   { icon: Users,     title: "Property Management Security",    desc: "Comprehensive surveillance solutions for multifamily communities, apartment complexes, and managed properties.",                       href: "/property-management-security" },
   { icon: Users,     title: "HOA & Community Security",        desc: "Gate cameras, license plate recognition, common area surveillance & neighborhood-wide security systems for HOA boards.",              href: "/hoa-security" },
-  { icon: Radio,     title: "24/7 Monitoring & Active Deterrence", desc: "In-house San Antonio dispatch center — never outsourced to a national call center. Active deterrence cameras with sirens, strobes & two-way audio.",       href: "/monitoring-services" },
+  { icon: Radio,     title: "24/7 Monitoring & Active Deterrence", desc: "Professional 24/7 monitoring with fast dispatch response. Active deterrence cameras with sirens, strobes & two-way audio.",       href: "/monitoring-services" },
 ];
 
 const processSteps = [
   { icon: PhoneCall,       num: "01", title: "Discovery Call",          desc: "Speak with a security specialist about your property portfolio, pain points, and security goals." },
   { icon: ClipboardCheck,  num: "02", title: "Free Property Assessment", desc: "We visit your property, evaluate existing equipment, map vulnerabilities, and design a tailored solution." },
   { icon: Wrench,          num: "03", title: "Professional Deployment",  desc: "Licensed technicians install your system with minimal disruption to tenants and business operations." },
-  { icon: HeadphonesIcon,  num: "04", title: "Ongoing Monitoring & Support", desc: "24/7 local monitoring, remote diagnostics, and a dedicated account manager for the life of your system." },
+  { icon: HeadphonesIcon,  num: "04", title: "Ongoing Monitoring & Support", desc: "24/7 professional monitoring, remote diagnostics, and a dedicated account manager for the life of your system." },
 ];
 
 const whyUs = [
   { icon: MapPin,          title: "Houston-Born & Operated",     desc: "Locally owned and operated, serving Houston's commercial and residential communities. We know the neighborhoods, the crime patterns, and the infrastructure." },
   { icon: Shield,          title: "We Never Sell Your Contract",  desc: "Unlike national providers, your account stays with our local team — permanently. No buyouts, no surprises." },
-  { icon: HeadphonesIcon,  title: "San Antonio Dispatch Center",   desc: "Our in-house monitoring center is in San Antonio — never outsourced to a national call center. Real operators dispatch local authorities within seconds." },
+  { icon: HeadphonesIcon,  title: "Professional 24/7 Monitoring",   desc: "Certified monitoring center staffed around the clock. When an alarm triggers, trained operators verify and dispatch local authorities within seconds." },
   { icon: Building2,       title: "Built for Property Managers",  desc: "We understand multi-site operations, tenant liability concerns, and HOA compliance — because property management security is what we do." },
   { icon: Award,           title: "Trusted by Decision Makers",   desc: "Property management companies, HOA boards, and business owners across Greater Houston rely on us for their security infrastructure." },
   { icon: Lock,            title: "Enterprise-Grade Technology",   desc: "Active deterrence, LPR cameras, custom security poles, and smart integrations — built for commercial-scale deployments." },
@@ -127,13 +127,13 @@ const testimonials = [
 const faqs = [
   { q: "How do property management companies switch alarm providers?", a: "Switching is straightforward. We evaluate your existing alarm equipment from any provider — and in most cases, take over your panels, sensors, and wiring without replacing them. Our local team handles the entire transition with zero downtime to your tenants and operations." },
   { q: "Do you handle security for apartment complexes and multifamily properties?", a: "Yes — this is one of our core specialties. We provide comprehensive security for apartment communities including entrance/exit gate cameras, LPR systems, common area surveillance, package area monitoring, mailbox cameras, and dumpster area deterrence systems." },
-  { q: "What makes you different from national alarm companies?", a: "We are a locally owned Houston company — not a franchise. You get dedicated Houston technicians, an in-house San Antonio dispatch center that never outsources to a national call center, and we never sell your contract. Property managers get a single point of contact for every property in their portfolio." },
+  { q: "What makes you different from national alarm companies?", a: "We are a locally owned Houston company — not a franchise. You get dedicated Houston technicians, professional 24/7 monitoring, and we never sell your contract. Property managers get a single point of contact for every property in their portfolio." },
   { q: "Can you install security poles with multiple cameras?", a: "Absolutely. We custom-fabricate security poles in heights from 10 to 25 feet, supporting 1–4 cameras per pole with integrated wiring, LED floodlights, IR illuminators, and active deterrence systems. Use our 3D configurator to design your exact setup." },
   { q: "Do you serve commercial and industrial properties?", a: "Yes. From single retail locations to multi-site corporate campuses, warehouses, and industrial facilities — every system is custom-designed for your property's layout, liability requirements, and operational needs." },
   { q: "Can you take over our existing alarm equipment?", a: "In most cases, yes. We evaluate your existing keypads, sensors, wiring, and panels during a free property assessment. If your equipment is compatible — such as Honeywell VISTA panels, DMP, or DSC systems — we integrate it into your new setup, saving significant replacement costs." },
   { q: "What does a free property assessment include?", a: "A certified security professional visits your property at no cost. We map every entry point, evaluate existing equipment, identify blind spots and vulnerabilities, and provide a detailed proposal with transparent pricing. Zero obligation, zero pressure — designed for decision makers who need clear ROI justification." },
   { q: "How long does a commercial security installation take?", a: "Commercial and HOA projects typically take 1–5 days depending on scope. Apartment complexes with multiple buildings may take 1–2 weeks. We schedule around your operations and coordinate with property management to minimize disruption to tenants." },
-  { q: "Do you offer 24/7 monitoring with local dispatch?", a: "Yes. Our in-house dispatch center is based in San Antonio — never outsourced to a national call center. When an alarm triggers, our operators verify the signal and dispatch local authorities immediately. Property managers receive real-time notifications and incident reports." },
+  { q: "Do you offer 24/7 monitoring with local dispatch?", a: "Yes. Our professional monitoring center is staffed 24/7. When an alarm triggers, trained operators verify the signal and dispatch local authorities immediately. Property managers receive real-time notifications and incident reports." },
   { q: "What areas in Houston do you serve?", a: "We serve Houston and premier surrounding communities including Sugar Land, Katy, The Woodlands, Cypress, Bellaire, Memorial, West University, and Richmond. Contact us to confirm service availability for your property portfolio." },
 ];
 
@@ -461,7 +461,7 @@ const Index = () => {
             { label: "Custom Security Poles",              accent: false },
             { label: "License Plate Recognition",          accent: true  },
             { label: "Alarm.com Authorized Dealer",        accent: false },
-            { label: "24/7 Monitoring · San Antonio Dispatch Center", accent: true  },
+            { label: "24/7 Professional Alarm Monitoring",            accent: true  },
             { label: "Honeywell · Resideo Systems",        accent: false },
             { label: "Locally Owned & Operated",           accent: false },
           ];
@@ -588,7 +588,7 @@ const Index = () => {
                     From single storefronts to multi-site operations — we design commercial security that protects your assets, employees, and bottom line.
                   </p>
                   <ul className="space-y-2 mb-6 relative z-10">
-                    {["Commercial alarm systems & cameras", "Access control & active deterrence", "24/7 in-house dispatch monitoring", "Service & support — not just install"].map((item) => (
+                    {["Commercial alarm systems & cameras", "Active deterrence systems", "24/7 professional monitoring", "Service & support — not just install"].map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(220 70% 68%)" }} />
                         <span className="text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>{item}</span>
@@ -621,7 +621,7 @@ const Index = () => {
                     Gate access, community cameras, centralized reporting, and a single point of contact for your entire portfolio — built for how you actually manage properties.
                   </p>
                   <ul className="space-y-2 mb-6 relative z-10">
-                    {["Gate access control & LPR cameras", "Community-wide surveillance", "Multi-unit alarm monitoring", "HOA board-friendly reporting"].map((item) => (
+                    {["Gate cameras & LPR systems", "Community-wide surveillance", "Multi-unit alarm monitoring", "HOA board-friendly reporting"].map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "hsl(0 85% 58%)" }} />
                         <span className="text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>{item}</span>
@@ -800,7 +800,7 @@ const Index = () => {
               Securing Multi-Family Communities & HOA Properties Across Houston
             </h2>
             <p className="text-base leading-relaxed mb-3" style={{ color: "rgba(255,255,255,0.45)" }}>
-              From gate access control and license plate recognition to community-wide cameras and alarm monitoring for every unit — we build security ecosystems that property managers and HOA boards can trust and report on.
+              From gate cameras and license plate recognition to community-wide surveillance and alarm monitoring for every unit — we build security ecosystems that property managers and HOA boards can trust and report on.
             </p>
             <p className="text-sm font-semibold" style={{ color: "hsl(0 85% 62%)" }}>
               Trusted by Property Managers and HOA Boards throughout Greater Houston
@@ -812,8 +812,8 @@ const Index = () => {
             {[
               {
                 icon: Lock,
-                title: "Gate Access Control",
-                desc: "Automated gate systems with remote access, resident credentials, and visitor management for gated communities.",
+                title: "Gate Camera Systems",
+                desc: "LPR and surveillance cameras covering gate entries with remote viewing, resident monitoring, and visitor documentation for gated communities.",
               },
               {
                 icon: Camera,
@@ -1249,7 +1249,7 @@ const Index = () => {
                 <span style={{ color: "rgba(255,255,255,0.45)" }}>Your neighbors.</span>
               </h2>
               <p className="text-base leading-relaxed mb-3" style={{ color: "rgba(255,255,255,0.5)" }}>
-                Over three decades protecting Houston homes, businesses, and communities. When you call, you reach real people who know your system — not a national call center. We monitor through our own San Antonio dispatch center, never sell your contract, and stay with you long after the install.
+                Over three decades protecting Houston homes, businesses, and communities. When you call, you reach real people who know your system. We provide professional 24/7 monitoring, never sell your contract, and stay with you long after the install.
               </p>
               <p className="text-[13px] font-medium mb-7" style={{ color: "rgba(255,255,255,0.28)" }}>
                 We genuinely care about the people and properties we protect — and your neighbors can tell the difference.

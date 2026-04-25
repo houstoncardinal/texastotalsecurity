@@ -49,7 +49,7 @@ const solutions = [
   {
     icon: Shield,
     title: "Local Alarm Systems",
-    desc: "Custom-designed alarm systems with 24/7 in-house monitoring from our San Antonio dispatch center. We never outsource to a national call center.",
+    desc: "Custom-designed alarm systems with professional 24/7 monitoring. Fast response when it matters — every hour of every day.",
     href: "/alarm-systems",
   },
   {
@@ -79,7 +79,7 @@ const solutions = [
   {
     icon: Radio,
     title: "24/7 Local Monitoring",
-    desc: "Our Houston-based dispatch center never sleeps. When an alarm triggers, local operators contact local authorities — immediately.",
+    desc: "Professional 24/7 monitoring that never sleeps. When an alarm triggers, trained operators contact local authorities — immediately.",
     href: "/monitoring-services",
   },
 ];
@@ -406,7 +406,7 @@ const HoustonProblem = () => (
                 ADT, Brinks, and Vivint route your emergency through call centers thousands of miles away. By the time they reach a local dispatcher, the threat is over.
               </p>
               <p>
-                Texas Total Security operates an in-house monitoring center right here in Houston. When your alarm triggers, our local operators dispatch local police — in seconds, not minutes.
+                Texas Total Security provides professional 24/7 alarm monitoring with fast response. When your alarm triggers, trained operators dispatch local police — in seconds, not minutes.
               </p>
               <p>
                 We've been in your neighborhood. We've protected your neighbors. We know the specific security challenges of every Houston zip code, from Memorial to The Woodlands.
@@ -414,7 +414,7 @@ const HoustonProblem = () => (
             </div>
             <div className="space-y-3 mb-8">
               {[
-                "In-house monitoring — never sold to a national company",
+                "Professional monitoring — we never sell your contract",
                 "Local Houston technicians who know your system",
                 "System takeover from ADT, Brinks & Vivint",
                 "No long-term contracts required",

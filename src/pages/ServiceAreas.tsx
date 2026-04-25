@@ -38,8 +38,8 @@ const countyGroups = [
 const reasons = [
   {
     icon: Radio,
-    title: "In-House Local Monitoring — Not a Call Center",
-    desc: "Our monitoring center is physically located in Houston. When an alarm triggers at your property, local Houston operators verify and dispatch local authorities — not a national call center with no knowledge of your neighborhood.",
+    title: "Professional 24/7 Monitoring",
+    desc: "Certified monitoring center staffed around the clock. When an alarm triggers at your property, trained operators verify and dispatch local Houston-area authorities fast.",
   },
   {
     icon: Shield,
@@ -105,7 +105,7 @@ const ServiceAreas = () => {
               {[
                 { label: "5 Counties Covered" },
                 { label: "16+ Cities Served" },
-                { label: "In-House Houston Monitoring" },
+                { label: "Professional 24/7 Monitoring" },
                 { label: "Licensed · LIC# B03066901" },
               ].map((item) => (
                 <span

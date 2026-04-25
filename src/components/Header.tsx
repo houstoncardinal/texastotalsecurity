@@ -14,7 +14,7 @@ const mainServices = [
   { name: "Commercial Security",       href: "/commercial",           icon: Building2, desc: "Enterprise-grade business solutions" },
   { name: "Property Management",       href: "/property-management-security", icon: Users, desc: "Multifamily & managed property security" },
   { name: "HOA Security Solutions",    href: "/hoa-security",         icon: Users,     desc: "Gate cameras & community-wide security" },
-  { name: "Monitoring Services",       href: "/monitoring-services",  icon: Radio,     desc: "24/7 local dispatch center" },
+  { name: "Monitoring Services",       href: "/monitoring-services",  icon: Radio,     desc: "24/7 professional alarm monitoring" },
   { name: "Security Pole Configurator", href: "/security-pole-configurator", icon: Camera, desc: "Design your custom pole setup in 3D" },
   { name: "Service & Maintenance",     href: "/service-maintenance",  icon: Wrench,    desc: "Ongoing system support & upkeep" },
 ];
@@ -238,7 +238,7 @@ const Header = () => {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-semibold text-gray-900 text-sm mb-0.5">Commercial & Business</p>
-                          <p className="text-xs text-gray-500 leading-relaxed">Enterprise security, access control & multi-site</p>
+                          <p className="text-xs text-gray-500 leading-relaxed">Enterprise security, surveillance & multi-site</p>
                         </div>
                         <ArrowRight className="w-4 h-4 text-accent opacity-0 group-hover:opacity-100 transition-opacity mt-1 shrink-0" />
                       </Link>

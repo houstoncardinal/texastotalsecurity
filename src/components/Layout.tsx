@@ -4,8 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Header from "./Header";
 import Footer from "./Footer";
 import MobileCTA from "./MobileCTA";
-import ExitIntentPopup from "./ExitIntentPopup";
-import LiveChat from "./LiveChat";
 
 const pageVariants = {
   initial: { opacity: 0, y: 6 },
@@ -34,8 +32,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
       </AnimatePresence>
       <Footer />
       <MobileCTA />
-      <ExitIntentPopup />
-      <LiveChat />
       {/* Spacer for mobile CTA */}
       <div className="h-16 lg:hidden" />
     </div>

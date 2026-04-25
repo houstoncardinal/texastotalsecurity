@@ -149,7 +149,7 @@ const CityLanding = () => {
               { title: "Local Company, Not National", desc: `We're based in Houston — not a distant call center. When ${city.name} clients call, they reach a real person who knows the area.` },
               { title: "Houston's Local Security Experts", desc: "Locally owned and operated, designing and installing security systems across the greater Houston metropolitan area." },
               { title: "Custom-Designed Systems", desc: `Every ${city.name} property gets a security system designed for its specific layout, risks, and needs — no one-size-fits-all packages.` },
-              { title: "24/7 Local Monitoring", desc: "Our monitoring center is in Houston. Local operators, faster response, direct dispatch to local authorities." },
+              { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock. Trained operators with fast response and direct dispatch to local authorities." },
             ].map(item => (
               <div key={item.title} className="flex gap-4">
                 <CheckCircle2 className="w-6 h-6 text-accent shrink-0 mt-0.5" />

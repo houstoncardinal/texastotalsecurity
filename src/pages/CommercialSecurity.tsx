@@ -64,7 +64,7 @@ const industries = [
 const whyUs = [
   { icon: Building2, title: "Houston's Local Experts", desc: "Deep commercial security experience across virtually every industry type in the greater Houston area — locally owned and operated." },
   { icon: Shield, title: "We Own Your Contract", desc: "We never sell your monitoring contract to a national company. Your account stays with our local team — always." },
-  { icon: Eye, title: "Local Monitoring Center", desc: "Our Houston-based dispatch center operates 24/7 — faster response, direct contact with local authorities." },
+  { icon: Eye, title: "Professional 24/7 Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
   { icon: CheckCircle2, title: "Custom-Engineered Systems", desc: "Every commercial system is designed specifically for your facility layout, risk profile, and operational needs." },
 ];
 
@@ -79,7 +79,7 @@ const faqs = [
   },
   {
     question: "Do you provide 24/7 monitoring for commercial properties?",
-    answer: "Absolutely. Our in-house San Antonio dispatch center provides 24/7 alarm and video monitoring, including video guard patrol services — where live operators actively review your cameras on a schedule.",
+    answer: "Absolutely. We provide professional 24/7 alarm and video monitoring, including video guard patrol services — where live operators actively review your cameras on a schedule.",
   },
   {
     question: "How does your commercial security consultation work?",

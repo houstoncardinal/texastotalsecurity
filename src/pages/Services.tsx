@@ -58,7 +58,7 @@ const services = [
     color: "from-purple-500 to-purple-600",
     bgColor: "bg-purple-50",
     borderColor: "border-purple-200",
-    features: ["Access Control", "Active Deterrence", "Video Monitoring", "Multi-Location Systems"],
+    features: ["Active Deterrence", "Video Monitoring", "Multi-Location Systems", "24/7 Monitoring"],
   },
   {
     icon: Users,
@@ -74,7 +74,7 @@ const services = [
     icon: Radio,
     title: "Monitoring",
     href: "/monitoring-services",
-    desc: "24/7 local dispatch center",
+    desc: "24/7 professional monitoring",
     color: "from-indigo-500 to-indigo-600",
     bgColor: "bg-indigo-50",
     borderColor: "border-indigo-200",
@@ -95,7 +95,7 @@ const services = [
 const whyChooseUs = [
   { icon: Clock, title: "Locally Owned", desc: "Houston-based & operated" },
   { icon: MapPin, title: "Locally Owned", desc: "Never sell your contract" },
-  { icon: Headphones, title: "Local Monitoring", desc: "Our own dispatch center" },
+  { icon: Headphones, title: "Professional Monitoring", desc: "24/7 certified monitoring" },
   { icon: Shield, title: "Licensed & Insured", desc: "LIC# B03066901" },
 ];
 

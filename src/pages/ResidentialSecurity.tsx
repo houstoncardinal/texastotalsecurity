@@ -74,7 +74,7 @@ const propertyTypes = [
 
 const pillars = [
   { icon: Shield, title: "Superior Installation", desc: "Licensed technicians handle the entire setup process with precision craftsmanship — every sensor, camera, and panel placed for maximum coverage." },
-  { icon: Bell, title: "Dedicated 24/7 Monitoring", desc: "Our in-house San Antonio dispatch center watches your home around the clock, ready to contact emergency services the moment an alarm triggers." },
+  { icon: Bell, title: "Dedicated 24/7 Monitoring", desc: "Professional monitoring center watches your home around the clock, ready to contact emergency services the moment an alarm triggers." },
   { icon: Home, title: "Responsive Support", desc: "When you need help, you talk to a real local person who knows your system. Not a national call center. Not a ticket queue." },
 ];
 
@@ -85,7 +85,7 @@ const faqs = [
   },
   {
     question: "What does your residential security service include?",
-    answer: "Our service is built on three core pillars: superior installation by licensed professionals, personalized system design tailored to your home, and dedicated 24/7 monitoring with rapid response from our in-house San Antonio dispatch center.",
+    answer: "Our service is built on three core pillars: superior installation by licensed professionals, personalized system design tailored to your home, and dedicated 24/7 professional monitoring with rapid response.",
   },
   {
     question: "Do you offer solutions beyond basic burglar alarms?",
@@ -373,7 +373,7 @@ const ResidentialSecurity = () => (
                 Choosing Texas Total Security means partnering with a team deeply committed to your long-term protection — going far beyond simple alarms to include full home automation, environmental monitoring, and smart home integration.
               </p>
               <p>
-                Our highly trained and licensed technicians manage the entire setup process, ensuring every component functions flawlessly from day one. Our in-house San Antonio dispatch center provides constant vigilance, ready to contact emergency services instantly when an alarm triggers.
+                Our highly trained and licensed technicians manage the entire setup process, ensuring every component functions flawlessly from day one. Our professional monitoring center provides constant vigilance, ready to contact emergency services instantly when an alarm triggers.
               </p>
               <p>
                 From your front door to your backyard, from your detached garage to your second home — we design coverage with zero blind spots.

@@ -11,7 +11,7 @@ import { CheckCircle2, Shield, Users, MapPin, Clock, HeadphonesIcon } from "luci
 const values = [
   { icon: MapPin, title: "Houston-Born & Operated", desc: "Locally owned and operated security technicians working in Houston and surrounding areas. We live and work in the same communities we protect." },
   { icon: Shield, title: "We Don't Sell Alarm Contracts", desc: "We don't sell our alarm contracts to big national companies. Your account stays with us — always." },
-  { icon: HeadphonesIcon, title: "In-House Monitoring", desc: "Our monitoring center is local. When an alarm triggers, local operators dispatch local authorities — fast." },
+  { icon: HeadphonesIcon, title: "Professional 24/7 Monitoring", desc: "Certified monitoring center staffed around the clock. When an alarm triggers, trained operators dispatch local authorities — fast." },
   { icon: Users, title: "Friendly, Local Service", desc: "You'll know your technician by name, and they'll know your system inside and out." },
   { icon: Clock, title: "Fast, Reliable Response", desc: "When you need service, you talk to a real person who can help — immediately." },
   { icon: CheckCircle2, title: "Custom System Design", desc: "Every system is designed for your specific property, risks, and goals." },

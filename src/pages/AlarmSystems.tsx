@@ -30,7 +30,7 @@ const vp = { once: true, amount: 0.15 };
 
 const features = [
   { icon: Shield, title: "Alarm Installation", desc: "Professional installation of hardwired, wireless, and hybrid alarm systems tailored to your property." },
-  { icon: Radio, title: "24/7 Local Monitoring", desc: "In-house San Antonio dispatch center with fast local dispatch — not a distant national call center." },
+  { icon: Radio, title: "24/7 Professional Monitoring", desc: "Certified monitoring center with fast local dispatch — trained operators ready to respond when it matters." },
   { icon: RefreshCw, title: "System Takeover", desc: "Already have a system? We can take it over and activate it on our local monitoring." },
   { icon: Wifi, title: "Wireless Systems", desc: "Modern wireless alarm solutions with cellular backup for reliable communication." },
   { icon: AlertTriangle, title: "Panic & Duress", desc: "Panic buttons, key fob remotes, and silent duress codes for emergency situations." },
@@ -49,11 +49,11 @@ const alarmEquipment = [
   "Indoor / Outdoor Sirens & Strobes",
   "Smart Home Integration",
   "Cellular Backup Communication",
-  "24/7 In-House Monitoring",
+  "24/7 Professional Monitoring",
 ];
 
 const faqs = [
-  { question: "Do you provide both installation and monitoring services?", answer: "Yes. Texas Total Security offers complete alarm system installation and monitoring services. Our technicians handle everything from designing and installing your system to activating it on our in-house 24/7 dispatch center — all in a single visit." },
+  { question: "Do you provide both installation and monitoring services?", answer: "Yes. Texas Total Security offers complete alarm system installation and professional 24/7 monitoring. Our technicians handle everything from designing and installing your system to activating monitoring — all in a single visit." },
   { question: "Can you install security systems for both homes and businesses?", answer: "Absolutely. We design and install custom alarm and surveillance systems for both residential and commercial properties." },
   { question: "How long does it take to install a new alarm system?", answer: "Most residential systems can be installed within a few hours to a full day, depending on property size and complexity." },
   { question: "Can I use my current system from another alarm company?", answer: "Yes. In many cases, we can take over monitoring of your existing alarm equipment, allowing you to avoid the cost of a full replacement." },
@@ -62,7 +62,7 @@ const faqs = [
   { question: "What's the difference between hardwired and wireless alarms?", answer: "Hardwired systems use physical wiring — extremely reliable for new construction. Wireless systems use radio signals and are ideal for existing homes. We also install hybrid systems." },
   { question: "What happens during a power outage?", answer: "All our systems include battery backup. Cellular communication ensures your system stays connected even if phone or internet lines are down." },
   { question: "What is the cost of switching alarm companies?", answer: "In many cases, there is minimal cost to switch. We often take over your existing alarm equipment at no charge, eliminating the need for new hardware. Contact us for a free assessment and we'll provide transparent pricing with no surprises." },
-  { question: "How long does it take to switch alarm companies?", answer: "Most alarm company switches are completed in a single visit. Our technicians reprogram your existing panel, test all sensors, and activate your system on our in-house dispatch center — typically within a few hours." },
+  { question: "How long does it take to switch alarm companies?", answer: "Most alarm company switches are completed in a single visit. Our technicians reprogram your existing panel, test all sensors, and activate professional 24/7 monitoring — typically within a few hours." },
 ];
 
 const alarmSchemas = [
@@ -279,7 +279,7 @@ const AlarmSystems = () => (
             </h2>
             <div className="space-y-5 text-gray-600 leading-relaxed text-lg">
               <p>
-                Unlike national providers that route alerts through distant call centers, Texas Total Security delivers alarm system monitoring backed by a local, in-house dispatch team right here in Houston, TX.
+                Texas Total Security delivers professional 24/7 alarm monitoring with fast response times and trained operators who take action the moment your alarm triggers.
               </p>
               <p>
                 If you already have alarm equipment and are frustrated with your current provider, we make switching simple while maximizing the value of what you own.
