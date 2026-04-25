@@ -32,6 +32,7 @@ const HoustonProblem = lazy(() => import("./pages/HoustonProblem"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const PoleConfigurator = lazy(() => import("./pages/PoleConfigurator"));
 const QualifyFunnel = lazy(() => import("./pages/QualifyFunnel"));
+const NeighborhoodLanding = lazy(() => import("./pages/NeighborhoodLanding"));
 
 const queryClient = new QueryClient();
 
@@ -74,6 +75,8 @@ const App = () => (
             <Route path="/:citySlug-security-systems" element={<CityLanding />} />
             <Route path="/:citySlug-security" element={<CityLanding />} />
             <Route path="/houston-we-have-a-problem" element={<HoustonProblem />} />
+            {/* Houston Neighborhood Landing Pages */}
+            <Route path="/neighborhoods/:neighborhoodSlug" element={<NeighborhoodLanding />} />
             <Route path="/security-pole-configurator" element={<PoleConfigurator />} />
             <Route path="/qualify" element={<QualifyFunnel />} />
             <Route path="/admin" element={<AdminDashboard />} />
