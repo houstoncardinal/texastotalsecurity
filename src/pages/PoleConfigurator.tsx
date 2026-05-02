@@ -430,10 +430,11 @@ function HoneycombMount({ poleColor: _poleColor, cameraType, W }: {
   const armGeo = useMemo(() => {
     const STEPS    = 96;
     const RADIAL   = 28;
-    const hwHead   = 0.014;  // 28 mm at junction-cap end
-    const hwMid    = 0.020;  // 40 mm along the bend
-    const hwFlare  = 0.052;  // 104 mm vertical flare at the very base (bell-mouth)
-    const hwBaseZ  = 0.026;  // half-depth (Z) at base — slightly wider than mid
+    const hwHead   = 0.022;  // 44 mm at junction-cap end (was 28)
+    const hwMid    = 0.032;  // 64 mm along the bend (was 40)
+    const hwFlare  = 0.068;  // 136 mm vertical flare at base (bell-mouth) (was 104)
+    const hwHeadZ  = 0.022;  // 44 mm depth at head
+    const hwBaseZ  = 0.040;  // 80 mm depth at base — heavy cast mass (was 52)
     const rRatio   = 0.30;
 
     // Sample the rounded-square outline. Width (Y) and depth (Z) can differ
