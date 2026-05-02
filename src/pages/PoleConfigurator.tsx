@@ -481,7 +481,7 @@ function HoneycombMount({ poleColor: _poleColor, cameraType, W }: {
       }
 
       // Depth (Z on profile) — narrow flare so the bell-mouth is mostly vertical
-      const hwZ = hwBaseZ + (hwHead - hwBaseZ) * Math.pow(t, 0.7);
+      const hwZ = hwBaseZ + (hwHeadZ - hwBaseZ) * Math.pow(t, 0.7);
 
       const profile = sampleProfile(hwY, hwZ);
       const center = curve.getPointAt(t);
