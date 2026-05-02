@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ═══════════════════════════════════════════════════════
+       HOMEPAGE
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.texastotalsecurity.com/og-image.jpg</image:loc>
+      <image:title>Texas Total Security — Houston Security Systems</image:title>
+    </image:image>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CORE SERVICE PAGES
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/services</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/alarm-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/security-cameras</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/residential</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/commercial</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/hoa-security</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/monitoring-services</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/industries</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/service-maintenance</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/security-pole-configurator</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONVERSION PAGES
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/free-analysis</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.96</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/qualify</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/contact</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       COMPANY PAGES
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/about</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.72</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/portfolio</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/reviews</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SERVICE AREAS HUB
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/service-areas</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CITY LANDING PAGES — HARRIS COUNTY
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/houston-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.96</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/bellaire-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/memorial-houston-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/cypress-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/spring-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/tomball-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/atascocita-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CITY LANDING PAGES — FORT BEND COUNTY
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/sugar-land-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/katy-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/richmond-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/missouri-city-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/rosenberg-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CITY LANDING PAGES — MONTGOMERY COUNTY
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/the-woodlands-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CITY LANDING PAGES — GALVESTON / BRAZORIA COUNTY
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/league-city-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/pearland-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HOUSTON NEIGHBORHOOD LANDING PAGES
+       (Priority order per client focus list)
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/memorial-villages-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/galleria-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/energy-corridor-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/bellaire-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/west-university-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/upper-kirby-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.86</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/river-oaks-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.86</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/spring-valley-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/rice-military-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/montrose-north-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/montrose-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/medical-center-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/neighborhoods/downtown-houston-security-systems</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BLOG — HUB
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BLOG — CATEGORIES
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/category/home-security</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.72</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/category/business-security</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.72</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/category/hoa-security</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/category/surveillance-guides</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/category/alarm-education</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/category/crime-prevention</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/category/technology</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/category/case-studies</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BLOG — ARTICLES
+       (Ordered by SEO/traffic value, not publish date)
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/houston-crime-statistics-2025-neighborhood-guide</loc>
+    <lastmod>2025-11-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/choosing-security-company-houston</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/do-you-need-security-system-houston</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/best-security-systems-hoas-texas</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.76</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/top-security-camera-setups-businesses</loc>
+    <lastmod>2025-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.76</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/video-verification-alarm-monitoring</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.74</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/how-criminals-target-homes-without-alarms</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.74</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/security-system-return-on-investment</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.74</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/wired-vs-wireless-security-cameras</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.72</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/security-cameras-night-vision-guide</loc>
+    <lastmod>2025-11-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.72</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/how-alarm-monitoring-works</loc>
+    <lastmod>2025-08-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/30-years-houston-security-experience</loc>
+    <lastmod>2025-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/blog/texas-license-requirements-security-companies</loc>
+    <lastmod>2025-11-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.68</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONTENT MARKETING
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/houston-we-have-a-problem</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.74</priority>
+  </url>
+
+</urlset>

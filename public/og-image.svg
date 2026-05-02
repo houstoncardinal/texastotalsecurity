@@ -1,0 +1,60 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'>
+  <defs>
+    <linearGradient id='bg' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#0a0a0a'/>
+      <stop offset='60%' stop-color='#111111'/>
+      <stop offset='100%' stop-color='#1a0505'/>
+    </linearGradient>
+    <radialGradient id='glow' cx='30%' cy='40%' r='55%'>
+      <stop offset='0%' stop-color='#dc2626' stop-opacity='0.18'/>
+      <stop offset='100%' stop-color='#dc2626' stop-opacity='0'/>
+    </radialGradient>
+    <linearGradient id='accent' x1='0%' y1='0%' x2='100%' y2='0%'>
+      <stop offset='0%' stop-color='#dc2626'/>
+      <stop offset='100%' stop-color='#b91c1c'/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width='1200' height='630' fill='url(#bg)'/>
+  <rect width='1200' height='630' fill='url(#glow)'/>
+  <!-- Grid texture lines -->
+  <g opacity='0.025' stroke='white' stroke-width='1'>
+    <line x1='0' y1='63' x2='1200' y2='63'/><line x1='0' y1='126' x2='1200' y2='126'/>
+    <line x1='0' y1='189' x2='1200' y2='189'/><line x1='0' y1='252' x2='1200' y2='252'/>
+    <line x1='0' y1='315' x2='1200' y2='315'/><line x1='0' y1='378' x2='1200' y2='378'/>
+    <line x1='0' y1='441' x2='1200' y2='441'/><line x1='0' y1='504' x2='1200' y2='504'/>
+    <line x1='0' y1='567' x2='1200' y2='567'/>
+    <line x1='100' y1='0' x2='100' y2='630'/><line x1='200' y1='0' x2='200' y2='630'/>
+    <line x1='300' y1='0' x2='300' y2='630'/><line x1='400' y1='0' x2='400' y2='630'/>
+    <line x1='500' y1='0' x2='500' y2='630'/><line x1='600' y1='0' x2='600' y2='630'/>
+    <line x1='700' y1='0' x2='700' y2='630'/><line x1='800' y1='0' x2='800' y2='630'/>
+    <line x1='900' y1='0' x2='900' y2='630'/><line x1='1000' y1='0' x2='1000' y2='630'/>
+    <line x1='1100' y1='0' x2='1100' y2='630'/>
+  </g>
+  <!-- Top accent bar -->
+  <rect x='0' y='0' width='1200' height='4' fill='url(#accent)'/>
+  <!-- Red accent rule below headline -->
+  <rect x='100' y='360' width='56' height='4' rx='2' fill='url(#accent)'/>
+  <!-- Badge -->
+  <rect x='100' y='148' width='280' height='32' rx='16' fill='#dc2626' fill-opacity='0.14' stroke='#dc2626' stroke-opacity='0.3' stroke-width='1'/>
+  <text x='240' y='169' font-family='Arial, sans-serif' font-size='11' font-weight='700' fill='#f87171' text-anchor='middle' letter-spacing='2'>HOUSTON, TEXAS · LOCALLY OWNED</text>
+  <!-- Main headline -->
+  <text x='100' y='290' font-family='Arial Black, Arial, sans-serif' font-size='68' font-weight='900' fill='white' letter-spacing='-2'>Texas Total Security</text>
+  <!-- Subheadline -->
+  <text x='100' y='340' font-family='Arial, sans-serif' font-size='28' font-weight='400' fill='rgba(255,255,255,0.62)'>Commercial Security · HOA · Property Management</text>
+  <!-- Description -->
+  <text x='100' y='410' font-family='Arial, sans-serif' font-size='19' fill='rgba(255,255,255,0.50)'>Alarm Systems · 4K Cameras · 24/7 Local Monitoring · Licensed &amp; Insured</text>
+  <!-- Phone -->
+  <text x='100' y='480' font-family='Arial, sans-serif' font-size='22' font-weight='700' fill='#f87171'>(713) 387-9937 · texastotalsecurity.com</text>
+  <!-- Trust badges -->
+  <rect x='100' y='518' width='180' height='36' rx='8' fill='rgba(255,255,255,0.05)' stroke='rgba(255,255,255,0.10)' stroke-width='1'/>
+  <text x='190' y='541' font-family='Arial, sans-serif' font-size='12' font-weight='700' fill='rgba(255,255,255,0.55)' text-anchor='middle'>Licensed · LIC# B03066901</text>
+  <rect x='296' y='518' width='160' height='36' rx='8' fill='rgba(255,255,255,0.05)' stroke='rgba(255,255,255,0.10)' stroke-width='1'/>
+  <text x='376' y='541' font-family='Arial, sans-serif' font-size='12' font-weight='700' fill='rgba(255,255,255,0.55)' text-anchor='middle'>In-House Monitoring</text>
+  <rect x='472' y='518' width='160' height='36' rx='8' fill='rgba(255,255,255,0.05)' stroke='rgba(255,255,255,0.10)' stroke-width='1'/>
+  <text x='552' y='541' font-family='Arial, sans-serif' font-size='12' font-weight='700' fill='rgba(255,255,255,0.55)' text-anchor='middle'>Locally Owned</text>
+  <!-- Shield icon (simplified) -->
+  <path d='M1050 180 L1050 180 C1050 180 1010 160 1010 220 L1010 280 C1010 320 1050 340 1050 340 C1050 340 1090 320 1090 280 L1090 220 C1090 160 1050 180 Z' fill='none' stroke='#dc2626' stroke-width='3' opacity='0.4'/>
+  <path d='M1050 210 L1050 210 C1050 210 1030 198 1030 234 L1030 272 C1030 296 1050 308 1050 308 C1050 308 1070 296 1070 272 L1070 234 C1070 198 1050 210 Z' fill='#dc2626' opacity='0.15'/>
+  <text x='1050' y='268' font-family='Arial, sans-serif' font-size='40' text-anchor='middle' fill='#dc2626' opacity='0.7'>&#128737;</text>
+</svg>
