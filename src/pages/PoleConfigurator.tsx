@@ -377,35 +377,39 @@ function CameraBracket({
 }
 
 // ─── Honeycomb Mount — LTB301 heavy-duty cast-aluminum gooseneck ─────────────
-// Wide-profile squared-off arm (non-tapering rounded-square cross-section),
-// thick reinforced base plate with 4 vertical gussets, deep pendant junction
-// cap with stainless set-screws. Semi-gloss Signal White powder coat.
+// Industrial cast-aluminum bracket per LTB301 spec:
+//   • Tapered, chamfered (rounded-square) arm — widest at base, narrower at head
+//   • Gusseted base plate with blended top + bottom reinforcement fins
+//   • Deep-skirted junction cap, noticeably wider than arm
+//   • Hex-bolt indentations on base plate, threaded side-conduit plug on cap
+//   • Signal White (RAL 9003) high-density powder coat finish
 function HoneycombMount({ poleColor: _poleColor, cameraType, W }: {
   poleColor: string; cameraType: string; W: number;
 }) {
   const faceX = W / 2;
 
-  // Semi-gloss Signal White powder coat
-  const wM  = { color: "#eceef0", roughness: 0.26, metalness: 0.22 } as const;
-  const wgM = { color: "#f2f4f4", roughness: 0.13, metalness: 0.28 } as const;
-  const ssM = { color: "#b2b6b9", roughness: 0.13, metalness: 0.92 } as const;
+  // Signal White (RAL 9003) high-density powder coat — slight orange-peel sheen
+  const wM   = { color: "#f1f1ee", roughness: 0.42, metalness: 0.10 } as const; // primary cast surface
+  const wgM  = { color: "#e8e8e4", roughness: 0.46, metalness: 0.08 } as const; // shadowed/recessed surfaces
+  const ssM  = { color: "#9aa0a4", roughness: 0.22, metalness: 0.94 } as const; // stainless hardware
+  const dkM  = { color: "#5a5e62", roughness: 0.55, metalness: 0.40 } as const; // bolt-hole recesses
 
-  // Gooseneck control points — strong L-curve, heavy cast-aluminum proportions
+  // ── Tapered gooseneck arm ──
+  // Curve sweeps from the gusseted base (high) down to the junction cap.
   const curve = useMemo(() => new THREE.CatmullRomCurve3([
-    new THREE.Vector3(faceX + 0.048,  0.000, 0),
-    new THREE.Vector3(faceX + 0.110,  0.016, 0),
-    new THREE.Vector3(faceX + 0.168,  0.028, 0),
-    new THREE.Vector3(faceX + 0.200,  0.014, 0),
-    new THREE.Vector3(faceX + 0.212, -0.040, 0),
-    new THREE.Vector3(faceX + 0.200, -0.115, 0),
-    new THREE.Vector3(faceX + 0.183, -0.188, 0),
+    new THREE.Vector3(faceX + 0.058,  0.012, 0),
+    new THREE.Vector3(faceX + 0.118,  0.024, 0),
+    new THREE.Vector3(faceX + 0.172,  0.022, 0),
+    new THREE.Vector3(faceX + 0.206, -0.004, 0),
+    new THREE.Vector3(faceX + 0.218, -0.060, 0),
+    new THREE.Vector3(faceX + 0.208, -0.130, 0),
+    new THREE.Vector3(faceX + 0.190, -0.196, 0),
   ]), [faceX]);
 
-  // Rounded-square cross-section — 36 mm × 36 mm, r=5 mm corners
-  const armShape = useMemo(() => {
-    const s  = new THREE.Shape();
-    const hw = 0.018;
-    const r  = 0.005;
+  // Rounded-square (chamfered) cross-section, parameterised by half-width.
+  // Used at multiple stations along the arm to produce a real taper.
+  const makeArmShape = (hw: number, r: number) => {
+    const s = new THREE.Shape();
     s.moveTo(-hw + r, -hw);
     s.lineTo( hw - r, -hw);
     s.quadraticCurveTo( hw, -hw,  hw, -hw + r);
@@ -416,92 +420,238 @@ function HoneycombMount({ poleColor: _poleColor, cameraType, W }: {
     s.lineTo(-hw, -hw + r);
     s.quadraticCurveTo(-hw, -hw, -hw + r, -hw);
     return s;
+  };
+
+  // Build the tapered tube as a custom BufferGeometry by sweeping the
+  // rounded-square profile along the curve and linearly reducing the
+  // half-width from base (24mm) → head (15mm).
+  const armGeo = useMemo(() => {
+    const STEPS    = 64;
+    const RADIAL   = 28; // points around the rounded-square profile
+    const hwBase   = 0.024;
+    const hwHead   = 0.015;
+    const rRatio   = 0.28;
+
+    // Sample the rounded-square outline at uniform parameter t∈[0,1]
+    const sampleProfile = (hw: number) => {
+      const shape = makeArmShape(hw, hw * rRatio);
+      const pts = shape.getPoints(RADIAL); // ~RADIAL+1 points
+      return pts;
+    };
+
+    const positions: number[] = [];
+    const indices: number[] = [];
+
+    const frames = curve.computeFrenetFrames(STEPS, false);
+    const ringSize = sampleProfile(hwBase).length;
+
+    for (let i = 0; i <= STEPS; i++) {
+      const t = i / STEPS;
+      // Ease taper toward the head for an organic cast-metal flare
+      const hw = hwBase + (hwHead - hwBase) * Math.pow(t, 0.85);
+      const profile = sampleProfile(hw);
+      const center = curve.getPointAt(t);
+      const N = frames.normals[Math.min(i, STEPS - 1)];
+      const B = frames.binormals[Math.min(i, STEPS - 1)];
+      for (let j = 0; j < ringSize; j++) {
+        const p = profile[j] || profile[profile.length - 1];
+        const x = center.x + N.x * p.x + B.x * p.y;
+        const y = center.y + N.y * p.x + B.y * p.y;
+        const z = center.z + N.z * p.x + B.z * p.y;
+        positions.push(x, y, z);
+      }
+    }
+
+    for (let i = 0; i < STEPS; i++) {
+      for (let j = 0; j < ringSize; j++) {
+        const a = i * ringSize + j;
+        const b = (i + 1) * ringSize + j;
+        const c = (i + 1) * ringSize + ((j + 1) % ringSize);
+        const d = i * ringSize + ((j + 1) % ringSize);
+        indices.push(a, b, d);
+        indices.push(b, c, d);
+      }
+    }
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    geo.setIndex(indices);
+    geo.computeVertexNormals();
+    return geo;
+  }, [curve]);
+
+  // ── Junction cap geometry ──
+  // Cap is noticeably wider than the head of the arm (head ≈ 30 mm wide → cap Ø 168 mm)
+  const capPos: [number, number, number] = [faceX + 0.190, -0.196, 0];
+  const capR  = 0.084;  // Ø 168 mm — clearly wider than arm head
+  const capD  = 0.058;  // 58 mm deep skirt
+  const skirtR = 0.088; // outer skirt rim, slightly flared
+
+  // Base plate dimensions
+  const plateW = 0.064; // 64 mm thick (X — wall depth)
+  const plateH = 0.196; // 196 mm tall (Y)
+  const plateD = 0.146; // 146 mm wide (Z)
+  const plateX = faceX + plateW / 2;
+
+  // Gusset profile — triangular fin that blends plate → arm
+  const gussetGeo = useMemo(() => {
+    const s = new THREE.Shape();
+    s.moveTo(0, 0);
+    s.lineTo(0.092, 0);     // along arm direction (X)
+    s.quadraticCurveTo(0.060, 0.040, 0, 0.066); // curved hypotenuse for cast blend
+    s.lineTo(0, 0);
+    return new THREE.ExtrudeGeometry(s, { depth: 0.014, bevelEnabled: true, bevelThickness: 0.002, bevelSize: 0.002, bevelSegments: 2 });
   }, []);
-
-  const armGeo = useMemo(() =>
-    new THREE.ExtrudeGeometry(armShape, {
-      steps: 52,
-      bevelEnabled: false,
-      extrudePath: curve,
-    }),
-  [armShape, curve]);
-
-  const capPos: [number, number, number] = [faceX + 0.183, -0.188, 0];
-  const capR = 0.068; // Ø 136 mm (matches 132 mm reference + rim)
-  const capD = 0.044; // 44 mm deep junction body
 
   return (
     <group>
-      {/* ── Base plate — thick cast-aluminum rectangle, 132 mm wide ── */}
-      <mesh position={[faceX + 0.028, 0, 0]}>
-        <boxGeometry args={[0.056, 0.174, 0.132]} />
+      {/* ════════ GUSSETED BASE PLATE ════════ */}
+      {/* Main cast-aluminum wall plate */}
+      <mesh position={[plateX, 0, 0]} castShadow receiveShadow>
+        <boxGeometry args={[plateW, plateH, plateD]} />
         <meshStandardMaterial {...wM} />
       </mesh>
 
-      {/* 4 vertical reinforcement gussets on the arm-side plate face */}
-      {([-0.046, -0.014, 0.014, 0.046] as const).map(z => (
-        <mesh key={z} position={[faceX + 0.060, 0, z]}>
-          <boxGeometry args={[0.014, 0.166, 0.012]} />
+      {/* Beveled chamfer lip around plate face (cast-edge realism) */}
+      <mesh position={[plateX + plateW / 2 + 0.001, 0, 0]} rotation={[0, 0, 0]}>
+        <boxGeometry args={[0.004, plateH - 0.012, plateD - 0.012]} />
+        <meshStandardMaterial {...wgM} />
+      </mesh>
+
+      {/* TOP gusset fin — blends arm into top of plate */}
+      <mesh
+        position={[faceX + plateW, 0.034, -0.007]}
+        rotation={[0, 0, 0]}
+        castShadow
+      >
+        <primitive object={gussetGeo} attach="geometry" />
+        <meshStandardMaterial {...wgM} />
+      </mesh>
+
+      {/* BOTTOM gusset fin — mirrored, blends arm into bottom of plate */}
+      <mesh
+        position={[faceX + plateW, -0.034, 0.007]}
+        rotation={[Math.PI, 0, 0]}
+        castShadow
+      >
+        <primitive object={gussetGeo} attach="geometry" />
+        <meshStandardMaterial {...wgM} />
+      </mesh>
+
+      {/* Secondary inner gussets for visual mass */}
+      {([0.014, -0.014] as const).map((zoff, i) => (
+        <mesh
+          key={`gi-${i}`}
+          position={[faceX + plateW, zoff > 0 ? 0.030 : -0.030, zoff]}
+          rotation={zoff > 0 ? [0, 0, 0] : [Math.PI, 0, 0]}
+          scale={[0.78, 0.78, 0.7]}
+        >
+          <primitive object={gussetGeo} attach="geometry" />
           <meshStandardMaterial {...wgM} />
         </mesh>
       ))}
 
-      {/* 4-hole bolt pattern — stainless steel hex bolts (2 × 2) */}
+      {/* 4× hex-bolt indentations (recessed counterbores) on plate face */}
       {([-1, 1] as const).flatMap(sy =>
-        ([-1, 1] as const).map(sz => (
-          <mesh key={`${sy}${sz}`}
-            position={[faceX + 0.056, sy * 0.062, sz * 0.046]}
-            rotation={[0, Math.PI / 2, 0]}
-          >
-            <cylinderGeometry args={[0.007, 0.007, 0.013, 6]} />
-            <meshStandardMaterial {...ssM} />
-          </mesh>
-        ))
+        ([-1, 1] as const).map(sz => {
+          const y = sy * (plateH / 2 - 0.022);
+          const z = sz * (plateD / 2 - 0.022);
+          return (
+            <group key={`bolt-${sy}-${sz}`}>
+              {/* Counterbore recess (dark) */}
+              <mesh position={[plateX + plateW / 2 + 0.0015, y, z]} rotation={[0, 0, Math.PI / 2]}>
+                <cylinderGeometry args={[0.0105, 0.0105, 0.005, 18]} />
+                <meshStandardMaterial {...dkM} />
+              </mesh>
+              {/* Hex bolt head, recessed into counterbore */}
+              <mesh position={[plateX + plateW / 2 + 0.0008, y, z]} rotation={[0, 0, Math.PI / 2]}>
+                <cylinderGeometry args={[0.0085, 0.0085, 0.0042, 6]} />
+                <meshStandardMaterial {...ssM} />
+              </mesh>
+            </group>
+          );
+        })
       )}
 
-      {/* ── Squared-off gooseneck arm — non-tapering rounded-square section ── */}
+      {/* ════════ TAPERED CAST GOOSENECK ARM ════════ */}
       <mesh geometry={armGeo} castShadow>
-        <meshStandardMaterial {...wgM} />
-      </mesh>
-
-      {/* ── Junction box cap — deep pendant cylinder (Ø 136 mm × 44 mm) ── */}
-      <mesh position={capPos} rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[capR, capR, capD, 36]} />
         <meshStandardMaterial {...wM} />
       </mesh>
 
-      {/* Back rim ring (arm-entry side) */}
-      <mesh position={[capPos[0] - capD / 2, capPos[1], capPos[2]]} rotation={[0, 0, Math.PI / 2]}>
-        <torusGeometry args={[capR, 0.0045, 8, 36]} />
+      {/* Cast collar where arm meets junction cap (heavy reinforcement ring) */}
+      <mesh position={[capPos[0] + 0.002, capPos[1] + 0.018, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.022, 0.026, 0.018, 24]} />
         <meshStandardMaterial {...wgM} />
       </mesh>
 
-      {/* Flat front face — flush camera mounting surface */}
+      {/* ════════ DEEP-SKIRTED JUNCTION CAP ════════ */}
+      {/* Outer skirt — deep, slightly flared cylinder */}
+      <mesh position={capPos} rotation={[0, 0, Math.PI / 2]} castShadow>
+        <cylinderGeometry args={[skirtR, capR, capD, 48]} />
+        <meshStandardMaterial {...wM} />
+      </mesh>
+
+      {/* Skirt outer rim accent (cast seam line) */}
+      <mesh position={[capPos[0] - capD / 2 + 0.001, capPos[1], capPos[2]]} rotation={[0, 0, Math.PI / 2]}>
+        <torusGeometry args={[skirtR, 0.0028, 10, 48]} />
+        <meshStandardMaterial {...wgM} />
+      </mesh>
+
+      {/* Front face plate (flush camera mounting surface) */}
       <mesh position={[capPos[0] + capD / 2, capPos[1], capPos[2]]} rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[capR, capR, 0.006, 36]} />
+        <cylinderGeometry args={[capR, capR, 0.008, 48]} />
         <meshStandardMaterial {...wgM} />
       </mesh>
 
-      {/* Front retention ring (stainless) */}
-      <mesh position={[capPos[0] + capD / 2 + 0.003, capPos[1], capPos[2]]} rotation={[0, 0, Math.PI / 2]}>
-        <torusGeometry args={[capR * 0.90, 0.0032, 8, 36]} />
+      {/* Front stainless retention ring */}
+      <mesh position={[capPos[0] + capD / 2 + 0.005, capPos[1], capPos[2]]} rotation={[0, 0, Math.PI / 2]}>
+        <torusGeometry args={[capR * 0.88, 0.0036, 10, 48]} />
         <meshStandardMaterial {...ssM} />
       </mesh>
 
-      {/* SS set-screws on cap circumference (4 × at 90°, near front rim) */}
-      {[0, Math.PI / 2, Math.PI, 3 * Math.PI / 2].map((a, i) => (
-        <mesh key={i}
-          position={[
-            capPos[0] - capD * 0.18,
-            capPos[1] + Math.sin(a) * capR * 0.99,
-            capPos[2] + Math.cos(a) * capR * 0.99,
-          ]}
-          rotation={[Math.PI / 2 - a, 0, 0]}
-        >
-          <cylinderGeometry args={[0.004, 0.004, 0.012, 6]} />
+      {/* 6× hex set-screws around skirt circumference */}
+      {[0, 1, 2, 3, 4, 5].map(i => {
+        const a = (i / 6) * Math.PI * 2;
+        return (
+          <mesh
+            key={`ss-${i}`}
+            position={[
+              capPos[0] - capD * 0.22,
+              capPos[1] + Math.sin(a) * (skirtR - 0.004),
+              capPos[2] + Math.cos(a) * (skirtR - 0.004),
+            ]}
+            rotation={[Math.PI / 2 - a, 0, 0]}
+          >
+            <cylinderGeometry args={[0.0042, 0.0042, 0.010, 6]} />
+            <meshStandardMaterial {...ssM} />
+          </mesh>
+        );
+      })}
+
+      {/* Threaded side-conduit plug (3/4" NPT) on top of skirt */}
+      <group position={[capPos[0], capPos[1] + skirtR + 0.001, capPos[2]]}>
+        {/* Boss hub blended into skirt */}
+        <mesh rotation={[0, 0, 0]}>
+          <cylinderGeometry args={[0.018, 0.020, 0.014, 20]} />
+          <meshStandardMaterial {...wgM} />
+        </mesh>
+        {/* Threaded plug body (hex) */}
+        <mesh position={[0, 0.012, 0]}>
+          <cylinderGeometry args={[0.014, 0.014, 0.010, 6]} />
           <meshStandardMaterial {...ssM} />
         </mesh>
-      ))}
+        {/* Plug top dome */}
+        <mesh position={[0, 0.019, 0]}>
+          <cylinderGeometry args={[0.0095, 0.0115, 0.005, 18]} />
+          <meshStandardMaterial {...ssM} />
+        </mesh>
+      </group>
+
+      {/* Cast logo/spec pad on underside of skirt */}
+      <mesh position={[capPos[0], capPos[1] - skirtR + 0.001, capPos[2]]} rotation={[0, Math.PI / 2, 0]}>
+        <boxGeometry args={[0.022, 0.001, 0.034]} />
+        <meshStandardMaterial color="#dcdcd8" roughness={0.6} metalness={0.08} />
+      </mesh>
 
       {/* Camera flush-mounted on front face */}
       <group position={[capPos[0] + capD / 2 + 0.014, capPos[1], capPos[2]]} rotation={[0.22, 0, 0]}>
