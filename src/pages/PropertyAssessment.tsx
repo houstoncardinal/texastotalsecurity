@@ -141,6 +141,28 @@ const PropertyAssessment = () => {
       services, additionalNotes,
       name: contact.name, phone: contact.phone, email: contact.email, address: contact.address,
     });
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        "form-name": "property-assessment",
+        "bot-field": "",
+        name: contact.name,
+        phone: contact.phone,
+        email: contact.email,
+        address: contact.address || "",
+        propertyType: propertyType || "",
+        unitCount: unitCount || "",
+        buildingCount: buildingCount || "",
+        propertySize: propertySize || "",
+        hasCameras: hasCameras != null ? String(hasCameras) : "",
+        hasAlarm: hasAlarm != null ? String(hasAlarm) : "",
+        cameraCount: cameraCount || "",
+        primaryConcern: primaryConcern || "",
+        services: services.join(", "),
+        additionalNotes: additionalNotes || "",
+      }).toString(),
+    }).catch(() => {});
     setSubmitted(true);
   };
 
@@ -575,7 +597,14 @@ const PropertyAssessment = () => {
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit}>
+                <form
+                  onSubmit={handleSubmit}
+                  name="property-assessment"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                >
+                  <input type="hidden" name="form-name" value="property-assessment" />
+                  <input type="hidden" name="bot-field" />
                   <div className="space-y-4 mb-6">
                     <div>
                       <label className={labelClass}>Full Name <span className="text-red-500">*</span></label>

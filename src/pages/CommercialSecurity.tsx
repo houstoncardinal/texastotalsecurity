@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import CTABlock from "@/components/CTABlock";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
-import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas } from "@/lib/seo";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas, generateServicePageReviewSchema } from "@/lib/seo";
 import {
   Building2, Camera, Shield, Zap, Eye,
   CheckCircle2, ArrowRight, Phone, Lock, Plus, Minus
@@ -83,6 +83,14 @@ const commercialSchemas = [
     { name: "Commercial Security", href: "/commercial" },
   ]),
   generateAllServicesSchemas()[1],
+  generateServicePageReviewSchema(
+    [
+      { author: "S Nevar", text: "Great company and staff. They did the set up on mobile phones and explained everything we needed to know on our two-way audio cameras and doorbell. Highly recommend. Thank You Tim and Johnny.", rating: 5, location: "Houston" },
+      { author: "Coleman Ferguson", text: "Texas Total Security did a fantastic job installing an alarm system and cameras. The cameras are all 1080p hd and are all commercial grade. The owner, Tim Townsend, is a very credible, knowledgeable person who was able to explain everything to me in a way I was able to understand. I would recommend this company to everyone.", rating: 5, location: "Houston" },
+    ],
+    "Commercial Security Systems — Houston TX",
+    "/commercial"
+  ),
   generateFAQSchema(faqs),
 ];
 

@@ -1166,6 +1166,23 @@ function QuoteForm({ config, estimatedTotal, onClose }: {
       status: "new",
     };
     savePoleQuote(quote);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        "form-name": "pole-configurator",
+        "bot-field": "",
+        name: form.name,
+        company: form.company || "",
+        email: form.email,
+        phone: form.phone,
+        propertyAddress: form.propertyAddress || "",
+        propertyType: form.propertyType || "",
+        notes: form.notes || "",
+        estimatedTotal: `$${estimatedTotal.toLocaleString()}`,
+        configuration: JSON.stringify(config),
+      }).toString(),
+    }).catch(() => {});
     setSubmitted(true);
   };
 
@@ -1211,7 +1228,15 @@ function QuoteForm({ config, estimatedTotal, onClose }: {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-3.5">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-3.5"
+        name="pole-configurator"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="pole-configurator" />
+        <input type="hidden" name="bot-field" />
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs font-semibold text-gray-600 mb-1 block">Full Name *</label>

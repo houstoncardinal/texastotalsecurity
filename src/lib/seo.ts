@@ -28,9 +28,9 @@ const COMPANY = {
   url: BASE_URL,
   logo: `${BASE_URL}/logo.png`,
   slogan: "Get the Protection You Deserve",
-  foundingDate: "1994",
+  foundingDate: "2009",
 
-  description: "Houston-based local alarm company specializing in residential security systems, commercial alarm systems, security camera installation, HOA & multi-family community security, and 24/7 alarm monitoring. Serving Houston and all surrounding areas for 10+ years.",
+  description: "Houston-based local alarm company specializing in residential security systems, commercial alarm systems, security camera installation, HOA & multi-family community security, and 24/7 alarm monitoring. Serving Houston and all surrounding areas for 15+ years.",
   address: {
     street: "11331 Richmond Ave. #102",
     city: "Houston",
@@ -609,7 +609,7 @@ export function generateVideoSchema(title: string, description: string, thumbnai
   };
 }
 
-export function generateHowToSchema(title: string, description: string, steps: { name: string; text: string }[]) {
+export function generateHowToSchema(title: string, description: string, steps: { name: string; text: string }[], pageUrl?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "HowTo",
@@ -621,10 +621,11 @@ export function generateHowToSchema(title: string, description: string, steps: {
       "position": index + 1,
       "name": step.name,
       "text": step.text,
-      "url": `${BASE_URL}/${index + 1}`
+      ...(pageUrl ? { "url": `${BASE_URL}${pageUrl}#step-${index + 1}` } : {}),
     })),
     "provider": {
       "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
       "name": COMPANY.name,
       "url": COMPANY.url
     }
@@ -911,7 +912,187 @@ export function generateSiteLinksSearchBoxSchema() {
     "url": BASE_URL,
     "name": COMPANY.name,
     "description": COMPANY.description,
-    "publisher": { "@type": "Organization", "@id": `${BASE_URL}/#organization` }
+    "publisher": { "@type": "Organization", "@id": `${BASE_URL}/#organization` },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${BASE_URL}/search?q={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
+    }
+  };
+}
+
+/** Person schema for Tim Townsend — owner/founder of Texas Total Security */
+export function generatePersonSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${BASE_URL}/#owner`,
+    "name": "Tim Townsend",
+    "jobTitle": "Owner & Founder",
+    "description": "Tim Townsend is the owner and founder of Texas Total Security — Houston's locally owned alarm and security company. With over 15 years of experience in the Houston security industry, Tim personally oversees system design, installation quality, and customer relationships.",
+    "url": `${BASE_URL}/about`,
+    "image": {
+      "@type": "ImageObject",
+      "url": `${BASE_URL}/timtownsend.jpg`,
+      "description": "Tim Townsend — Owner, Texas Total Security"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      "name": COMPANY.name
+    },
+    "knowsAbout": [
+      "Alarm System Installation",
+      "Security Camera Systems",
+      "24/7 Professional Alarm Monitoring",
+      "HOA Security Solutions",
+      "Commercial Security Systems",
+      "License Plate Recognition Cameras",
+      "Alarm System Takeovers",
+      "Active Deterrence Systems"
+    ],
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "license",
+      "name": "Texas Department of Public Safety Security License",
+      "identifier": COMPANY.license,
+      "validIn": {
+        "@type": "AdministrativeArea",
+        "name": "Texas"
+      }
+    },
+    "telephone": COMPANY.phoneTel,
+    "email": COMPANY.email,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Houston",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    }
+  };
+}
+
+/** SpecialAnnouncement — free security analysis offer */
+export function generateSpecialAnnouncementSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SpecialAnnouncement",
+    "name": "Free Onsite Security Analysis — Houston TX",
+    "text": "Texas Total Security offers a free onsite security analysis for Houston homes, businesses, HOA communities, and multi-family properties. A licensed security specialist visits your property, evaluates existing equipment, identifies vulnerabilities, and delivers a custom proposal — no obligation, no pressure.",
+    "datePosted": "2025-01-01",
+    "expires": "2026-12-31",
+    "spatialCoverage": {
+      "@type": "City",
+      "name": "Houston",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "announcementLocation": {
+      "@type": "LocalBusiness",
+      "@id": `${BASE_URL}/#localbusiness`,
+      "name": COMPANY.name,
+      "url": COMPANY.url,
+      "telephone": COMPANY.phoneTel
+    },
+    "url": `${BASE_URL}/free-analysis`
+  };
+}
+
+/** Event schema — free security consultation (ongoing offer) */
+export function generateConsultationEventSchema(city?: string) {
+  const locationName = city ? `${city}, TX` : "Greater Houston Area, TX";
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": `Free Security Analysis${city ? ` — ${city}, TX` : " — Houston TX"}`,
+    "description": `Texas Total Security offers free onsite security consultations for homes, businesses, and communities in ${city || "Houston"}, TX. A licensed specialist visits your property, evaluates vulnerabilities, and provides a custom no-obligation proposal.`,
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "startDate": "2025-01-01",
+    "endDate": "2026-12-31",
+    "location": {
+      "@type": "Place",
+      "name": locationName,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": city || "Houston",
+        "addressRegion": "TX",
+        "addressCountry": "US"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "@id": `${BASE_URL}/#organization`,
+      "name": COMPANY.name,
+      "url": COMPANY.url,
+      "telephone": COMPANY.phoneTel
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "validFrom": "2025-01-01",
+      "url": `${BASE_URL}/free-analysis`
+    },
+    "url": `${BASE_URL}/free-analysis`
+  };
+}
+
+/** Review schema for individual service pages — pass 2-3 relevant reviews */
+export function generateServicePageReviewSchema(
+  reviews: { author: string; text: string; rating: number; location?: string }[],
+  serviceName: string,
+  serviceUrl: string
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${BASE_URL}${serviceUrl}/#service-reviews`,
+    "name": serviceName,
+    "provider": {
+      "@type": "LocalBusiness",
+      "@id": `${BASE_URL}/#localbusiness`,
+      "name": COMPANY.name
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": String(reviews.length),
+      "bestRating": "5"
+    },
+    "review": reviews.map(r => ({
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": String(r.rating),
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": r.author
+      },
+      "reviewBody": r.text,
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "@id": `${BASE_URL}/#localbusiness`,
+        "name": COMPANY.name
+      },
+      ...(r.location ? {
+        "locationCreated": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": r.location,
+            "addressRegion": "TX",
+            "addressCountry": "US"
+          }
+        }
+      } : {})
+    }))
   };
 }
 

@@ -166,6 +166,22 @@ const QualifyFunnel = () => {
       value: "TBD",
       date: dateStr,
     });
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        "form-name": "qualify-funnel",
+        "bot-field": "",
+        name: contact.name,
+        phone: contact.phone,
+        email: contact.email,
+        address: contact.address || "",
+        role: role || "",
+        needs: needs.map(n => NEEDS.find(x => x.value === n)?.label || n).join(", "),
+        timeline: timeline || "",
+        propertySize: propertySize || "",
+      }).toString(),
+    }).catch(() => {});
     setSubmitted(true);
   };
 
@@ -423,7 +439,15 @@ const QualifyFunnel = () => {
                     </motion.div>
                   )}
 
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
+                    name="qualify-funnel"
+                    data-netlify="true"
+                    netlify-honeypot="bot-field"
+                  >
+                    <input type="hidden" name="form-name" value="qualify-funnel" />
+                    <input type="hidden" name="bot-field" />
                     {[
                       { label: "Full Name *", key: "name", type: "text", placeholder: "John Smith", required: true },
                       { label: "Phone *", key: "phone", type: "tel", placeholder: "(713) 555-0000", required: true },

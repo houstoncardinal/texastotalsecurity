@@ -10,6 +10,8 @@ import {
   generateServiceSchema,
   generateFAQSchema,
   generateBreadcrumbSchema,
+  generateServiceAreaSchema,
+  generateConsultationEventSchema,
 } from "@/lib/seo";
 import {
   Shield, Camera, Radio, Home, Building2,
@@ -88,6 +90,8 @@ const NeighborhoodLanding = () => {
       `Professional hardwired alarm systems, camera networks, and 24/7 monitoring in ${neighborhood.fullName}.`,
       `/neighborhoods/${neighborhood.slug}`
     ),
+    generateServiceAreaSchema(),
+    generateConsultationEventSchema(neighborhood.name),
     generateFAQSchema(neighborhood.faqs.map(f => ({ question: f.question, answer: f.answer }))),
     generateBreadcrumbSchema([
       { name: "Home", href: "/" },

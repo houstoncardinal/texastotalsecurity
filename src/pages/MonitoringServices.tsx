@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import FAQSection from "@/components/FAQSection";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
-import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateServicePageReviewSchema, generateConsultationEventSchema } from "@/lib/seo";
 import { Radio, MapPin, Clock, Shield, PhoneCall, CheckCircle2, Phone, Star, Signal, Bell, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -89,6 +89,15 @@ const monitoringSchemas = [
     { name: "Home", href: "/" },
     { name: "Monitoring Services", href: "/monitoring-services" },
   ]),
+  generateServicePageReviewSchema(
+    [
+      { author: "Jin Yang", text: "Very happy with Texas Total Security! We switched our alarm company to Texas Total Security from ADT. Love that they are a local Houston alarm company. There communication and customer service is awesome. Highly recommend!!!", rating: 5, location: "Houston" },
+      { author: "Ronen Klinghofer", text: "They did a fabulous job once again! I am a very happy repeat customer!", rating: 5, location: "Houston" },
+    ],
+    "24/7 Alarm Monitoring — Houston TX",
+    "/monitoring-services"
+  ),
+  generateConsultationEventSchema(),
 ];
 
 const MonitoringServices = () => (

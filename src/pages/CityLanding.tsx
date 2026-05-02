@@ -13,6 +13,8 @@ import {
   generateServiceSchema,
   generateFAQSchema,
   generateBreadcrumbSchema,
+  generateServiceAreaSchema,
+  generateConsultationEventSchema,
 } from "@/lib/seo";
 import { Shield, Camera, Radio, Home, Building2, Users, CheckCircle2, MapPin, ArrowRight } from "lucide-react";
 
@@ -45,6 +47,8 @@ const CityLanding = () => {
       `Professional alarm, camera, and monitoring services in ${city.name}, TX.`,
       `/${city.slug}-security-systems`
     ),
+    generateServiceAreaSchema(),
+    generateConsultationEventSchema(city.name),
     generateFAQSchema(city.faqs.map(f => ({ question: f.question, answer: f.answer }))),
     generateBreadcrumbSchema([
       { name: "Home", href: "/" },

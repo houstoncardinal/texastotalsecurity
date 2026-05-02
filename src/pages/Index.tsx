@@ -5,7 +5,12 @@ import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 
 const ServiceAreaMap = lazy(() => import("@/components/ServiceAreaMap"));
-import { generateItemListSchema, generateComprehensiveHomepageSchema } from "@/lib/seo";
+import {
+  generateItemListSchema,
+  generateComprehensiveHomepageSchema,
+  generateSiteLinksSearchBoxSchema,
+  generateSpecialAnnouncementSchema,
+} from "@/lib/seo";
 import {
   Shield, Building2, Radio, Home,
   ArrowRight, Phone, CheckCircle2, Star,
@@ -50,7 +55,7 @@ const heroSlides: HeroSlide[] = [
     eyebrow: "Homeowners · Property Managers · HOA Communities",
     headline: [
       "Custom Surveillance & Alarm Systems",
-      "for Every Houston Property.",
+      "for Homes and Businesses",
     ],
     sub: "Hardwired 4K cameras, license plate recognition, and 24/7 professional monitoring. Whether you're a homeowner or a property manager, you get a custom-engineered system and the accountability of a local owner-operated team.",
     cta: { label: "Request a Free Quote", href: "/property-assessment" },
@@ -62,12 +67,12 @@ const heroSlides: HeroSlide[] = [
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.91) 0%, rgba(0,0,0,0.76) 50%, rgba(0,0,0,0.56) 100%)",
   },
   {
-    eyebrow: "Alarm Takeover · Any Provider · Hardwired System Specialists",
+    eyebrow: "Alarm Takeover · Any Provider · Local Houston Team",
     headline: [
-      "Still Overpaying a National Company?",
-      "Switch to Local. Keep Your Equipment.",
+      "Unhappy with your current alarm company?",
+      "Switch to a Team That Treats You Like a Person.",
     ],
-    sub: "Your existing sensors, wiring, and panels stay exactly as-is. Our certified Houston team takes over monitoring — over Verizon cellular — for less than you pay now.",
+    sub: "Your existing equipment stays exactly as-is. What changes is the experience — a personable, owner-operated Houston security team that picks up the phone, knows your name, and delivers the kind of customer service national companies simply can't match.",
     cta: { label: "See How Easy It Is to Switch", href: "/switch-my-alarm" },
     bg: "/imgi_13_gd9131.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
@@ -195,6 +200,8 @@ const Index = () => {
 
   const schemas = [
     generateComprehensiveHomepageSchema(),
+    generateSiteLinksSearchBoxSchema(),
+    generateSpecialAnnouncementSchema(),
     generateItemListSchema([
       { name: "Alarm Systems", description: "Custom alarm design, installation & professional monitoring", url: "/alarm-systems", position: 1 },
       { name: "Security Camera Systems", description: "HD surveillance, license plate cameras, PTZ & remote viewing", url: "/security-cameras", position: 2 },

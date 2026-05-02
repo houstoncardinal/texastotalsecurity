@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
-import { generateOrganizationSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateOrganizationSchema, generateBreadcrumbSchema, generatePersonSchema, generateAboutPageSchema } from "@/lib/seo";
 import {
   Shield, MapPin, Radio, PhoneCall, Star, Award,
   CheckCircle2, ArrowRight, Phone, Users,
@@ -73,6 +73,8 @@ const About = () => {
 
   const schemas = [
     generateOrganizationSchema(),
+    generatePersonSchema(),
+    generateAboutPageSchema(),
     generateBreadcrumbSchema([
       { name: "Home", href: "/" },
       { name: "About Us", href: "/about" },

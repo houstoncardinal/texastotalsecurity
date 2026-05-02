@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import CTABlock from "@/components/CTABlock";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
-import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas } from "@/lib/seo";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas, generateServicePageReviewSchema } from "@/lib/seo";
 import {
   Home, Shield, Camera, Smartphone,
   Lock, Bell, CheckCircle2, ArrowRight, Phone, Plus, Minus
@@ -82,6 +82,14 @@ const residentialSchemas = [
     { name: "Residential Security", href: "/residential" },
   ]),
   generateAllServicesSchemas()[0],
+  generateServicePageReviewSchema(
+    [
+      { author: "Jason Hammond", text: "FANTASTIC experience and very professional and caring company. I felt very comfortable from start to finish. Honest and knowledgeable staff. The person I dealt with was most Tim Townsend and the experience was very satisfactory.", rating: 5, location: "Houston" },
+      { author: "Anna Bermudez", text: "Excellent Service! These guys know what they are doing. Love my Alarm System and my New Cameras all over my property. I would recommend Tim at Texas Total Security to anyone who is looking for a Security System!!! Thank You Guys", rating: 5, location: "Houston" },
+    ],
+    "Residential Security Systems — Houston TX",
+    "/residential"
+  ),
   generateFAQSchema(faqs),
 ];
 

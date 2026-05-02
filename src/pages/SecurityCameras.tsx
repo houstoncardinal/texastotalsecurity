@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import FAQSection from "@/components/FAQSection";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
-import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas } from "@/lib/seo";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas, generateProductSchema, generateServicePageReviewSchema } from "@/lib/seo";
 import { Camera, Eye, Zap, MonitorSpeaker, Shield, CheckCircle2, ArrowRight, Phone, Star, AlertTriangle, Network, Database, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -227,6 +227,20 @@ const cameraSchemas = [
     { name: "Security Cameras", href: "/security-cameras" },
   ]),
   generateAllServicesSchemas()[2],
+  generateProductSchema(
+    "Security Camera System — Houston TX",
+    "Commercial-grade hardwired CCTV camera systems for Houston properties. 4K IP cameras, PoE infrastructure, NVR recording, LPR, active deterrence, and professional video monitoring.",
+    undefined,
+    "https://schema.org/InStock"
+  ),
+  generateServicePageReviewSchema(
+    [
+      { author: "Coleman Ferguson", text: "Texas Total Security did a fantastic job installing an alarm system and cameras. The cameras are all 1080p hd and are all commercial grade. The owner, Tim Townsend, is a very credible, knowledgeable person who was able to explain everything to me in a way I was able to understand. I would recommend this company to everyone.", rating: 5, location: "Houston" },
+      { author: "Floral Yang", text: "Very happy with my new security camera system! Texas Total Security did a great job at installing everything and explained exactly how to use all the equipment. Job well done! I will recommend to my friends and family...", rating: 5, location: "Houston" },
+    ],
+    "Security Camera Systems — Houston TX",
+    "/security-cameras"
+  ),
   generateFAQSchema(faqs),
 ];
 

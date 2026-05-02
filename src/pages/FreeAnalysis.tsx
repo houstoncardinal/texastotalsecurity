@@ -4,7 +4,14 @@ import Layout from "@/components/Layout";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { generateLocalBusinessSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateHowToSchema,
+  generateConsultationEventSchema,
+  generateSpecialAnnouncementSchema,
+  generateAggregateOfferSchema,
+} from "@/lib/seo";
 import { Shield, CheckCircle2, Clock, Users, Phone, MapPin, ClipboardCheck, Wrench, Star } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
@@ -34,6 +41,19 @@ const FreeAnalysis = () => {
 
   const schemas = [
     generateLocalBusinessSchema(),
+    generateConsultationEventSchema(),
+    generateSpecialAnnouncementSchema(),
+    generateAggregateOfferSchema(),
+    generateHowToSchema(
+      "How to Get a Free Security Analysis from Texas Total Security",
+      "Schedule and complete a free onsite security analysis for your Houston home, business, or community. A licensed specialist visits, evaluates, and delivers a custom proposal.",
+      [
+        { name: "Walk the Property", text: "A licensed Texas Total Security specialist visits your property and reviews all entrances, blind spots, existing equipment, wiring paths, exterior exposure, and daily operating needs." },
+        { name: "Prioritize Risk", text: "We separate urgent vulnerabilities from optional upgrades so your proposal is clear, practical, and budget-aware. No upselling — just an honest assessment." },
+        { name: "Design the System", text: "You receive a custom recommendation for alarm coverage, CCTV infrastructure, monitoring, and service needs. Transparent pricing, zero obligation." },
+      ],
+      "/free-analysis"
+    ),
     generateBreadcrumbSchema([
       { name: "Home", href: "/" },
       { name: "Free Security Analysis", href: "/free-analysis" },

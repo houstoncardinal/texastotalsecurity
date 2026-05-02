@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import FAQSection from "@/components/FAQSection";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
-import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas } from "@/lib/seo";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas, generateProductSchema, generateServicePageReviewSchema } from "@/lib/seo";
 import { Shield, Radio, RefreshCw, Cable, AlertTriangle, Keyboard, Lock, Bell, CheckCircle2, ArrowRight, Phone, DollarSign, PhoneOff, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -208,6 +208,21 @@ const alarmSchemas = [
     "Alarm System Installation",
     ["switch alarm company Houston TX", "local alarm company Houston", "change alarm provider Houston", "local alarm system Houston", "local burglar alarm Houston", "alarm companies near me Houston", "best alarm companies Houston", "professional alarm monitoring Houston", "change alarm company Houston", "alarm system takeover Houston"],
     faqs
+  ),
+  generateProductSchema(
+    "Professional Alarm System — Houston TX",
+    "Custom hardwired alarm system installation for Houston homes and businesses. Includes door/window sensors, motion detectors, glass break sensors, cellular backup, and 24/7 professional monitoring over Verizon cellular.",
+    undefined,
+    "https://schema.org/InStock"
+  ),
+  generateServicePageReviewSchema(
+    [
+      { author: "Jin Yang", text: "Very happy with Texas Total Security! We switched our alarm company from ADT. Love that they are a local Houston alarm company. Their communication and customer service is awesome. Highly recommend!", rating: 5, location: "Houston" },
+      { author: "Coleman Ferguson", text: "Texas Total Security did a fantastic job installing an alarm system and cameras. The cameras are all commercial grade. The owner, Tim Townsend, is a very credible, knowledgeable person. I would recommend this company to everyone.", rating: 5, location: "Houston" },
+      { author: "Jason Hammond", text: "FANTASTIC experience and very professional and caring company. I felt very comfortable from start to finish. Honest and knowledgeable staff. The person I dealt with most was Tim Townsend and the experience was very satisfactory.", rating: 5, location: "Houston" },
+    ],
+    "Alarm System Installation & Monitoring — Houston TX",
+    "/alarm-systems"
   ),
   generateBreadcrumbSchema([
     { name: "Home", href: "/" },

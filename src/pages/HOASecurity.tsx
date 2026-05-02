@@ -6,7 +6,7 @@ import LeadForm from "@/components/LeadForm";
 import TestimonialCard from "@/components/TestimonialCard";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
-import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas } from "@/lib/seo";
+import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas, generateServicePageReviewSchema } from "@/lib/seo";
 import {
   Camera, Eye, Zap, Shield, Smartphone, FileText, Users, Building2,
   CheckCircle2, ArrowRight, Phone, MapPin, Trash2, Mail, Waves,
@@ -239,6 +239,14 @@ const hoaSchemas = [
     { name: "HOA Security", href: "/hoa-security" },
   ]),
   generateAllServicesSchemas()[3],
+  generateServicePageReviewSchema(
+    [
+      { author: "S Nevar", text: "Great company and staff. They did the set up on mobile phones and explained everything we needed to know on our two-way audio cameras and doorbell. Highly recommend. Thank You Tim and Johnny.", rating: 5, location: "Houston" },
+      { author: "John Gray", text: "Very professional and safety oriented with cameras and alarm systems", rating: 5, location: "Houston" },
+    ],
+    "HOA & Property Management Security — Houston TX",
+    "/hoa-security"
+  ),
   generateFAQSchema(faqs),
 ];
 

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
+import { generateLocalBusinessSchema, generateHowToSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import {
   CheckCircle2, ArrowRight, ArrowLeft, Phone,
   Upload, X, AlertCircle, Wrench, Plus,
@@ -217,6 +218,24 @@ const SwitchAssessment = () => {
       interests, whatToFix, whatToAdd, situation,
       name: contact.name, phone: contact.phone, email: contact.email, address: contact.address,
     });
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        "form-name": "switch-assessment",
+        "bot-field": "",
+        name: contact.name,
+        phone: contact.phone,
+        email: contact.email,
+        address: contact.address || "",
+        systemType: systemType || "",
+        currentCompany: currentCompany || "",
+        interests: interests.join(", "),
+        situation: situation || "",
+        whatToFix: whatToFix || "",
+        whatToAdd: whatToAdd || "",
+      }).toString(),
+    }).catch(() => {});
     setSubmitted(true);
   };
 
@@ -284,7 +303,23 @@ const SwitchAssessment = () => {
       <SEOHead
         title="Alarm Takeover Assessment — Switch Your Alarm | Texas Total Security"
         description="Tell us about your current alarm system. We'll review your equipment, check your contract status, and show you how much you could save by switching to Texas Total Security."
-        schemas={[]}
+        schemas={[
+          generateLocalBusinessSchema(),
+          generateHowToSchema(
+            "How to Switch Your Alarm Company to Texas Total Security",
+            "Switch your existing alarm system to Texas Total Security in one visit. We take over your panels, sensors, and wiring from any provider — ADT, Brinks, Vivint, and more.",
+            [
+              { name: "Free Switch Assessment", text: "We visit your property at no charge, evaluate your existing alarm equipment from any provider, and tell you exactly what we can take over — panels, sensors, wiring, and all." },
+              { name: "Same-Day Takeover", text: "Our licensed technician reprograms your panel, tests every sensor, replaces any faulty components, and activates 24/7 Verizon cellular monitoring — all in a single visit. Most switches take just a few hours." },
+              { name: "You're Protected", text: "Your system stays exactly as-is — Honeywell, DSC, DMP, Resideo, and more are all compatible. Monitoring runs over Verizon cellular so you stay protected even when Wi-Fi goes down." },
+            ],
+            "/switch-my-alarm"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", href: "/" },
+            { name: "Switch My Alarm", href: "/switch-my-alarm" },
+          ]),
+        ]}
       />
       <ProgressBar step={step} />
 
@@ -708,7 +743,14 @@ const SwitchAssessment = () => {
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit}>
+                <form
+                  onSubmit={handleSubmit}
+                  name="switch-assessment"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                >
+                  <input type="hidden" name="form-name" value="switch-assessment" />
+                  <input type="hidden" name="bot-field" />
                   <div className="space-y-4 mb-6">
                     <div>
                       <label className={labelClass}>Full Name <span className="text-red-500">*</span></label>
