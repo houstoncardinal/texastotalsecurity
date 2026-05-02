@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Send, CheckCircle, Upload, X, File, Image, Video,
@@ -523,6 +524,155 @@ const LeadForm = ({
     const guidedCanContinue = Boolean(guidedAnswers[activeGuidedStep.field]);
     const guidedReadyToSubmit = guidedStep === guidedSteps.length - 1 && formData.firstName && formData.phone && formData.agreeToContact && formData.propertyType && guidedCanContinue;
 
+    const guidedModal = (
+      <AnimatePresence>
+        {guidedOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[10000] flex items-start justify-center overflow-y-auto bg-black/70 px-4 py-6 backdrop-blur-sm sm:items-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.98 }}
+              className="my-auto w-full max-w-xl bg-white shadow-2xl max-h-[calc(100vh-3rem)] overflow-y-auto"
+            >
+              <form onSubmit={handleGuidedSubmit} className="p-5 sm:p-6">
+                <div className="flex items-start justify-between gap-4 border-b border-gray-100 pb-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 rounded-full bg-red-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-red-700">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      Guided Form
+                    </div>
+                    <h3 className="mt-3 text-2xl font-display font-bold text-gray-950">{guidedTitle}</h3>
+                    <p className="mt-1 text-sm text-gray-500">{guidedIntro}</p>
+                  </div>
+                  <button type="button" onClick={() => setGuidedOpen(false)} className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-700">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <div className="mt-5 flex gap-2">
+                  {guidedSteps.map((step, index) => (
+                    <div key={step.label} className={`h-1.5 flex-1 rounded-full ${index <= guidedStep ? "bg-accent" : "bg-gray-200"}`} />
+                  ))}
+                </div>
+
+                <div className="mt-5">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-gray-400">
+                    Step {guidedStep + 1} of {guidedSteps.length} · {activeGuidedStep.label}
+                  </p>
+                  <h4 className="mt-2 text-xl font-display font-bold text-gray-950">{activeGuidedStep.title}</h4>
+                  <div className="mt-4 grid gap-2">
+                    {activeGuidedStep.options.map((option) => (
+                      <button
+                        type="button"
+                        key={option}
+                        onClick={() => setGuidedAnswers(prev => ({ ...prev, [activeGuidedStep.field]: option }))}
+                        className={`flex items-center justify-between border px-4 py-3 text-left text-sm font-medium transition-colors ${
+                          guidedAnswers[activeGuidedStep.field] === option
+                            ? "border-accent bg-red-50 text-gray-950"
+                            : "border-gray-200 bg-white text-gray-700 hover:border-red-200 hover:bg-red-50"
+                        }`}
+                      >
+                        {option}
+                        {guidedAnswers[activeGuidedStep.field] === option && <Check className="w-4 h-4 text-accent" />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {guidedStep === guidedSteps.length - 1 && (
+                  <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <input
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      placeholder="First Name *"
+                      required
+                      className="input-premium"
+                    />
+                    <input
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="Phone *"
+                      required
+                      className="input-premium"
+                    />
+                    <input
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Email"
+                      className="input-premium"
+                    />
+                    <select
+                      name="propertyType"
+                      value={formData.propertyType}
+                      onChange={handleInputChange}
+                      required
+                      className="input-premium"
+                    >
+                      <option value="">Property Type *</option>
+                      {propertyTypes.slice(0, 5).map(type => (
+                        <option key={type.value} value={type.value}>{type.label}</option>
+                      ))}
+                    </select>
+                    <label className="sm:col-span-2 flex items-start gap-3 cursor-pointer rounded-xl border border-gray-100 bg-gray-50 p-3">
+                      <input
+                        type="checkbox"
+                        name="agreeToContact"
+                        checked={formData.agreeToContact}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-1"
+                      />
+                      <span className="text-sm text-gray-600">Yes, Texas Total Security can contact me about this request. *</span>
+                    </label>
+                  </div>
+                )}
+
+                <div className="mt-6 flex items-center justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setGuidedStep(step => Math.max(0, step - 1))}
+                    disabled={guidedStep === 0}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-gray-600 disabled:opacity-35"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    Back
+                  </button>
+                  {guidedStep < guidedSteps.length - 1 ? (
+                    <button
+                      type="button"
+                      disabled={!guidedCanContinue}
+                      onClick={() => setGuidedStep(step => Math.min(guidedSteps.length - 1, step + 1))}
+                      className="btn-primary-gradient inline-flex items-center gap-2 px-5 py-2.5 text-sm disabled:opacity-50"
+                    >
+                      Continue <ArrowRight className="w-4 h-4" />
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      disabled={!guidedReadyToSubmit || isSubmitting}
+                      className="btn-primary-gradient inline-flex items-center gap-2 px-5 py-2.5 text-sm disabled:opacity-50"
+                    >
+                      {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                      Submit Guided Request
+                    </button>
+                  )}
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+
     return (
       <>
         <div className={`glass-card-static p-5 sm:p-6 ${className}`}>
@@ -680,152 +830,7 @@ const LeadForm = ({
           </form>
         </div>
 
-        <AnimatePresence>
-          {guidedOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/70 px-4 py-6 backdrop-blur-sm"
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 12, scale: 0.98 }}
-                className="w-full max-w-xl bg-white shadow-2xl"
-              >
-                <form onSubmit={handleGuidedSubmit} className="p-5 sm:p-6">
-                  <div className="flex items-start justify-between gap-4 border-b border-gray-100 pb-4">
-                    <div>
-                      <div className="inline-flex items-center gap-2 rounded-full bg-red-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-red-700">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        Guided Form
-                      </div>
-                      <h3 className="mt-3 text-2xl font-display font-bold text-gray-950">{guidedTitle}</h3>
-                      <p className="mt-1 text-sm text-gray-500">{guidedIntro}</p>
-                    </div>
-                    <button type="button" onClick={() => setGuidedOpen(false)} className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-700">
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
-
-                  <div className="mt-5 flex gap-2">
-                    {guidedSteps.map((step, index) => (
-                      <div key={step.label} className={`h-1.5 flex-1 rounded-full ${index <= guidedStep ? "bg-accent" : "bg-gray-200"}`} />
-                    ))}
-                  </div>
-
-                  <div className="mt-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-gray-400">
-                      Step {guidedStep + 1} of {guidedSteps.length} · {activeGuidedStep.label}
-                    </p>
-                    <h4 className="mt-2 text-xl font-display font-bold text-gray-950">{activeGuidedStep.title}</h4>
-                    <div className="mt-4 grid gap-2">
-                      {activeGuidedStep.options.map((option) => (
-                        <button
-                          type="button"
-                          key={option}
-                          onClick={() => setGuidedAnswers(prev => ({ ...prev, [activeGuidedStep.field]: option }))}
-                          className={`flex items-center justify-between border px-4 py-3 text-left text-sm font-medium transition-colors ${
-                            guidedAnswers[activeGuidedStep.field] === option
-                              ? "border-accent bg-red-50 text-gray-950"
-                              : "border-gray-200 bg-white text-gray-700 hover:border-red-200 hover:bg-red-50"
-                          }`}
-                        >
-                          {option}
-                          {guidedAnswers[activeGuidedStep.field] === option && <Check className="w-4 h-4 text-accent" />}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {guidedStep === guidedSteps.length - 1 && (
-                    <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <input
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        placeholder="First Name *"
-                        required
-                        className="input-premium"
-                      />
-                      <input
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder="Phone *"
-                        required
-                        className="input-premium"
-                      />
-                      <input
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="Email"
-                        className="input-premium"
-                      />
-                      <select
-                        name="propertyType"
-                        value={formData.propertyType}
-                        onChange={handleInputChange}
-                        required
-                        className="input-premium"
-                      >
-                        <option value="">Property Type *</option>
-                        {propertyTypes.slice(0, 5).map(type => (
-                          <option key={type.value} value={type.value}>{type.label}</option>
-                        ))}
-                      </select>
-                      <label className="sm:col-span-2 flex items-start gap-3 cursor-pointer rounded-xl border border-gray-100 bg-gray-50 p-3">
-                        <input
-                          type="checkbox"
-                          name="agreeToContact"
-                          checked={formData.agreeToContact}
-                          onChange={handleInputChange}
-                          required
-                          className="mt-1"
-                        />
-                        <span className="text-sm text-gray-600">Yes, Texas Total Security can contact me about this request. *</span>
-                      </label>
-                    </div>
-                  )}
-
-                  <div className="mt-6 flex items-center justify-between gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setGuidedStep(step => Math.max(0, step - 1))}
-                      disabled={guidedStep === 0}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-gray-600 disabled:opacity-35"
-                    >
-                      <ArrowLeft className="w-4 h-4" />
-                      Back
-                    </button>
-                    {guidedStep < guidedSteps.length - 1 ? (
-                      <button
-                        type="button"
-                        disabled={!guidedCanContinue}
-                        onClick={() => setGuidedStep(step => Math.min(guidedSteps.length - 1, step + 1))}
-                        className="btn-primary-gradient inline-flex items-center gap-2 px-5 py-2.5 text-sm disabled:opacity-50"
-                      >
-                        Continue <ArrowRight className="w-4 h-4" />
-                      </button>
-                    ) : (
-                      <button
-                        type="submit"
-                        disabled={!guidedReadyToSubmit || isSubmitting}
-                        className="btn-primary-gradient inline-flex items-center gap-2 px-5 py-2.5 text-sm disabled:opacity-50"
-                      >
-                        {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                        Submit Guided Request
-                      </button>
-                    )}
-                  </div>
-                </form>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {typeof document !== "undefined" ? createPortal(guidedModal, document.body) : guidedModal}
       </>
     );
   }

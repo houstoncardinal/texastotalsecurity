@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
-import CTABlock from "@/components/CTABlock";
 import SEOHead from "@/components/SEOHead";
 import { generateLocalBusinessSchema, generateReviewSchema, generateBreadcrumbSchema } from "@/lib/seo";
-import { Star, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Star, ExternalLink, Quote, Shield, Phone, ArrowRight, CheckCircle2 } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.1 };
 const fadeUp = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0 } };
+const fadeLeft = { hidden: { opacity: 0, x: -28 }, show: { opacity: 1, x: 0 } };
+const fadeRight = { hidden: { opacity: 0, x: 28 }, show: { opacity: 1, x: 0 } };
 
 /* ─── All 21 Google reviews with text (verbatim from Google listing) ── */
 const googleReviews = [
@@ -168,42 +170,68 @@ const Reviews = () => (
       schemas={reviewSchemas}
     />
 
-    {/* ── HERO ── */}
-    <section
-      className="relative py-20 sm:py-24 overflow-hidden"
-      style={{ background: "linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(0 60% 12%) 100%)" }}
-    >
+    <section className="relative overflow-hidden bg-neutral-950">
+      <div className="absolute inset-0">
+        <img src="/imgi_12_Better-Picture-LOGO-on-Wall-at-Office2-scaled.jpg" alt="" className="h-full w-full object-cover opacity-20" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,10,0.98)_0%,rgba(10,10,10,0.91)_48%,rgba(10,10,10,0.72)_100%)]" />
+      </div>
       <div
-        className="absolute inset-0 pointer-events-none opacity-10"
+        className="absolute inset-0 pointer-events-none opacity-[0.055]"
         style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, hsl(0 85% 60% / 0.3) 1px, transparent 0)`,
-          backgroundSize: "40px 40px",
+          backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
         }}
       />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, ease: easeExpo }}
-        >
-          <div className="flex justify-center gap-1 mb-5">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star key={i} className="w-7 h-7 fill-yellow-400 text-yellow-400" />
-            ))}
-          </div>
-          <h1
-            className="font-display font-bold text-white mb-4 leading-tight"
-            style={{ fontSize: "clamp(2rem, 4.5vw, 3.4rem)" }}
-          >
-            5.0 Stars on Google.
-            <span className="block" style={{ color: "hsl(0 85% 60%)" }}>
-              Every Review Earned.
-            </span>
-          </h1>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed">
-            Real feedback from Houston homeowners, business owners, and property managers who trusted us with their security. Not one review was incentivized or solicited.
-          </p>
-        </motion.div>
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:py-16">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_420px] gap-8 lg:gap-12 items-center">
+          <motion.div initial="hidden" animate="show" variants={fadeLeft} transition={{ duration: 0.75, ease: easeExpo }}>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-500/25 bg-red-500/10 mb-5">
+              <Star className="w-3.5 h-3.5 text-red-400 fill-red-400" />
+              <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-red-200">
+                Verified Customer Feedback
+              </span>
+            </div>
+            <h1 className="font-display font-bold text-white leading-[1.02] text-4xl sm:text-5xl lg:text-6xl max-w-3xl">
+              Trusted by Houston homeowners, businesses, and property teams.
+            </h1>
+            <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
+              Real Google reviews from homeowners, businesses, and property teams who trusted Texas Total Security for alarms, cameras, monitoring, service, and straight answers.
+            </p>
+            <div className="mt-5 flex flex-col sm:flex-row gap-3">
+              <a href="https://maps.app.goo.gl/o4XYckgxB3B77AyW8" target="_blank" rel="noopener noreferrer" className="btn-primary-gradient inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm">
+                <GoogleG /> View Google Reviews <ExternalLink className="w-4 h-4" />
+              </a>
+              <Link to="/free-analysis" className="inline-flex items-center justify-center gap-2 border border-white/15 px-7 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
+                Start a Project <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </motion.div>
+
+          <motion.div initial="hidden" animate="show" variants={fadeRight} transition={{ duration: 0.75, ease: easeExpo, delay: 0.08 }} className="border border-white/10 bg-white/[0.055] p-5 sm:p-6 backdrop-blur-sm">
+            <div className="flex items-center gap-1 mb-5">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+              ))}
+            </div>
+            <p className="font-display text-6xl font-bold text-white leading-none">5.0</p>
+            <p className="mt-2 text-sm font-semibold uppercase tracking-[0.14em] text-white/40">Google rating</p>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              {[
+                { label: "25+", sublabel: "Google reviews" },
+                { label: "100%", sublabel: "5-star reviews" },
+                { label: "Local", sublabel: "Houston team" },
+                { label: "15+", sublabel: "years serving" },
+              ].map((stat) => (
+                <div key={stat.label} className="border border-white/10 bg-black/45 p-4">
+                  <p className="font-display text-2xl font-bold text-white">{stat.label}</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
 
@@ -235,7 +263,7 @@ const Reviews = () => (
             href="https://maps.app.goo.gl/o4XYckgxB3B77AyW8"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold border transition-all duration-200"
             style={{ borderColor: "hsl(0 85% 50% / 0.25)", color: "hsl(0 85% 45%)" }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLAnchorElement).style.background = "hsl(0 85% 50% / 0.06)";
@@ -251,30 +279,30 @@ const Reviews = () => (
     </section>
 
     {/* ── REVIEWS GRID ── */}
-    <section className="section-padding" style={{ background: "hsl(0 0% 97%)" }}>
+    <section className="py-12 sm:py-14" style={{ background: "hsl(0 0% 97%)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="show" viewport={vp}
           transition={{ duration: 0.6, ease: easeExpo }}
           className="text-center max-w-2xl mx-auto mb-12"
         >
-          <h2 className="font-display font-bold text-gray-900 text-3xl sm:text-4xl mb-3">
-            What Our Customers Say
+          <h2 className="font-display font-bold text-gray-950 text-3xl sm:text-4xl mb-3">
+            Real feedback from customers who trusted us with their security.
           </h2>
           <p className="text-gray-500 text-base leading-relaxed">
             Every review below is verbatim from our Google listing — unedited, unfiltered, and 100% from real customers.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {googleReviews.map((review, i) => (
             <motion.div
               key={`${review.name}-${i}`}
               variants={fadeUp} initial="hidden" whileInView="show" viewport={vp}
               transition={{ duration: 0.5, ease: easeExpo, delay: (i % 3) * 0.08 }}
-              className="flex flex-col bg-white border border-gray-100 rounded-2xl p-6 hover:border-red-100 hover:shadow-lg transition-all duration-300"
-              style={{ boxShadow: "0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05)" }}
+              className="relative flex flex-col bg-white border border-gray-200 p-5 hover:border-red-200 hover:shadow-lg transition-all duration-300"
             >
+              <Quote className="absolute right-5 top-5 w-6 h-6 text-gray-100" />
               {/* Stars */}
               <div className="flex gap-0.5 mb-4">
                 {Array.from({ length: review.rating }).map((_, s) => (
@@ -283,14 +311,14 @@ const Reviews = () => (
               </div>
 
               {/* Review text */}
-              <p className="text-[14.5px] leading-relaxed text-gray-600 flex-1 mb-6">
+              <p className="relative text-[14.5px] leading-relaxed text-gray-600 flex-1 mb-6">
                 &ldquo;{review.text}&rdquo;
               </p>
 
               {/* Reviewer */}
               <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 bg-gray-100 border border-gray-200 flex items-center justify-center shrink-0">
                     <span className="text-xs font-bold text-gray-600">{review.name.charAt(0)}</span>
                   </div>
                   <div>
@@ -306,47 +334,104 @@ const Reviews = () => (
       </div>
     </section>
 
+    <section className="py-12 sm:py-14 bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[0.88fr_1.12fr] gap-8 lg:gap-12 items-stretch">
+          <motion.div variants={fadeLeft} initial="hidden" whileInView="show" viewport={vp} transition={{ duration: 0.7, ease: easeExpo }} className="relative overflow-hidden border border-white/10 bg-white/[0.035] p-6 sm:p-8">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent" />
+            <Shield className="w-9 h-9 text-red-400 mb-5" />
+            <h2 className="text-3xl sm:text-4xl font-display font-bold leading-tight">
+              The pattern customers call out is the part that matters.
+            </h2>
+            <p className="mt-4 text-white/60 leading-relaxed">
+              People mention local service, clear explanations, fast work, fair pricing, and systems they understand before we leave.
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 gap-px bg-white/10 border border-white/10">
+            {[
+              "Local Houston alarm company, not a national call-center maze",
+              "Owner involvement and technicians who explain the system",
+              "Alarm and camera work completed with professional follow-through",
+              "Support for homes, families, businesses, and repeat customers",
+            ].map((item, i) => (
+              <motion.div key={item} variants={fadeUp} initial="hidden" whileInView="show" viewport={vp} transition={{ duration: 0.55, ease: easeExpo, delay: i * 0.04 }} className="bg-black p-5">
+                <CheckCircle2 className="w-5 h-5 text-red-400 mb-4" />
+                <p className="text-sm font-semibold leading-relaxed text-white/70">{item}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
     {/* ── LEAVE A REVIEW CTA ── */}
-    <section className="section-padding bg-white">
-      <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section className="py-12 sm:py-14 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="show" viewport={vp}
           transition={{ duration: 0.6, ease: easeExpo }}
+          className="relative overflow-hidden border border-gray-200 bg-gray-50 p-6 sm:p-8"
         >
-          <div className="flex justify-center gap-1 mb-5">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
-            ))}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent" />
+          <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-6 lg:gap-8 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-4 border border-red-100 bg-white text-red-700">
+                <Star className="w-3.5 h-3.5 fill-red-600 text-red-600" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em]">Customer Review Center</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-gray-950 leading-tight">
+                Worked with Texas Total Security?
+              </h2>
+              <p className="mt-3 text-gray-600 leading-relaxed">
+                Your Google review helps Houston property owners evaluate a local security company with confidence.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-3">
+              <a
+                href="https://maps.app.goo.gl/o4XYckgxB3B77AyW8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex min-h-[104px] flex-col justify-between border border-red-200 bg-white p-4 text-left hover:border-red-300 hover:bg-red-50 transition-colors"
+              >
+                <span className="flex items-center gap-2 text-sm font-bold text-gray-950">
+                  <GoogleG /> Leave Review
+                </span>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-red-700">
+                  Open Google <ExternalLink className="w-3.5 h-3.5" />
+                </span>
+              </a>
+              <a
+                href="tel:7133879937"
+                className="group flex min-h-[104px] flex-col justify-between border border-gray-200 bg-white p-4 text-left hover:border-red-200 hover:bg-white transition-colors"
+              >
+                <span className="flex items-center gap-2 text-sm font-bold text-gray-950">
+                  <Phone className="w-4 h-4 text-red-600" /> Call Us
+                </span>
+                <span className="mt-3 text-xs font-semibold text-gray-500">(713) 387-9937</span>
+              </a>
+              <a
+                href="https://maps.app.goo.gl/o4XYckgxB3B77AyW8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex min-h-[104px] flex-col justify-between border border-gray-200 bg-white p-4 text-left hover:border-red-200 hover:bg-white transition-colors"
+              >
+                <span className="flex items-center gap-2 text-sm font-bold text-gray-950">
+                  <ExternalLink className="w-4 h-4 text-red-600" /> View Listing
+                </span>
+                <span className="mt-3 text-xs font-semibold text-gray-500">Google profile</span>
+              </a>
+            </div>
           </div>
-          <h2 className="text-2xl font-display font-bold text-gray-900 mb-3">
-            A Customer? We'd Love Your Review.
-          </h2>
-          <p className="text-gray-500 mb-7 leading-relaxed">
-            If Texas Total Security has served your home, business, or community, leaving a Google review helps other Houston families find a local company they can trust.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="https://maps.app.goo.gl/o4XYckgxB3B77AyW8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary-gradient inline-flex items-center gap-2"
-            >
-              <GoogleG /> Leave a Google Review <ExternalLink className="w-4 h-4" />
-            </a>
-            <a
-              href="https://maps.app.goo.gl/o4XYckgxB3B77AyW8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-gray-800 transition-colors"
-            >
-              View All Google Reviews <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-gray-200 pt-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-400">
+            <span>5.0 Google Rating</span>
+            <span>25+ Reviews</span>
+            <span>Local Houston Team</span>
           </div>
         </motion.div>
       </div>
     </section>
-
-    <CTABlock />
   </Layout>
 );
 
