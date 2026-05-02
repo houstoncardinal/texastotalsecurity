@@ -526,15 +526,8 @@ function HoneycombMount({ poleColor: _poleColor, cameraType, W }: {
   const plateD = 0.146; // 146 mm wide (Z)
   const plateX = faceX + plateW / 2;
 
-  // Gusset profile — triangular fin that blends plate → arm
-  const gussetGeo = useMemo(() => {
-    const s = new THREE.Shape();
-    s.moveTo(0, 0);
-    s.lineTo(0.092, 0);     // along arm direction (X)
-    s.quadraticCurveTo(0.060, 0.040, 0, 0.066); // curved hypotenuse for cast blend
-    s.lineTo(0, 0);
-    return new THREE.ExtrudeGeometry(s, { depth: 0.014, bevelEnabled: true, bevelThickness: 0.002, bevelSize: 0.002, bevelSegments: 2 });
-  }, []);
+  // (No separate gusset fins — the arm's bell-mouth flare at its base
+  // provides the integrated cast-aluminum gusseting in one continuous piece.)
 
   return (
     <group>
@@ -551,38 +544,12 @@ function HoneycombMount({ poleColor: _poleColor, cameraType, W }: {
         <meshStandardMaterial {...wgM} />
       </mesh>
 
-      {/* TOP gusset fin — blends arm into top of plate */}
-      <mesh
-        position={[faceX + plateW, 0.034, -0.007]}
-        rotation={[0, 0, 0]}
-        castShadow
-      >
-        <primitive object={gussetGeo} attach="geometry" />
-        <meshStandardMaterial {...wgM} />
+      {/* Cast blend boss — a soft pillow where the arm's flared base meets the
+          plate, hides the seam between plate face and the swept arm geometry. */}
+      <mesh position={[faceX + 0.006, 0, 0]} castShadow>
+        <boxGeometry args={[0.014, 0.118, 0.060]} />
+        <meshStandardMaterial {...wM} />
       </mesh>
-
-      {/* BOTTOM gusset fin — mirrored, blends arm into bottom of plate */}
-      <mesh
-        position={[faceX + plateW, -0.034, 0.007]}
-        rotation={[Math.PI, 0, 0]}
-        castShadow
-      >
-        <primitive object={gussetGeo} attach="geometry" />
-        <meshStandardMaterial {...wgM} />
-      </mesh>
-
-      {/* Secondary inner gussets for visual mass */}
-      {([0.014, -0.014] as const).map((zoff, i) => (
-        <mesh
-          key={`gi-${i}`}
-          position={[faceX + plateW, zoff > 0 ? 0.030 : -0.030, zoff]}
-          rotation={zoff > 0 ? [0, 0, 0] : [Math.PI, 0, 0]}
-          scale={[0.78, 0.78, 0.7]}
-        >
-          <primitive object={gussetGeo} attach="geometry" />
-          <meshStandardMaterial {...wgM} />
-        </mesh>
-      ))}
 
       {/* 4× hex-bolt indentations (recessed counterbores) on plate face */}
       {([-1, 1] as const).flatMap(sy =>
