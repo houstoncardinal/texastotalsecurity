@@ -26,18 +26,21 @@ const audiences = [
     id: "pm",
     icon: Building2,
     label: "Property Manager",
+    mobileLabel: "Prop. Manager",
     sublabel: "Apartments, Multi-family & Mixed-Use",
   },
   {
     id: "hoa",
     icon: Users,
     label: "HOA Board",
+    mobileLabel: "HOA Board",
     sublabel: "Residential Communities & Neighborhoods",
   },
   {
     id: "investor",
     icon: TrendingUp,
     label: "Investor / Owner",
+    mobileLabel: "Investor",
     sublabel: "Protect & Maximize Your Investment",
   },
 ];
@@ -247,6 +250,7 @@ const HOASecurity = () => {
   // Security pole image carousel
   const [poleIdx, setPoleIdx] = useState(0);
   const [polePaused, setPolePaused] = useState(false);
+  const [openHoaFaq, setOpenHoaFaq] = useState<number | null>(null);
   const poleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -373,122 +377,156 @@ const HOASecurity = () => {
       </section>
 
       {/* ── AUDIENCE TOGGLE ── */}
-      <section style={{ background: "hsl(0 0% 5%)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section className="bg-white" style={{ borderTop: "1px solid hsl(0 0% 91%)", borderBottom: "1px solid hsl(0 0% 91%)" }}>
         <div className="max-w-7xl mx-auto">
 
           {/* Tab selector bar */}
-          <motion.div
-            variants={fadeUp} initial="hidden" whileInView="show" viewport={vp}
-            transition={{ duration: 0.55, ease: easeExpo }}
-            className="border-b"
-            style={{ borderColor: "rgba(255,255,255,0.07)" }}
-          >
-            <div className="flex overflow-x-auto scrollbar-hide px-4 sm:px-6 lg:px-8">
+          <div className="border-b" style={{ borderColor: "hsl(0 0% 91%)" }}>
+
+            {/* Mobile — equal 3-column grid, all tabs visible at once */}
+            <div className="grid grid-cols-3 sm:hidden">
               {audiences.map((a) => {
                 const active = activeAudience === a.id;
                 return (
                   <button
                     key={a.id}
                     onClick={() => setActiveAudience(a.id as "pm" | "hoa" | "investor")}
-                    className="relative flex items-center gap-3 px-6 py-5 shrink-0 transition-all duration-300"
-                    style={{ color: active ? "white" : "rgba(255,255,255,0.38)" }}
+                    className="relative flex flex-col items-center justify-center gap-1.5 py-3.5 px-2 transition-colors duration-200"
                   >
                     <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300"
+                      className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
                       style={{
-                        background: active ? "hsl(0 85% 50%)" : "rgba(255,255,255,0.06)",
-                        border: active ? "none" : "1px solid rgba(255,255,255,0.08)",
+                        background: active ? "hsl(0 85% 50%)" : "hsl(0 0% 95%)",
+                        border: active ? "none" : "1px solid hsl(0 0% 88%)",
                       }}
                     >
-                      <a.icon className="w-4 h-4" style={{ color: active ? "white" : "rgba(255,255,255,0.4)" }} />
+                      <a.icon className="w-4 h-4" style={{ color: active ? "white" : "rgba(0,0,0,0.36)" }} />
                     </div>
-                    <div className="text-left">
-                      <p className="text-[13px] font-bold leading-tight">{a.label}</p>
-                      <p className="text-[10px] leading-tight mt-0.5 hidden sm:block" style={{ color: active ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.25)" }}>{a.sublabel}</p>
-                    </div>
+                    <p className="text-[10px] font-bold leading-tight text-center"
+                      style={{ color: active ? "#111" : "rgba(0,0,0,0.42)" }}>
+                      {a.mobileLabel}
+                    </p>
                     {active && (
-                      <span className="absolute inset-x-0 bottom-0 h-[2px] rounded-t-full" style={{ background: "hsl(0 85% 52%)" }} />
+                      <span className="absolute inset-x-0 bottom-0 h-[2.5px] rounded-t-full" style={{ background: "hsl(0 85% 50%)" }} />
                     )}
                   </button>
                 );
               })}
             </div>
-          </motion.div>
+
+            {/* Desktop — horizontal row with sublabel */}
+            <div className="hidden sm:flex px-6 lg:px-8">
+              {audiences.map((a) => {
+                const active = activeAudience === a.id;
+                return (
+                  <button
+                    key={a.id}
+                    onClick={() => setActiveAudience(a.id as "pm" | "hoa" | "investor")}
+                    className="relative flex items-center gap-3 px-5 py-4 shrink-0 transition-all duration-200"
+                    style={{ color: active ? "#111" : "rgba(0,0,0,0.40)" }}
+                  >
+                    <div
+                      className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200"
+                      style={{
+                        background: active ? "hsl(0 85% 50%)" : "hsl(0 0% 95%)",
+                        border: active ? "none" : "1px solid hsl(0 0% 88%)",
+                      }}
+                    >
+                      <a.icon className="w-4 h-4" style={{ color: active ? "white" : "rgba(0,0,0,0.38)" }} />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-[13px] font-bold leading-tight">{a.label}</p>
+                      <p className="text-[10px] leading-tight mt-0.5"
+                        style={{ color: active ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.30)" }}>
+                        {a.sublabel}
+                      </p>
+                    </div>
+                    {active && (
+                      <span className="absolute inset-x-0 bottom-0 h-[2px] rounded-t-full" style={{ background: "hsl(0 85% 50%)" }} />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+          </div>
 
           {/* Tab content */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeAudience}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.35, ease: easeExpo }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.28, ease: easeExpo }}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-0">
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-0">
 
                 {/* Left — copy */}
-                <div className="px-6 sm:px-8 lg:px-12 py-10 lg:py-12 border-b lg:border-b-0 lg:border-r" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold mb-5 uppercase tracking-[0.16em]"
-                    style={{ background: "hsl(0 85% 50% / 0.14)", border: "1px solid hsl(0 85% 50% / 0.25)", color: "hsl(0 75% 68%)" }}>
+                <div className="px-6 sm:px-8 lg:px-10 py-8 lg:py-10 border-b lg:border-b-0 lg:border-r"
+                  style={{ borderColor: "hsl(0 0% 91%)" }}>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold mb-4 uppercase tracking-[0.16em]"
+                    style={{ background: "hsl(0 85% 50% / 0.07)", border: "1px solid hsl(0 85% 50% / 0.16)", color: "hsl(0 80% 42%)" }}>
                     {content.eyebrow}
                   </div>
-                  <h2 className="font-display font-bold text-white leading-tight mb-4"
-                    style={{ fontSize: "clamp(1.55rem, 2.8vw, 2.25rem)", letterSpacing: "-0.035em" }}>
+                  <h2 className="font-display font-bold text-gray-900 leading-tight mb-3"
+                    style={{ fontSize: "clamp(1.45rem, 2.6vw, 2.1rem)", letterSpacing: "-0.03em" }}>
                     {content.headline}
                   </h2>
-                  <p className="leading-relaxed mb-7 text-[14px]" style={{ color: "rgba(255,255,255,0.52)", maxWidth: "38rem" }}>
+                  <p className="text-gray-500 leading-relaxed mb-5 text-[14px]" style={{ maxWidth: "38rem" }}>
                     {content.body}
                   </p>
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-2.5 mb-7">
                     {content.points.map((pt) => (
                       <li key={pt} className="flex items-start gap-3">
                         <div className="w-4 h-4 rounded-full shrink-0 mt-0.5 flex items-center justify-center"
-                          style={{ background: "hsl(0 85% 50% / 0.18)", border: "1px solid hsl(0 85% 50% / 0.32)" }}>
-                          <CheckCircle2 className="w-2.5 h-2.5" style={{ color: "hsl(0 75% 65%)" }} />
+                          style={{ background: "hsl(0 85% 50% / 0.10)", border: "1px solid hsl(0 85% 50% / 0.22)" }}>
+                          <CheckCircle2 className="w-2.5 h-2.5" style={{ color: "hsl(0 80% 46%)" }} />
                         </div>
-                        <span className="text-[13.5px] leading-relaxed" style={{ color: "rgba(255,255,255,0.68)" }}>{pt}</span>
+                        <span className="text-[13.5px] text-gray-600 leading-relaxed">{pt}</span>
                       </li>
                     ))}
                   </ul>
                   <Link
                     to={activeAudience === "pm"
-                      ? "/free-analysis?service=property-management&property=multifamily"
+                      ? "/property-assessment"
                       : activeAudience === "investor"
-                      ? "/free-analysis?service=property-management&property=multifamily&audience=investor"
-                      : "/free-analysis?service=hoa&property=hoa"}
-                    className="btn-primary-gradient inline-flex items-center gap-2 px-7 py-3.5 text-[13.5px] font-bold"
-                    style={{ boxShadow: "0 4px 20px hsl(0 85% 44% / 0.4)" }}>
+                      ? "/property-assessment"
+                      : "/property-assessment"}
+                    className="btn-primary-gradient inline-flex items-center gap-2 px-6 py-3 text-[13.5px] font-bold"
+                    style={{ boxShadow: "0 4px 16px hsl(0 85% 44% / 0.28)" }}>
                     {content.cta} <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
 
-                {/* Right — premium stat cards */}
-                <div className="grid grid-cols-2 p-6 sm:p-8 gap-3 content-start">
+                {/* Right — stat cards */}
+                <div className="grid grid-cols-2 p-6 sm:p-8 gap-3 content-start" style={{ background: "hsl(0 0% 98%)" }}>
                   {[content.stat1, content.stat2, content.stat3, content.stat4].map((s, i) => (
                     <motion.div
                       key={s.label}
-                      initial={{ opacity: 0, scale: 0.96 }}
+                      initial={{ opacity: 0, scale: 0.97 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.35, ease: easeExpo, delay: i * 0.07 }}
-                      className="rounded-xl p-5 flex flex-col justify-between"
+                      transition={{ duration: 0.28, ease: easeExpo, delay: i * 0.06 }}
+                      className="rounded-xl p-4 flex flex-col gap-1"
                       style={{
-                        background: i === 0 ? "hsl(0 85% 50% / 0.12)" : "rgba(255,255,255,0.04)",
-                        border: i === 0 ? "1px solid hsl(0 85% 50% / 0.22)" : "1px solid rgba(255,255,255,0.07)",
+                        background: i === 0 ? "hsl(0 85% 50% / 0.07)" : "white",
+                        border: i === 0 ? "1px solid hsl(0 85% 50% / 0.18)" : "1px solid hsl(0 0% 90%)",
                       }}
                     >
-                      <p className="font-display font-bold leading-none mb-2"
-                        style={{ fontSize: "clamp(1.6rem, 3vw, 2.1rem)", color: i === 0 ? "hsl(0 78% 72%)" : "white", letterSpacing: "-0.04em" }}>
+                      <p className="font-display font-bold leading-none"
+                        style={{ fontSize: "clamp(1.5rem, 2.8vw, 2rem)", color: i === 0 ? "hsl(0 80% 44%)" : "#111", letterSpacing: "-0.04em" }}>
                         {s.value}
                       </p>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.35)" }}>{s.label}</p>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-gray-400">{s.label}</p>
                     </motion.div>
                   ))}
-                  <div className="col-span-2 rounded-xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                    <p className="text-[11px] leading-relaxed" style={{ color: "rgba(255,255,255,0.36)" }}>
+                  <div className="col-span-2 rounded-xl p-3.5" style={{ background: "white", border: "1px solid hsl(0 0% 90%)" }}>
+                    <p className="text-[11px] text-gray-400 leading-relaxed">
                       Texas Total Security is locally owned and operated in Houston. You work directly with the owner — not a national call center or franchise.
                     </p>
                   </div>
                 </div>
+
               </div>
             </motion.div>
           </AnimatePresence>
