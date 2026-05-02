@@ -423,33 +423,66 @@ function HoneycombMount({ poleColor: _poleColor, cameraType, W }: {
   };
 
   // Build the tapered tube as a custom BufferGeometry by sweeping the
-  // rounded-square profile along the curve and linearly reducing the
-  // half-width from base (24mm) → head (15mm).
+  // rounded-square profile along the curve. The arm flares dramatically wide
+  // at the base (bell-mouth, integrated gussets), tapers smoothly upward
+  // along the rising portion, then continues to slim toward the head — one
+  // continuous solid casting (no separate fins, no horizontal split).
   const armGeo = useMemo(() => {
-    const STEPS    = 64;
-    const RADIAL   = 28; // points around the rounded-square profile
-    const hwBase   = 0.024;
-    const hwHead   = 0.015;
-    const rRatio   = 0.28;
+    const STEPS    = 96;
+    const RADIAL   = 28;
+    const hwHead   = 0.014;  // 28 mm at junction-cap end
+    const hwMid    = 0.020;  // 40 mm along the bend
+    const hwFlare  = 0.052;  // 104 mm vertical flare at the very base (bell-mouth)
+    const hwBaseZ  = 0.026;  // half-depth (Z) at base — slightly wider than mid
+    const rRatio   = 0.30;
 
-    // Sample the rounded-square outline at uniform parameter t∈[0,1]
-    const sampleProfile = (hw: number) => {
-      const shape = makeArmShape(hw, hw * rRatio);
-      const pts = shape.getPoints(RADIAL); // ~RADIAL+1 points
-      return pts;
+    // Sample the rounded-square outline. Width (Y) and depth (Z) can differ
+    // so the base flares VERTICALLY into the plate while staying narrow in
+    // depth — exactly how a real cast bracket merges into its mounting plate.
+    const sampleProfile = (hwY: number, hwZ: number) => {
+      const s = new THREE.Shape();
+      const r = Math.min(hwY, hwZ) * rRatio;
+      s.moveTo(-hwY + r, -hwZ);
+      s.lineTo( hwY - r, -hwZ);
+      s.quadraticCurveTo( hwY, -hwZ,  hwY, -hwZ + r);
+      s.lineTo( hwY,  hwZ - r);
+      s.quadraticCurveTo( hwY,  hwZ,  hwY - r,  hwZ);
+      s.lineTo(-hwY + r,  hwZ);
+      s.quadraticCurveTo(-hwY,  hwZ, -hwY,  hwZ - r);
+      s.lineTo(-hwY, -hwZ + r);
+      s.quadraticCurveTo(-hwY, -hwZ, -hwY + r, -hwZ);
+      return s.getPoints(RADIAL);
     };
 
     const positions: number[] = [];
     const indices: number[] = [];
 
     const frames = curve.computeFrenetFrames(STEPS, false);
-    const ringSize = sampleProfile(hwBase).length;
+    const ringSize = sampleProfile(hwFlare, hwBaseZ).length;
 
     for (let i = 0; i <= STEPS; i++) {
       const t = i / STEPS;
-      // Ease taper toward the head for an organic cast-metal flare
-      const hw = hwBase + (hwHead - hwBase) * Math.pow(t, 0.85);
-      const profile = sampleProfile(hw);
+
+      // Width (vertical / Y on profile) — bell-mouth flare:
+      //   t=0.00 → hwFlare (huge, blends into plate)
+      //   t≈0.18 → hwMid    (smooth transition complete, arm now uniform-ish)
+      //   t→1.00 → hwHead   (slim taper toward junction cap)
+      let hwY: number;
+      if (t < 0.18) {
+        // Smooth cosine ease-out from flare → mid (the integrated gusset zone)
+        const k = t / 0.18;
+        const ease = 0.5 - 0.5 * Math.cos(Math.PI * k); // 0..1 smoothstep-ish
+        hwY = hwFlare + (hwMid - hwFlare) * ease;
+      } else {
+        // Gentle linear taper from mid → head over the rest of the arm
+        const k = (t - 0.18) / 0.82;
+        hwY = hwMid + (hwHead - hwMid) * Math.pow(k, 0.9);
+      }
+
+      // Depth (Z on profile) — narrow flare so the bell-mouth is mostly vertical
+      const hwZ = hwBaseZ + (hwHead - hwBaseZ) * Math.pow(t, 0.7);
+
+      const profile = sampleProfile(hwY, hwZ);
       const center = curve.getPointAt(t);
       const N = frames.normals[Math.min(i, STEPS - 1)];
       const B = frames.binormals[Math.min(i, STEPS - 1)];
