@@ -5,6 +5,7 @@ import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 
 const ServiceAreaMap = lazy(() => import("@/components/ServiceAreaMap"));
+import WirelessBridgeSection from "@/components/WirelessBridgeSection";
 import {
   generateItemListSchema,
   generateComprehensiveHomepageSchema,
@@ -52,16 +53,16 @@ type HeroSlide = {
 
 const heroSlides: HeroSlide[] = [
   {
-    eyebrow: "Homeowners · Property Managers · HOA Communities",
+    eyebrow: "Houston Homes · Businesses · HOA Communities",
     headline: [
-      "Custom Surveillance & Alarm Systems",
+      "Custom Security Camera & Alarm Systems",
       "for Homes and Businesses",
     ],
-    sub: "Hardwired 4K cameras, license plate recognition, and 24/7 professional monitoring. Whether you're a homeowner or a property manager, you get a custom-engineered system and the accountability of a local owner-operated team.",
-    cta: { label: "Request a Free Quote", href: "/property-assessment" },
+    sub: "Our Houston Security Camera and Alarm System Experts deliver top-notch service and cutting-edge technology for your custom security project — designed, installed, and monitored by a local owner-operated team.",
+    cta: { label: "Design My Custom System", href: "/property-assessment" },
     ctas: [
-      { label: "Request a Free Quote", href: "/property-assessment" },
-      { label: "Speak with the Owner", href: "tel:7133879937", external: true },
+      { label: "Design My Custom System", href: "/property-assessment" },
+      { label: "Talk to a Houston Expert", href: "tel:7133879937", external: true },
     ],
     bg: "/imgi_14_upscale_gate_TTS.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.91) 0%, rgba(0,0,0,0.76) 50%, rgba(0,0,0,0.56) 100%)",
@@ -70,10 +71,14 @@ const heroSlides: HeroSlide[] = [
     eyebrow: "Alarm Takeover · Any Provider · Local Houston Team",
     headline: [
       "Unhappy with your current alarm company?",
-      "Switch to a Team That Treats You Like a Person.",
+      "Make the switch to a local team that cares.",
     ],
-    sub: "Your existing equipment stays exactly as-is. What changes is the experience — a personable, owner-operated Houston security team that picks up the phone, knows your name, and delivers the kind of customer service national companies simply can't match.",
+    sub: "Texas Total Security is a Houston alarm company that provides custom alarm installations with reliable equipment and local staff who actually care — answer the phone, know your name, and stay accountable long after the install.",
     cta: { label: "See How Easy It Is to Switch", href: "/switch-my-alarm" },
+    ctas: [
+      { label: "Switch My Alarm Company", href: "/switch-my-alarm" },
+      { label: "Get a Free Switch Quote", href: "/free-analysis" },
+    ],
     bg: "/imgi_13_gd9131.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
   },
@@ -1124,6 +1129,10 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ══════════════════════════════════════════════════
+          WIRELESS BRIDGE SYSTEM — interactive premium section
+      ══════════════════════════════════════════════════ */}
+      <WirelessBridgeSection />
 
       {/* ══════════════════════════════════════════════════
           FAQ — animated accordion
