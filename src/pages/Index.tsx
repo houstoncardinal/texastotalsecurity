@@ -1129,6 +1129,10 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ══════════════════════════════════════════════════
+          WIRELESS BRIDGE SYSTEM — interactive premium section
+      ══════════════════════════════════════════════════ */}
+      <WirelessBridgeSection />
 
       {/* ══════════════════════════════════════════════════
           FAQ — animated accordion
