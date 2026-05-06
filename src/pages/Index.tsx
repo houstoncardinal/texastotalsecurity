@@ -5,6 +5,7 @@ import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 
 const ServiceAreaMap = lazy(() => import("@/components/ServiceAreaMap"));
+import WirelessBridgeSection from "@/components/WirelessBridgeSection";
 import {
   generateItemListSchema,
   generateComprehensiveHomepageSchema,
