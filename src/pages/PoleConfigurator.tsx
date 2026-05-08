@@ -117,10 +117,8 @@ function calcPrice(config: PoleConfig): { perPole: number; total: number; breakd
   const camType = CAMERA_TYPES.find(c => c.value === config.cameraType)!;
   const light = LIGHTING_OPTIONS.find(l => l.value === config.lighting)!;
   const mount = MOUNT_TYPES.find(m => m.value === config.mountType)!;
-  const accessoryCost = config.accessories.reduce((acc, a) => {
-    const item = ACCESSORIES.find(x => x.value === a);
-    return acc + (item?.cost ?? 0);
-  }, 0);
+  const accessoryCost = 0;
+
 
   const cameraTotal = camType.cost * config.cameraCount;
   const installLabor = 320 + config.cameraCount * 80;
