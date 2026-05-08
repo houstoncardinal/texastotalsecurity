@@ -47,40 +47,37 @@ function savePoleQuote(quote: PoleQuote) {
 // ─── Configuration Options ────────────────────────────────────────────────────
 
 const POLE_HEIGHTS = [
-  { label: "10 ft", value: 10, desc: "Parking lots, small yards", baseCost: 850 },
-  { label: "15 ft", value: 15, desc: "Standard commercial", baseCost: 1200 },
-  { label: "20 ft", value: 20, desc: "Large properties, gates", baseCost: 1600 },
-  { label: "25 ft", value: 25, desc: "Maximum deterrence", baseCost: 2100 },
-  { label: "30 ft", value: 30, desc: "Industrial / Perimeter", baseCost: 2700 },
+  { label: "9 ft (Above Ground)", value: 9, desc: "Multi-Family Setups · Close-range video (works well with analytics)", baseCost: 720 },
+  { label: "12 ft", value: 12, desc: "Popular for Multi-Family · Entrance & exit gates", baseCost: 950 },
+  { label: "16 ft", value: 16, desc: "Industrial properties · Covers further distances", baseCost: 1350 },
+  { label: "Custom Size", value: 0, desc: "Need a size you don't see? Contact us and we'll help you customize.", baseCost: 0 },
 ];
 
 const ARM_CONFIGS = [
-  { label: "Honeycomb Mount", value: "honeycomb", desc: "Gooseneck L-arm with reinforced base plate — LTB301 (132mm)", cost: 180, arms: 0 },
-  { label: "Circle Mount", value: "circle", desc: "Deep-base die-cast junction box extension — LTB03-W (126mm)", cost: 0, arms: 0 },
+  { label: "L Bracket Junction Box", value: "honeycomb", desc: "Gooseneck L-arm with reinforced base plate", cost: 180, arms: 0 },
+  { label: "Circle Junction Box", value: "circle", desc: "Deep-base die-cast junction box extension", cost: 0, arms: 0 },
 ];
 
 const CAMERA_COUNTS = [1, 2, 3, 4, 5, 6];
 
 const CAMERA_TYPES = [
-  { label: "Swivel Wide-Angle", value: "ptz", desc: "Compact adjustable view up to 190°", cost: 650 },
-  { label: "Bullet", value: "bullet", desc: "Fixed long-range focus", cost: 380 },
-  { label: "Turret", value: "dome", desc: "Compact dome-style wide-angle", cost: 320 },
-  { label: "LPR", value: "lpr", desc: "License plate recognition", cost: 950 },
-  { label: "Multi-Sensor", value: "multi", desc: "180°/360° panoramic", cost: 1100 },
+  { label: "Dome / Turret", value: "dome", desc: "90° wide-angle camera", cost: 320 },
+  { label: "Bullet", value: "bullet", desc: "Zoom & focus long-range", cost: 380 },
+  { label: "PTZ", value: "ptz", desc: "Pan · Tilt · Zoom", cost: 650 },
+  { label: "LPR", value: "lpr", desc: "License Plate Recognition camera", cost: 950 },
+  { label: "Panoramic", value: "multi", desc: "180° or 360° panoramic camera", cost: 1100 },
 ];
 
 const LIGHTING_OPTIONS = [
-  { label: "None", value: "none", desc: "Camera-only setup", cost: 0 },
-  { label: "LED Floodlight", value: "led", desc: "High-output white light", cost: 280 },
-  { label: "IR Illuminator", value: "ir", desc: "Invisible night vision", cost: 220 },
-  { label: "Strobe + Siren", value: "strobe", desc: "Active deterrence", cost: 340 },
-  { label: "Solar LED", value: "solar", desc: "Off-grid illumination", cost: 520 },
+  { label: "Red / Blue LED Strobe Light Kit", value: "rb-strobe", desc: "Active deterrence — alternating red/blue", cost: 380 },
+  { label: "Blue LED Strobe Light Kit",       value: "blue-strobe", desc: "High-visibility blue strobe deterrence", cost: 320 },
+  { label: "Red LED Strobe Light Kit",        value: "red-strobe", desc: "High-visibility red strobe deterrence", cost: 320 },
+  { label: "None",                            value: "none", desc: "Camera-only setup", cost: 0 },
 ];
 
 const MOUNT_TYPES = [
-  { label: "Direct Burial", value: "burial", desc: "Standard 4–6 ft depth", cost: 0 },
-  { label: "Concrete Base", value: "concrete", desc: "Poured footing, strongest", cost: 350 },
-  { label: "Anchor Bolt", value: "anchor", desc: "Pre-cast template system", cost: 450 },
+  { label: "Concrete Base", value: "concrete", desc: "Poured footing — strongest, permanent install", cost: 350 },
+  { label: "Gate Anchor",   value: "anchor", desc: "Anchor-bolt to existing concrete or gate post", cost: 450 },
 ];
 
 const FINISH_OPTIONS = [
@@ -90,15 +87,6 @@ const FINISH_OPTIONS = [
   { label: "Galvanized", value: "#8a8d8f", hex: "#8a8d8f" },
   { label: "Powder White", value: "#dde0e2", hex: "#dde0e2" },
   { label: "Forest Green", value: "#2c3e2d", hex: "#2c3e2d" },
-];
-
-const ACCESSORIES = [
-  { label: "Weatherproof Junction Box", value: "junction", cost: 120 },
-  { label: "Conduit Kit (per pole)", value: "conduit", cost: 85 },
-  { label: "Grounding Kit", value: "grounding", cost: 65 },
-  { label: "Smart Controller / PoE Switch", value: "controller", cost: 240 },
-  { label: "Vandal-Resistant Shroud", value: "shroud", cost: 95 },
-  { label: "Tamper-Proof Hardware", value: "tamper", cost: 55 },
 ];
 
 const QUANTITY_OPTIONS = [1, 2, 3, 4, 5, 6, 8, 10, 15, 20];
