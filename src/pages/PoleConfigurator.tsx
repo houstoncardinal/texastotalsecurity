@@ -1390,7 +1390,7 @@ const PoleConfigurator = () => {
             {[
               { icon: Shield, text: "Texas-licensed installers" },
               { icon: Wrench, text: "Professional installation included" },
-              { icon: Star, text: "5-year structural warranty" },
+              { icon: Star, text: "Built for Houston conditions" },
             ].map(f => (
               <div key={f.text} className="flex items-center gap-2">
                 <f.icon className="w-3.5 h-3.5" style={{ color: "hsl(0 85% 60%)" }} />
