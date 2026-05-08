@@ -1618,31 +1618,10 @@ const PoleConfigurator = () => {
                                   </button>
                                 ))}
                               </div>
-                              <p className="text-xs font-semibold text-gray-500 mb-2">Add-on Accessories</p>
-                              {ACCESSORIES.map(a => (
-                                <button
-                                  key={a.value}
-                                  onClick={() => toggleAccessory(a.value)}
-                                  className="w-full flex items-center justify-between p-3.5 rounded-xl border mb-2 transition-all text-left"
-                                  style={{
-                                    background: config.accessories.includes(a.value) ? "hsl(0 75% 50%/0.07)" : "white",
-                                    borderColor: config.accessories.includes(a.value) ? "hsl(0 75% 50%)" : "#e5e7eb",
-                                  }}
-                                >
-                                  <div className="flex items-center gap-3">
-                                    <div
-                                      className="w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0"
-                                      style={{
-                                        borderColor: config.accessories.includes(a.value) ? "hsl(0 75% 50%)" : "#d1d5db",
-                                        background: config.accessories.includes(a.value) ? "hsl(0 75% 50%)" : "white",
-                                      }}
-                                    >
-                                      {config.accessories.includes(a.value) && <Check className="w-2.5 h-2.5 text-white" />}
-                                    </div>
-                                    <span className="text-sm font-medium text-gray-800">{a.label}</span>
-                                  </div>
-                                </button>
-                              ))}
+                              <p className="text-[11px] text-gray-500 leading-relaxed mt-3">
+                                Standard pole sizing: <strong>4&quot; × 4&quot;</strong> permanent structure.
+                              </p>
+
                             </>
                           )}
                         </motion.div>
