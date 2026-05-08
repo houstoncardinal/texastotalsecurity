@@ -817,7 +817,7 @@ function CrossarmMount({
 
 function SecurityPole({ config }: { config: PoleConfig }) {
   const groupRef = useRef<THREE.Group>(null);
-  const poleH = config.height * 0.17;
+  const poleH = (config.height || 12) * 0.17;
   const W = 0.145; // square pole cross-section — matches photos
 
   useFrame(({ clock }) => {
