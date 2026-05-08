@@ -584,11 +584,6 @@ const Index = () => {
                 Security Solutions for Every Property Type
               </h2>
             </div>
-            <p
-              className="text-gray-500 text-sm leading-relaxed sm:text-right sm:max-w-xs"
-            >
-              From homeowners to HOA boards — every system is custom-designed for your property and your goals.
-            </p>
           </motion.div>
 
           {/* Cards grid */}
