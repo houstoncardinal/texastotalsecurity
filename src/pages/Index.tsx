@@ -53,34 +53,19 @@ type HeroSlide = {
 
 const heroSlides: HeroSlide[] = [
   {
-    eyebrow: "Houston Homes · Businesses · HOA Communities",
+    eyebrow: "Locally Owned · Licensed & Insured · Houston Based · 5 Star On Google",
     headline: [
       "Custom Security Camera & Alarm Systems",
       "for Homes and Businesses",
     ],
-    sub: "Our Houston Security Camera and Alarm System Experts deliver top-notch service and cutting-edge technology for your custom security project — designed, installed, and monitored by a local owner-operated team.",
-    cta: { label: "Design My Custom System", href: "/property-assessment" },
+    sub: "Our local security professionals deliver top-notch service and cutting-edge technology for your custom security project — designed, installed, and monitored by a Houston owner-operated team.",
+    cta: { label: "Design My Security System", href: "/property-assessment" },
     ctas: [
-      { label: "Design My Custom System", href: "/property-assessment" },
-      { label: "Talk to a Houston Expert", href: "tel:7133879937", external: true },
+      { label: "Design My Security System", href: "/property-assessment" },
+      { label: "Talk to a Security Professional", href: "tel:7133879937", external: true },
     ],
     bg: "/imgi_14_upscale_gate_TTS.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.91) 0%, rgba(0,0,0,0.76) 50%, rgba(0,0,0,0.56) 100%)",
-  },
-  {
-    eyebrow: "Alarm Takeover · Any Provider · Local Houston Team",
-    headline: [
-      "Unhappy with your current alarm company?",
-      "Make the switch to a local team that cares.",
-    ],
-    sub: "Texas Total Security is a Houston alarm company that provides custom alarm installations with reliable equipment and local staff who actually care — answer the phone, know your name, and stay accountable long after the install.",
-    cta: { label: "See How Easy It Is to Switch", href: "/switch-my-alarm" },
-    ctas: [
-      { label: "Switch My Alarm Company", href: "/switch-my-alarm" },
-      { label: "Get a Free Switch Quote", href: "/free-analysis" },
-    ],
-    bg: "/imgi_13_gd9131.jpg",
-    overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
   },
 ];
 
@@ -323,18 +308,48 @@ const Index = () => {
                     overflowWrap: "normal",
                   }}
                 >
-                  <span className="block">{heroSlides[currentSlide].headline[0]}</span>
-                  <span
-                    className="block"
-                    style={{
-                      background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 40%, hsl(0 90% 44%) 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                    }}
-                  >
-                    {heroSlides[currentSlide].headline[1]}
-                  </span>
+                  {(() => {
+                    const h0 = heroSlides[currentSlide].headline[0];
+                    const h1 = heroSlides[currentSlide].headline[1];
+                    // Custom (white) + services (red gradient)
+                    if (h0.startsWith("Custom ")) {
+                      const rest = h0.replace(/^Custom\s+/, "");
+                      return (
+                        <>
+                          <span className="block">
+                            Custom{" "}
+                            <span
+                              style={{
+                                background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 40%, hsl(0 90% 44%) 100%)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                backgroundClip: "text",
+                              }}
+                            >
+                              {rest}
+                            </span>
+                          </span>
+                          <span className="block text-white">{h1}</span>
+                        </>
+                      );
+                    }
+                    return (
+                      <>
+                        <span className="block">{h0}</span>
+                        <span
+                          className="block"
+                          style={{
+                            background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 40%, hsl(0 90% 44%) 100%)",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                            backgroundClip: "text",
+                          }}
+                        >
+                          {h1}
+                        </span>
+                      </>
+                    );
+                  })()}
                 </h1>
 
                 {/* ── Subtitle ── */}
@@ -397,8 +412,8 @@ const Index = () => {
                 {/* ── Trust authority strip ── */}
                 <div className="flex items-center justify-start sm:justify-center flex-wrap gap-x-5 gap-y-1">
                   {[
-                    { icon: Star,         label: "Top Rated" },
-                    { icon: Shield,       label: "LIC# B03066901" },
+                    { icon: Star,         label: "5★ on Google" },
+                    { icon: Shield,       label: "Licensed & Insured" },
                     { icon: CheckCircle2, label: "Locally Owned" },
                     { icon: MapPin,       label: "Houston-Based" },
                   ].map(({ icon: Icon, label }, idx, arr) => (
@@ -481,16 +496,17 @@ const Index = () => {
       >
         {(() => {
           const items = [
-            { label: "Switch Alarm Providers",             accent: true  },
-            { label: "Property Management Security",       accent: false },
-            { label: "LIC# B03066901 · Licensed & Insured", accent: true },
-            { label: "HOA & Community Security",           accent: false },
-            { label: "Custom Security Poles",              accent: false },
-            { label: "License Plate Recognition",          accent: true  },
-            { label: "Alarm.com Authorized Dealer",        accent: false },
-            { label: "24/7 Professional Alarm Monitoring", accent: true  },
-            { label: "Honeywell · Resideo Systems",        accent: false },
-            { label: "Locally Owned & Operated",           accent: false },
+            { label: "Unhappy with your current alarm company? Make the switch", accent: true },
+            { label: "Local & Reliable Security Company That Cares",            accent: false },
+            { label: "Free Security Analysis",                                  accent: true  },
+            { label: "Switch Alarm Providers · Any Brand",                      accent: false },
+            { label: "Property Management & HOA Security",                      accent: true  },
+            { label: "Licensed & Insured · Houston Based",                      accent: false },
+            { label: "Custom Security Poles",                                   accent: true  },
+            { label: "License Plate Recognition (LPR)",                         accent: false },
+            { label: "Alarm.com Authorized Dealer",                             accent: true  },
+            { label: "24/7 Professional Alarm Monitoring",                      accent: false },
+            { label: "Locally Owned & Operated",                                accent: true  },
           ];
           const row = [...items, ...items];
           return (
@@ -568,11 +584,6 @@ const Index = () => {
                 Security Solutions for Every Property Type
               </h2>
             </div>
-            <p
-              className="text-gray-500 text-sm leading-relaxed sm:text-right sm:max-w-xs"
-            >
-              From homeowners to HOA boards — every system is custom-designed for your property and your goals.
-            </p>
           </motion.div>
 
           {/* Cards grid */}
@@ -763,7 +774,7 @@ const Index = () => {
             <div className="flex items-center gap-2 mb-3">
               <span className="h-px w-4 rounded-full" style={{ background: "hsl(0 85% 52%)" }} />
               <span className="text-[9.5px] font-bold uppercase tracking-[0.22em]" style={{ color: "hsl(0 75% 60%)" }}>
-                Alarm Takeover · Any Provider · Hardwired System Specialists
+                Looking for a New Security Company? · Free Security Analysis
               </span>
             </div>
 
@@ -773,7 +784,7 @@ const Index = () => {
               style={{ fontSize: "clamp(1.55rem, 2.8vw, 2.25rem)", letterSpacing: "-0.04em" }}
             >
               <span className="block text-white">Tired of Your Current Alarm Company?</span>
-              <span className="block" style={{ color: "hsl(0 85% 54%)" }}>Switching Is Easier Than You Think.</span>
+              <span className="block" style={{ color: "hsl(0 85% 54%)" }}>Get a Free Security Analysis Today.</span>
             </h2>
 
             {/* Trust stats */}
@@ -818,11 +829,11 @@ const Index = () => {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
-                to="/switch-my-alarm"
+                to="/free-analysis"
                 className="btn-primary-gradient inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3"
                 style={{ boxShadow: "0 4px 24px hsl(0 85% 44% / 0.42)" }}
               >
-                Start My Free Switch Assessment <ArrowRight className="w-4 h-4" />
+                Get My Free Security Analysis <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="tel:7133879937"

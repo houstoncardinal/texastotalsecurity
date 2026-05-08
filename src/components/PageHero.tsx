@@ -138,7 +138,7 @@ const PageHero = ({
 
       {/* Trust strip */}
       <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-10">
-        {["Locally Owned & Operated", "Licensed & Insured · LIC# B03066901", "24/7 Professional Monitoring"].map((item) => (
+        {["Locally Owned & Operated", "Licensed & Insured", "5★ on Google · Houston Based"].map((item) => (
           <span
             key={item}
             className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em]"
