@@ -412,8 +412,8 @@ const Index = () => {
                 {/* ── Trust authority strip ── */}
                 <div className="flex items-center justify-start sm:justify-center flex-wrap gap-x-5 gap-y-1">
                   {[
-                    { icon: Star,         label: "Top Rated" },
-                    { icon: Shield,       label: "LIC# B03066901" },
+                    { icon: Star,         label: "5★ on Google" },
+                    { icon: Shield,       label: "Licensed & Insured" },
                     { icon: CheckCircle2, label: "Locally Owned" },
                     { icon: MapPin,       label: "Houston-Based" },
                   ].map(({ icon: Icon, label }, idx, arr) => (
