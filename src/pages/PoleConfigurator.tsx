@@ -1056,7 +1056,7 @@ const STEPS = [
   { id: "cameras", label: "Cameras", icon: Camera },
   { id: "lighting", label: "Lighting", icon: Sun },
   { id: "mount", label: "Mount & Finish", icon: Box },
-  { id: "quantity", label: "Qty & Add-ons", icon: Package },
+  { id: "quantity", label: "Quantity", icon: Package },
   { id: "quote", label: "Get Quote", icon: ClipboardList },
 ];
 
