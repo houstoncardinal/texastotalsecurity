@@ -53,34 +53,19 @@ type HeroSlide = {
 
 const heroSlides: HeroSlide[] = [
   {
-    eyebrow: "Houston Homes · Businesses · HOA Communities",
+    eyebrow: "Locally Owned · Licensed & Insured · Houston Based · 5 Star On Google",
     headline: [
       "Custom Security Camera & Alarm Systems",
       "for Homes and Businesses",
     ],
-    sub: "Our Houston Security Camera and Alarm System Experts deliver top-notch service and cutting-edge technology for your custom security project — designed, installed, and monitored by a local owner-operated team.",
-    cta: { label: "Design My Custom System", href: "/property-assessment" },
+    sub: "Our local security professionals deliver top-notch service and cutting-edge technology for your custom security project — designed, installed, and monitored by a Houston owner-operated team.",
+    cta: { label: "Design My Security System", href: "/property-assessment" },
     ctas: [
-      { label: "Design My Custom System", href: "/property-assessment" },
-      { label: "Talk to a Houston Expert", href: "tel:7133879937", external: true },
+      { label: "Design My Security System", href: "/property-assessment" },
+      { label: "Talk to a Security Professional", href: "tel:7133879937", external: true },
     ],
     bg: "/imgi_14_upscale_gate_TTS.jpg",
     overlay: "linear-gradient(135deg, rgba(0,0,0,0.91) 0%, rgba(0,0,0,0.76) 50%, rgba(0,0,0,0.56) 100%)",
-  },
-  {
-    eyebrow: "Alarm Takeover · Any Provider · Local Houston Team",
-    headline: [
-      "Unhappy with your current alarm company?",
-      "Make the switch to a local team that cares.",
-    ],
-    sub: "Texas Total Security is a Houston alarm company that provides custom alarm installations with reliable equipment and local staff who actually care — answer the phone, know your name, and stay accountable long after the install.",
-    cta: { label: "See How Easy It Is to Switch", href: "/switch-my-alarm" },
-    ctas: [
-      { label: "Switch My Alarm Company", href: "/switch-my-alarm" },
-      { label: "Get a Free Switch Quote", href: "/free-analysis" },
-    ],
-    bg: "/imgi_13_gd9131.jpg",
-    overlay: "linear-gradient(135deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.74) 50%, rgba(0,0,0,0.54) 100%)",
   },
 ];
 
