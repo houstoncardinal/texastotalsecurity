@@ -1415,7 +1415,7 @@ const PoleConfigurator = () => {
               {/* Live config overlay */}
               <div className="absolute top-4 left-4 space-y-1.5 pointer-events-none">
                 {[
-                  `${config.height} ft pole`,
+                  config.height === 0 ? "Custom size" : `${config.height} ft pole`,
                   `${config.cameraCount}× ${CAMERA_TYPES.find(c => c.value === config.cameraType)?.label}`,
                   ARM_CONFIGS.find(a => a.value === config.armConfig)?.label,
                   LIGHTING_OPTIONS.find(l => l.value === config.lighting)?.label !== "None"
