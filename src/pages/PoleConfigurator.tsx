@@ -1288,12 +1288,12 @@ function QuoteForm({ config, estimatedTotal, onClose }: {
 
 const PoleConfigurator = () => {
   const [config, setConfig] = useState<PoleConfig>({
-    height: 15,
+    height: 12,
     armConfig: "honeycomb",
     cameraCount: 2,
-    cameraType: "ptz",
+    cameraType: "dome",
     lighting: "none",
-    mountType: "burial",
+    mountType: "concrete",
     color: "#111111",
     quantity: 1,
     accessories: [],
@@ -1302,8 +1302,24 @@ const PoleConfigurator = () => {
   const [showQuote, setShowQuote] = useState(false);
   const { perPole, total } = calcPrice(config);
 
+  // Mount × Camera compatibility:
+  //   • LPR        → Circle Junction Box only (never L Bracket)
+  //   • Dome/Turret→ L Bracket Junction Box only
+  //   • All others → Circle Junction Box (default for everything except dome)
   const update = (key: keyof PoleConfig, val: any) =>
-    setConfig(prev => ({ ...prev, [key]: val }));
+    setConfig(prev => {
+      const next = { ...prev, [key]: val };
+      if (key === "cameraType") {
+        if (val === "lpr" && next.armConfig === "honeycomb") next.armConfig = "circle";
+        else if (val === "dome") next.armConfig = "honeycomb";
+        else if (val !== "dome") next.armConfig = "circle";
+      }
+      if (key === "armConfig") {
+        if (val === "honeycomb" && (next.cameraType === "lpr")) next.cameraType = "dome";
+        if (val === "circle" && next.cameraType === "dome") next.cameraType = "bullet";
+      }
+      return next;
+    });
 
   const toggleAccessory = (val: string) =>
     setConfig(prev => ({
@@ -1313,7 +1329,7 @@ const PoleConfigurator = () => {
         : [...prev.accessories, val],
     }));
 
-  const isLast = step === STEPS.length - 2; // step 5 = Qty & Add-ons (last before quote)
+  const isLast = step === STEPS.length - 2; // last step before quote
 
   return (
     <Layout>
