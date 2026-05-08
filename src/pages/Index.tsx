@@ -834,11 +834,11 @@ const Index = () => {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
-                to="/switch-my-alarm"
+                to="/free-analysis"
                 className="btn-primary-gradient inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3"
                 style={{ boxShadow: "0 4px 24px hsl(0 85% 44% / 0.42)" }}
               >
-                Start My Free Switch Assessment <ArrowRight className="w-4 h-4" />
+                Get My Free Security Analysis <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="tel:7133879937"
