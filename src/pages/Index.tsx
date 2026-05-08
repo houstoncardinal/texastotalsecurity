@@ -308,18 +308,48 @@ const Index = () => {
                     overflowWrap: "normal",
                   }}
                 >
-                  <span className="block">{heroSlides[currentSlide].headline[0]}</span>
-                  <span
-                    className="block"
-                    style={{
-                      background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 40%, hsl(0 90% 44%) 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                    }}
-                  >
-                    {heroSlides[currentSlide].headline[1]}
-                  </span>
+                  {(() => {
+                    const h0 = heroSlides[currentSlide].headline[0];
+                    const h1 = heroSlides[currentSlide].headline[1];
+                    // Custom (white) + services (red gradient)
+                    if (h0.startsWith("Custom ")) {
+                      const rest = h0.replace(/^Custom\s+/, "");
+                      return (
+                        <>
+                          <span className="block">
+                            Custom{" "}
+                            <span
+                              style={{
+                                background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 40%, hsl(0 90% 44%) 100%)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                backgroundClip: "text",
+                              }}
+                            >
+                              {rest}
+                            </span>
+                          </span>
+                          <span className="block text-white">{h1}</span>
+                        </>
+                      );
+                    }
+                    return (
+                      <>
+                        <span className="block">{h0}</span>
+                        <span
+                          className="block"
+                          style={{
+                            background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 40%, hsl(0 90% 44%) 100%)",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                            backgroundClip: "text",
+                          }}
+                        >
+                          {h1}
+                        </span>
+                      </>
+                    );
+                  })()}
                 </h1>
 
                 {/* ── Subtitle ── */}
