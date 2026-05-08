@@ -779,7 +779,7 @@ const Index = () => {
             <div className="flex items-center gap-2 mb-3">
               <span className="h-px w-4 rounded-full" style={{ background: "hsl(0 85% 52%)" }} />
               <span className="text-[9.5px] font-bold uppercase tracking-[0.22em]" style={{ color: "hsl(0 75% 60%)" }}>
-                Alarm Takeover · Any Provider · Hardwired System Specialists
+                Looking for a New Security Company? · Free Security Analysis
               </span>
             </div>
 
@@ -789,7 +789,7 @@ const Index = () => {
               style={{ fontSize: "clamp(1.55rem, 2.8vw, 2.25rem)", letterSpacing: "-0.04em" }}
             >
               <span className="block text-white">Tired of Your Current Alarm Company?</span>
-              <span className="block" style={{ color: "hsl(0 85% 54%)" }}>Switching Is Easier Than You Think.</span>
+              <span className="block" style={{ color: "hsl(0 85% 54%)" }}>Get a Free Security Analysis Today.</span>
             </h2>
 
             {/* Trust stats */}
