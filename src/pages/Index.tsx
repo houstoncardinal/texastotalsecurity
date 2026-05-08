@@ -496,16 +496,17 @@ const Index = () => {
       >
         {(() => {
           const items = [
-            { label: "Switch Alarm Providers",             accent: true  },
-            { label: "Property Management Security",       accent: false },
-            { label: "LIC# B03066901 · Licensed & Insured", accent: true },
-            { label: "HOA & Community Security",           accent: false },
-            { label: "Custom Security Poles",              accent: false },
-            { label: "License Plate Recognition",          accent: true  },
-            { label: "Alarm.com Authorized Dealer",        accent: false },
-            { label: "24/7 Professional Alarm Monitoring", accent: true  },
-            { label: "Honeywell · Resideo Systems",        accent: false },
-            { label: "Locally Owned & Operated",           accent: false },
+            { label: "Unhappy with your current alarm company? Make the switch", accent: true },
+            { label: "Local & Reliable Security Company That Cares",            accent: false },
+            { label: "Free Security Analysis",                                  accent: true  },
+            { label: "Switch Alarm Providers · Any Brand",                      accent: false },
+            { label: "Property Management & HOA Security",                      accent: true  },
+            { label: "Licensed & Insured · Houston Based",                      accent: false },
+            { label: "Custom Security Poles",                                   accent: true  },
+            { label: "License Plate Recognition (LPR)",                         accent: false },
+            { label: "Alarm.com Authorized Dealer",                             accent: true  },
+            { label: "24/7 Professional Alarm Monitoring",                      accent: false },
+            { label: "Locally Owned & Operated",                                accent: true  },
           ];
           const row = [...items, ...items];
           return (
