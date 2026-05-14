@@ -689,7 +689,7 @@ const PropertyAssessment = () => {
         <div className="max-w-2xl mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
             {[
-              { icon: Shield,       label: "LIC# B03066901" },
+              { icon: Shield,       label: "Licensed & Insured" },
               { icon: Phone,        label: "Talk to the Owner" },
               { icon: Camera,       label: "15+ Years in Houston" },
               { icon: CheckCircle2, label: "Free — No Obligation" },

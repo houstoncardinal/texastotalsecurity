@@ -112,7 +112,7 @@ const FreeAnalysis = () => {
                 ))}
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/35">
-                <span>Licensed & Insured · LIC# B03066901</span>
+                <span>Licensed & Insured</span>
                 <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-red-400" /> Houston Area Specialists</span>
               </div>
             </motion.div>

@@ -85,7 +85,7 @@ const About = () => {
     <Layout>
       <SEOHead
         title="About Texas Total Security | Houston's Locally Owned Alarm & Security Company"
-        description="Meet Tim Townsend and the Texas Total Security team — Houston's locally owned, licensed security specialists. Hardwired cameras, alarm systems, and 24/7 monitoring. LIC# B03066901."
+        description="Meet Tim Townsend and the Texas Total Security team — Houston's locally owned, licensed security specialists. Hardwired cameras, alarm systems, and 24/7 monitoring."
         schemas={schemas}
       />
 
@@ -188,7 +188,7 @@ const About = () => {
             {/* Trust strip */}
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
               {[
-                { icon: Shield,       label: "LIC# B03066901" },
+                { icon: Shield,       label: "Licensed & Insured" },
                 { icon: Star,         label: "5.0 Google Rating" },
                 { icon: CheckCircle2, label: "Locally Owned" },
                 { icon: MapPin,       label: "Houston-Based" },
@@ -272,7 +272,7 @@ const About = () => {
                   <p style={{ fontSize: "11px", color: "hsl(0 85% 46%)", fontWeight: 700, marginTop: "2px" }}>
                     Founder · Licensed Security Professional
                   </p>
-                  <p style={{ fontSize: "10px", color: "hsl(0 0% 52%)", marginTop: "2px" }}>LIC# B03066901</p>
+                  <p style={{ fontSize: "10px", color: "hsl(0 0% 52%)", marginTop: "2px" }}>Licensed &amp; Insured</p>
                 </div>
               </div>
             </motion.div>

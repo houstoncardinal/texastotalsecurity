@@ -302,7 +302,7 @@ const AlarmSystems = () => (
               </a>
             </div>
             <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/35">
-              <span>Licensed & Insured · LIC# B03066901</span>
+              <span>Licensed & Insured</span>
               <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-red-400" /> 5-Star Rated</span>
             </div>
           </motion.div>
@@ -425,7 +425,7 @@ const AlarmSystems = () => (
                   { label: "24/7", sublabel: "Certified monitoring" },
                   { label: "Cellular", sublabel: "Verizon network" },
                   { label: "Local", sublabel: "Account management" },
-                  { label: "Licensed", sublabel: "B03066901" },
+                  { label: "Licensed", sublabel: "& Insured" },
                 ].map((badge) => (
                   <div key={badge.label} className="border border-white/10 bg-black p-4">
                     <p className="font-display text-2xl font-bold">{badge.label}</p>

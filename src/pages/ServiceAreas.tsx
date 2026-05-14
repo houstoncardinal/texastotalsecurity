@@ -164,7 +164,7 @@ const capabilityGroups = [
 ];
 
 const trustPoints = [
-  { icon: Shield, label: "Licensed & Insured", sublabel: "LIC# B03066901" },
+  { icon: Shield, label: "Licensed & Insured", sublabel: "Texas Alarm Company" },
   { icon: Radio, label: "Verizon Cellular", sublabel: "Monitoring backup" },
   { icon: Camera, label: "Hardwired Systems", sublabel: "PoE cameras & alarms" },
   { icon: Star, label: "Local Houston Team", sublabel: "Owner-led service" },

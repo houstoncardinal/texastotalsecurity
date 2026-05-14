@@ -1,4 +1,4 @@
-import { useState, useRef, Suspense, useMemo } from "react";
+import { useState, useRef, Suspense, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Environment, ContactShadows, Html } from "@react-three/drei";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight, Phone, CheckCircle2, Camera, Sun, Ruler,
   ChevronLeft, ChevronRight, RotateCcw, Zap, Shield,
-  Box, Layers, Package, Wrench, Star,
+  Box, Layers, Wrench, Star,
   ClipboardList, Check, AlertTriangle,
 } from "lucide-react";
 import * as THREE from "three";
@@ -80,16 +80,7 @@ const MOUNT_TYPES = [
   { label: "Gate Anchor",   value: "anchor", desc: "Anchor-bolt to existing concrete or gate post", cost: 450 },
 ];
 
-const FINISH_OPTIONS = [
-  { label: "Matte Black", value: "#111111", hex: "#111111" },
-  { label: "Gloss Black", value: "#1c1c1e", hex: "#1c1c1e" },
-  { label: "Dark Bronze", value: "#3b2314", hex: "#3b2314" },
-  { label: "Galvanized", value: "#8a8d8f", hex: "#8a8d8f" },
-  { label: "Powder White", value: "#dde0e2", hex: "#dde0e2" },
-  { label: "Forest Green", value: "#2c3e2d", hex: "#2c3e2d" },
-];
 
-const QUANTITY_OPTIONS = [1, 2, 3, 4, 5, 6, 8, 10, 15, 20];
 
 const PROPERTY_TYPES = [
   "Residential", "Commercial Office", "Retail", "Industrial/Warehouse",
@@ -136,6 +127,154 @@ function calcPrice(config: PoleConfig): { perPole: number; total: number; breakd
   const perPole = breakdown.reduce((s, b) => s + b.amount, 0);
   return { perPole, total: perPole * config.quantity, breakdown };
 }
+
+// ─── Grass shaders ───────────────────────────────────────────────────────────
+
+const BLADE_VERT = /* glsl */`
+  attribute mat4 instanceMatrix;
+  uniform float uTime;
+  varying vec2  vUv;
+  varying float vId;
+
+  float hash(float n) { return fract(sin(n) * 43758.5453); }
+
+  void main() {
+    vUv = uv;
+    vId = float(gl_InstanceID);
+
+    float phase  = hash(vId)        * 6.2832;
+    float speed  = 0.55 + hash(vId + 1.0) * 0.35;
+    float hFac   = uv.y * uv.y;
+    float swingX = hFac * sin(uTime * speed + phase)               * 0.05;
+    float swingZ = hFac * cos(uTime * speed * 0.72 + phase + 1.4)  * 0.025;
+
+    vec3 pos = position;
+    pos.x   += swingX;
+    pos.z   += swingZ;
+
+    gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(pos, 1.0);
+  }
+`;
+
+const BLADE_FRAG = /* glsl */`
+  varying vec2  vUv;
+  varying float vId;
+
+  float hash(float n) { return fract(sin(n) * 43758.5453); }
+
+  void main() {
+    float h   = vUv.y;
+    float var = (hash(vId * 3.73 + 5.1) - 0.5) * 0.18;
+
+    vec3 root = vec3(0.03,  0.12, 0.01);
+    vec3 mid  = vec3(0.10  + var * 0.3, 0.36 + var,        0.04);
+    vec3 tip  = vec3(0.30  + var,       0.68 + var * 0.5,   0.12 + var * 0.2);
+
+    vec3 col;
+    if (h < 0.40) col = mix(root, mid,  h / 0.40);
+    else           col = mix(mid,  tip, (h - 0.40) / 0.60);
+
+    float ao  = smoothstep(0.0, 0.25, h);
+    col      *= (0.48 + 0.52 * ao);
+
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+// ─── Tapered blade geometry (9 verts, wider at base → pointed tip) ────────────
+
+function createBladeGeometry(): THREE.BufferGeometry {
+  const bw = 0.052; // base half-width
+
+  // 9 vertices: 4 rows tapering to a tip, with a slight forward Z curve
+  const pos = new Float32Array([
+    -bw,         0.00, 0.000,   // 0 – base L
+     bw,         0.00, 0.000,   // 1 – base R
+    -bw * 0.78,  0.28, 0.006,   // 2 – row-1 L
+     bw * 0.78,  0.28, 0.006,   // 3 – row-1 R
+    -bw * 0.50,  0.56, 0.020,   // 4 – row-2 L
+     bw * 0.50,  0.56, 0.020,   // 5 – row-2 R
+    -bw * 0.24,  0.79, 0.044,   // 6 – row-3 L
+     bw * 0.24,  0.79, 0.044,   // 7 – row-3 R
+     0,          1.00, 0.078,   // 8 – tip
+  ]);
+
+  // Front faces (CCW winding)
+  const idx = new Uint16Array([
+    0, 1, 3,  0, 3, 2,   // base → row-1
+    2, 3, 5,  2, 5, 4,   // row-1 → row-2
+    4, 5, 7,  4, 7, 6,   // row-2 → row-3
+    6, 7, 8,             // row-3 → tip
+    // Back faces (reversed winding for DoubleSide shader)
+    3, 1, 0,  2, 3, 0,
+    5, 3, 2,  4, 5, 2,
+    7, 5, 4,  6, 7, 4,
+    8, 7, 6,
+  ]);
+
+  // UVs: V = height along blade (0=base, 1=tip), U = 0/1/0.5
+  const vH  = [0.00, 0.00, 0.28, 0.28, 0.56, 0.56, 0.79, 0.79, 1.00];
+  const uvs = new Float32Array(18);
+  for (let i = 0; i < 9; i++) {
+    uvs[i * 2]     = i === 8 ? 0.5 : (i % 2 === 0 ? 0 : 1);
+    uvs[i * 2 + 1] = vH[i];
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  geo.setIndex(new THREE.BufferAttribute(idx, 1));
+  geo.setAttribute("uv",       new THREE.BufferAttribute(uvs, 2));
+  geo.computeVertexNormals();
+  return geo;
+}
+
+const SHARED_BLADE_GEO = createBladeGeometry(); // created once, shared
+
+// ─── Grass Field ─────────────────────────────────────────────────────────────
+
+function GrassField() {
+  const meshRef = useRef<THREE.InstancedMesh>(null);
+  const COUNT   = 1400;
+
+  const mat = useMemo(() => new THREE.ShaderMaterial({
+    vertexShader:   BLADE_VERT,
+    fragmentShader: BLADE_FRAG,
+    uniforms:       { uTime: { value: 0 } },
+    side:           THREE.DoubleSide,
+  }), []);
+
+  useEffect(() => {
+    const mesh = meshRef.current;
+    if (!mesh) return;
+    const dummy = new THREE.Object3D();
+    for (let i = 0; i < COUNT; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const r     = 0.20 + Math.sqrt(Math.random()) * 2.6;
+      const h     = 0.28 + Math.random() * 0.22;   // tall enough to see as blades
+      // Small Y offset so blade bases never z-fight with the ground plane
+      dummy.position.set(Math.cos(angle) * r, 0.004, Math.sin(angle) * r);
+      dummy.rotation.set(
+        (Math.random() - 0.5) * 0.55,  // natural fore/aft lean
+        Math.random() * Math.PI * 2,   // random facing direction
+        (Math.random() - 0.5) * 0.38,  // gentle side lean
+      );
+      dummy.scale.set(0.75 + Math.random() * 0.50, h, 0.75 + Math.random() * 0.50);
+      dummy.updateMatrix();
+      mesh.setMatrixAt(i, dummy.matrix);
+    }
+    mesh.instanceMatrix.needsUpdate = true;
+    return () => { mat.dispose(); };
+  }, [mat]);
+
+  useFrame(({ clock }) => {
+    mat.uniforms.uTime.value = clock.elapsedTime;
+  });
+
+  return (
+    <instancedMesh ref={meshRef} args={[SHARED_BLADE_GEO, mat, COUNT]} />
+  );
+}
+
 
 // ─── Camera Models (origin = mount point, body faces +X outward) ──────────────
 
@@ -840,26 +979,14 @@ function SecurityPole({ config }: { config: PoleConfig }) {
   return (
     <group ref={groupRef} position={[0, -(poleH / 2) - 0.06, 0]}>
 
-      {/* Ground / asphalt */}
-      <mesh position={[0, 0.003, 0]}>
-        <boxGeometry args={[1.2, 0.006, 1.2]} />
-        <meshStandardMaterial color="#383838" roughness={0.98} metalness={0.0} />
-      </mesh>
-      {/* Concrete pad */}
-      <mesh position={[0, 0.03, 0]} receiveShadow>
-        <boxGeometry args={[0.72, 0.054, 0.72]} />
-        <meshStandardMaterial color="#6e6e6e" roughness={0.92} metalness={0.03} />
+      {/* Ground — dark soil so blades contrast clearly */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <circleGeometry args={[3.6, 48]} />
+        <meshStandardMaterial color="#1e2a10" roughness={0.98} metalness={0} />
       </mesh>
 
-      {/* Anchor bolts */}
-      {([-1, 1] as const).flatMap(sx =>
-        ([-1, 1] as const).map(sz => (
-          <mesh key={`${sx}${sz}`} position={[sx * 0.25, 0.09, sz * 0.25]}>
-            <cylinderGeometry args={[0.009, 0.009, 0.075, 6]} />
-            <meshStandardMaterial color="#484848" roughness={0.4} metalness={0.85} />
-          </mesh>
-        ))
-      )}
+      {/* Grass blades */}
+      <GrassField />
 
       {/* Base flange plate */}
       <mesh position={[0, 0.072, 0]}>
@@ -1019,30 +1146,34 @@ function SecurityPole({ config }: { config: PoleConfig }) {
 }
 
 function PoleScene({ config }: { config: PoleConfig }) {
+  // Camera pulled back and lowered so ground + full pole tip are both in frame
+  // for every height option (9 / 12 / 16 ft).
   return (
     <Canvas
-      camera={{ position: [3.5, 1, 3.5], fov: 42 }}
+      camera={{ position: [5.0, 0.6, 5.0], fov: 44 }}
       gl={{ antialias: true, alpha: true }}
       style={{ background: "transparent" }}
       shadows
     >
-      <ambientLight intensity={0.45} />
-      <directionalLight position={[6, 10, 5]} intensity={1.4} castShadow shadow-mapSize={[1024, 1024]} />
-      <directionalLight position={[-4, 5, -3]} intensity={0.3} color="#b8cce0" />
-      <pointLight position={[0, 4, 1]} intensity={0.25} color="#fff5ee" />
+      <ambientLight intensity={0.55} />
+      <directionalLight position={[6, 10, 5]} intensity={1.3} castShadow shadow-mapSize={[1024, 1024]} />
+      <directionalLight position={[-4, 5, -3]} intensity={0.28} color="#b8cce0" />
+      <pointLight position={[0, 4, 1]} intensity={0.22} color="#fff5ee" />
       <Suspense fallback={<Html center><span className="text-sm text-gray-400">Loading…</span></Html>}>
         <SecurityPole config={config} />
-        <ContactShadows position={[0, -config.height * 0.085 - 0.02, 0]} opacity={0.4} scale={8} blur={3} />
-        <Environment preset="warehouse" />
+        {/* ContactShadows exactly at ground level: -(poleH/2)-0.06 = -(h*0.085)-0.06 */}
+        <ContactShadows position={[0, -(config.height || 12) * 0.085 - 0.06, 0]} opacity={0.45} scale={9} blur={3} />
+        <Environment preset="forest" />
       </Suspense>
       <OrbitControls
         enablePan={false}
-        minPolarAngle={Math.PI / 8}
+        minPolarAngle={Math.PI / 10}
         maxPolarAngle={Math.PI / 2.1}
-        minDistance={2.5}
-        maxDistance={10}
+        minDistance={3.0}
+        maxDistance={12}
         autoRotate
-        autoRotateSpeed={0.6}
+        autoRotateSpeed={0.55}
+        target={[0, 0.1, 0]}
       />
     </Canvas>
   );
@@ -1056,7 +1187,6 @@ const STEPS = [
   { id: "cameras", label: "Cameras", icon: Camera },
   { id: "lighting", label: "Lighting", icon: Sun },
   { id: "mount", label: "Mount & Finish", icon: Box },
-  { id: "quantity", label: "Quantity", icon: Package },
   { id: "quote", label: "Get Quote", icon: ClipboardList },
 ];
 
@@ -1409,7 +1539,7 @@ const PoleConfigurator = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_460px] gap-8 lg:gap-12">
 
             {/* 3D Viewport */}
-            <div className="relative rounded-3xl overflow-hidden border border-gray-100 bg-gradient-to-b from-gray-50 to-white" style={{ minHeight: 520 }}>
+            <div className="relative rounded-3xl overflow-hidden border border-gray-100" style={{ minHeight: 520, background: "linear-gradient(to bottom, #a8d8f0 0%, #d6edf8 45%, #e8f4e8 100%)" }}>
               <PoleScene config={config} />
 
               {/* Live config overlay */}
@@ -1433,23 +1563,6 @@ const PoleConfigurator = () => {
                 <span className="text-[11px] text-white/60">Drag · Scroll to zoom</span>
               </div>
 
-              {/* Color swatch row */}
-              <div className="absolute top-4 right-4 flex flex-col gap-1.5">
-                {FINISH_OPTIONS.map(f => (
-                  <button
-                    key={f.value}
-                    onClick={() => update("color", f.value)}
-                    className="w-6 h-6 rounded-full border-2 transition-all"
-                    style={{
-                      background: f.hex,
-                      borderColor: config.color === f.value ? "white" : "rgba(255,255,255,0.2)",
-                      boxShadow: config.color === f.value ? "0 0 0 1px rgba(0,0,0,0.3)" : "none",
-                      transform: config.color === f.value ? "scale(1.2)" : "scale(1)",
-                    }}
-                    title={f.label}
-                  />
-                ))}
-              </div>
             </div>
 
             {/* Config Panel */}
@@ -1593,53 +1706,12 @@ const PoleConfigurator = () => {
                                   cost={m.cost}
                                 />
                               ))}
-                              <p className="text-xs font-semibold text-gray-500 mt-4 mb-2">Pole Finish</p>
-                              <div className="grid grid-cols-3 gap-2">
-                                {FINISH_OPTIONS.map(f => (
-                                  <button
-                                    key={f.value}
-                                    onClick={() => update("color", f.value)}
-                                    className="flex flex-col items-center gap-2 p-3 rounded-xl border transition-all"
-                                    style={{
-                                      borderColor: config.color === f.value ? "hsl(0 75% 50%)" : "#e5e7eb",
-                                      background: config.color === f.value ? "hsl(0 75% 50%/0.05)" : "white",
-                                    }}
-                                  >
-                                    <span className="w-7 h-7 rounded-full border border-gray-200" style={{ background: f.hex }} />
-                                    <span className="text-[11px] font-semibold text-gray-700 text-center leading-tight">{f.label}</span>
-                                    {config.color === f.value && <Check className="w-3 h-3 text-red-500" />}
-                                  </button>
-                                ))}
-                              </div>
-                            </>
-                          )}
-
-                          {/* Step 5: Quantity + Accessories */}
-                          {step === 5 && (
-                            <>
-                              <p className="text-xs font-semibold text-gray-500 mb-2">Number of Poles</p>
-                              <div className="grid grid-cols-5 gap-2 mb-5">
-                                {QUANTITY_OPTIONS.map(q => (
-                                  <button
-                                    key={q}
-                                    onClick={() => update("quantity", q)}
-                                    className="py-2.5 rounded-xl text-sm font-bold transition-all border"
-                                    style={{
-                                      background: config.quantity === q ? "hsl(0 75% 50%)" : "white",
-                                      color: config.quantity === q ? "white" : "#374151",
-                                      borderColor: config.quantity === q ? "hsl(0 75% 50%)" : "#e5e7eb",
-                                    }}
-                                  >
-                                    {q}
-                                  </button>
-                                ))}
-                              </div>
-                              <p className="text-[11px] text-gray-500 leading-relaxed mt-3">
-                                Standard pole sizing: <strong>4&quot; × 4&quot;</strong> permanent structure.
+                              <p className="text-[11px] text-gray-400 leading-relaxed mt-3 mb-4">
+                                Standard pole sizing: <strong>4″ × 4″</strong> permanent structure.
                               </p>
-
                             </>
                           )}
+
                         </motion.div>
                       </AnimatePresence>
                     </div>

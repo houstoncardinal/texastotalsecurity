@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
-  Phone, Menu, X, ChevronDown, Shield, Mail,
+  Phone, Menu, X, ChevronDown, Shield,
   Camera, Home, Building2, Users, Radio, Wrench,
   ArrowRight, CheckCircle2, MapPin, Star,
 } from "lucide-react";
@@ -79,72 +79,30 @@ const Header = () => {
 
   return (
     <>
-      {/* ── Top utility bar ─────────────────────────────────── */}
-      <div className="hidden lg:block" style={{ background: "hsl(0 0% 4%)" }}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-2.5">
-          <span
-            className="text-[11px] font-medium tracking-wide"
-            style={{ color: "rgba(255,255,255,0.32)" }}
-          >
-            Houston's Trusted Security Company — Serving Property Managers, HOAs & Businesses
-          </span>
-          <div className="flex items-center gap-7">
-            <span
-              className="text-[11px] font-semibold tracking-[0.16em]"
-              style={{ color: "rgba(255,255,255,0.22)" }}
-            >
-              LIC# B03066901
-            </span>
-            <a
-              href="mailto:info@texastotalsecurity.com"
-              className="flex items-center gap-1.5 text-[11px] transition-colors duration-200"
-              style={{ color: "rgba(255,255,255,0.38)" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.72)")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.38)")}
-            >
-              <Mail className="w-3 h-3" />
-              info@texastotalsecurity.com
-            </a>
-            <a
-              href="tel:7133879937"
-              className="flex items-center gap-1.5 text-[11px] font-bold transition-colors duration-200"
-              style={{ color: "hsl(var(--accent))" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "hsl(0 85% 60%)")}
-              onMouseLeave={e => (e.currentTarget.style.color = "hsl(var(--accent))")}
-            >
-              <Phone className="w-3 h-3" />
-              (713) 387-9937
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* ── Main header ─────────────────────────────────────── */}
       <header
         className={`sticky top-0 z-[100000] transition-all duration-300 ${
           scrolled ? "header-scrolled" : "header-default"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5 lg:py-5">
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative">
-              <img
-                src="/logo.png"
-                alt="Texas Total Security"
-                className="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Texas Total Security"
+              className="w-16 h-16 sm:w-20 sm:h-20 object-contain transition-transform duration-300 group-hover:scale-105"
+            />
             <div className="leading-tight">
-              <span className="font-display font-bold text-gray-900 text-[17px] block tracking-tight leading-none">
+              <span className="font-display font-bold text-gray-900 block tracking-tight leading-none" style={{ fontSize: "clamp(1.25rem, 2.8vw, 1.6rem)" }}>
                 Texas Total Security
               </span>
               <span
-                className="text-[10px] tracking-[0.14em] uppercase font-semibold mt-0.5 block"
-                style={{ color: "rgba(107,114,128,0.8)" }}
+                className="text-[10px] uppercase font-semibold mt-[3px] block w-full"
+                style={{ color: "hsl(0 0% 8%)", letterSpacing: "0.18em" }}
               >
-                Licensed & Insured · Houston, TX
+                "For All Your Security Needs"
               </span>
             </div>
           </Link>
@@ -305,7 +263,7 @@ const Header = () => {
                       <div className="mt-5 pt-5 border-t border-gray-100 space-y-2.5">
                         {[
                           "Locally Owned & Operated",
-                          "Licensed & Insured · #B03066901",
+                          "Licensed & Insured",
                           "24/7 Professional Monitoring",
                           "5.0 ★ Google Rating",
                         ].map((badge) => (

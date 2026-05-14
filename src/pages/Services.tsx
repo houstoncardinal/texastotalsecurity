@@ -72,7 +72,7 @@ const services = [
 
 const trustStats = [
   { label: "Houston", sublabel: "local account management" },
-  { label: "B03066901", sublabel: "licensed and insured" },
+  { label: "Licensed", sublabel: "and insured" },
   { label: "CCTV + Alarm", sublabel: "integrated expertise" },
   { label: "24/7", sublabel: "monitoring options" },
 ];

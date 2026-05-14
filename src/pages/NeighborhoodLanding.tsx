@@ -161,7 +161,7 @@ const NeighborhoodLanding = () => {
               <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
                 {[
                   { icon: Star, label: "5-Star", sublabel: "Google rated" },
-                  { icon: Shield, label: "Licensed", sublabel: "B03066901" },
+                  { icon: Shield, label: "Licensed", sublabel: "& Insured" },
                   { icon: Radio, label: "Verizon", sublabel: "cellular monitoring" },
                   { icon: Camera, label: "Hardwired", sublabel: "alarms & cameras" },
                 ].map((item) => (

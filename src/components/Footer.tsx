@@ -138,8 +138,7 @@ const Footer = () => {
               ))}
             </ul>
             <div className="mt-6 pt-5 border-t border-white/[0.07]">
-              <p className="text-[10px] uppercase tracking-widest text-white/28 font-semibold mb-2">License</p>
-              <p className="text-[13px] font-semibold" style={{ color: "rgba(255,255,255,0.65)" }}>LIC# B03066901</p>
+              <p className="text-[13px] font-semibold" style={{ color: "rgba(255,255,255,0.65)" }}>Licensed & Insured</p>
             </div>
           </motion.div>
 
@@ -353,7 +352,7 @@ const Footer = () => {
             ))}
           </div>
           <p className="text-[11px] mt-3 font-medium" style={{ color: "rgba(255,255,255,0.22)" }}>
-            Licensed & Insured · Texas DPS Alarm License #B03066901 · Locally owned &amp; operated for 15+ years
+            Licensed & Insured · Locally owned &amp; operated for 15+ years
           </p>
         </div>
 
@@ -367,7 +366,7 @@ const Footer = () => {
               © {currentYear} Texas Total Security. All rights reserved.
             </p>
             <span className="hidden sm:inline" style={{ color: "rgba(255,255,255,0.08)" }}>·</span>
-            <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.24)" }}>LIC# B03066901</p>
+            <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.24)" }}>Licensed &amp; Insured</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {[

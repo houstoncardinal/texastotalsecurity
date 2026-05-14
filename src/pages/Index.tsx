@@ -5,7 +5,6 @@ import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 
 const ServiceAreaMap = lazy(() => import("@/components/ServiceAreaMap"));
-import WirelessBridgeSection from "@/components/WirelessBridgeSection";
 import {
   generateItemListSchema,
   generateComprehensiveHomepageSchema,
@@ -13,7 +12,7 @@ import {
   generateSpecialAnnouncementSchema,
 } from "@/lib/seo";
 import {
-  Shield, Building2, Radio, Home,
+  Shield, Building2, Radio, Home, Camera,
   ArrowRight, Phone, CheckCircle2, Star,
   PhoneCall,
   Award, MapPin, Plus, Minus,
@@ -55,10 +54,10 @@ const heroSlides: HeroSlide[] = [
   {
     eyebrow: "Locally Owned · Licensed & Insured · Houston Based · 5 Star On Google",
     headline: [
-      "Custom Security Camera & Alarm Systems",
-      "for Homes and Businesses",
+      "Make the switch to a",
+      "Local & Reliable Security Company That Cares",
     ],
-    sub: "Our local security professionals deliver top-notch service and cutting-edge technology for your custom security project — designed, installed, and monitored by a Houston owner-operated team.",
+    sub: "Our local security professionals deliver top-notch service and cutting-edge technology.",
     cta: { label: "Design My Security System", href: "/property-assessment" },
     ctas: [
       { label: "Design My Security System", href: "/property-assessment" },
@@ -103,7 +102,7 @@ const faqs = [
   { q: "How do property management companies switch alarm providers?", a: "Switching is straightforward. We evaluate your existing alarm equipment from any provider — and in most cases, take over your panels, sensors, and wiring without replacing them. Our local team handles the entire transition with zero downtime to your tenants and operations." },
   { q: "Do you handle security for apartment complexes and multifamily properties?", a: "Yes — this is one of our core specialties. We provide comprehensive security for apartment communities including entrance/exit gate cameras, LPR systems, common area surveillance, package area monitoring, mailbox cameras, and dumpster area deterrence systems." },
   { q: "What makes you different from national alarm companies?", a: "Five things set us apart: (1) You can talk directly to the owner — no hold queues or call centers. (2) We monitor over Verizon cellular, not internet or landline, so your system stays connected even when Wi-Fi or phone lines go down. (3) When your equipment has an issue, we call you first — you never have to chase us. (4) We're 5-star rated on Google by real Houston customers. (5) Many customers who switch pay less on monthly monitoring — ask us to compare your current plan. Your account is managed by Texas Total Security, with monitoring handled through our certified San Antonio partner center." },
-  { q: "Can you install security poles with multiple cameras?", a: "Absolutely. We custom-fabricate security poles in heights from 10 to 25 feet, supporting 1–4 cameras per pole with integrated wiring, LED floodlights, IR illuminators, and active deterrence systems. Use our 3D configurator to design your exact setup." },
+  { q: "Can you install security poles with multiple cameras?", a: "Absolutely. We custom-fabricate security poles in heights from 9 to 16 feet, supporting 1–6 cameras per pole with integrated wiring, LED strobes, IR illuminators, and active deterrence systems. Use our 3D configurator to design your exact setup." },
   { q: "Do you serve commercial and industrial properties?", a: "Yes. From single retail locations to multi-site corporate campuses, warehouses, and industrial facilities — every system is custom-designed for your property's layout, liability requirements, and operational needs." },
   { q: "Can you take over our existing alarm equipment?", a: "In most cases, yes. We evaluate your existing keypads, sensors, wiring, and panels during a free property assessment. If your equipment is compatible — such as Honeywell VISTA panels, DMP, or DSC systems — we integrate it into your new setup, saving significant replacement costs." },
   { q: "What does a free property assessment include?", a: "A certified security professional visits your property at no cost. We map every entry point, evaluate existing equipment, identify blind spots and vulnerabilities, and provide a detailed proposal with transparent pricing. Zero obligation, zero pressure — designed for decision makers who need clear ROI justification." },
@@ -176,6 +175,7 @@ const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHeroPaused, setIsHeroPaused] = useState(false);
+  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
@@ -333,19 +333,25 @@ const Index = () => {
                         </>
                       );
                     }
+                    const redGradient = {
+                      background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 40%, hsl(0 90% 44%) 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    } as const;
+                    const localReliablePrefix = "Local & Reliable ";
                     return (
                       <>
-                        <span className="block">{h0}</span>
-                        <span
-                          className="block"
-                          style={{
-                            background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 40%, hsl(0 90% 44%) 100%)",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                            backgroundClip: "text",
-                          }}
-                        >
-                          {h1}
+                        <span className="block text-white">{h0}</span>
+                        <span className="block">
+                          {h1.startsWith(localReliablePrefix) ? (
+                            <>
+                              <span style={redGradient}>Local &amp; Reliable </span>
+                              <span className="text-white">{h1.slice(localReliablePrefix.length)}</span>
+                            </>
+                          ) : (
+                            <span style={redGradient}>{h1}</span>
+                          )}
                         </span>
                       </>
                     );
@@ -462,235 +468,173 @@ const Index = () => {
           </div>
         </div>
 
-        {/* ── Prev / Next arrows ── */}
-        {[
-          { dir: "prev", icon: ChevronLeft,  pos: "left-4 sm:left-6",  fn: () => setCurrentSlide(p => (p - 1 + heroSlides.length) % heroSlides.length) },
-          { dir: "next", icon: ChevronRight, pos: "right-4 sm:right-6", fn: () => setCurrentSlide(p => (p + 1) % heroSlides.length) },
-        ].map(({ dir, icon: Icon, pos, fn }) => (
-          <button
-            key={dir}
-            onClick={fn}
-            aria-label={dir === "prev" ? "Previous slide" : "Next slide"}
-            className={`absolute ${pos} top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40`}
-            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(8px)" }}
-            onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.13)")}
-            onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}
-          >
-            <Icon className="w-4 h-4 text-white/60" />
-          </button>
-        ))}
 
       </section>
 
       {/* ══════════════════════════════════════════════════
-          TRUST STRIP — light marquee
+          WHY SWITCH — static CTA strip
       ══════════════════════════════════════════════════ */}
-      <div
-        className="marquee-outer overflow-hidden"
-        style={{
-          background: "hsl(0 0% 97%)",
-          borderTop: "1px solid hsl(0 0% 91%)",
-          borderBottom: "1px solid hsl(0 0% 91%)",
-          padding: "10px 0",
-        }}
-      >
-        {(() => {
-          const items = [
-            { label: "Unhappy with your current alarm company? Make the switch", accent: true },
-            { label: "Local & Reliable Security Company That Cares",            accent: false },
-            { label: "Free Security Analysis",                                  accent: true  },
-            { label: "Switch Alarm Providers · Any Brand",                      accent: false },
-            { label: "Property Management & HOA Security",                      accent: true  },
-            { label: "Licensed & Insured · Houston Based",                      accent: false },
-            { label: "Custom Security Poles",                                   accent: true  },
-            { label: "License Plate Recognition (LPR)",                         accent: false },
-            { label: "Alarm.com Authorized Dealer",                             accent: true  },
-            { label: "24/7 Professional Alarm Monitoring",                      accent: false },
-            { label: "Locally Owned & Operated",                                accent: true  },
-          ];
-          const row = [...items, ...items];
-          return (
-            <div className="marquee-track">
-              {row.map((item, i) => (
-                <span key={i} className="inline-flex items-center gap-5 px-5 select-none">
-                  {item.accent ? (
-                    <span className="inline-flex items-center gap-2">
-                      <motion.span
-                        className="w-[5px] h-[5px] rounded-full shrink-0"
-                        style={{ background: "hsl(0 85% 50%)" }}
-                        animate={{ opacity: [0.5, 1, 0.5] }}
-                        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
-                      />
-                      <span
-                        className="text-[10.5px] font-bold uppercase tracking-[0.18em] whitespace-nowrap"
-                        style={{ color: "hsl(0 0% 11%)" }}
-                      >
-                        {item.label}
-                      </span>
-                    </span>
-                  ) : (
-                    <span
-                      className="text-[10.5px] font-medium uppercase tracking-[0.15em] whitespace-nowrap"
-                      style={{ color: "hsl(0 0% 52%)" }}
-                    >
-                      {item.label}
-                    </span>
-                  )}
-                  <span style={{ color: "hsl(0 0% 82%)", fontSize: "16px", lineHeight: 1 }} aria-hidden>╌</span>
-                </span>
-              ))}
+      <div style={{ background: "white", borderTop: "1px solid hsl(0 0% 90%)", borderBottom: "1px solid hsl(0 0% 90%)" }}>
+        <div style={{ height: "3px", background: "linear-gradient(90deg, hsl(0 85% 46%) 0%, hsl(0 72% 56%) 50%, hsl(0 85% 46%) 100%)" }} />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 py-4 sm:py-5">
+
+          {/* Left: badge + message */}
+          <div className="flex items-center gap-3 min-w-0">
+            <div
+              className="shrink-0 flex items-center gap-1.5 rounded-full px-3 py-1.5"
+              style={{ background: "hsl(0 85% 46%)" }}
+            >
+              <motion.span
+                className="w-1.5 h-1.5 rounded-full bg-white shrink-0"
+                animate={{ opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <span className="text-white font-extrabold uppercase whitespace-nowrap" style={{ fontSize: "9.5px", letterSpacing: "0.24em" }}>
+                Why Switch?
+              </span>
             </div>
-          );
-        })()}
+            <p className="font-medium text-gray-600 leading-snug" style={{ fontSize: "clamp(0.8rem, 1.4vw, 0.9rem)" }}>
+              Tired of your security company? Find out why Houston homeowners & businesses are switching to Texas Total Security.
+            </p>
+          </div>
+
+          {/* Right: CTA */}
+          <Link
+            to="/free-analysis"
+            className="shrink-0 inline-flex items-center gap-2 rounded-lg font-bold uppercase transition-opacity duration-200 hover:opacity-85 whitespace-nowrap"
+            style={{
+              background: "hsl(0 85% 46%)",
+              color: "white",
+              fontSize: "clamp(0.66rem, 1.1vw, 0.72rem)",
+              letterSpacing: "0.1em",
+              padding: "9px 16px",
+            }}
+          >
+            Get a Free Assessment
+            <ArrowRight className="w-3 h-3 shrink-0" />
+          </Link>
+
+        </div>
       </div>
 
       {/* ══════════════════════════════════════════════════
-          WHO WE SERVE — light theme image cards
+          WHO WE SERVE — Residential & Commercial
       ══════════════════════════════════════════════════ */}
       <section
-        className="overflow-hidden"
         style={{
           background: "white",
-          borderTop: "1px solid hsl(0 0% 92%)",
+          borderTop: "1px solid hsl(0 0% 91%)",
           paddingTop: "clamp(3rem, 6vw, 5rem)",
           paddingBottom: "clamp(3rem, 6vw, 5rem)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Header row — left-aligned, side by side with descriptor */}
+          {/* Header */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={vp}
-            transition={{ duration: 0.7, ease: easeExpo }}
-            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-9"
+            transition={{ duration: 0.6, ease: easeExpo }}
+            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10"
           >
             <div>
               <div className="flex items-center gap-2.5 mb-3">
                 <div className="w-6 h-[2px] rounded-full" style={{ background: "hsl(0 85% 50%)" }} />
-                <span
-                  className="text-[10px] font-bold uppercase tracking-[0.22em]"
-                  style={{ color: "hsl(0 85% 50%)" }}
-                >
+                <span className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: "hsl(0 85% 50%)" }}>
                   Who We Serve
                 </span>
               </div>
               <h2
-                className="font-display font-bold text-gray-900 leading-tight"
+                className="font-bold text-gray-900 leading-tight"
                 style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.5rem)", letterSpacing: "-0.04em" }}
               >
                 Security Solutions for Every Property Type
               </h2>
             </div>
+            <p className="sm:text-right" style={{ color: "hsl(0 0% 48%)", fontSize: "0.875rem", lineHeight: 1.6, maxWidth: "30ch" }}>
+              Whether it's your home or your business — we design, install, and monitor systems built specifically for your property.
+            </p>
           </motion.div>
 
-          {/* Cards grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {whoWeServeCards.map((card, i) => {
+          {/* 2-col cards — clean full-bleed design */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+            {whoWeServeCards.slice(0, 2).map((card, i) => {
               const Icon = card.icon;
               return (
                 <motion.div
                   key={card.id}
-                  variants={fadeUp}
+                  variants={i === 0 ? fadeLeft : fadeRight}
                   initial="hidden"
                   whileInView="show"
                   viewport={vp}
-                  transition={{ duration: 0.6, ease: easeExpo, delay: i * 0.09 }}
+                  transition={{ duration: 0.65, ease: easeExpo, delay: i * 0.08 }}
                 >
-                  <Link to={card.cta.href} className="group block h-full">
+                  <Link to={card.cta.href} className="group block" style={{ textDecoration: "none" }}>
                     <div
-                      className="relative h-full flex flex-col rounded-2xl overflow-hidden transition-all duration-350"
+                      className="relative rounded-2xl overflow-hidden"
                       style={{
-                        border: "1px solid hsl(0 0% 91%)",
-                        background: "white",
-                        boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
-                        transition: "box-shadow 0.3s ease, transform 0.3s ease",
+                        height: "clamp(340px, 44vw, 460px)",
+                        boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+                        transition: "box-shadow 0.35s ease, transform 0.35s ease",
                       }}
                       onMouseEnter={e => {
-                        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(0,0,0,0.10)";
-                        (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
+                        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 20px 56px rgba(0,0,0,0.18)";
+                        (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
                       }}
                       onMouseLeave={e => {
-                        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 1px 4px rgba(0,0,0,0.04)";
-                        (e.currentTarget as HTMLDivElement).style.transform = "translateY(0px)";
+                        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
+                        (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
                       }}
                     >
-                      {/* Image */}
-                      <div className="relative overflow-hidden h-44 sm:h-[200px]">
-                        <img
-                          src={card.image}
-                          alt={card.label}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-                          loading="lazy"
-                        />
-                        <div
-                          className="absolute inset-0"
-                          style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.52) 100%)" }}
-                        />
-                        {/* Eyebrow on image */}
-                        <div className="absolute bottom-3 left-3">
-                          <div
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full"
-                            style={{
-                              background: "hsl(0 85% 48%)",
-                              boxShadow: "0 2px 12px hsl(0 85% 40% / 0.45)",
-                            }}
-                          >
-                            <Icon className="w-3 h-3 text-white" />
-                            <span className="text-white text-[10px] font-bold uppercase tracking-[0.16em] whitespace-nowrap">
-                              {card.eyebrow}
-                            </span>
-                          </div>
-                        </div>
-                        {/* Red top accent */}
-                        <div
-                          className="absolute top-0 left-0 right-0"
-                          style={{
-                            height: 3,
-                            background: "linear-gradient(to right, hsl(0 85% 42%), hsl(0 85% 56%))",
-                          }}
-                        />
-                      </div>
+                      {/* Full-bleed image */}
+                      <img
+                        src={card.image}
+                        alt={card.label}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                        loading="lazy"
+                      />
 
-                      {/* Content */}
-                      <div className="flex flex-col flex-1 p-5">
+                      {/* Layered gradients — strong bottom, subtle top */}
+                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.12) 100%)" }} />
+
+                      {/* Red top accent */}
+                      <div className="absolute top-0 left-0 right-0" style={{ height: 3, background: "linear-gradient(to right, hsl(0 85% 42%), hsl(0 85% 58%))" }} />
+
+                      {/* Content — pinned to bottom */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
+                        {/* Category label — the dominant element */}
+                        <div className="flex items-center gap-2.5 mb-3">
+                          <div
+                            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                            style={{ background: "hsl(0 85% 44%)", boxShadow: "0 2px 12px hsl(0 85% 40% / 0.5)" }}
+                          >
+                            <Icon className="w-4 h-4 text-white" />
+                          </div>
+                          <span
+                            className="font-extrabold text-white uppercase"
+                            style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.35rem)", letterSpacing: "0.06em", textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}
+                          >
+                            {card.label}
+                          </span>
+                        </div>
+
+                        {/* Headline */}
                         <h3
-                          className="font-display font-bold text-gray-900 mb-1.5 leading-snug group-hover:text-[hsl(0,85%,45%)] transition-colors duration-200"
-                          style={{ fontSize: "1.05rem", letterSpacing: "-0.025em" }}
+                          className="font-bold text-white leading-snug mb-5"
+                          style={{ fontSize: "clamp(1.05rem, 2vw, 1.3rem)", letterSpacing: "-0.025em", textShadow: "0 1px 8px rgba(0,0,0,0.4)" }}
                         >
                           {card.headline}
                         </h3>
-                        <p className="text-[13px] text-gray-500 leading-relaxed mb-4">
-                          {card.body}
-                        </p>
 
-                        {/* Features */}
-                        <ul className="space-y-1.5 mb-5 flex-1">
-                          {card.features.map((f) => (
-                            <li key={f} className="flex items-start gap-2">
-                              <CheckCircle2
-                                className="w-3.5 h-3.5 shrink-0 mt-[1px]"
-                                style={{ color: "hsl(0 85% 50%)" }}
-                              />
-                              <span className="text-[12.5px] text-gray-700 leading-snug">{f}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        {/* CTA row */}
+                        {/* CTA button */}
                         <div
-                          className="pt-4"
-                          style={{ borderTop: "1px solid hsl(0 0% 93%)" }}
+                          className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-bold uppercase tracking-[0.1em] group-hover:gap-3 transition-all duration-250"
+                          style={{ background: "hsl(0 85% 44%)", color: "white", fontSize: "clamp(0.7rem, 1.3vw, 0.78rem)", boxShadow: "0 2px 16px hsl(0 85% 40% / 0.45)" }}
                         >
-                          <span
-                            className="inline-flex items-center gap-1.5 text-sm font-bold group-hover:gap-2.5 transition-all duration-200"
-                            style={{ color: "hsl(0 85% 48%)" }}
-                          >
-                            {card.cta.label}
-                            <ArrowRight className="w-4 h-4" />
-                          </span>
+                          {card.cta.label}
+                          <ArrowRight className="w-3.5 h-3.5 shrink-0" />
                         </div>
                       </div>
                     </div>
@@ -728,8 +672,8 @@ const Index = () => {
             className="relative min-h-[220px] lg:min-h-0"
           >
             <img
-              src="/keypadimage.jpg"
-              alt="Security alarm keypad — Texas Total Security Houston"
+              src="/honeywell.jpg"
+              alt="Honeywell security alarm panel — Texas Total Security Houston"
               className="absolute inset-0 w-full h-full object-cover object-center"
               loading="lazy"
             />
@@ -960,6 +904,382 @@ const Index = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════
+          US VS THEM — comparison table
+      ══════════════════════════════════════════════════ */}
+      <section style={{ background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 91%)", padding: "clamp(2.5rem, 5vw, 4rem) 0" }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Header */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.6, ease: easeExpo }}
+            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8"
+          >
+            <div>
+              <div className="flex items-center gap-2.5 mb-3">
+                <div className="w-5 h-[2px] rounded-full" style={{ background: "hsl(0 85% 50%)" }} />
+                <span className="text-[9.5px] font-bold uppercase tracking-[0.26em]" style={{ color: "hsl(0 85% 50%)" }}>
+                  The Difference Is Clear
+                </span>
+              </div>
+              <h2
+                className="font-extrabold text-gray-900 leading-tight"
+                style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", letterSpacing: "-0.025em" }}
+              >
+                Texas Total Security
+                <span className="font-light" style={{ color: "hsl(0 85% 48%)" }}> vs. </span>
+                Big National Alarm Companies
+              </h2>
+            </div>
+            <p className="sm:text-right sm:max-w-[24ch]" style={{ color: "hsl(0 0% 50%)", fontSize: "0.82rem", lineHeight: 1.6 }}>
+              Not all security companies are created equal. Here's what actually matters.
+            </p>
+          </motion.div>
+
+          {/* Table — overflow-visible so tooltips can escape the container */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.65, ease: easeExpo, delay: 0.08 }}
+            className="rounded-2xl"
+            style={{ border: "1px solid hsl(0 0% 88%)", boxShadow: "0 4px 32px rgba(0,0,0,0.08)", overflow: "visible" }}
+          >
+            {/* ── Column headers: desktop (3-col) ── */}
+            <div className="hidden sm:grid grid-cols-[1.6fr_1fr_1fr]">
+              <div
+                className="px-6 lg:px-8 py-4 flex items-center"
+                style={{ background: "hsl(0 0% 14%)", borderTopLeftRadius: "1rem" }}
+              >
+                <span className="text-[9px] font-bold uppercase tracking-[0.22em]" style={{ color: "hsl(0 0% 42%)" }}>
+                  What You Get
+                </span>
+              </div>
+              <div
+                className="flex flex-col items-center justify-center gap-0.5 py-4"
+                style={{ background: "hsl(0 85% 44%)", borderLeft: "1px solid hsl(0 80% 38%)" }}
+              >
+                <span className="text-[8px] font-bold uppercase tracking-[0.18em] text-white/55">Texas Total</span>
+                <span className="font-extrabold text-white leading-none" style={{ fontSize: "clamp(0.82rem, 2vw, 1rem)", letterSpacing: "-0.01em" }}>Security</span>
+              </div>
+              <div
+                className="flex flex-col items-center justify-center gap-0.5 py-4"
+                style={{ background: "hsl(0 0% 20%)", borderLeft: "1px solid hsl(0 0% 27%)", borderTopRightRadius: "1rem" }}
+              >
+                <span className="text-[8px] font-bold uppercase tracking-[0.18em]" style={{ color: "hsl(0 0% 46%)" }}>Big National</span>
+                <span className="font-extrabold leading-none" style={{ fontSize: "clamp(0.82rem, 2vw, 1rem)", letterSpacing: "-0.01em", color: "hsl(0 0% 58%)" }}>Chains</span>
+              </div>
+            </div>
+
+            {/* ── Column headers: mobile (2-col, no feature label) ── */}
+            <div className="grid grid-cols-2 sm:hidden">
+              <div
+                className="flex flex-col items-center justify-center gap-0.5 py-3"
+                style={{ background: "hsl(0 85% 44%)", borderTopLeftRadius: "1rem" }}
+              >
+                <span className="text-[7px] font-bold uppercase tracking-[0.18em] text-white/55">Texas Total</span>
+                <span className="font-extrabold text-white text-sm leading-none">Security</span>
+              </div>
+              <div
+                className="flex flex-col items-center justify-center gap-0.5 py-3"
+                style={{ background: "hsl(0 0% 20%)", borderLeft: "1px solid hsl(0 0% 27%)", borderTopRightRadius: "1rem" }}
+              >
+                <span className="text-[7px] font-bold uppercase tracking-[0.18em]" style={{ color: "hsl(0 0% 46%)" }}>Big National</span>
+                <span className="font-extrabold text-sm leading-none" style={{ color: "hsl(0 0% 58%)" }}>Chains</span>
+              </div>
+            </div>
+
+            {/* ── Rows ── */}
+            {([
+              {
+                feature:  "A Personable Experience from Local Staff",
+                ttsLabel: "Local Houston Team",
+                themLabel:"Remote Call Center",
+                themGood: false,
+                tooltip:  "You'll speak with the same local team from first call to final installation. No national call queues — just a direct line to people who know Houston and know your property.",
+              },
+              {
+                feature:  "Compatible with Your Existing Equipment",
+                ttsLabel: "Alarm Takeover Ready",
+                themLabel:"Often Requires Replacement",
+                themGood: false,
+                tooltip:  "Already have sensors, cameras, or a control panel installed? We'll take it over and bring it under full monitoring — no pressure to replace hardware that still works.",
+              },
+              {
+                feature:  "Transparent, Honest Pricing",
+                ttsLabel: "Upfront & Itemized",
+                themLabel:"Surprise Rate Increases",
+                themGood: false,
+                tooltip:  "The price we quote is the price you pay, broken down line by line. National chains are known for annual rate-escalation clauses buried deep in multi-year contracts.",
+              },
+              {
+                feature:  "Property-Specific Security Consultation",
+                ttsLabel: "Complimentary & Personalized",
+                themLabel:"Generic Sales Pitch",
+                themGood: false,
+                tooltip:  "We physically walk your property before any quote. Entry points, lighting, floor plan, and neighborhood risk all factor into the system design — not a template copied from another job.",
+              },
+              {
+                feature:  "24/7 Professional Alarm Monitoring",
+                ttsLabel: "Included",
+                themLabel:"Included",
+                themGood: true,
+                tooltip:  "Both provide round-the-clock monitoring. Ours runs on Verizon cellular — so your alarm stays active even if your internet or Wi-Fi goes down during a break-in.",
+              },
+            ] as { feature: string; ttsLabel: string; themLabel: string; themGood: boolean; tooltip: string }[]).map((row, i) => {
+              const rowBg = i % 2 === 0 ? "white" : "hsl(0 0% 99%)";
+              const ttsBg  = i % 2 === 0 ? "hsl(0 80% 97.5%)" : "hsl(0 80% 96.5%)";
+              const natBg  = i % 2 === 0 ? "hsl(0 0% 97%)"    : "hsl(0 0% 96%)";
+              return (
+                <div key={i} style={{ borderTop: "1px solid hsl(0 0% 91%)" }}>
+
+                  {/* Desktop row: 3-col grid */}
+                  <div className="hidden sm:grid grid-cols-[1.6fr_1fr_1fr]">
+                    {/* Feature cell with tooltip — desktop only */}
+                    <div
+                      className="relative px-6 lg:px-8 py-4 flex items-center cursor-default"
+                      style={{ background: rowBg }}
+                      onMouseEnter={() => setHoveredRow(i)}
+                      onMouseLeave={() => setHoveredRow(null)}
+                    >
+                      <span
+                        className="font-semibold text-gray-800 leading-snug flex items-center gap-2"
+                        style={{ fontSize: "clamp(0.8rem, 1.55vw, 0.9rem)" }}
+                      >
+                        <span style={{ borderBottom: hoveredRow === i ? "1px solid hsl(0 0% 60%)" : "1px dashed hsl(0 0% 80%)", paddingBottom: "1px" }}>
+                          {row.feature}
+                        </span>
+                        {/* Info hint dot */}
+                        <svg
+                          width="13" height="13" viewBox="0 0 14 14" fill="none"
+                          className="shrink-0 transition-opacity duration-150"
+                          style={{ opacity: hoveredRow === i ? 0.7 : 0.3 }}
+                        >
+                          <circle cx="7" cy="7" r="6" stroke="hsl(0 0% 50%)" strokeWidth="1.3" fill="none" />
+                          <path d="M7 6.5v3.5" stroke="hsl(0 0% 50%)" strokeWidth="1.3" strokeLinecap="round" />
+                          <circle cx="7" cy="4.5" r="0.65" fill="hsl(0 0% 50%)" />
+                        </svg>
+                      </span>
+
+                      {/* Tooltip — desktop only, AnimatePresence */}
+                      <AnimatePresence>
+                        {hoveredRow === i && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 5, scale: 0.97 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 3, scale: 0.97 }}
+                            transition={{ duration: 0.18, ease: "easeOut" }}
+                            className="absolute left-4 z-50 pointer-events-none"
+                            style={{ bottom: "calc(100% + 10px)", width: "min(300px, calc(100vw - 2rem))" }}
+                          >
+                            {/* Caret */}
+                            <div
+                              className="absolute left-5"
+                              style={{
+                                bottom: -6,
+                                width: 0, height: 0,
+                                borderLeft: "7px solid transparent",
+                                borderRight: "7px solid transparent",
+                                borderTop: "7px solid hsl(220 16% 11%)",
+                              }}
+                            />
+                            <div
+                              className="rounded-xl px-4 py-3"
+                              style={{
+                                background: "hsl(220 16% 11%)",
+                                boxShadow: "0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.06)",
+                              }}
+                            >
+                              {/* Red accent bar */}
+                              <div className="w-7 h-[2px] rounded-full mb-2" style={{ background: "hsl(0 85% 50%)" }} />
+                              <p className="text-white leading-relaxed" style={{ fontSize: "0.775rem" }}>
+                                {row.tooltip}
+                              </p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {/* TTS verdict */}
+                    <div className="flex items-center justify-center px-3 py-4" style={{ background: ttsBg, borderLeft: "1px solid hsl(0 70% 90%)" }}>
+                      <span
+                        className="font-bold inline-flex items-center gap-1.5 whitespace-nowrap"
+                        style={{
+                          fontSize: "clamp(0.62rem, 1.1vw, 0.72rem)",
+                          background: "hsl(0 85% 44%)",
+                          color: "white",
+                          borderRadius: "999px",
+                          padding: "5px 11px 5px 5px",
+                        }}
+                      >
+                        <span
+                          className="font-extrabold shrink-0"
+                          style={{ fontSize: "0.58rem", letterSpacing: "0.04em", background: "rgba(255,255,255,0.2)", borderRadius: "999px", padding: "2px 6px" }}
+                        >
+                          Yes
+                        </span>
+                        {row.ttsLabel}
+                      </span>
+                    </div>
+
+                    {/* National verdict */}
+                    <div className="flex items-center justify-center px-3 py-4" style={{ background: natBg, borderLeft: "1px solid hsl(0 0% 90%)" }}>
+                      {row.themGood ? (
+                        <span
+                          className="font-semibold inline-flex items-center gap-1.5 whitespace-nowrap"
+                          style={{
+                            fontSize: "clamp(0.62rem, 1.1vw, 0.72rem)",
+                            background: "hsl(142 38% 90%)",
+                            color: "hsl(142 40% 26%)",
+                            borderRadius: "999px",
+                            padding: "5px 11px 5px 5px",
+                          }}
+                        >
+                          <span
+                            className="font-extrabold shrink-0"
+                            style={{ fontSize: "0.58rem", letterSpacing: "0.04em", background: "hsl(142 38% 80%)", borderRadius: "999px", padding: "2px 6px" }}
+                          >
+                            Yes
+                          </span>
+                          {row.themLabel}
+                        </span>
+                      ) : (
+                        <span
+                          className="font-medium inline-flex items-center gap-1.5 whitespace-nowrap"
+                          style={{
+                            fontSize: "clamp(0.62rem, 1.1vw, 0.72rem)",
+                            background: "hsl(0 0% 89%)",
+                            color: "hsl(0 0% 38%)",
+                            borderRadius: "999px",
+                            padding: "5px 11px 5px 5px",
+                          }}
+                        >
+                          <span
+                            className="font-extrabold shrink-0"
+                            style={{ fontSize: "0.58rem", letterSpacing: "0.04em", background: "hsl(0 0% 76%)", color: "hsl(0 0% 28%)", borderRadius: "999px", padding: "2px 6px" }}
+                          >
+                            No
+                          </span>
+                          {row.themLabel}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Mobile row: feature full-width, verdicts side-by-side below */}
+                  <div className="sm:hidden" style={{ background: rowBg }}>
+                    <div className="px-4 pt-3 pb-2.5">
+                      <span className="font-semibold text-gray-800 leading-snug" style={{ fontSize: "0.875rem" }}>
+                        {row.feature}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2" style={{ borderTop: "1px solid hsl(0 0% 93%)" }}>
+                      <div className="flex items-center justify-center px-2 py-3" style={{ background: ttsBg }}>
+                        <span
+                          className="font-bold inline-flex items-center gap-1 whitespace-nowrap"
+                          style={{
+                            fontSize: "0.62rem",
+                            background: "hsl(0 85% 44%)",
+                            color: "white",
+                            borderRadius: "999px",
+                            padding: "4px 8px 4px 4px",
+                          }}
+                        >
+                          <span
+                            className="font-extrabold shrink-0"
+                            style={{ fontSize: "0.55rem", letterSpacing: "0.04em", background: "rgba(255,255,255,0.2)", borderRadius: "999px", padding: "1px 5px" }}
+                          >
+                            Yes
+                          </span>
+                          {row.ttsLabel}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-center px-2 py-3" style={{ background: natBg, borderLeft: "1px solid hsl(0 0% 91%)" }}>
+                        {row.themGood ? (
+                          <span
+                            className="font-semibold inline-flex items-center gap-1 whitespace-nowrap"
+                            style={{
+                              fontSize: "0.62rem",
+                              background: "hsl(142 38% 90%)",
+                              color: "hsl(142 40% 26%)",
+                              borderRadius: "999px",
+                              padding: "4px 8px 4px 4px",
+                            }}
+                          >
+                            <span
+                              className="font-extrabold shrink-0"
+                              style={{ fontSize: "0.55rem", letterSpacing: "0.04em", background: "hsl(142 38% 80%)", borderRadius: "999px", padding: "1px 5px" }}
+                            >
+                              Yes
+                            </span>
+                            {row.themLabel}
+                          </span>
+                        ) : (
+                          <span
+                            className="font-medium inline-flex items-center gap-1 whitespace-nowrap"
+                            style={{
+                              fontSize: "0.62rem",
+                              background: "hsl(0 0% 89%)",
+                              color: "hsl(0 0% 38%)",
+                              borderRadius: "999px",
+                              padding: "4px 8px 4px 4px",
+                            }}
+                          >
+                            <span
+                              className="font-extrabold shrink-0"
+                              style={{ fontSize: "0.55rem", letterSpacing: "0.04em", background: "hsl(0 0% 76%)", color: "hsl(0 0% 28%)", borderRadius: "999px", padding: "1px 5px" }}
+                            >
+                              No
+                            </span>
+                            {row.themLabel}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              );
+            })}
+
+            {/* ── CTA footer ── */}
+            <div
+              style={{
+                borderTop: "1px solid hsl(0 0% 89%)",
+                background: "hsl(0 0% 98%)",
+                borderBottomLeftRadius: "1rem",
+                borderBottomRightRadius: "1rem",
+                padding: "1rem 1.5rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "1rem",
+                flexWrap: "wrap",
+              }}
+            >
+              <p className="text-gray-500" style={{ fontSize: "0.82rem" }}>
+                See the full difference for yourself — no cost, no commitment.
+              </p>
+              <a
+                href="/free-analysis"
+                className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-bold uppercase tracking-[0.11em] transition-opacity duration-200 hover:opacity-85 whitespace-nowrap shrink-0"
+                style={{ background: "hsl(0 85% 44%)", color: "white", fontSize: "clamp(0.66rem, 1.2vw, 0.73rem)" }}
+              >
+                Get a Free Security Analysis
+                <ArrowRight className="w-3 h-3 shrink-0" />
+              </a>
+            </div>
+
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
           TESTIMONIALS — Google-branded enterprise reviews
       ══════════════════════════════════════════════════ */}
       <section className="py-12 sm:py-16" style={{ background: "white", borderTop: "1px solid hsl(0 0% 92%)" }}>
@@ -1141,11 +1461,6 @@ const Index = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          WIRELESS BRIDGE SYSTEM — interactive premium section
-      ══════════════════════════════════════════════════ */}
-      <WirelessBridgeSection />
-
-      {/* ══════════════════════════════════════════════════
           FAQ — animated accordion
       ══════════════════════════════════════════════════ */}
       <section className="py-10 sm:py-14" style={{ background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 92%)" }}>
@@ -1214,7 +1529,7 @@ const Index = () => {
                 q: "Can you install security poles with multiple cameras?",
                 a: (
                   <span>
-                    Absolutely. We custom-fabricate security poles in heights from 10 to 25 feet, supporting 1–4 cameras per pole with integrated wiring, LED floodlights, IR illuminators, and active deterrence systems.{" "}
+                    Absolutely. We custom-fabricate security poles in heights from 9 to 16 feet, supporting 1–6 cameras per pole with integrated wiring, LED strobes, IR illuminators, and active deterrence systems.{" "}
                     <Link to="/security-pole-configurator" className="text-red-600 font-semibold hover:underline">Use our 3D configurator to design your exact setup</Link>.
                   </span>
                 ),

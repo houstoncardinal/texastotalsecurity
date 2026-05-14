@@ -80,7 +80,7 @@ const Contact = () => (
               </a>
             </div>
             <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/35">
-              <span>Licensed & Insured · LIC# B03066901</span>
+              <span>Licensed & Insured</span>
               <span>Serving Greater Houston</span>
             </div>
           </motion.div>
