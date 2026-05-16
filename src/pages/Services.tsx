@@ -6,9 +6,9 @@ import {
   generateLocalBusinessSchema, generateFAQSchema, generateServiceSchema, generateOrganizationSchema
 } from "@/lib/seo";
 import {
-  Shield, Camera, Home, Building2, Users, Radio, Wrench,
+  Shield, Camera, Home, Building2, Users, Radio,
   ArrowRight, Phone, CheckCircle2, Clock, MapPin, Star,
-  Cable, MonitorSpeaker, Settings, ClipboardCheck,
+  Cable, MonitorSpeaker, Settings, ClipboardCheck, RefreshCw,
 } from "lucide-react";
 
 const services = [
@@ -16,22 +16,29 @@ const services = [
     icon: Shield,
     title: "Alarm Systems & Takeovers",
     href: "/alarm-systems",
-    desc: "Hardwired alarm installation, existing-system takeovers, repair, cellular communication, and 24/7 professional monitoring.",
-    features: ["Hardwired alarm systems", "System takeovers", "Sensor and zone repair", "Professional monitoring"],
+    desc: "Hardwired alarm installation, existing-system takeovers, backup communication planning, and 24/7 professional monitoring.",
+    features: ["Hardwired alarm systems", "System takeovers", "Backup planning", "Professional monitoring"],
+  },
+  {
+    icon: RefreshCw,
+    title: "Switch Your Alarm Company",
+    href: "/switch-my-alarm",
+    desc: "Free alarm company switch assessment for Houston customers who want to change providers, keep compatible equipment, and move monitoring locally.",
+    features: ["Provider switch", "Equipment takeover", "Contract review", "Monitoring comparison"],
   },
   {
     icon: Camera,
     title: "Security Camera Systems",
     href: "/security-cameras",
-    desc: "Commercial CCTV infrastructure, 4K IP cameras, LPR, NVR recording, remote viewing, and video monitoring workflows.",
-    features: ["Hardwired CCTV", "4K IP cameras", "License plate recognition", "Remote viewing"],
+    desc: "Hardwired 4K IP cameras, License Plate Reader (LPR), NVR recording, remote viewing, and video monitoring workflows.",
+    features: ["Hardwired camera systems", "4K IP cameras", "License plate recognition", "Remote viewing"],
   },
   {
     icon: Radio,
     title: "Monitoring Services",
     href: "/monitoring-services",
     desc: "Professional alarm monitoring with accountable signal handling, dispatch support, and local account management.",
-    features: ["24/7 monitoring", "Cellular communication", "Video verification options", "Local support"],
+    features: ["24/7 monitoring", "Signal handling", "Video verification options", "Local support"],
   },
   {
     icon: Home,
@@ -45,14 +52,14 @@ const services = [
     title: "Commercial Solutions",
     href: "/commercial",
     desc: "Security for offices, retail, warehouses, industrial sites, and multi-location business operations.",
-    features: ["Commercial alarms", "Camera systems", "Access coverage planning", "Multi-site support"],
+    features: ["Commercial alarms", "Camera systems", "Coverage planning", "Multi-site support"],
   },
   {
     icon: Users,
     title: "HOA Security Solutions",
     href: "/hoa-security",
-    desc: "Gate cameras, LPR, common-area coverage, and board-ready security planning for Houston communities.",
-    features: ["Gate cameras", "LPR systems", "Amenity coverage", "Board reporting support"],
+    desc: "Gate cameras, License Plate Reader (LPR), common-area coverage, and board-ready security planning for Houston communities.",
+    features: ["Gate cameras", "License Plate Reader (LPR) systems", "Amenity coverage", "Board reporting support"],
   },
   {
     icon: Camera,
@@ -61,33 +68,26 @@ const services = [
     desc: "Interactive security pole planning for camera placement, lighting, deterrence equipment, and site design.",
     features: ["3D pole planning", "Camera placement", "Lighting layout", "System estimate"],
   },
-  {
-    icon: Wrench,
-    title: "Service & Maintenance",
-    href: "/service-maintenance",
-    desc: "Troubleshooting, upgrades, camera service, alarm repairs, and ongoing system support for existing clients.",
-    features: ["System troubleshooting", "Camera repair", "Alarm repair", "Preventive support"],
-  },
 ];
 
 const trustStats = [
   { label: "Houston", sublabel: "local account management" },
   { label: "Licensed", sublabel: "and insured" },
-  { label: "CCTV + Alarm", sublabel: "integrated expertise" },
+  { label: "Camera + Alarm", sublabel: "integrated expertise" },
   { label: "24/7", sublabel: "monitoring options" },
 ];
 
 const processSteps = [
   { icon: MapPin, title: "Site Assessment", desc: "We review property layout, risk areas, existing equipment, network paths, and operating requirements." },
-  { icon: ClipboardCheck, title: "System Design", desc: "You receive a focused recommendation for alarm coverage, CCTV infrastructure, monitoring, and service priorities." },
+  { icon: ClipboardCheck, title: "System Design", desc: "You receive a focused recommendation for alarm coverage, camera placement, monitoring, and priority risk areas." },
   { icon: Cable, title: "Professional Installation", desc: "Licensed technicians install, route, test, label, and commission the system for dependable use." },
-  { icon: Settings, title: "Support & Optimization", desc: "We provide account support, troubleshooting, monitoring changes, and long-term system maintenance." },
+  { icon: Settings, title: "Account Setup", desc: "We configure users, notifications, monitoring details, and remote viewing around your operating needs." },
 ];
 
 const faqs = [
-  { question: "What security services does Texas Total Security provide?", answer: "We provide alarm systems and takeovers, security camera systems, monitoring services, residential security, commercial security, HOA security, security pole planning, and service and maintenance." },
+  { question: "What security services does Texas Total Security provide?", answer: "We provide alarm systems and takeovers, security camera systems, monitoring services, residential security, commercial security, HOA security, license plate reader cameras, active deterrence, and security pole planning." },
   { question: "Do you serve commercial properties and HOAs in Houston?", answer: "Yes. We work with Houston businesses, HOAs, property managers, commercial facilities, residential clients, and multi-site operators." },
-  { question: "Can you take over an existing alarm or camera system?", answer: "In many cases, yes. We evaluate existing equipment, identify what can be reused, and recommend repairs, upgrades, or replacement where needed." },
+  { question: "Can you take over an existing alarm system?", answer: "In many cases, yes. We evaluate existing alarm equipment, identify what can be reused, and recommend a practical takeover or replacement path where needed." },
   { question: "Do you provide free onsite assessments?", answer: "Yes. We provide onsite security assessments for qualified Houston-area properties so recommendations are based on the actual layout and risks." },
 ];
 
@@ -95,15 +95,15 @@ const Services = () => {
   const schemas = [
     generateOrganizationSchema(),
     generateLocalBusinessSchema(),
-    generateServiceSchema("Security Services Houston TX", "Alarm systems, security camera systems, monitoring, HOA security, commercial security, residential security, security poles, and maintenance in Houston, TX.", "/services"),
+    generateServiceSchema("Security Services Houston TX", "Alarm systems, security camera systems, monitoring, HOA security, commercial security, residential security, License Plate Reader (LPR) cameras, active deterrence, and security poles in Houston, TX.", "/services"),
     generateFAQSchema(faqs),
   ];
 
   return (
     <Layout>
       <SEOHead
-        title="Security Services Houston TX | Alarm, CCTV, Monitoring & HOA Security"
-        description="Texas Total Security provides Houston alarm systems, CCTV security camera systems, monitoring services, residential security, commercial security, HOA security, security pole planning, and service maintenance."
+        title="Security Services Houston TX | Alarm, Cameras, Monitoring & HOA Security"
+        description="Texas Total Security provides Houston alarm systems, security camera systems, monitoring, residential security, commercial security, HOA security, License Plate Reader (LPR) cameras, and security pole planning."
         schemas={schemas}
       />
 
@@ -138,7 +138,7 @@ const Services = () => {
               Integrated security systems for Houston homes, HOAs, and businesses.
             </h1>
             <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
-              Texas Total Security designs, installs, monitors, and services hardwired alarm systems, CCTV camera systems, security poles, and property-wide security infrastructure.
+              Texas Total Security designs, installs, and monitors hardwired alarm systems, 4K camera systems, security poles, and property-wide security infrastructure.
             </p>
             <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
               {trustStats.map((stat) => (
@@ -225,7 +225,7 @@ const Services = () => {
                   Professional security is a system, not a collection of devices.
                 </h2>
                 <p className="mt-4 text-white/60 leading-relaxed">
-                  We connect the practical pieces: alarm zones, camera coverage, LPR, monitoring, remote access, service requirements, and long-term reliability.
+                  We connect the practical pieces: alarm zones, camera coverage, License Plate Reader (LPR), monitoring, remote access, service requirements, and long-term reliability.
                 </p>
               </div>
             </div>

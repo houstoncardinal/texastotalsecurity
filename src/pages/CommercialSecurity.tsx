@@ -8,7 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas, generateServicePageReviewSchema } from "@/lib/seo";
 import {
   Building2, Camera, Shield, Zap, Eye,
-  CheckCircle2, ArrowRight, Phone, Lock, Plus, Minus
+  CheckCircle2, ArrowRight, Phone, Lock, Plus, Minus, Star, Quote
 } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
@@ -21,7 +21,7 @@ const solutions = [
   { icon: Camera,    title: "4K Commercial Surveillance",    desc: "Multi-camera hardwired systems with 4K resolution, high-retention recording, and remote live viewing for your facility." },
   { icon: Shield,    title: "Commercial Alarm Systems",      desc: "Intrusion detection across every access point — doors, windows, and motion zones — with 24/7 professional monitoring and direct dispatch." },
   { icon: Zap,       title: "Active Deterrence",             desc: "Cameras equipped with sirens, strobe lights, and two-way audio that confront and stop trespassers in real time — before damage is done." },
-  { icon: Lock,      title: "License Plate Recognition",     desc: "LPR cameras at entry and exit points capture every vehicle — essential for gated facilities, parking areas, and high-traffic commercial properties." },
+  { icon: Lock,      title: "License Plate Reader",     desc: "License Plate Reader (LPR) cameras at entry and exit points capture every vehicle — essential for gated facilities, parking areas, and high-traffic commercial properties." },
   { icon: Eye,       title: "24/7 Alarm Monitoring",         desc: "Professional monitoring through our certified partner center — fast signal verification and direct dispatch communication with your team." },
   { icon: Building2, title: "Alarm Takeovers & Upgrades",    desc: "Already have a system? We take over existing commercial panels and sensors, saving replacement costs while improving your monitoring service." },
 ];
@@ -29,7 +29,7 @@ const solutions = [
 const pillars = [
   { num: "01", title: "On-Site System Design",   desc: "We visit your facility, walk every access point, and engineer a system around your specific layout, risk profile, and operational needs — no generic packages." },
   { num: "02", title: "24/7 Professional Monitoring", desc: "Your monitoring account is managed locally — dispatched through our certified partner center in San Antonio. Same team, same number, same accountability." },
-  { num: "03", title: "Long-Term Partnership",   desc: "We maintain the relationship after installation day. When your system needs service or expansion, the team that installed it is the team that shows up." },
+  { num: "03", title: "Long-Term Partnership",   desc: "We maintain the relationship after installation day. When your system needs expansion, the team that installed it is the team that shows up." },
 ];
 
 const industries = [
@@ -39,6 +39,24 @@ const industries = [
   "Retail Centers", "Parking Garages", "Valet Facilities",
   "Construction Sites", "Recycling Centers", "Places of Worship",
   "Restaurants", "Stadiums & Event Venues", "Marinas",
+];
+
+const reviewProof = [
+  {
+    name: "Coleman Ferguson",
+    role: "Google Review",
+    text: "Texas Total Security did a fantastic job installing an alarm system and cameras. The cameras are all 1080p hd and are all commercial grade. The owner, Tim Townsend, is a very credible, knowledgeable person who was able to explain everything to me in a way I was able to understand.",
+  },
+  {
+    name: "John Gray",
+    role: "Google Review",
+    text: "Very professional and safety oriented with cameras and alarm systems",
+  },
+  {
+    name: "S Nevar",
+    role: "Google Review",
+    text: "Great company and staff. They did the set up on mobile phones and explained everything we needed to know on our two-way audio cameras and doorbell. Highly recommend. Thank You Tim and Johnny.",
+  },
 ];
 
 const faqs = [
@@ -75,7 +93,7 @@ const commercialSchemas = [
     "Enterprise-grade security for Houston businesses. Commercial alarms, 4K surveillance, active deterrence & 24/7 professional monitoring. Scalable for any industry.",
     "/commercial",
     "Commercial Security System Installation",
-    ["commercial security systems Houston TX", "business alarm system Houston", "commercial surveillance Houston", "commercial CCTV Houston", "business security cameras Houston"],
+    ["commercial security systems Houston TX", "business alarm system Houston", "commercial surveillance Houston", "commercial security camera systems Houston", "business security cameras Houston"],
     faqs
   ),
   generateBreadcrumbSchema([
@@ -94,6 +112,28 @@ const commercialSchemas = [
   generateFAQSchema(faqs),
 ];
 
+const commercialImages = [
+  "20251224_114459.jpg",
+  "20260115_141311.jpg",
+  "20260129_125134.jpg",
+  "20260224_100256.jpg",
+  "20260224_103953.jpg",
+  "20260224_104001.jpg",
+  "20260314_093725.jpg",
+  "20260320_120744.jpg",
+  "20260402_092659.jpg",
+  "imgi_2_com10-scaled.jpg",
+  "imgi_6_com6-scaled.jpg",
+  "imgi_10_com2.jpg",
+  "imgi_22_com16.png",
+  "imgi_23_com15.jpg",
+  "imgi_50_com25.png",
+  "imgi_58_com17.png",
+  "imgi_62_com13.png",
+  "imgi_74_fmf-1252.jpg",
+  "imgi_75_qtq80-zVtNuU.jpg",
+];
+
 const CommercialSecurity = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
@@ -104,108 +144,114 @@ const CommercialSecurity = () => {
       schemas={commercialSchemas}
     />
 
-    {/* ══ HERO — 2-column ══════════════════════════════════ */}
-    <section className="relative overflow-hidden" style={{ minHeight: "100vh" }}>
+    {/* ══ HERO — compact professional banner ══════════════ */}
+    <section className="relative overflow-hidden bg-neutral-950">
       <div className="absolute inset-0">
         <img
           src="/commercial/imgi_6_com6-scaled.jpg"
           alt="Commercial security camera system protecting Houston business"
-          className="w-full h-full object-cover object-center"
+          className="h-full w-full object-cover object-center opacity-25"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.80) 52%, rgba(0,0,0,0.62) 100%)" }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 60% at 15% 65%, hsl(0 85% 44% / 0.13), transparent 65%)" }} />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,10,0.98)_0%,rgba(10,10,10,0.91)_48%,rgba(10,10,10,0.76)_100%)]" />
       </div>
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.055]"
+        style={{
+          backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+        }}
+      />
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-0 lg:min-h-screen lg:flex lg:items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 w-full lg:py-20">
-
-          {/* Left — copy */}
-          <motion.div
-            variants={fadeLeft} initial="hidden" animate="show"
-            transition={{ duration: 0.8, ease: easeExpo }}
-            className="flex flex-col justify-center"
-          >
-            <div className="flex items-center gap-2 mb-5">
-              <div className="h-px w-5 rounded-full" style={{ background: "hsl(0 85% 52%)" }} />
-              <span className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: "hsl(0 75% 64%)" }}>Commercial Security · Houston, TX</span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_460px] gap-8 lg:gap-10 items-center">
+          <motion.div variants={fadeLeft} initial="hidden" animate="show" transition={{ duration: 0.75, ease: easeExpo }}>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-500/25 bg-red-500/10 mb-5">
+              <Building2 className="w-3.5 h-3.5 text-red-400" />
+              <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-red-200">Commercial Security · Houston, TX</span>
             </div>
-
-            <h1 className="font-display font-bold text-white leading-[1.05] tracking-tight mb-4"
-              style={{ fontSize: "clamp(2rem, 4.5vw, 3.4rem)" }}>
-              Commercial Security Solutions<br />
-              <span style={{
-                background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 45%, hsl(0 90% 44%) 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>Built for Houston Businesses.</span>
+            <h1 className="font-display font-bold text-white leading-[1.02] text-4xl sm:text-5xl lg:text-6xl max-w-3xl">
+              Commercial security solutions built for Houston businesses.
             </h1>
-
-            <p className="leading-relaxed mb-7" style={{ fontSize: "clamp(0.95rem, 1.5vw, 1.05rem)", color: "rgba(255,255,255,0.60)", maxWidth: "30rem" }}>
-              Custom-engineered cameras, alarms, and active deterrence — built for your operation, monitored 24/7 by a local team that knows your system.
-            </p>
-
-            <ul className="space-y-3 mb-8">
+            <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
               {[
-                "4K hardwired cameras — active deterrence stops threats in real time",
-                "Commercial alarm system designed around your facility's risk profile",
-                "24/7 professional monitoring — local team, local accountability",
-              ].map(item => (
-                <li key={item} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 shrink-0 mt-[2px]" style={{ color: "hsl(0 85% 54%)" }} />
-                  <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.78)", lineHeight: 1.5 }}>{item}</span>
-                </li>
+                { label: "4K", sublabel: "facility coverage" },
+                { label: "Alarm", sublabel: "risk-based design" },
+                { label: "Active", sublabel: "deterrence options" },
+                { label: "24/7", sublabel: "monitoring support" },
+              ].map((stat) => (
+                <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
+                  <p className="font-display text-xl font-bold text-white">{stat.label}</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
+                </div>
               ))}
-            </ul>
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link
-                to="/property-assessment"
-                className="btn-primary-gradient inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3.5"
-                style={{ boxShadow: "0 4px 24px hsl(0 85% 44% / 0.42)" }}
-              >
-                Request a Free Assessment <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="tel:7133879937"
-                className="inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3.5 rounded-xl transition-all duration-200"
-                style={{ border: "1px solid rgba(255,255,255,0.18)", color: "white" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.08)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}
-              >
-                <Phone className="w-4 h-4" style={{ color: "hsl(0 85% 54%)" }} /> (713) 387-9937
-              </a>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
+              <span>Licensed & Insured</span>
+              <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-red-400 fill-red-400" /> Commercial-Grade Systems</span>
             </div>
           </motion.div>
 
-          {/* Right — form panel */}
-          <motion.div
-            variants={fadeRight} initial="hidden" animate="show"
-            transition={{ duration: 0.8, ease: easeExpo, delay: 0.15 }}
-            className="flex items-center"
-          >
-            <div className="w-full rounded-2xl overflow-hidden"
-              style={{
-                background: "rgba(8,8,8,0.82)",
-                backdropFilter: "blur(24px)",
-                WebkitBackdropFilter: "blur(24px)",
-                border: "1px solid rgba(255,255,255,0.10)",
-                boxShadow: "0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.05)",
-              }}>
-              <div className="px-1 py-1">
-                <LeadForm
-                  title="Request a Free Commercial Assessment"
-                  subtitle="Describe your facility — we'll design a custom system at no charge, no obligation."
-                  showServiceType
-                  defaultServiceType="commercial"
-                  defaultPropertyType="commercial"
-                  referringPage="/commercial"
-                  compact
-                />
-              </div>
-            </div>
+          <motion.div variants={fadeRight} initial="hidden" animate="show" transition={{ duration: 0.75, ease: easeExpo, delay: 0.08 }}>
+            <LeadForm
+              title="Free Commercial Assessment"
+              subtitle="Describe your facility. We will review risks, cameras, alarms, and monitoring options."
+              showServiceType
+              defaultServiceType="commercial"
+              defaultPropertyType="commercial"
+              referringPage="/commercial"
+              compact
+              className="shadow-2xl ring-1 ring-white/10"
+            />
           </motion.div>
+        </div>
+      </div>
+    </section>
 
+    {/* ══ TRUST PROOF — real Google reviews ═══════════════ */}
+    <section className="bg-white py-12 sm:py-14 border-b border-gray-100">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[0.82fr_1.18fr] gap-8 lg:gap-10 items-start">
+          <motion.div variants={fadeLeft} initial="hidden" whileInView="show" viewport={vp} transition={{ duration: 0.7, ease: easeExpo }}>
+            <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-red-50 border border-red-100">
+              <Star className="w-3.5 h-3.5 fill-red-600 text-red-600" />
+              <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-red-700">Real Google Reviews</span>
+            </div>
+            <h2 className="font-display font-bold text-gray-950 leading-tight" style={{ fontSize: "clamp(1.55rem, 3vw, 2.2rem)", letterSpacing: "-0.03em" }}>
+              Commercial-grade work, explained clearly by the owner.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-gray-600">
+              Commercial buyers need proof of experience, expertise, and accountability. These real reviews highlight the signals that matter: professional installation, commercial-grade cameras, clear education, and direct local ownership.
+            </p>
+            <Link to="/reviews" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-red-600 hover:underline">
+              Read all customer reviews <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {reviewProof.map((review, i) => (
+              <motion.article
+                key={review.name}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={vp}
+                transition={{ duration: 0.55, ease: easeExpo, delay: i * 0.06 }}
+                className="rounded-xl border border-gray-200 bg-gray-50 p-5"
+              >
+                <div className="flex items-center justify-between gap-3 mb-4">
+                  <Quote className="w-5 h-5 text-red-600" />
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }).map((_, j) => <Star key={j} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />)}
+                  </div>
+                </div>
+                <p className="text-[13px] leading-relaxed text-gray-600">"{review.text}"</p>
+                <div className="mt-5 border-t border-gray-200 pt-4">
+                  <p className="text-sm font-bold text-gray-950">{review.name}</p>
+                  <p className="mt-0.5 text-[11px] uppercase tracking-[0.12em] text-gray-400">{review.role}</p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -356,11 +402,7 @@ const CommercialSecurity = () => {
               loading="lazy"
             />
             <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.40) 0%, transparent 48%)" }} />
-            <div className="absolute bottom-5 left-5 right-5 px-4 py-3 rounded-xl"
-              style={{ background: "rgba(6,6,6,0.84)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.09)" }}>
-              <p className="font-bold text-white text-sm leading-tight">Engineered. Installed. Professionally Monitored.</p>
-              <p style={{ fontSize: "11.5px", color: "rgba(255,255,255,0.5)", marginTop: "3px" }}>One team handles your design, installation, and ongoing support.</p>
-            </div>
+            
           </motion.div>
         </div>
       </div>
@@ -384,28 +426,17 @@ const CommercialSecurity = () => {
         </motion.div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {[
-            { src: "/commercial/imgi_10_com2.jpg",        alt: "Commercial security camera installation at Houston business" },
-            { src: "/commercial/imgi_22_com16.png",       alt: "Multi-camera commercial security system on Houston facility" },
-            { src: "/commercial/imgi_23_com15.jpg",       alt: "Active deterrence camera system at commercial property" },
-            { src: "/commercial/imgi_2_com10-scaled.jpg", alt: "Multi-camera security pole on commercial property" },
-            { src: "/commercial/imgi_50_com25.png",       alt: "Hardwired surveillance system installed by Texas Total Security" },
-            { src: "/commercial/imgi_58_com17.png",       alt: "Houston commercial property camera installation" },
-            { src: "/commercial/imgi_62_com13.png",       alt: "Commercial camera system on business exterior" },
-            { src: "/commercial/imgi_6_com6-scaled.jpg",  alt: "Security camera installation at Houston commercial facility" },
-            { src: "/commercial/imgi_74_fmf-1252.jpg",    alt: "Hardwired commercial camera system Houston" },
-            { src: "/commercial/imgi_75_qtq80-zVtNuU.jpg",alt: "Multi-camera installation at commercial property" },
-          ].map((img, i) => (
+          {commercialImages.map((img, i) => (
             <motion.div
-              key={img.src}
+              key={img}
               variants={fadeUp} initial="hidden" whileInView="show" viewport={vp}
               transition={{ duration: 0.55, ease: easeExpo, delay: i * 0.07 }}
               className="relative rounded-xl overflow-hidden"
               style={{ aspectRatio: "1/1" }}
             >
               <img
-                src={img.src}
-                alt={img.alt}
+                src={`/commercial/${img}`}
+                alt={`Commercial installation ${img}`}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
@@ -418,7 +449,7 @@ const CommercialSecurity = () => {
 
     {/* ══ FAQ — inline accordion ════════════════════════════ */}
     <section className="py-12 sm:py-16" style={{ background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 92%)" }}>
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="show" viewport={vp}
           transition={{ duration: 0.6, ease: easeExpo }}
@@ -439,7 +470,7 @@ const CommercialSecurity = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-2">
+        <div className="grid gap-2 md:grid-cols-2 md:items-start">
           {[
             {
               q: "What types of commercial properties do you serve?",
@@ -545,6 +576,11 @@ const CommercialSecurity = () => {
               </motion.div>
             );
           })}
+        </div>
+        <div className="mt-7 flex justify-center">
+          <Link to="/faq" className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3 text-sm font-bold text-gray-800 shadow-sm transition-all hover:border-red-200 hover:text-red-600 hover:shadow-md">
+            View the Full Security FAQ <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

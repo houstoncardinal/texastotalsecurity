@@ -17,13 +17,13 @@ const ResidentialSecurity = lazy(() => import("./pages/ResidentialSecurity"));
 const CommercialSecurity = lazy(() => import("./pages/CommercialSecurity"));
 const HOASecurity = lazy(() => import("./pages/HOASecurity"));
 const MonitoringServices = lazy(() => import("./pages/MonitoringServices"));
-const ServiceMaintenance = lazy(() => import("./pages/ServiceMaintenance"));
 const IndustriesWeServe = lazy(() => import("./pages/IndustriesWeServe"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const Reviews = lazy(() => import("./pages/Reviews"));
 const ServiceAreas = lazy(() => import("./pages/ServiceAreas"));
 const Contact = lazy(() => import("./pages/Contact"));
 const FreeAnalysis = lazy(() => import("./pages/FreeAnalysis"));
+const FAQ = lazy(() => import("./pages/FAQ"));
 const CityLanding = lazy(() => import("./pages/CityLanding"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
@@ -35,6 +35,7 @@ const PoleConfigurator = lazy(() => import("./pages/PoleConfigurator"));
 const QualifyFunnel = lazy(() => import("./pages/QualifyFunnel"));
 const NeighborhoodLanding = lazy(() => import("./pages/NeighborhoodLanding"));
 const SwitchAssessment = lazy(() => import("./pages/SwitchAssessment"));
+const RequestCallback = lazy(() => import("./pages/RequestCallback"));
 const PropertyManagementSecurity = lazy(() => import("./pages/PropertyManagementSecurity"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
@@ -74,7 +75,6 @@ const App = () => (
             <Route path="/hoa-security" element={<HOASecurity />} />
             <Route path="/property-management-security" element={<PropertyManagementSecurity />} />
             <Route path="/monitoring-services" element={<MonitoringServices />} />
-            <Route path="/service-maintenance" element={<ServiceMaintenance />} />
             <Route path="/industries" element={<IndustriesWeServe />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/reviews" element={<Reviews />} />
@@ -82,6 +82,8 @@ const App = () => (
             <Route path="/services-area" element={<ServiceAreas />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/free-analysis" element={<FreeAnalysis />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/faqs" element={<FAQ />} />
             {/* Blog */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:articleSlug" element={<BlogArticle />} />
@@ -94,7 +96,9 @@ const App = () => (
             <Route path="/neighborhoods/:neighborhoodSlug" element={<NeighborhoodLanding />} />
             <Route path="/security-pole-configurator" element={<PoleConfigurator />} />
             <Route path="/qualify" element={<QualifyFunnel />} />
+            <Route path="/pre-qualify" element={<QualifyFunnel />} />
             <Route path="/switch-my-alarm" element={<SwitchAssessment />} />
+            <Route path="/request-callback" element={<RequestCallback />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />

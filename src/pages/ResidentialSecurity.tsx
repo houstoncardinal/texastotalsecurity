@@ -8,7 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas, generateServicePageReviewSchema } from "@/lib/seo";
 import {
   Home, Shield, Camera, Smartphone,
-  Lock, Bell, CheckCircle2, ArrowRight, Phone, Plus, Minus
+  Lock, Bell, CheckCircle2, ArrowRight, Phone, Plus, Minus, Star, Quote
 } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
@@ -20,9 +20,9 @@ const fadeRight= { hidden: { opacity: 0, x:  28 }, show: { opacity: 1, x: 0 } };
 const solutions = [
   { icon: Camera,     title: "4K Hardwired Cameras",      desc: "Hardwired 4K resolution — no Wi-Fi dependency, no dropped feeds, zero blind spots." },
   { icon: Shield,     title: "Custom Alarm Systems",      desc: "Every door, window, and access point covered — built for your layout, not a generic package." },
-  { icon: Bell,       title: "24/7 Cellular Monitoring",  desc: "Connected over Verizon cellular, not your internet — stays on when Wi-Fi or power goes down." },
+  { icon: Bell,       title: "24/7 Professional Monitoring", desc: "Professional monitoring and backup planning for dependable home protection." },
   { icon: Smartphone, title: "Remote App Access",         desc: "Arm, disarm, and view live footage from anywhere in the world — full visibility, always." },
-  { icon: Lock,       title: "Perimeter & Gate Security", desc: "Driveway coverage and LPR cameras so you know who's approaching before they reach your door." },
+  { icon: Lock,       title: "Perimeter & Gate Security", desc: "Driveway and gate coverage so you know who's approaching before they reach your door." },
 ];
 
 const propertyTypes = [
@@ -38,6 +38,24 @@ const pillars = [
   { icon: Shield, num: "01", title: "Superior Installation",    desc: "Licensed technicians handle every sensor, camera, and panel — placed for maximum coverage of your specific property." },
   { icon: Bell,   num: "02", title: "Dedicated 24/7 Monitoring", desc: "Our professional partner monitoring center watches your home around the clock, ready to dispatch emergency services the moment an alarm fires." },
   { icon: Home,   num: "03", title: "Responsive Local Support",  desc: "When you need help, you reach a real local team who knows your system — not a national call center or a ticket queue." },
+];
+
+const reviewProof = [
+  {
+    name: "Anna Bermudez",
+    role: "Google Review",
+    text: "Excellent Service! These guys know what they are doing. Love my Alarm System and my New Cameras all over my property. I would recommend Tim at Texas Total Security to anyone who is looking for a Security System!!! Thank You Guys",
+  },
+  {
+    name: "Edward Koreba",
+    role: "Google Local Guide",
+    text: "THEY INSTALLED CAMERAS AT MY HOME AN THEY WERE VERY POLITE AN WORKED VERY FAST MY CAMERAS SET UP WAS DONE AN PROGRAMMED IN ONE DAY THANK YOU for making my home safe",
+  },
+  {
+    name: "Jason Hammond",
+    role: "Google Review",
+    text: "FANTASTIC experience and very professional and caring company. I felt very comfortable from start to finish. Honest and knowledgeable staff.",
+  },
 ];
 
 const faqs = [
@@ -114,113 +132,117 @@ const ResidentialSecurity = () => {
       schemas={residentialSchemas}
     />
 
-    {/* ══ HERO — 2-column ══════════════════════════════════ */}
-    <section className="relative overflow-hidden" style={{ minHeight: "100vh" }}>
-      {/* BG */}
+    {/* ══ HERO — compact professional banner ══════════════ */}
+    <section className="relative overflow-hidden bg-neutral-950">
       <div className="absolute inset-0">
         <img
           src="/residential/imgi_33_luxury-home-6886153_1280.jpg"
           alt="Luxury Houston residential home secured by Texas Total Security"
-          className="w-full h-full object-cover object-center"
+          className="h-full w-full object-cover object-center opacity-25"
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.78) 52%, rgba(0,0,0,0.60) 100%)" }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 60% at 15% 65%, hsl(0 85% 44% / 0.12), transparent 65%)" }} />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,10,0.98)_0%,rgba(10,10,10,0.91)_48%,rgba(10,10,10,0.76)_100%)]" />
       </div>
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.055]"
+        style={{
+          backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+        }}
+      />
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-0 lg:min-h-screen lg:flex lg:items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 w-full lg:py-20">
-
-          {/* Left — copy */}
-          <motion.div
-            variants={fadeLeft}
-            initial="hidden"
-            animate="show"
-            transition={{ duration: 0.8, ease: easeExpo }}
-            className="flex flex-col justify-center"
-          >
-            <div className="flex items-center gap-2 mb-5">
-              <div className="h-px w-5 rounded-full" style={{ background: "hsl(0 85% 52%)" }} />
-              <span className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: "hsl(0 75% 64%)" }}>Residential Security · Houston, TX</span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_460px] gap-8 lg:gap-10 items-center">
+          <motion.div variants={fadeLeft} initial="hidden" animate="show" transition={{ duration: 0.75, ease: easeExpo }}>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-500/25 bg-red-500/10 mb-5">
+              <Home className="w-3.5 h-3.5 text-red-400" />
+              <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-red-200">Residential Security · Houston, TX</span>
             </div>
-
-            <h1 className="font-display font-bold text-white leading-[1.05] tracking-tight mb-4"
-              style={{ fontSize: "clamp(2rem, 4.5vw, 3.4rem)" }}>
-              Houston's Most Trusted<br />
-              <span style={{
-                background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 45%, hsl(0 90% 44%) 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>Home Security Experts.</span>
+            <h1 className="font-display font-bold text-white leading-[1.02] text-4xl sm:text-5xl lg:text-6xl max-w-3xl">
+              Houston's most trusted home security experts.
             </h1>
-
-            <p className="leading-relaxed mb-7" style={{ fontSize: "clamp(0.95rem, 1.5vw, 1.05rem)", color: "rgba(255,255,255,0.60)", maxWidth: "30rem" }}>
+            <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/75">
               Custom alarm systems and hardwired 4K cameras — built around your property, backed by 24/7 professional monitoring.
             </p>
-
-            <ul className="space-y-3 mb-8">
+            <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
               {[
-                "Hardwired 4K cameras — no Wi-Fi dependency, no blind spots",
-                "Alarm system custom-designed for your home's layout",
-                "24/7 monitoring over Verizon cellular — stays on when Wi-Fi fails",
-              ].map(item => (
-                <li key={item} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 shrink-0 mt-[2px]" style={{ color: "hsl(0 85% 54%)" }} />
-                  <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.78)", lineHeight: 1.5 }}>{item}</span>
-                </li>
+                { label: "4K", sublabel: "hardwired cameras" },
+                { label: "Custom", sublabel: "home alarm design" },
+                { label: "24/7", sublabel: "monitoring options" },
+                { label: "Local", sublabel: "Houston support" },
+              ].map((stat) => (
+                <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
+                  <p className="font-display text-xl font-bold text-white">{stat.label}</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
+                </div>
               ))}
-            </ul>
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link
-                to="/property-assessment"
-                className="btn-primary-gradient inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3.5"
-                style={{ boxShadow: "0 4px 24px hsl(0 85% 44% / 0.42)" }}
-              >
-                Get My Free Assessment <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="tel:7133879937"
-                className="inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3.5 rounded-xl transition-all duration-200"
-                style={{ border: "1px solid rgba(255,255,255,0.18)", color: "white" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.08)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}
-              >
-                <Phone className="w-4 h-4" style={{ color: "hsl(0 85% 54%)" }} /> (713) 387-9937
-              </a>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
+              <span>Licensed & Insured</span>
+              <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-red-400 fill-red-400" /> Real Google Reviews</span>
             </div>
           </motion.div>
 
-          {/* Right — form panel */}
-          <motion.div
-            variants={fadeRight}
-            initial="hidden"
-            animate="show"
-            transition={{ duration: 0.8, ease: easeExpo, delay: 0.15 }}
-            className="flex items-center"
-          >
-            <div className="w-full rounded-2xl overflow-hidden"
-              style={{
-                background: "rgba(8,8,8,0.82)",
-                backdropFilter: "blur(24px)",
-                WebkitBackdropFilter: "blur(24px)",
-                border: "1px solid rgba(255,255,255,0.10)",
-                boxShadow: "0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.05)",
-              }}>
-              <div className="px-1 py-1">
-                <LeadForm
-                  title="Get Your Free Home Security Assessment"
-                  subtitle="No obligation. We'll design the perfect system for your property."
-                  showServiceType
-                  defaultServiceType="residential"
-                  defaultPropertyType="residential"
-                  referringPage="/residential"
-                  compact
-                />
-              </div>
-            </div>
+          <motion.div variants={fadeRight} initial="hidden" animate="show" transition={{ duration: 0.75, ease: easeExpo, delay: 0.08 }}>
+            <LeadForm
+              title="Free Home Security Assessment"
+              subtitle="Tell us about your home. We will review your layout, camera needs, and monitoring options."
+              showServiceType
+              defaultServiceType="residential"
+              defaultPropertyType="residential"
+              referringPage="/residential"
+              compact
+              className="shadow-2xl ring-1 ring-white/10"
+            />
           </motion.div>
+        </div>
+      </div>
+    </section>
 
+    {/* ══ TRUST PROOF — real Google reviews ═══════════════ */}
+    <section className="bg-white py-12 sm:py-14 border-b border-gray-100">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[0.82fr_1.18fr] gap-8 lg:gap-10 items-start">
+          <motion.div variants={fadeLeft} initial="hidden" whileInView="show" viewport={vp} transition={{ duration: 0.7, ease: easeExpo }}>
+            <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-red-50 border border-red-100">
+              <Star className="w-3.5 h-3.5 fill-red-600 text-red-600" />
+              <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-red-700">Real Google Reviews</span>
+            </div>
+            <h2 className="font-display font-bold text-gray-950 leading-tight" style={{ fontSize: "clamp(1.55rem, 3vw, 2.2rem)", letterSpacing: "-0.03em" }}>
+              Homeowners trust us inside the places that matter most.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-gray-600">
+              Residential security is personal. These reviews come from real customers on our reviews page and show the experience signals Google looks for: installation quality, clear education, local accountability, and homeowner confidence.
+            </p>
+            <Link to="/reviews" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-red-600 hover:underline">
+              Read all customer reviews <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {reviewProof.map((review, i) => (
+              <motion.article
+                key={review.name}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={vp}
+                transition={{ duration: 0.55, ease: easeExpo, delay: i * 0.06 }}
+                className="rounded-xl border border-gray-200 bg-gray-50 p-5"
+              >
+                <div className="flex items-center justify-between gap-3 mb-4">
+                  <Quote className="w-5 h-5 text-red-600" />
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }).map((_, j) => <Star key={j} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />)}
+                  </div>
+                </div>
+                <p className="text-[13px] leading-relaxed text-gray-600">"{review.text}"</p>
+                <div className="mt-5 border-t border-gray-200 pt-4">
+                  <p className="text-sm font-bold text-gray-950">{review.name}</p>
+                  <p className="mt-0.5 text-[11px] uppercase tracking-[0.12em] text-gray-400">{review.role}</p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -376,14 +398,9 @@ const ResidentialSecurity = () => {
               src="/residential/imgi_2_resi6-scaled.jpg"
               alt="Hardwired security camera protecting Houston home backyard"
               className="w-full h-full object-cover"
+              style={{ objectPosition: "75% center" }}
               loading="lazy"
             />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 45%)" }} />
-            <div className="absolute bottom-5 left-5 right-5 px-4 py-3 rounded-xl"
-              style={{ background: "rgba(6,6,6,0.84)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.09)" }}>
-              <p className="font-bold text-white text-sm leading-tight">Hardwired. Local. Accountable.</p>
-              <p style={{ fontSize: "11.5px", color: "rgba(255,255,255,0.5)", marginTop: "3px" }}>Professional installation by our own licensed Houston technicians.</p>
-            </div>
           </motion.div>
         </div>
       </div>
@@ -430,7 +447,7 @@ const ResidentialSecurity = () => {
 
     {/* ══ FAQ — inline accordion ════════════════════════════ */}
     <section className="py-12 sm:py-16" style={{ background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 92%)" }}>
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="show" viewport={vp}
           transition={{ duration: 0.6, ease: easeExpo }}
@@ -451,7 +468,7 @@ const ResidentialSecurity = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-2">
+        <div className="grid gap-2 md:grid-cols-2 md:items-start">
           {[
             {
               q: "How does Texas Total Security customize residential security systems?",
@@ -557,6 +574,11 @@ const ResidentialSecurity = () => {
               </motion.div>
             );
           })}
+        </div>
+        <div className="mt-7 flex justify-center">
+          <Link to="/faq" className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3 text-sm font-bold text-gray-800 shadow-sm transition-all hover:border-red-200 hover:text-red-600 hover:shadow-md">
+            View the Full Security FAQ <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

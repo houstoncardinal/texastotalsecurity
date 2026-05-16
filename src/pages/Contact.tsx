@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
 import { generateLocalBusinessSchema, generateContactPageSchema, generateBreadcrumbSchema } from "@/lib/seo";
-import { Phone, Mail, MapPin, Clock, Shield, ExternalLink, ArrowRight, CheckCircle2, MessageSquare, Wrench, Camera, Radio } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Shield, ExternalLink, ArrowRight, CheckCircle2, MessageSquare, Camera, Radio, ClipboardCheck, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
@@ -28,10 +28,10 @@ const contactMethods = [
 ];
 
 const requestTypes = [
-  { icon: Shield, title: "Alarm Systems", desc: "New hardwired systems, takeovers, sensor issues, keypad problems, and cellular monitoring." },
-  { icon: Camera, title: "Security Cameras", desc: "CCTV design, LPR, NVR recording, remote access, active deterrence, and camera service." },
+  { icon: Shield, title: "Alarm Systems", desc: "New hardwired systems, alarm takeovers, keypad planning, sensor layout, and professional monitoring." },
+  { icon: Camera, title: "Security Cameras", desc: "Hardwired camera design, License Plate Reader (LPR), NVR recording, remote access, active deterrence, and video monitoring." },
   { icon: Radio, title: "Monitoring", desc: "Switch monitoring, activate compatible systems, update emergency contacts, or review dispatch instructions." },
-  { icon: Wrench, title: "Service Calls", desc: "Troubleshooting, repairs, upgrades, system health checks, and preventive maintenance." },
+  { icon: ClipboardCheck, title: "Free Assessment", desc: "Property walkthroughs, existing-equipment review, system design, and transparent project proposals." },
 ];
 
 const Contact = () => (
@@ -69,7 +69,7 @@ const Contact = () => (
               Talk to a local security team that can actually help.
             </h1>
             <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
-              Request a free analysis, get a camera quote, switch alarm monitoring, or schedule service with Texas Total Security in Houston.
+              Request a free analysis, get a camera quote, switch alarm monitoring, or plan a new security project with Texas Total Security in Houston.
             </p>
             <div className="mt-5 flex flex-col sm:flex-row gap-3">
               <a href="tel:7133879937" className="btn-primary-gradient inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm">

@@ -27,16 +27,16 @@ const easeExpo = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.15 };
 
 const fullCameraList = [
-  "CCTV Infrastructure — Hardwired PoE camera networks, fiber backhaul, surge protection, and commercial NVR recording",
+  "Hardwired Camera Infrastructure — PoE camera networks, fiber backhaul, surge protection, and commercial NVR recording",
   "High-Definition IP Cameras — 4K and multi-megapixel imaging for entrances, corridors, amenity centers, and critical assets",
-  "License Plate Recognition — Purpose-built LPR coverage for gates, parking lots, loading zones, and access-controlled lanes",
+  "License Plate Reader — Purpose-built License Plate Reader (LPR) coverage for gates, parking lots, loading zones, and access-controlled lanes",
   "PTZ Cameras — Operator-controlled or tour-based coverage for parking fields, perimeters, and large common areas",
   "180 Degree & Multi-Sensor Cameras — Broad-area visibility with fewer mounting points and fewer blind spots",
   "Fisheye Cameras — Top-down situational awareness for lobbies, clubhouses, retail areas, and interior common spaces",
   "Professional Video Monitoring — Real-time alerts, remote viewing, event review, and escalation workflows",
   "Edge Storage — Camera-level redundancy paired with centralized NVR storage for resilient evidence retention",
   "Active Deterrence — Strobes, sirens, prerecorded messages, and two-way voice for immediate response",
-  "Security Poles — Engineered pole assemblies with LPR cameras, wide-angle cameras, lighting, and deterrence equipment",
+  "Security Poles — Engineered pole assemblies with License Plate Reader (LPR) cameras, wide-angle cameras, lighting, and deterrence equipment",
   "Construction Site Surveillance — Temporary or semi-permanent systems for theft reduction and project oversight",
   "Audio Recording — Integrated camera microphones or standalone devices where legally appropriate",
   "Notification Systems — Mobile alerts, VMS notifications, and direct NVR event review",
@@ -64,7 +64,7 @@ const cameraChallenges = [
     bullets: [
       "Wi-Fi cameras dropping offline across large properties",
       "No PoE switching plan, surge protection, or fiber backhaul strategy",
-      "Consumer-grade equipment installed where commercial CCTV is required",
+      "Consumer-grade equipment installed where commercial-grade video surveillance is required",
     ],
   },
   {
@@ -92,9 +92,9 @@ const cameraChallenges = [
 ];
 
 const surveillanceCapabilities = [
-  { icon: Shield, title: "Hardwired CCTV Infrastructure", desc: "Commercial PoE camera networks with structured cabling, fiber uplinks, weather-rated junctions, surge protection, and serviceable NVR design." },
+  { icon: Shield, title: "Hardwired Camera Infrastructure", desc: "Commercial PoE camera networks with structured cabling, fiber uplinks, weather-rated junctions, surge protection, and professional NVR design." },
   { icon: Camera, title: "4K IP Camera Installation", desc: "High-definition IP infrastructure for entrances, parking lots, common areas, corridors, loading zones, and exterior perimeters." },
-  { icon: Eye, title: "License Plate Recognition", desc: "Purpose-built LPR camera placement for HOA gates, drive lanes, parking access, visitor entry, and vehicle investigations." },
+  { icon: Eye, title: "License Plate Reader", desc: "Purpose-built License Plate Reader (LPR) camera placement for HOA gates, drive lanes, parking access, visitor entry, and vehicle investigations." },
   { icon: MapPin, title: "Coverage Mapping & Placement", desc: "Camera layouts planned around field of view, mounting height, lighting, choke points, blind spots, and evidence requirements." },
   { icon: MonitorSpeaker, title: "Professional Video Monitoring", desc: "Remote viewing, real-time alerts, visual verification, event review, and escalation workflows for management teams." },
   { icon: Zap, title: "Active Deterrence", desc: "Strobes, sirens, two-way voice, and speaker output for intervention at gates, dumpster areas, after-hours zones, and parking lots." },
@@ -122,7 +122,7 @@ const monitoringPanels = [
 const faqs = [
   { question: "How many cameras does a commercial property need?", answer: "Camera count depends on field of view, mounting height, lighting, entry points, choke points, and identification requirements. We map coverage zones before recommending camera quantity or placement." },
   { question: "Can property managers view cameras remotely?", answer: "Yes. We configure secure remote viewing for authorized users with mobile and desktop access, role-based permissions, and event review workflows." },
-  { question: "Do you design hardwired CCTV systems?", answer: "Yes. We design hardwired CCTV infrastructure using PoE switching, NVR recording, fiber or wireless backhaul where appropriate, surge protection, and weather-rated enclosures." },
+  { question: "Do you design hardwired security camera systems?", answer: "Yes. We design hardwired camera infrastructure using PoE switching, NVR recording, fiber or wireless backhaul where appropriate, surge protection, and weather-rated enclosures." },
   { question: "How long is footage stored?", answer: "Most systems are designed for 30 to 90 days of retention, but storage is engineered around camera count, resolution, frame rate, motion activity, compliance requirements, and available budget." },
   { question: "Can cameras support video monitoring and real-time alerts?", answer: "Yes. Properly designed surveillance systems can support professional video monitoring, remote viewing, event notifications, visual verification, and escalation workflows for management teams." },
   { question: "What's the difference between IP cameras and analog cameras?", answer: "IP cameras provide higher resolution, cleaner network architecture, remote access flexibility, and better scalability. Analog cameras may be supported in hybrid systems when existing infrastructure still has value." },
@@ -151,10 +151,10 @@ const faqsDisplay = [
     ),
   },
   {
-    question: "Do you design hardwired CCTV systems?",
+    question: "Do you design hardwired security camera systems?",
     answer: (
       <span>
-        Yes. We design hardwired CCTV infrastructure using PoE switching, NVR recording, fiber or wireless backhaul where appropriate, surge protection, and weather-rated enclosures.{" "}
+        Yes. We design hardwired camera infrastructure using PoE switching, NVR recording, fiber or wireless backhaul where appropriate, surge protection, and weather-rated enclosures.{" "}
         <Link to="/property-assessment" className="text-red-600 font-semibold hover:underline">Request a free consultation</Link>{" "}
         or call <a href="tel:7133879937" className="text-red-600 font-semibold hover:underline">(713) 387-9937</a> to discuss your infrastructure requirements.
       </span>
@@ -214,11 +214,11 @@ const faqsDisplay = [
 const cameraSchemas = [
   generateLocalBusinessSchema(),
   generateEnhancedServiceSchema(
-    "Security Camera Systems Houston TX | CCTV, LPR & Video Monitoring",
-    "Professional security camera systems in Houston, TX. Hardwired CCTV infrastructure, 4K IP cameras, license plate recognition, video monitoring, remote viewing, active deterrence, and enterprise surveillance systems for HOAs, property managers, and businesses.",
+    "Security Camera Systems Houston TX | License Plate Reader (LPR) & Video Monitoring",
+    "Professional security camera systems in Houston, TX. Hardwired PoE camera infrastructure, 4K IP cameras, license plate reader, video monitoring, remote viewing, active deterrence, and enterprise surveillance systems for HOAs, property managers, and businesses.",
     "/security-cameras",
     "Security Camera Installation",
-    ["security camera systems Houston TX", "security camera installation Houston", "surveillance systems Houston", "video monitoring Houston", "CCTV installation Houston", "license plate recognition cameras Houston", "HOA security cameras Houston", "property management security cameras Houston", "4K IP camera installation Houston", "commercial surveillance systems Houston"],
+    ["security camera systems Houston TX", "security camera installation Houston", "surveillance systems Houston", "video monitoring Houston", "hardwired security camera installation Houston", "PoE security camera systems Houston", "NVR camera systems Houston", "license plate reader cameras Houston", "HOA security cameras Houston", "property management security cameras Houston", "4K IP camera installation Houston", "commercial surveillance systems Houston"],
     faqs
   ),
   generateBreadcrumbSchema([
@@ -229,7 +229,7 @@ const cameraSchemas = [
   generateAllServicesSchemas()[2],
   generateProductSchema(
     "Security Camera System — Houston TX",
-    "Commercial-grade hardwired CCTV camera systems for Houston properties. 4K IP cameras, PoE infrastructure, NVR recording, LPR, active deterrence, and professional video monitoring.",
+    "Commercial-grade hardwired camera systems for Houston properties. 4K IP cameras, PoE infrastructure, NVR recording, License Plate Reader (LPR), active deterrence, and professional video monitoring.",
     undefined,
     "https://schema.org/InStock"
   ),
@@ -247,8 +247,8 @@ const cameraSchemas = [
 const SecurityCameras = () => (
   <Layout>
     <SEOHead
-      title="Security Camera Systems Houston TX | CCTV, LPR & Video Monitoring"
-      description="Professional security camera systems in Houston, TX. Hardwired CCTV infrastructure, 4K IP cameras, LPR, video monitoring, remote viewing & surveillance systems for HOAs, property managers and businesses."
+      title="Security Camera Systems Houston TX | License Plate Reader (LPR) & Video Monitoring"
+      description="Professional security camera systems in Houston, TX. Hardwired PoE camera infrastructure, 4K IP cameras, License Plate Reader (LPR), video monitoring, remote viewing and surveillance systems for HOAs, property managers and businesses."
       schemas={cameraSchemas}
     />
 
@@ -282,20 +282,20 @@ const SecurityCameras = () => (
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-500/25 bg-red-500/10 mb-5">
               <Camera className="w-3.5 h-3.5 text-red-400" />
               <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-red-200">
-                CCTV · LPR · Video Monitoring · Houston
+                Security Cameras · License Plate Reader (LPR) · Video Monitoring · Houston
               </span>
             </div>
             <h1 className="font-display font-bold text-white leading-[1.02] text-4xl sm:text-5xl lg:text-6xl max-w-3xl">
               Security Camera Systems in Houston, TX
             </h1>
             <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
-              Enterprise-grade surveillance systems for HOAs, property managers, commercial facilities, and multi-site operators that need reliable footage, remote viewing, LPR, and accountable video monitoring.
+              Enterprise-grade surveillance systems for HOAs, property managers, commercial facilities, and multi-site operators that need reliable footage, remote viewing, License Plate Reader (LPR), and accountable video monitoring.
             </p>
             <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
               {[
                 { label: "4K IP", sublabel: "camera systems" },
-                { label: "CCTV", sublabel: "hardwired networks" },
-                { label: "LPR", sublabel: "gate & vehicle capture" },
+                { label: "PoE", sublabel: "hardwired networks" },
+                { label: "License Plate Reader (LPR)", sublabel: "gate & vehicle capture" },
                 { label: "Alerts", sublabel: "video monitoring" },
               ].map((stat) => (
                 <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
@@ -360,7 +360,7 @@ const SecurityCameras = () => (
               A surveillance system should reduce uncertainty, not create more of it.
             </h2>
             <p className="mt-4 text-gray-600 leading-relaxed">
-              Houston properties need more than cameras on a wall. They need engineered CCTV infrastructure, correct camera placement, searchable evidence, remote visibility, and video monitoring workflows that support real operational decisions.
+              Houston properties need more than cameras on a wall. They need engineered camera infrastructure, correct camera placement, searchable evidence, remote visibility, and video monitoring workflows that support real operational decisions.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row lg:flex-col gap-3">
               <a href="tel:7133879937" className="inline-flex items-center justify-center gap-2 bg-black px-6 py-3 text-sm font-semibold text-white hover:bg-red-700 transition-colors">
@@ -433,8 +433,8 @@ const SecurityCameras = () => (
               </p>
               <div className="mt-6 grid grid-cols-2 gap-3">
                 {[
-                  { label: "PoE", sublabel: "hardwired CCTV" },
-                  { label: "LPR", sublabel: "vehicle evidence" },
+                  { label: "PoE", sublabel: "hardwired cameras" },
+                  { label: "License Plate Reader (LPR)", sublabel: "vehicle evidence" },
                   { label: "NVR", sublabel: "retention planning" },
                   { label: "VMS", sublabel: "remote access" },
                 ].map((badge) => (
@@ -607,7 +607,7 @@ const SecurityCameras = () => (
             Build a Surveillance System That Supports Operations
           </h2>
           <p className="text-xl text-white/60 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Schedule a site analysis for CCTV infrastructure, professional video monitoring, camera placement, recording retention, and long-term system design.
+            Schedule a site analysis for camera infrastructure, professional video monitoring, camera placement, recording retention, and long-term system design.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

@@ -46,12 +46,11 @@ const TermsOfService = () => (
             <p>Texas Total Security provides the following services to residential and commercial customers in the Greater Houston area:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>Security alarm system installation, takeovers, and upgrades</li>
-              <li>Security camera and CCTV installation (hard-wired)</li>
+              <li>Hard-wired security camera installation</li>
               <li>24/7 alarm monitoring services</li>
               <li>HOA and community security systems</li>
               <li>Commercial and property management security solutions</li>
               <li>Security pole installation</li>
-              <li>Ongoing system maintenance and support</li>
             </ul>
             <p className="mt-3">
               All services are subject to availability, site assessment results, and execution of a separate service agreement where applicable.
@@ -128,7 +127,7 @@ const TermsOfService = () => (
               <li>Ensure safe and lawful access to the property for our technicians</li>
               <li>Maintain equipment in good condition and report issues promptly</li>
               <li>Comply with all local ordinances regarding alarm systems (including false alarm policies)</li>
-              <li>Not attempt to modify, repair, or tamper with installed equipment yourself</li>
+              <li>Not attempt to modify, move, or tamper with installed equipment yourself</li>
             </ul>
           </section>
 

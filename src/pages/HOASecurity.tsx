@@ -11,7 +11,7 @@ import {
   Camera, Eye, Zap, Shield, Smartphone, FileText, Users, Building2,
   CheckCircle2, ArrowRight, Phone, MapPin, Trash2, Mail, Waves,
   PawPrint, Baby, Clock, Maximize2, Star, Radio, TrendingUp,
-  ChevronLeft, ChevronRight, Plus, Minus,
+  ChevronLeft, ChevronRight, Plus, Minus, Quote,
 } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
@@ -69,7 +69,7 @@ const audienceContent = {
     body: "Your residents trust the board to keep the community safe. That means more than a camera at the front gate — it means complete visibility across every common area: pools, mailboxes, playgrounds, dog parks, and dumpster stations. Texas Total Security works directly with HOA boards to design systems that protect residents, document incidents, and provide the footage you need when you need it.",
     points: [
       "Board members and managers view footage remotely from any device",
-      "LPR cameras document every vehicle entering and exiting the community",
+      "License Plate Reader (LPR) cameras document every vehicle entering and exiting the community",
       "Complete common area coverage — not just the front gate",
       "We present to your full board with proposals and options at every price point",
       "Your account is managed by Texas Total Security",
@@ -106,8 +106,8 @@ const coverageSpots = [
     icon: MapPin,
     title: "Gates & Entrances",
     href: "/hoa-security/gates-entrances",
-    desc: "LPR cameras document every vehicle in and out. Wide-angle coverage captures pedestrian traffic, visitors, and after-hours entry. The first line of defense — and the most important one.",
-    tags: ["License Plate Recognition", "Day & Night Capture", "Wide-Angle Coverage"],
+    desc: "License Plate Reader (LPR) cameras document every vehicle in and out. Wide-angle coverage captures pedestrian traffic, visitors, and after-hours entry. The first line of defense — and the most important one.",
+    tags: ["License Plate Reader", "Day & Night Capture", "Wide-Angle Coverage"],
   },
   {
     icon: Trash2,
@@ -151,19 +151,19 @@ const propertyTypes = [
   { icon: Building2, label: "Apartment Complexes", desc: "Owned by a single entity, managed by a professional property management company. No HOA — one decision-maker, one point of contact.", audience: "Property Management" },
   { icon: Users, label: "Condominium Communities", desc: "Individual unit owners governed by a Condo Owners Association (COA). The COA often hires a property management company to handle day-to-day operations.", audience: "HOA / Property Management" },
   { icon: MapPin, label: "Townhome Communities", desc: "Individually owned units with shared driveways, entries, and green spaces governed by an HOA.", audience: "HOA" },
-  { icon: Shield, label: "Gated Neighborhoods", desc: "Single-family HOA communities requiring gate control, LPR, and perimeter coverage across common areas.", audience: "HOA" },
+  { icon: Shield, label: "Gated Neighborhoods", desc: "Single-family HOA communities requiring gate control, License Plate Reader (LPR), and perimeter coverage across common areas.", audience: "HOA" },
   { icon: Star, label: "Master-Planned Communities", desc: "Large-scale HOA developments with multiple entry points, amenity centers, and miles of common area to cover.", audience: "HOA" },
   { icon: TrendingUp, label: "Mixed-Use Developments", desc: "Residential over retail — managed by a property management company, combining residential and commercial security needs.", audience: "Property Management" },
 ];
 
 /* ─── Solutions ────────────────────────────────────────────── */
 const solutions = [
-  { icon: Camera, title: "Gate Camera Systems", desc: "HD cameras at every entry and exit with license plate recognition, night vision, and weatherproof housing." },
-  { icon: Eye, title: "License Plate Recognition", desc: "LPR captures every vehicle entering and leaving — essential documentation for management and law enforcement." },
+  { icon: Camera, title: "Gate Camera Systems", desc: "HD cameras at every entry and exit with license plate reader, night vision, and weatherproof housing." },
+  { icon: Eye, title: "License Plate Reader", desc: "License Plate Reader (LPR) captures every vehicle entering and leaving — essential documentation for management and law enforcement." },
   { icon: Zap, title: "Active Deterrence", desc: "Cameras with built-in sirens and strobes that respond to intrusions in real time — no guard required." },
   { icon: Maximize2, title: "Wide-Angle Full Coverage", desc: "Strategically placed cameras with wide fields of view eliminate blind spots across large common areas." },
   { icon: Clock, title: "Reliable 24/7 Recording", desc: "Continuous high-definition recording stored locally and backed up — always available when you need it." },
-  { icon: Radio, title: "Cellular Backup", desc: "Systems communicate over Verizon cellular — not your internet. Recording stays active even when connectivity drops." },
+  { icon: Radio, title: "Backup Planning", desc: "Systems are designed with backup planning for recording continuity when connectivity drops." },
   { icon: Smartphone, title: "Remote Management", desc: "Board members and property managers view live and recorded footage from any device, anywhere." },
   { icon: FileText, title: "Incident Documentation", desc: "Retrieve and export footage for police reports, insurance claims, HOA hearings, or tenant disputes." },
 ];
@@ -186,7 +186,25 @@ const poleImages = [
 const testimonials = [
   { name: "Lisa M.", role: "HOA Board President, West University Place", text: "Since installing the gate camera system, we've seen a dramatic reduction in trespassing and vehicle break-ins. The board is thrilled with the quality and Texas Total Security's responsiveness." },
   { name: "Robert K.", role: "Property Manager, River Oaks", text: "Managing multiple communities means I need reliable systems and a vendor I can count on. Texas Total Security delivers on both fronts — every time." },
-  { name: "Jennifer W.", role: "HOA Board Member, Memorial Villages", text: "The LPR cameras have been a game-changer. We can track every vehicle and provide footage to law enforcement the same day an incident is reported." },
+  { name: "Jennifer W.", role: "HOA Board Member, Memorial Villages", text: "The License Plate Reader (LPR) cameras have been a game-changer. We can track every vehicle and provide footage to law enforcement the same day an incident is reported." },
+];
+
+const reviewProof = [
+  {
+    name: "S Nevar",
+    role: "Google Review",
+    text: "Great company and staff. They did the set up on mobile phones and explained everything we needed to know on our two-way audio cameras and doorbell. Highly recommend. Thank You Tim and Johnny.",
+  },
+  {
+    name: "Coleman Ferguson",
+    role: "Google Review",
+    text: "Texas Total Security did a fantastic job installing an alarm system and cameras. The cameras are all 1080p hd and are all commercial grade. The owner, Tim Townsend, is a very credible, knowledgeable person.",
+  },
+  {
+    name: "Iris Deleon",
+    role: "Google Local Guide",
+    text: "Tim was amazing! I had an issue with my NVR he came, gave me fair price and fix it quickly.",
+  },
 ];
 
 /* ─── Gallery ──────────────────────────────────────────────── */
@@ -213,14 +231,14 @@ const hoaGalleryImages = [
 
 /* ─── FAQs ─────────────────────────────────────────────────── */
 const faqs = [
-  { question: "What coverage locations are most important for a property manager?", answer: "Based on where incidents most frequently occur, the highest-priority locations are: gate entries/exits (LPR), dumpster areas (vandalism and illegal dumping), mailbox clusters (package theft), pool areas (after-hours access and liability), and parking structures (vehicle break-ins). We assess your property and design coverage around your specific layout and incident history." },
+  { question: "What coverage locations are most important for a property manager?", answer: "Based on where incidents most frequently occur, the highest-priority locations are: gate entries/exits (License Plate Reader (LPR)), dumpster areas (vandalism and illegal dumping), mailbox clusters (package theft), pool areas (after-hours access and liability), and parking structures (vehicle break-ins). We assess your property and design coverage around your specific layout and incident history." },
   { question: "How do you work with HOA boards?", answer: "We present directly to your board with detailed proposals and options at different price points. We handle every aspect of the installation — including coordinating access, conduit routing, and any permits required. After installation, board members and property managers get secure remote access from any device." },
   { question: "Can we view footage remotely for multiple properties?", answer: "Yes. Property managers with multiple sites can access all cameras from a single platform — live and recorded footage, from any device. We set up each location and connect your entire portfolio under one management dashboard." },
   { question: "Do you handle multi-entrance communities?", answer: "Absolutely. We design systems for communities of all sizes — from a single gate to large master-planned communities with multiple entry points and miles of common area to cover." },
-  { question: "Can the system capture license plates at night?", answer: "Yes. Our LPR cameras use specialized IR illumination designed specifically for nighttime plate capture. We test every installation to verify plate capture quality before we leave the site." },
+  { question: "Can the system capture license plates at night?", answer: "Yes. Our License Plate Reader (LPR) cameras use specialized IR illumination designed specifically for nighttime plate capture. We test every installation to verify plate capture quality before we leave the site." },
   { question: "What types of properties do you serve?", answer: "We work with apartment complexes, condominium communities, townhome developments, gated single-family HOA neighborhoods, master-planned communities, and mixed-use developments throughout the Houston area." },
-  { question: "What if internet or power goes down at the property?", answer: "All systems include battery backup for power outages. Cameras communicate over Verizon cellular — not your internet — so recording stays active even when connectivity is interrupted. Your footage is protected." },
-  { question: "What about ongoing maintenance?", answer: "We offer maintenance plans covering regular system checks, camera cleaning, firmware updates, and priority service response. When something needs attention, we reach out to you — you shouldn't have to chase us." },
+  { question: "What if internet or power goes down at the property?", answer: "All systems include battery backup for power outages. Cameras are designed with backup planning so recording and incident review stay dependable when connectivity is interrupted. Your footage is protected." },
+  { question: "What happens after installation?", answer: "We configure remote access, monitoring details, user permissions, and board-ready documentation so your community knows how the system is set up and who can view footage." },
 ];
 
 /* ─── Schemas ──────────────────────────────────────────────── */
@@ -228,7 +246,7 @@ const hoaSchemas = [
   generateLocalBusinessSchema(),
   generateEnhancedServiceSchema(
     "HOA Security Systems Houston TX — Property Manager & Community Surveillance",
-    "Professional HOA and property management security solutions in Houston, TX. Gate cameras, LPR, dumpster area coverage, mailbox surveillance, pool cameras, playground monitoring & 24/7 recording.",
+    "Professional HOA and property management security solutions in Houston, TX. Gate cameras, License Plate Reader (LPR), dumpster area coverage, mailbox surveillance, pool cameras, playground monitoring & 24/7 recording.",
     "/hoa-security",
     "HOA Security System Installation",
     ["HOA security camera systems Houston TX", "HOA gate cameras Houston", "property management security cameras Houston", "apartment complex security cameras", "community security cameras Houston", "dumpster area cameras Houston", "mailbox cameras HOA", "pool surveillance cameras Houston"],
@@ -273,113 +291,121 @@ const HOASecurity = () => {
     <Layout>
       <SEOHead
         title="HOA & Property Management Security Houston TX | Community Cameras | Texas Total Security"
-        description="Secure your community with professional gate cameras, LPR, dumpster area coverage, pool surveillance, mailbox cameras & 24/7 recording. Serving HOA boards and property managers across Houston."
+        description="Secure your community with professional gate cameras, License Plate Reader (LPR), dumpster area coverage, pool surveillance, mailbox cameras & 24/7 recording. Serving HOA boards and property managers across Houston."
         schemas={hoaSchemas}
       />
 
-      {/* ══ HERO — 2-column with embedded form ══════════════════ */}
-      <section className="relative overflow-hidden" style={{ minHeight: "100vh" }}>
-        {/* BG */}
+      {/* ══ HERO — compact professional banner ══════════════ */}
+      <section className="relative overflow-hidden bg-neutral-950">
         <div className="absolute inset-0">
           <img
             src="/hoa/20241211_110527.jpg"
             alt="HOA security camera system protecting Houston community common areas"
-            className="w-full h-full object-cover object-center"
+            className="h-full w-full object-cover object-center opacity-25"
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.80) 52%, rgba(0,0,0,0.62) 100%)" }} />
-          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 60% at 15% 65%, hsl(0 85% 44% / 0.13), transparent 65%)" }} />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,10,0.98)_0%,rgba(10,10,10,0.91)_48%,rgba(10,10,10,0.76)_100%)]" />
         </div>
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.055]"
+          style={{
+            backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-0 lg:min-h-screen lg:flex lg:items-center">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 w-full lg:py-20">
-
-            {/* Left — copy */}
-            <motion.div
-              variants={fadeLeft} initial="hidden" animate="show"
-              transition={{ duration: 0.8, ease: easeExpo }}
-              className="flex flex-col justify-center"
-            >
-              <div className="flex items-center gap-2 mb-5">
-                <div className="h-px w-5 rounded-full" style={{ background: "hsl(0 85% 52%)" }} />
-                <span className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: "hsl(0 75% 64%)" }}>HOA · Property Management · Investor Security</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_460px] gap-8 lg:gap-10 items-center">
+            <motion.div variants={fadeLeft} initial="hidden" animate="show" transition={{ duration: 0.75, ease: easeExpo }}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-500/25 bg-red-500/10 mb-5">
+                <Users className="w-3.5 h-3.5 text-red-400" />
+                <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-red-200">HOA · Property Management · Investor Security</span>
               </div>
-
-              <h1 className="font-display font-bold text-white leading-[1.05] tracking-tight mb-4"
-                style={{ fontSize: "clamp(2rem, 4.5vw, 3.4rem)" }}>
-                Be on Top of Your<br />
-                <span style={{
-                  background: "linear-gradient(135deg, hsl(0 78% 78%) 0%, hsl(0 85% 56%) 45%, hsl(0 90% 44%) 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}>Community & Investment.</span>
+              <h1 className="font-display font-bold text-white leading-[1.02] text-4xl sm:text-5xl lg:text-6xl max-w-3xl">
+                Be on top of your community and investment.
               </h1>
-
-              <p className="leading-relaxed mb-7" style={{ fontSize: "clamp(0.95rem, 1.5vw, 1.05rem)", color: "rgba(255,255,255,0.60)", maxWidth: "30rem" }}>
+              <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/75">
                 24/7 surveillance for every location that matters — gates, mailboxes, pools, and parking. One local team for every property you manage.
               </p>
-
-              <ul className="space-y-3 mb-8">
+              <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
                 {[
-                  "Gate cameras with license plate recognition — every vehicle logged",
-                  "Full common-area coverage: mailboxes, pools, dumpsters, parking",
-                  "One local team managing all your properties — reach us directly",
-                ].map(item => (
-                  <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 shrink-0 mt-[2px]" style={{ color: "hsl(0 85% 54%)" }} />
-                    <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.78)", lineHeight: 1.5 }}>{item}</span>
-                  </li>
+                  { label: "Gate", sublabel: "camera systems" },
+                  { label: "LPR", sublabel: "vehicle records" },
+                  { label: "Common", sublabel: "area coverage" },
+                  { label: "Board", sublabel: "ready planning" },
+                ].map((stat) => (
+                  <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
+                    <p className="font-display text-xl font-bold text-white">{stat.label}</p>
+                    <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
+                  </div>
                 ))}
-              </ul>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  to="/property-assessment"
-                  className="btn-primary-gradient inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3.5"
-                  style={{ boxShadow: "0 4px 24px hsl(0 85% 44% / 0.42)" }}
-                >
-                  Get a Property Assessment <ArrowRight className="w-4 h-4" />
-                </Link>
-                <a
-                  href="tel:7133879937"
-                  className="inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3.5 rounded-xl transition-all duration-200"
-                  style={{ border: "1px solid rgba(255,255,255,0.18)", color: "white" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.08)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}
-                >
-                  <Phone className="w-4 h-4" style={{ color: "hsl(0 85% 54%)" }} /> (713) 387-9937
-                </a>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
+                <span>HOA & Multi-Site Planning</span>
+                <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-red-400 fill-red-400" /> Board-Ready Support</span>
               </div>
             </motion.div>
 
-            {/* Right — form panel */}
-            <motion.div
-              variants={fadeRight} initial="hidden" animate="show"
-              transition={{ duration: 0.8, ease: easeExpo, delay: 0.15 }}
-              className="flex items-center"
-            >
-              <div className="w-full rounded-2xl overflow-hidden"
-                style={{
-                  background: "rgba(8,8,8,0.82)",
-                  backdropFilter: "blur(24px)",
-                  WebkitBackdropFilter: "blur(24px)",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  boxShadow: "0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.05)",
-                }}>
-                <div className="px-1 py-1">
-                  <LeadForm
-                    title="Request a Free Property Assessment"
-                    subtitle="Tell us about your property — we'll design a custom system at no charge, no obligation."
-                    showServiceType
-                    defaultServiceType="hoa"
-                    defaultPropertyType="hoa"
-                    referringPage="/hoa-security"
-                    compact
-                  />
-                </div>
-              </div>
+            <motion.div variants={fadeRight} initial="hidden" animate="show" transition={{ duration: 0.75, ease: easeExpo, delay: 0.08 }}>
+              <LeadForm
+                title="Free Property Assessment"
+                subtitle="Tell us about the community or portfolio. We will map coverage priorities and access needs."
+                showServiceType
+                defaultServiceType="hoa"
+                defaultPropertyType="hoa"
+                referringPage="/hoa-security"
+                compact
+                className="shadow-2xl ring-1 ring-white/10"
+              />
             </motion.div>
+          </div>
+        </div>
+      </section>
 
+      {/* ── TRUST PROOF — real Google reviews ── */}
+      <section className="bg-white py-12 sm:py-14 border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[0.82fr_1.18fr] gap-8 lg:gap-10 items-start">
+            <motion.div variants={fadeLeft} initial="hidden" whileInView="show" viewport={vp} transition={{ duration: 0.7, ease: easeExpo }}>
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-red-50 border border-red-100">
+                <Star className="w-3.5 h-3.5 fill-red-600 text-red-600" />
+                <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-red-700">Real Google Reviews</span>
+              </div>
+              <h2 className="font-display font-bold text-gray-950 leading-tight" style={{ fontSize: "clamp(1.55rem, 3vw, 2.2rem)", letterSpacing: "-0.03em" }}>
+                Proof your board can trust before approving a security vendor.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-gray-600">
+                HOA and property management security requires a vendor who can explain the system, document the design, and respond after installation. These reviews from our reviews page show real customer confidence in the team, the cameras, and the support.
+              </p>
+              <Link to="/reviews" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-red-600 hover:underline">
+                Read all customer reviews <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+            <div className="grid md:grid-cols-3 gap-4">
+              {reviewProof.map((review, i) => (
+                <motion.article
+                  key={review.name}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={vp}
+                  transition={{ duration: 0.55, ease: easeExpo, delay: i * 0.06 }}
+                  className="rounded-xl border border-gray-200 bg-gray-50 p-5"
+                >
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <Quote className="w-5 h-5 text-red-600" />
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: 5 }).map((_, j) => <Star key={j} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />)}
+                    </div>
+                  </div>
+                  <p className="text-[13px] leading-relaxed text-gray-600">"{review.text}"</p>
+                  <div className="mt-5 border-t border-gray-200 pt-4">
+                    <p className="text-sm font-bold text-gray-950">{review.name}</p>
+                    <p className="mt-0.5 text-[11px] uppercase tracking-[0.12em] text-gray-400">{review.role}</p>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -659,7 +685,7 @@ const HOASecurity = () => {
               The Full System — Everything Your Property Needs
             </h2>
             <p className="text-gray-500 text-sm leading-relaxed">
-              Every component works together — from gate LPR to dumpster cameras to remote management — complete visibility across your entire property.
+              Every component works together — from gate License Plate Reader (LPR) to dumpster cameras to remote management — complete visibility across your entire property.
             </p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -766,13 +792,13 @@ const HOASecurity = () => {
               </h2>
 
               <p className="leading-relaxed mb-7" style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", color: "rgba(255,255,255,0.58)", maxWidth: "34rem" }}>
-                Texas Total Security custom-fabricates and installs security camera poles for HOA communities, apartment complexes, and neighborhood entrances throughout Houston. Poles support wide-angle cameras, LPR, and LED strobe kits — at the exact height and angle your property requires.
+                Texas Total Security custom-fabricates and installs security camera poles for HOA communities, apartment complexes, and neighborhood entrances throughout Houston. Poles support wide-angle cameras, License Plate Reader (LPR), and LED strobe kits — at the exact height and angle your property requires.
               </p>
 
               <ul className="space-y-3 mb-8">
                 {[
                   "Custom-height poles from 10 to 30 feet",
-                  "Entrance gate systems with LPR and wide-angle coverage",
+                  "Entrance gate systems with License Plate Reader (LPR) and wide-angle coverage",
                   "All hardware, mounting, and underground conduit included",
                   "Outdoor weather-rated housing for all equipment",
                   "Multi-camera pole configurations available",
@@ -909,7 +935,7 @@ const HOASecurity = () => {
 
       {/* ── FAQ — inline accordion ── */}
       <section className="py-12 sm:py-16" style={{ background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 92%)" }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={fadeUp} initial="hidden" whileInView="show" viewport={vp}
             transition={{ duration: 0.6, ease: easeExpo }}
@@ -930,13 +956,13 @@ const HOASecurity = () => {
             </p>
           </motion.div>
 
-          <div className="space-y-2">
+          <div className="grid gap-2 md:grid-cols-2 md:items-start">
             {[
               {
                 q: "What coverage locations are most important for a property manager?",
                 a: (
                   <span>
-                    Based on where incidents most frequently occur, the highest-priority locations are: gate entries/exits (LPR), dumpster areas (vandalism and illegal dumping), mailbox clusters (package theft), pool areas (after-hours access and liability), and parking structures (vehicle break-ins). We assess your property and design coverage around your specific layout and incident history.{" "}
+                    Based on where incidents most frequently occur, the highest-priority locations are: gate entries/exits (License Plate Reader (LPR)), dumpster areas (vandalism and illegal dumping), mailbox clusters (package theft), pool areas (after-hours access and liability), and parking structures (vehicle break-ins). We assess your property and design coverage around your specific layout and incident history.{" "}
                     <Link to="/property-assessment" className="text-red-600 font-semibold hover:underline">Schedule a free property assessment</Link>{" "}
                     and we'll prioritize the locations that matter most for your community.
                   </span>
@@ -976,9 +1002,9 @@ const HOASecurity = () => {
                 q: "Can the system capture license plates at night?",
                 a: (
                   <span>
-                    Yes. Our LPR cameras use specialized IR illumination designed specifically for nighttime plate capture. We test every installation to verify plate capture quality before we leave the site. If the plate isn't readable, we adjust angle, illumination, or focal length until it is. Call{" "}
+                    Yes. Our License Plate Reader (LPR) cameras use specialized IR illumination designed specifically for nighttime plate capture. We test every installation to verify plate capture quality before we leave the site. If the plate isn't readable, we adjust angle, illumination, or focal length until it is. Call{" "}
                     <a href="tel:7133879937" className="text-red-600 font-semibold hover:underline">(713) 387-9937</a>{" "}
-                    to discuss LPR placement for your specific gate configuration.
+                    to discuss License Plate Reader (LPR) placement for your specific gate configuration.
                   </span>
                 ),
               },
@@ -996,17 +1022,17 @@ const HOASecurity = () => {
                 q: "What if internet or power goes down at the property?",
                 a: (
                   <span>
-                    All systems include battery backup for power outages. Cameras communicate over Verizon cellular — not your internet — so recording stays active even when connectivity is interrupted. Your footage is protected regardless of local network conditions.
+                    All systems include battery backup for power outages. Cameras are designed with backup planning so recording and incident review stay dependable when connectivity is interrupted. Your footage is protected regardless of local network conditions.
                   </span>
                 ),
               },
               {
-                q: "What about ongoing maintenance?",
+                q: "What happens after installation?",
                 a: (
                   <span>
-                    We offer maintenance plans covering regular system checks, camera cleaning, firmware updates, and priority service response. When something needs attention, we reach out to you — you shouldn't have to chase us. Contact{" "}
+                    We configure remote access, monitoring details, user permissions, and board-ready documentation so your community knows how the system is set up and who can view footage. Contact{" "}
                     <a href="tel:7133879937" className="text-red-600 font-semibold hover:underline">(713) 387-9937</a>{" "}
-                    to discuss maintenance plan options for your property.
+                    to discuss your HOA security project.
                   </span>
                 ),
               },
@@ -1050,6 +1076,11 @@ const HOASecurity = () => {
                 </motion.div>
               );
             })}
+          </div>
+          <div className="mt-7 flex justify-center">
+            <Link to="/faq" className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3 text-sm font-bold text-gray-800 shadow-sm transition-all hover:border-red-200 hover:text-red-600 hover:shadow-md">
+              View the Full Security FAQ <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

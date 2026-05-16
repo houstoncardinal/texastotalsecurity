@@ -29,7 +29,7 @@ const problems = [
     icon: Camera,
     stat: "Top 3",
     label: "Vehicle Theft City in the U.S.",
-    desc: "Harris County leads Texas in auto theft. Parking lot cameras, active deterrence systems, and LPR cameras are proven tools to reduce theft and recover stolen property faster.",
+    desc: "Harris County leads Texas in auto theft. Parking lot cameras, active deterrence systems, and License Plate Reader (LPR) cameras are proven tools to reduce theft and recover stolen property faster.",
   },
   {
     icon: Building2,
@@ -55,7 +55,7 @@ const solutions = [
   {
     icon: Camera,
     title: "Security Camera Systems",
-    desc: "HD cameras, license plate recognition, active deterrence, and security poles — covering every angle of your property.",
+    desc: "HD cameras, license plate reader, active deterrence, and security poles — covering every angle of your property.",
     href: "/security-cameras",
   },
   {
@@ -73,7 +73,7 @@ const solutions = [
   {
     icon: Users,
     title: "HOA & Community Security",
-    desc: "Gate cameras, LPR, community surveillance, and neighborhood-wide security systems for HOAs and apartment complexes.",
+    desc: "Gate cameras, License Plate Reader (LPR), community surveillance, and neighborhood-wide security systems for HOAs and apartment complexes.",
     href: "/hoa-security",
   },
   {
@@ -417,7 +417,7 @@ const HoustonProblem = () => (
                 "Professional monitoring through our certified San Antonio partner center",
                 "Local Houston technicians who know your system",
                 "System takeover from ADT, Brinks & Vivint",
-                "Verizon cellular monitoring — always connected",
+                "professional alarm monitoring — always connected",
                 "Locally owned & operated Houston company",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">

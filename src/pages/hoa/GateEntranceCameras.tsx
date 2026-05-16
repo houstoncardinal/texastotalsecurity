@@ -17,18 +17,18 @@ const fadeLeft  = { hidden: { opacity: 0, x: -28 }, show: { opacity: 1, x: 0 } }
 const fadeRight = { hidden: { opacity: 0, x:  28 }, show: { opacity: 1, x: 0 } };
 
 const features = [
-  { icon: Car,      title: "License Plate Recognition (LPR)", desc: "Every vehicle entering and exiting your community is captured and logged — day and night — with high-resolution LPR cameras purpose-built for gate environments." },
+  { icon: Car,      title: "License Plate Reader (LPR)", desc: "Every vehicle entering and exiting your community is captured and logged — day and night — with high-resolution License Plate Reader (LPR) cameras purpose-built for gate environments." },
   { icon: Maximize2, title: "Wide-Angle Entry Coverage",      desc: "Multiple cameras cover the full approach, lane, pedestrian path, and exit. No angle is left unmonitored." },
   { icon: Eye,       title: "Night Vision & IR Illumination", desc: "Specialized IR illumination gives you clear plate and facial detail even in complete darkness — tested and verified before we leave the site." },
-  { icon: Lock,      title: "Video Intercom Integration",     desc: "Pair your surveillance system with video intercom for complete visitor identification and access control at every entry point." },
-  { icon: Clock,     title: "After-Hours Monitoring",         desc: "24/7 recording backed by Verizon cellular means your gate footage is available whenever an incident is reported — not just during business hours." },
+  { icon: Lock,      title: "Video Intercom Visibility",      desc: "Pair your surveillance system with video intercom visibility for complete visitor identification at every entry point." },
+  { icon: Clock,     title: "After-Hours Monitoring",         desc: "24/7 recording means your gate footage is available whenever an incident is reported — not just during business hours." },
   { icon: Shield,    title: "Incident Documentation",         desc: "Export timestamped footage for police reports, HOA hearings, insurance claims, or resident dispute resolution in minutes." },
 ];
 
 const faqsForSchema = [
-  { question: "How many cameras does a gate entrance system typically require?", answer: "Most single-lane residential gates require a minimum of two cameras: one LPR camera aimed at the inbound lane at the optimal angle for plate capture, and one wide-angle camera covering the full approach and pedestrian access. Two-lane or dual-direction entrances require additional cameras. Multi-entrance communities need independent setups at each gate. We assess your specific layout and design the exact camera positions before installation." },
-  { question: "Can LPR cameras read plates at night?", answer: "Yes. Our LPR cameras use dedicated IR illumination designed for nighttime plate capture — not generic security cameras repurposed for LPR. We test every installation in darkness before we consider the job complete. If the plate isn't readable, we adjust angle, illumination, or focal length until it is." },
-  { question: "What happens if a vehicle tailgates through the gate?", answer: "LPR cameras with wide-angle coverage capture every vehicle in the lane, regardless of whether the gate opened for them. If a vehicle follows another without authorization, the footage documents both vehicles with timestamp and plate data. Many of our HOA clients use this footage to identify and address unauthorized entry." },
+  { question: "How many cameras does a gate entrance system typically require?", answer: "Most single-lane residential gates require a minimum of two cameras: one License Plate Reader (LPR) camera aimed at the inbound lane at the optimal angle for plate capture, and one wide-angle camera covering the full approach and pedestrian access. Two-lane or dual-direction entrances require additional cameras. Multi-entrance communities need independent setups at each gate. We assess your specific layout and design the exact camera positions before installation." },
+  { question: "Can License Plate Reader (LPR) cameras read plates at night?", answer: "Yes. Our License Plate Reader (LPR) cameras use dedicated IR illumination designed for nighttime plate capture — not generic security cameras repurposed for License Plate Reader (LPR). We test every installation in darkness before we consider the job complete. If the plate isn't readable, we adjust angle, illumination, or focal length until it is." },
+  { question: "What happens if a vehicle tailgates through the gate?", answer: "License Plate Reader (LPR) cameras with wide-angle coverage capture every vehicle in the lane, regardless of whether the gate opened for them. If a vehicle follows another without authorization, the footage documents both vehicles with timestamp and plate data. Many of our HOA clients use this footage to identify and address unauthorized entry." },
   { question: "Can the gate camera footage be accessed remotely?", answer: "Yes. Board members, property managers, and authorized personnel can view live and recorded gate footage from any device — phone, tablet, or desktop — with secure login credentials. No IT infrastructure is required on your end." },
   { question: "How long is gate footage stored?", answer: "Storage duration depends on your system configuration and the number of cameras. Most installations are set up for 30 to 90 days of continuous recording, stored locally on-site. We size the storage capacity to your camera count and desired retention period during the system design phase." },
   { question: "Will the cameras hold up in Houston's heat and weather?", answer: "All cameras installed by Texas Total Security are rated for outdoor use in extreme conditions — including the heat, humidity, and storm exposure Houston delivers. We use weatherproof, vandal-resistant housings and route all cabling through conduit to protect against the elements." },
@@ -51,7 +51,7 @@ const schemas = [
     provider: { "@type": "LocalBusiness", name: "Texas Total Security" },
     serviceType: "Security Camera Installation",
     areaServed: "Houston, TX",
-    description: "LPR gate cameras, wide-angle entry coverage, and 24/7 recording for HOA communities and apartment complexes throughout Houston.",
+    description: "License Plate Reader (LPR) gate cameras, wide-angle entry coverage, and 24/7 recording for HOA communities and apartment complexes throughout Houston.",
     url: "https://www.texastotalsecurity.com/hoa-security/gates-entrances",
   },
 ];
@@ -63,7 +63,7 @@ const GateEntranceCameras = () => {
     <Layout>
       <SEOHead
         title="Gate & Entrance Camera Systems for HOA Communities | Texas Total Security"
-        description="LPR cameras, wide-angle entry coverage & 24/7 recording at every gate and entrance. Serving Houston HOA communities and apartment complexes. Free property assessment."
+        description="License Plate Reader (LPR) cameras, wide-angle entry coverage & 24/7 recording at every gate and entrance. Serving Houston HOA communities and apartment complexes. Free property assessment."
         schemas={schemas}
       />
 
@@ -97,14 +97,14 @@ const GateEntranceCameras = () => {
             </h1>
 
             <p className="leading-relaxed mb-7" style={{ fontSize: "clamp(0.95rem, 1.5vw, 1.05rem)", color: "rgba(255,255,255,0.60)", maxWidth: "34rem" }}>
-              Every vehicle that enters or exits your community should be documented. LPR cameras, wide-angle coverage, and 24/7 recording — designed for the gate environments where it matters most.
+              Every vehicle that enters or exits your community should be documented. License Plate Reader (LPR) cameras, wide-angle coverage, and 24/7 recording — designed for the gate environments where it matters most.
             </p>
 
             <ul className="space-y-3 mb-8">
               {[
                 "License plate recognition at every entry and exit — day and night",
                 "Wide-angle cameras covering full approach, lane, and pedestrian access",
-                "24/7 recording over Verizon cellular — always on, always accessible",
+                "24/7 recording — always on, always accessible",
               ].map(item => (
                 <li key={item} className="flex items-start gap-3">
                   <CheckCircle2 className="w-4 h-4 shrink-0 mt-[2px]" style={{ color: "hsl(0 85% 54%)" }} />
@@ -153,10 +153,10 @@ const GateEntranceCameras = () => {
                 No Documentation Means No Accountability at Your Gate
               </h2>
               <p className="text-gray-600 leading-relaxed mb-5 text-sm">
-                The gate is the first line of defense for any community — and the most frequently cited location when incidents happen. Without LPR cameras and proper coverage, your HOA has no record of who entered, when they entered, or whether they were authorized. When a car break-in happens in the parking lot, a package is stolen from a resident's door, or an unauthorized person is seen in a common area — the first question law enforcement asks is: "Do you have gate footage?"
+                The gate is the first line of defense for any community — and the most frequently cited location when incidents happen. Without License Plate Reader (LPR) cameras and proper coverage, your HOA has no record of who entered, when they entered, or whether they were authorized. When a car break-in happens in the parking lot, a package is stolen from a resident's door, or an unauthorized person is seen in a common area — the first question law enforcement asks is: "Do you have gate footage?"
               </p>
               <p className="text-gray-600 leading-relaxed mb-5 text-sm">
-                A basic camera pointed at the gate isn't enough. Plate capture requires the right lens, the right angle, and the right IR illumination. Without purpose-built LPR cameras, you'll have footage that shows a vehicle passed through — but not which vehicle. That footage is useless to investigators.
+                A basic camera pointed at the gate isn't enough. Plate capture requires the right lens, the right angle, and the right IR illumination. Without purpose-built License Plate Reader (LPR) cameras, you'll have footage that shows a vehicle passed through — but not which vehicle. That footage is useless to investigators.
               </p>
               <div className="space-y-3">
                 {[
@@ -271,7 +271,7 @@ const GateEntranceCameras = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { num: "01", title: "LPR Tested in the Field", desc: "We verify plate capture quality at night before calling an installation complete. If the plate isn't readable, we adjust until it is." },
+              { num: "01", title: "License Plate Reader (LPR) Tested in the Field", desc: "We verify plate capture quality at night before calling an installation complete. If the plate isn't readable, we adjust until it is." },
               { num: "02", title: "Licensed Professionals", desc: "Every installation is performed by our licensed team — License #B03066901. No subcontractors, no handoffs." },
               { num: "03", title: "One Local Team", desc: "When your community needs footage retrieved or a camera serviced, you reach Tim Townsend directly — not a call center." },
             ].map((p, i) => (
@@ -323,17 +323,17 @@ const GateEntranceCameras = () => {
                 q: "How many cameras does a gate entrance system typically require?",
                 a: (
                   <span>
-                    Most single-lane residential gates require a minimum of two cameras: one LPR camera aimed at the inbound lane at the optimal angle for plate capture, and one wide-angle camera covering the full approach and pedestrian access. Two-lane or dual-direction entrances require additional cameras. Multi-entrance communities need independent setups at each gate. We assess your specific layout during a{" "}
+                    Most single-lane residential gates require a minimum of two cameras: one License Plate Reader (LPR) camera aimed at the inbound lane at the optimal angle for plate capture, and one wide-angle camera covering the full approach and pedestrian access. Two-lane or dual-direction entrances require additional cameras. Multi-entrance communities need independent setups at each gate. We assess your specific layout during a{" "}
                     <Link to="/property-assessment" className="text-red-600 font-semibold hover:underline">free property assessment</Link>{" "}
                     and design the exact camera positions before installation.
                   </span>
                 ),
               },
               {
-                q: "Can LPR cameras read plates at night?",
+                q: "Can License Plate Reader (LPR) cameras read plates at night?",
                 a: (
                   <span>
-                    Yes. Our LPR cameras use dedicated IR illumination designed for nighttime plate capture — not generic security cameras repurposed for LPR. We test every installation in darkness before we consider the job complete. If the plate isn't readable, we adjust angle, illumination, or focal length until it is. Call us at{" "}
+                    Yes. Our License Plate Reader (LPR) cameras use dedicated IR illumination designed for nighttime plate capture — not generic security cameras repurposed for License Plate Reader (LPR). We test every installation in darkness before we consider the job complete. If the plate isn't readable, we adjust angle, illumination, or focal length until it is. Call us at{" "}
                     <a href="tel:7133879937" className="text-red-600 font-semibold hover:underline">(713) 387-9937</a>{" "}
                     to discuss your specific gate layout.
                   </span>
@@ -343,7 +343,7 @@ const GateEntranceCameras = () => {
                 q: "What happens if a vehicle tailgates through the gate?",
                 a: (
                   <span>
-                    LPR cameras with wide-angle coverage capture every vehicle in the lane, regardless of whether the gate opened for them. If a vehicle follows another without authorization, the footage documents both vehicles with timestamp and plate data. Many of our HOA clients use this footage in conjunction with management companies to identify and address unauthorized entry. We can also design coverage that flags multiple vehicles passing simultaneously.
+                    License Plate Reader (LPR) cameras with wide-angle coverage capture every vehicle in the lane, regardless of whether the gate opened for them. If a vehicle follows another without authorization, the footage documents both vehicles with timestamp and plate data. Many of our HOA clients use this footage in conjunction with management companies to identify and address unauthorized entry. We can also design coverage that flags multiple vehicles passing simultaneously.
                   </span>
                 ),
               },

@@ -31,7 +31,7 @@ const fadeRight= { hidden: { opacity: 0, x: 28 }, show: { opacity: 1, x: 0 } };
 /* ─── Static company-wide data ──────────────────────────────── */
 const companyDifferentiators = [
   { icon: MapPin,    title: "Talk to the Owner Directly",     desc: "Locally owned — not a franchise. Reach the owner of the company directly, no hold queues, no call centers." },
-  { icon: Radio,     title: "Verizon Cellular Monitoring",    desc: "Your system communicates over Verizon cellular. Works even when your Wi-Fi goes down or phone lines fail." },
+  { icon: Radio,     title: "Reliable Alarm Monitoring",    desc: "Your system is planned for dependable monitoring, backup power, and practical support when something needs attention." },
   { icon: PhoneCall, title: "We Call You First",              desc: "When equipment flags an issue, we reach out before you even know there's a problem. Proactive — not reactive." },
   { icon: Star,      title: "5-Star Google Rated",            desc: "Every review earned from a customer we genuinely cared for. Accountable long after installation." },
   { icon: Award,     title: "Competitive Monitoring Rates",   desc: "Many customers who switch pay less on monthly monitoring — often keeping their existing equipment." },
@@ -42,7 +42,7 @@ const processSteps = [
   { num: "01", icon: PhoneCall, title: "Discovery Call",           desc: "Speak with a local specialist about your property, existing equipment, and security goals. Zero pressure." },
   { num: "02", icon: Eye,       title: "Free Property Assessment", desc: "We visit your property, evaluate every entry point and blind spot, and design a custom solution." },
   { num: "03", icon: Zap,       title: "Same-Day Installation",    desc: "Most installations complete in a single visit. Licensed technicians. No disruption to your household or tenants." },
-  { num: "04", icon: Lock,      title: "24/7 Monitoring & Support", desc: "Verizon cellular monitoring from day one. We proactively alert you to equipment issues before you notice them." },
+  { num: "04", icon: Lock,      title: "24/7 Monitoring & Support", desc: "professional alarm monitoring from day one. We proactively alert you to equipment issues before you notice them." },
 ];
 
 const serviceIcons = [Shield, Camera, Home, Building2, Radio, Star];
@@ -162,7 +162,7 @@ const NeighborhoodLanding = () => {
                 {[
                   { icon: Star, label: "5-Star", sublabel: "Google rated" },
                   { icon: Shield, label: "Licensed", sublabel: "& Insured" },
-                  { icon: Radio, label: "Verizon", sublabel: "cellular monitoring" },
+                  { icon: Radio, label: "24/7", sublabel: "monitoring" },
                   { icon: Camera, label: "Hardwired", sublabel: "alarms & cameras" },
                 ].map((item) => (
                   <div key={item.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
@@ -216,7 +216,7 @@ const NeighborhoodLanding = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-2">
-                {["Alarm systems", "4K cameras", "LPR & gates", "Monitoring"].map((item) => (
+                {["Alarm systems", "4K cameras", "License Plate Reader (LPR) & gates", "Monitoring"].map((item) => (
                   <div key={item} className="border border-white/10 bg-black/20 px-3 py-3 text-center text-[11px] font-bold uppercase tracking-[0.12em] text-white/45">
                     {item}
                   </div>

@@ -64,7 +64,7 @@ const CAMERA_TYPES = [
   { label: "Dome / Turret", value: "dome", desc: "90° wide-angle camera", cost: 320 },
   { label: "Bullet", value: "bullet", desc: "Zoom & focus long-range", cost: 380 },
   { label: "PTZ", value: "ptz", desc: "Pan · Tilt · Zoom", cost: 650 },
-  { label: "LPR", value: "lpr", desc: "License Plate Recognition camera", cost: 950 },
+  { label: "License Plate Reader (LPR)", value: "lpr", desc: "License Plate Reader camera", cost: 950 },
   { label: "Panoramic", value: "multi", desc: "180° or 360° panoramic camera", cost: 1100 },
 ];
 
@@ -1433,7 +1433,7 @@ const PoleConfigurator = () => {
   const { perPole, total } = calcPrice(config);
 
   // Mount × Camera compatibility:
-  //   • LPR        → Circle Junction Box only (never L Bracket)
+  //   • License Plate Reader (LPR)        → Circle Junction Box only (never L Bracket)
   //   • Dome/Turret→ L Bracket Junction Box only
   //   • All others → Circle Junction Box (default for everything except dome)
   const update = (key: keyof PoleConfig, val: any) =>

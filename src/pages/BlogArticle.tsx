@@ -38,7 +38,6 @@ const BlogArticle = () => {
       "/commercial": "Commercial Security",
       "/hoa-security": "HOA Security",
       "/monitoring-services": "Monitoring Services",
-      "/service-maintenance": "Service & Maintenance",
     };
     return { label: labels[href] || href, href };
   });

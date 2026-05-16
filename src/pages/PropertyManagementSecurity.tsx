@@ -30,8 +30,8 @@ const coverageSpots = [
   {
     icon: Car,
     title: "Parking Lots & Garages",
-    desc: "Vehicle break-ins, hit-and-runs, and overnight trespassing are the most frequent liability events in multi-family properties. Wide-angle and LPR cameras document every incident with timestamped footage.",
-    tags: ["Vehicle Break-In Evidence", "Hit & Run Documentation", "LPR Capture"],
+    desc: "Vehicle break-ins, hit-and-runs, and overnight trespassing are the most frequent liability events in multi-family properties. Wide-angle and License Plate Reader (LPR) cameras document every incident with timestamped footage.",
+    tags: ["Vehicle Break-In Evidence", "Hit & Run Documentation", "License Plate Reader (LPR) Capture"],
   },
   {
     icon: Trash2,
@@ -79,8 +79,8 @@ const whyUs = [
   },
   {
     icon: Radio,
-    title: "Monitored Over Verizon Cellular",
-    desc: "Our systems communicate over Verizon cellular — not your internet. Recording stays active even when the property's connection drops. No ISP dependency, no gaps.",
+    title: "Professional Monitoring Support",
+    desc: "Our systems are designed with backup planning, practical recording coverage, and local support when property connectivity creates risk.",
   },
   {
     icon: Users,
@@ -112,11 +112,11 @@ const propertyTypes = [
 /* ─── Solutions ────────────────────────────────────────────── */
 const solutions = [
   { icon: Camera,    title: "4K Hard-Wired Surveillance",      desc: "Power-over-Ethernet IP cameras deliver consistent 4K resolution across parking lots, building entrances, amenity areas, and common spaces — no Wi-Fi required." },
-  { icon: Eye,       title: "License Plate Recognition",       desc: "LPR documents every vehicle entering and leaving — essential for hit-and-run incidents, unauthorized access, and trespassing documentation." },
+  { icon: Eye,       title: "License Plate Reader",       desc: "License Plate Reader (LPR) documents every vehicle entering and leaving — essential for hit-and-run incidents, unauthorized access, and trespassing documentation." },
   { icon: Zap,       title: "Active Deterrence",               desc: "Cameras with built-in sirens and strobes that respond to intrusion in real time — no on-site guard required." },
   { icon: Maximize2, title: "Wide-Angle Full Coverage",        desc: "Strategically placed cameras eliminate blind spots across large parking areas, courtyards, and multi-building campuses." },
   { icon: Clock,     title: "Reliable 24/7 Recording",         desc: "Continuous high-definition recording stored locally — always available for incident review, police reports, and insurance claims." },
-  { icon: Radio,     title: "Cellular Backup",                 desc: "Systems run over Verizon cellular — not your internet. Recording stays active even when the property's connectivity is interrupted." },
+  { icon: Radio,     title: "Backup Planning", desc: "Systems are designed with backup planning so recording stays dependable when property connectivity is interrupted." },
   { icon: Smartphone, title: "Multi-Site Remote Management",   desc: "Property managers view live and recorded footage across every site from a single dashboard, on any device." },
   { icon: FileText,  title: "Incident Documentation",          desc: "Export timestamped footage for police reports, insurance claims, eviction proceedings, or owner reporting in minutes." },
 ];
@@ -156,7 +156,7 @@ const faqs = [
   },
   {
     question: "What happens when the internet goes down at a property?",
-    answer: "All of our systems include Verizon cellular backup. Cameras communicate over the cellular network — not your internet provider — so recording continues uninterrupted even during an outage. Your footage is protected regardless of connectivity status.",
+    answer: "We design camera systems with backup planning and recording continuity in mind, so footage remains protected through common connectivity issues. Your footage is protected regardless of connectivity status.",
   },
   {
     question: "How does the footage help with tenant disputes or eviction proceedings?",
@@ -164,11 +164,11 @@ const faqs = [
   },
   {
     question: "Can the system capture license plates in a parking lot at night?",
-    answer: "Yes. Our LPR cameras use specialized IR illumination designed for nighttime plate capture at parking lot entry and exit points. We test every installation to verify plate capture quality before we leave the site.",
+    answer: "Yes. Our License Plate Reader (LPR) cameras use specialized IR illumination designed for nighttime plate capture at parking lot entry and exit points. We test every installation to verify plate capture quality before we leave the site.",
   },
   {
-    question: "What about ongoing maintenance after installation?",
-    answer: "We offer maintenance plans covering regular system checks, camera cleaning, firmware updates, and priority service response. When something needs attention, we reach out to you — you shouldn't have to file a ticket with a national support line and wait.",
+    question: "What happens after installation?",
+    answer: "We configure remote access, user permissions, monitoring details, documentation, and reporting workflows so property managers know exactly how the system is set up and how footage can be reviewed.",
   },
   {
     question: "How do you handle properties with multiple buildings or large campuses?",
@@ -210,7 +210,7 @@ const faqsDisplay = [
     question: "What happens when the internet goes down at a property?",
     answer: (
       <span>
-        All of our systems include Verizon cellular backup. Cameras communicate over the cellular network — not your internet provider — so recording continues uninterrupted even during an outage. Your footage is protected regardless of connectivity status.{" "}
+        We design camera systems with backup planning and recording continuity in mind, so footage remains protected through common connectivity issues. Your footage is protected regardless of connectivity status.{" "}
         <Link to="/monitoring-services" className="text-red-600 font-semibold hover:underline">Learn more about our monitoring reliability</Link>.
       </span>
     ),
@@ -229,17 +229,17 @@ const faqsDisplay = [
     question: "Can the system capture license plates in a parking lot at night?",
     answer: (
       <span>
-        Yes. Our LPR cameras use specialized IR illumination designed for nighttime plate capture at parking lot entry and exit points. We test every installation to verify plate capture quality before we leave the site.{" "}
-        <Link to="/hoa-security/gates-entrances" className="text-red-600 font-semibold hover:underline">See how we configure LPR for gates and entrances</Link>.
+        Yes. Our License Plate Reader (LPR) cameras use specialized IR illumination designed for nighttime plate capture at parking lot entry and exit points. We test every installation to verify plate capture quality before we leave the site.{" "}
+        <Link to="/hoa-security/gates-entrances" className="text-red-600 font-semibold hover:underline">See how we configure License Plate Reader (LPR) for gates and entrances</Link>.
       </span>
     ),
   },
   {
-    question: "What about ongoing maintenance after installation?",
+    question: "What happens after installation?",
     answer: (
       <span>
-        We offer maintenance plans covering regular system checks, camera cleaning, firmware updates, and priority service response. When something needs attention, we reach out to you — you shouldn't have to file a ticket with a national support line and wait.{" "}
-        <Link to="/service-maintenance" className="text-red-600 font-semibold hover:underline">Learn about our maintenance plans</Link>{" "}
+        We configure remote access, user permissions, monitoring details, documentation, and reporting workflows so property managers know exactly how the system is set up and how footage can be reviewed.{" "}
+        <Link to="/property-assessment" className="text-red-600 font-semibold hover:underline">Schedule a property assessment</Link>{" "}
         or call <a href="tel:7133879937" className="text-red-600 font-semibold hover:underline">(713) 387-9937</a>.
       </span>
     ),
@@ -361,7 +361,7 @@ const PropertyManagementSecurity = () => (
           {[
             "Hard-Wired Systems — No Wi-Fi Needed",
             "Talk to the Owner Directly",
-            "Monitored Over Verizon Cellular",
+            "Professional Monitoring Support",
             "We Call You First",
             "5-Star Rated on Google",
           ].map((chip) => (
@@ -398,7 +398,7 @@ const PropertyManagementSecurity = () => (
               {[
                 "Remote access to every property from your phone or desktop",
                 "4K hard-wired footage that holds up for insurance claims and legal proceedings",
-                "Reliable 24/7 recording over Verizon cellular — no gaps, no internet dependency",
+                "Reliable 24/7 recording with backup planning and incident review",
                 "One local Houston company for all your properties — not a different vendor per site",
                 "We call you when something needs attention — you don't chase us",
               ].map((pt) => (
@@ -674,7 +674,7 @@ const PropertyManagementSecurity = () => (
             The Full System — Everything Your Property Needs
           </h2>
           <p className="text-gray-500 text-base leading-relaxed">
-            Every component is hard-wired and works together — from parking lot LPR to dumpster cameras to remote multi-site management — giving you complete visibility and documentation across your entire portfolio.
+            Every component is hard-wired and works together — from parking lot License Plate Reader (LPR) to dumpster cameras to remote multi-site management — giving you complete visibility and documentation across your entire portfolio.
           </p>
         </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">

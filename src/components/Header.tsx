@@ -2,19 +2,18 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Phone, Menu, X, ChevronDown, Shield,
-  Camera, Home, Building2, Users, Radio, Wrench,
-  ArrowRight, CheckCircle2, MapPin, Star,
+  Camera, Home, Building2, Users, Radio,
+  ArrowRight, CheckCircle2, MapPin, Star, RefreshCw,
 } from "lucide-react";
 
 const mainServices = [
   { name: "Alarm Systems & Takeovers", href: "/alarm-systems",        icon: Shield,    desc: "Switch providers & keep your equipment" },
-  { name: "Security Camera Systems",   href: "/security-cameras",     icon: Camera,    desc: "4K surveillance & LPR systems" },
+  { name: "Security Camera Systems",   href: "/security-cameras",     icon: Camera,    desc: "4K surveillance & License Plate Reader (LPR) systems" },
   { name: "Monitoring Services",       href: "/monitoring-services",  icon: Radio,     desc: "24/7 professional alarm monitoring" },
   { name: "Residential Solutions",     href: "/residential",          icon: Home,      desc: "Custom home security for all property types" },
   { name: "Commercial Solutions",      href: "/commercial",           icon: Building2, desc: "Enterprise-grade business solutions" },
   { name: "HOA Security Solutions",    href: "/hoa-security",         icon: Users,     desc: "Gate cameras & community-wide security" },
   { name: "Security Pole Configurator", href: "/security-pole-configurator", icon: Camera, desc: "Design your custom pole setup in 3D" },
-  { name: "Service & Maintenance",     href: "/service-maintenance",  icon: Wrench,    desc: "Ongoing system support & upkeep" },
 ];
 
 const navLinks = [
@@ -88,18 +87,18 @@ const Header = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5 lg:py-5">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group shrink-0">
+          <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3 group shrink-0">
             <img
               src="/logo.png"
               alt="Texas Total Security"
-              className="w-16 h-16 sm:w-20 sm:h-20 object-contain transition-transform duration-300 group-hover:scale-105"
+              className="w-12 h-12 sm:w-20 sm:h-20 object-contain transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="leading-tight">
-              <span className="font-display font-bold text-gray-900 block tracking-tight leading-none" style={{ fontSize: "clamp(1.25rem, 2.8vw, 1.6rem)" }}>
+            <div className="min-w-0 leading-tight">
+              <span className="font-display font-bold text-gray-900 block tracking-tight leading-none" style={{ fontSize: "clamp(1rem, 4.6vw, 1.6rem)" }}>
                 Texas Total Security
               </span>
               <span
-                className="text-[10px] uppercase font-semibold mt-[3px] block w-full"
+                className="hidden min-[360px]:block text-[10px] uppercase font-semibold mt-[3px] w-full"
                 style={{ color: "hsl(0 0% 8%)", letterSpacing: "0.18em" }}
               >
                 "For All Your Security Needs"
@@ -205,7 +204,7 @@ const Header = () => {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-semibold text-gray-900 text-sm mb-0.5">HOA & Multi-Family</p>
-                          <p className="text-xs text-gray-500 leading-relaxed">Gate cameras, LPR & community-wide security</p>
+                          <p className="text-xs text-gray-500 leading-relaxed">Gate cameras, License Plate Reader (LPR) & community-wide security</p>
                         </div>
                         <ArrowRight className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity mt-0.5 shrink-0" />
                       </Link>
@@ -336,11 +335,11 @@ const Header = () => {
               (713) 387-9937
             </a>
             <Link
-              to="/qualify"
+              to="/pre-qualify"
               className="btn-primary-gradient text-[13.5px] whitespace-nowrap"
               style={{ padding: "0.55rem 1.25rem", borderRadius: "0.65rem" }}
             >
-              Check If You Qualify
+              Pre-Qualify Now
             </Link>
           </div>
 
@@ -363,7 +362,7 @@ const Header = () => {
           className={`lg:hidden fixed inset-0 z-[100001] bg-white transition-all duration-300 ${
             mobileOpen
               ? "translate-x-0 opacity-100"
-              : "translate-x-full opacity-0 pointer-events-none"
+              : "hidden translate-x-full opacity-0 pointer-events-none"
           }`}
           style={{ overflowY: "auto", overscrollBehavior: "contain" }}
         >
@@ -435,10 +434,10 @@ const Header = () => {
             {/* CTA */}
             <div className="mt-auto pt-4 border-t border-gray-100 space-y-3">
               <Link
-                to="/qualify"
+                to="/pre-qualify"
                 className="block btn-primary-gradient text-center text-sm py-3.5 font-semibold"
               >
-                Check If You Qualify
+                Pre-Qualify Now
               </Link>
               <a
                 href="tel:7133879937"

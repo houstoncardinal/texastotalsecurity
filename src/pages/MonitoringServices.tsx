@@ -4,7 +4,7 @@ import FAQSection from "@/components/FAQSection";
 import LeadForm from "@/components/LeadForm";
 import SEOHead from "@/components/SEOHead";
 import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateServicePageReviewSchema, generateConsultationEventSchema } from "@/lib/seo";
-import { Radio, MapPin, Clock, Shield, PhoneCall, CheckCircle2, Phone, Star, Signal, Bell, Wrench } from "lucide-react";
+import { Radio, MapPin, Clock, Shield, PhoneCall, CheckCircle2, Phone, Star, Bell, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
@@ -14,7 +14,7 @@ const fadeLeft = { hidden: { opacity: 0, x: -28 }, show: { opacity: 1, x: 0 } };
 const fadeRight = { hidden: { opacity: 0, x: 28 }, show: { opacity: 1, x: 0 } };
 
 const benefits = [
-  { icon: Signal, title: "Cellular Communication", desc: "Alarm signals communicate over cellular paths instead of depending on Wi-Fi or traditional phone lines." },
+  { icon: Radio, title: "Reliable Signal Handling", desc: "Alarm events are configured for dependable delivery, clear verification, and fast dispatch workflows." },
   { icon: PhoneCall, title: "Proactive Account Support", desc: "When equipment or communication problems appear, our local team helps address them before they become bigger issues." },
   { icon: MapPin, title: "Local Account Management", desc: "Your account is managed by Texas Total Security, not passed around a national call-center system." },
   { icon: Shield, title: "Certified Monitoring Partner", desc: "Alarm events are handled through our certified monitoring partner center with trained operators and dispatch workflows." },
@@ -25,7 +25,7 @@ const benefits = [
 const monitoringTypes = [
   "Alarm Monitoring — 24/7 professional alarm monitoring with dispatch workflows",
   "System Takeover Monitoring — activate compatible existing equipment under Texas Total Security",
-  "Cellular Communication — alarm signal paths that do not rely on Wi-Fi or landline service",
+  "Signal Path Review — confirm the system can send alarm events dependably",
   "Custom Instructions — emergency contacts, dispatch preferences, and site-specific notes",
 ];
 
@@ -66,7 +66,7 @@ const faqs = [
     question: "What if my current monitoring is unreliable?",
     answer: (
       <span>
-        We inspect communication paths, panel condition, cellular modules, sensors, and account programming to determine what needs to be corrected before monitoring is activated. Call{" "}
+        We inspect communication paths, panel condition, sensors, and account programming to determine what needs to be corrected before monitoring is activated. Call{" "}
         <a href="tel:7133879937" className="text-red-600 font-semibold hover:underline">(713) 387-9937</a>{" "}
         or{" "}
         <Link to="/property-assessment" className="text-red-600 font-semibold hover:underline">schedule a free system review</Link>{" "}
@@ -80,7 +80,7 @@ const monitoringSchemas = [
   generateLocalBusinessSchema(),
   generateEnhancedServiceSchema(
     "24/7 Alarm Monitoring Houston TX — Professional Monitoring",
-    "Professional 24/7 alarm monitoring for Houston homes and businesses. Cellular communication, system takeovers, local account management, and certified dispatch support.",
+    "Professional 24/7 alarm monitoring for Houston homes and businesses. System takeovers, local account management, and certified dispatch support.",
     "/monitoring-services",
     "Alarm Monitoring Service",
     ["alarm monitoring Houston TX", "24/7 alarm monitoring Houston", "professional alarm monitoring Houston", "security monitoring company Houston", "alarm system takeover Houston"]
@@ -104,7 +104,7 @@ const MonitoringServices = () => (
   <Layout>
     <SEOHead
       title="Alarm Monitoring Houston TX | 24/7 Professional Monitoring"
-      description="Professional 24/7 alarm monitoring in Houston, TX. Cellular communication, alarm system takeovers, local account management, certified dispatch support, and responsive service."
+      description="Professional 24/7 alarm monitoring in Houston, TX. Alarm system takeovers, local account management, certified dispatch support, and responsive service."
       schemas={monitoringSchemas}
     />
 
@@ -141,7 +141,7 @@ const MonitoringServices = () => (
             <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
               {[
                 { label: "24/7", sublabel: "monitoring coverage" },
-                { label: "Cellular", sublabel: "communication paths" },
+                { label: "Reliable", sublabel: "signal handling" },
                 { label: "Local", sublabel: "account management" },
                 { label: "Takeover", sublabel: "existing systems" },
               ].map((stat) => (
@@ -184,7 +184,7 @@ const MonitoringServices = () => (
               Designed for reliability, not call-center confusion.
             </h2>
             <p className="mt-4 text-gray-600 leading-relaxed">
-              Monitoring depends on working equipment, proper programming, cellular communication, and a team that answers when something needs attention.
+              Monitoring depends on working equipment, proper programming, reliable signal handling, and a team that answers when something needs attention.
             </p>
           </motion.div>
 
@@ -223,7 +223,7 @@ const MonitoringServices = () => (
               Monitoring service should match the property and the people responding.
             </h2>
             <p className="mt-4 text-white/60 leading-relaxed">
-              We help configure the details that make monitoring useful: contacts, dispatch instructions, zones, cellular communication, and escalation priorities.
+              We help configure the details that make monitoring useful: contacts, dispatch instructions, zones, signal handling, and escalation priorities.
             </p>
           </div>
           <div className="grid gap-2">

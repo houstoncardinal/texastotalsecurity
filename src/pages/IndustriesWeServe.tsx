@@ -14,7 +14,7 @@ const fadeRight = { hidden: { opacity: 0, x: 28 }, show: { opacity: 1, x: 0 } };
 
 const industries = [
   { icon: Home, name: "Residential", desc: "Custom alarm and camera systems for homes of all sizes.", category: "Homes" },
-  { icon: Users, name: "HOA Communities", desc: "Gate cameras, LPR, and community-wide surveillance.", category: "Communities" },
+  { icon: Users, name: "HOA Communities", desc: "Gate cameras, License Plate Reader (LPR), and community-wide surveillance.", category: "Communities" },
   { icon: Building2, name: "Apartment Complexes", desc: "Multi-unit security and common area cameras.", category: "Multifamily" },
   { icon: Store, name: "Shopping Centers", desc: "Mall and strip center loss prevention, storefront cameras, and parking lot surveillance.", category: "Retail" },
   { icon: ShoppingBag, name: "Retail Stores", desc: "Storefront security, POS area cameras, employee entrance monitoring, and after-hours alerts.", category: "Retail" },
@@ -22,9 +22,9 @@ const industries = [
   { icon: Hotel, name: "Hotels & Hospitality", desc: "Guest safety, hallway cameras, and property perimeter security.", category: "Hospitality" },
   { icon: UtensilsCrossed, name: "Restaurants", desc: "Kitchen, dining, and exterior cameras with POS area monitoring.", category: "Hospitality" },
   { icon: Factory, name: "Industrial Sites", desc: "Perimeter security and hazardous area monitoring.", category: "Industrial" },
-  { icon: Car, name: "Parking Garages", desc: "Level-by-level cameras, LPR, emergency call stations, and lighting.", category: "Parking" },
+  { icon: Car, name: "Parking Garages", desc: "Level-by-level cameras, License Plate Reader (LPR), emergency call stations, and lighting.", category: "Parking" },
   { icon: HardHat, name: "Construction Sites", desc: "Solar-powered cameras, time-lapse, and temporary site security.", category: "Temporary" },
-  { icon: Landmark, name: "Government Buildings", desc: "High-security surveillance, restricted access, and compliance systems.", category: "Government" },
+  { icon: Landmark, name: "Government Buildings", desc: "High-security surveillance, monitored entry points, and compliance-focused camera coverage.", category: "Government" },
   { icon: Plane, name: "Airports", desc: "Perimeter surveillance, terminal cameras, and runway monitoring.", category: "Critical" },
   { icon: Anchor, name: "Marinas", desc: "Dock cameras, boat slip monitoring, and waterfront perimeter security.", category: "Waterfront" },
   { icon: Star, name: "Valet Operations", desc: "Vehicle tracking cameras, key management, and customer documentation.", category: "Operations" },
@@ -36,9 +36,9 @@ const industries = [
 
 const focusAreas = [
   { icon: Camera, title: "Coverage Design", desc: "Camera placement planned around entry points, parking exposure, blind spots, lighting, and the evidence your team actually needs." },
-  { icon: Shield, title: "Alarm Protection", desc: "Hardwired alarm systems, takeovers, cellular communication, and emergency response programming for occupied or after-hours properties." },
+  { icon: Shield, title: "Alarm Protection", desc: "Hardwired alarm systems, takeovers, backup communication planning, and emergency response programming for occupied or after-hours properties." },
   { icon: Radio, title: "Monitoring Workflows", desc: "Professional monitoring, contacts, dispatch instructions, remote viewing, and escalation plans matched to how your property operates." },
-  { icon: Network, title: "Serviceable Infrastructure", desc: "PoE networks, NVR retention, surge protection, access control tie-ins, and designs that can be maintained long after installation." },
+  { icon: Network, title: "Professional Infrastructure", desc: "PoE networks, NVR retention, surge protection, and camera designs built for dependable long-term operation." },
 ];
 
 const industriesSchemas = [
@@ -108,8 +108,8 @@ const IndustriesWeServe = () => (
             <div className="grid grid-cols-2 gap-3">
               {[
                 { label: "19", sublabel: "industry profiles" },
-                { label: "CCTV", sublabel: "hardwired systems" },
-                { label: "LPR", sublabel: "gates & parking" },
+                { label: "PoE", sublabel: "hardwired cameras" },
+                { label: "License Plate Reader (LPR)", sublabel: "gates & parking" },
                 { label: "24/7", sublabel: "monitoring options" },
               ].map((stat) => (
                 <div key={stat.label} className="border border-white/10 bg-black/45 p-4">
@@ -138,7 +138,7 @@ const IndustriesWeServe = () => (
               Different environments call for different security priorities.
             </h2>
             <p className="mt-4 text-gray-600 leading-relaxed">
-              We translate each property type into practical security decisions: where footage matters, what should trigger alerts, who needs access, and how the system should be maintained.
+              We translate each property type into practical security decisions: where footage matters, what should trigger alerts, who needs visibility, and how the system should be managed.
             </p>
             <div className="mt-6 grid gap-2">
               {["Alarm systems", "Security cameras", "Access points", "Video monitoring"].map((item) => (

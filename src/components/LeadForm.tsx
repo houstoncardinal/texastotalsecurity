@@ -413,7 +413,7 @@ const LeadForm = ({
         steps: [
           { label: "Project", title: "What type of camera project is this?", field: "goal" as const, options: ["New camera system for a property", "Upgrade or replace an existing camera system", "Gate, parking, or license plate camera coverage", "Remote viewing or video monitoring setup"] },
           { label: "Coverage", title: "Which areas need coverage first?", field: "currentIssue" as const, options: ["Entrances, exits, or gate lanes", "Parking lots, drive aisles, or vehicle activity", "Common areas, amenities, dumpsters, or mailboxes", "I need a full site coverage plan"] },
-          { label: "Current System", title: "What camera infrastructure do you have now?", field: "existingProvider" as const, options: ["No existing camera system", "Existing cameras but coverage is poor", "Existing NVR or CCTV system needs service", "Not sure what equipment is currently installed"] },
+          { label: "Current System", title: "What camera infrastructure do you have now?", field: "existingProvider" as const, options: ["No existing camera system", "Existing cameras but coverage is poor", "Existing NVR or camera system", "Not sure what equipment is currently installed"] },
           { label: "Timing", title: "How soon should we reach out?", field: "bestTime" as const, options: ["Today", "This week", "Within 2 weeks", "Just researching"] },
         ],
       },
@@ -434,7 +434,7 @@ const LeadForm = ({
         consent: "Yes, Texas Total Security can contact me about my commercial security request. *",
         steps: [
           { label: "Facility", title: "What kind of commercial property is this?", field: "goal" as const, options: ["Office, retail, or small business", "Warehouse or industrial facility", "Apartment, multifamily, or mixed-use property", "Multi-location business or portfolio"] },
-          { label: "Priority", title: "What needs attention first?", field: "currentIssue" as const, options: ["Commercial alarm system or takeover", "Security cameras or CCTV coverage", "After-hours trespassing or deterrence", "Full facility assessment"] },
+          { label: "Priority", title: "What needs attention first?", field: "currentIssue" as const, options: ["Commercial alarm system or takeover", "Security camera coverage", "After-hours trespassing or deterrence", "Full facility assessment"] },
           { label: "Current Setup", title: "What systems are already installed?", field: "existingProvider" as const, options: ["No current system", "Existing alarm system", "Existing camera system", "Alarm and cameras", "Not sure what is usable"] },
           { label: "Timing", title: "How soon should we reach out?", field: "bestTime" as const, options: ["Today", "This week", "Within 2 weeks", "Just researching"] },
         ],
@@ -445,7 +445,7 @@ const LeadForm = ({
         consent: "Yes, Texas Total Security can contact me about my HOA or property management security request. *",
         steps: [
           { label: "Community", title: "What type of property are we assessing?", field: "goal" as const, options: ["HOA neighborhood or gated community", "Apartment or multifamily property", "Condo or townhome community", "Mixed-use or managed property portfolio"] },
-          { label: "Coverage", title: "Which areas are the highest priority?", field: "currentIssue" as const, options: ["Gates, entrances, or LPR", "Parking, mailboxes, dumpsters, or amenities", "Pool, playground, or common areas", "Full community coverage plan"] },
+          { label: "Coverage", title: "Which areas are the highest priority?", field: "currentIssue" as const, options: ["Gates, entrances, or License Plate Reader (LPR)", "Parking, mailboxes, dumpsters, or amenities", "Pool, playground, or common areas", "Full community coverage plan"] },
           { label: "Decision Process", title: "Who needs to review the recommendation?", field: "existingProvider" as const, options: ["HOA board", "Property manager", "Owner or investor", "Board and property manager together", "Not sure yet"] },
           { label: "Timing", title: "How soon should we reach out?", field: "bestTime" as const, options: ["Today", "This week", "Before our next board meeting", "Just researching"] },
         ],
@@ -461,24 +461,13 @@ const LeadForm = ({
           { label: "Timing", title: "How soon should we reach out?", field: "bestTime" as const, options: ["Today", "This week", "Within 2 weeks", "Just researching"] },
         ],
       },
-      maintenance: {
-        title: "Quick service request",
-        intro: "Answer a few service prompts so we can route the issue to the right technician and understand urgency.",
-        consent: "Yes, Texas Total Security can contact me about service or maintenance. *",
-        steps: [
-          { label: "Issue", title: "What needs service?", field: "goal" as const, options: ["Alarm system issue", "Camera system issue", "Monitoring or communication issue", "Preventive maintenance or inspection"] },
-          { label: "Symptoms", title: "What is happening right now?", field: "currentIssue" as const, options: ["Device offline or not responding", "False alarms, beeping, or trouble alerts", "Poor camera image or recording issue", "I need a technician to inspect the system"] },
-          { label: "System", title: "Who installed or manages the system?", field: "existingProvider" as const, options: ["Texas Total Security", "Another security company", "Inherited with property", "Not sure"] },
-          { label: "Urgency", title: "How urgent is the service request?", field: "bestTime" as const, options: ["Today if possible", "This week", "Routine maintenance", "Just requesting information"] },
-        ],
-      },
       analysis: {
         title: "Quick security analysis",
         intro: "Answer a few prompts so we can prepare for the site visit and understand what matters most.",
         consent: "Yes, Texas Total Security can contact me about my free security analysis. *",
         steps: [
           { label: "Property", title: "What type of property should we assess?", field: "goal" as const, options: ["Residential home", "Commercial business", "HOA or managed community", "Multiple properties or portfolio"] },
-          { label: "Priority", title: "What are you most interested in?", field: "currentIssue" as const, options: ["Alarm system or monitoring", "Security cameras or CCTV", "Both alarms and cameras", "Not sure, I need recommendations"] },
+          { label: "Priority", title: "What are you most interested in?", field: "currentIssue" as const, options: ["Alarm system or monitoring", "Security cameras or License Plate Reader (LPR)", "Both alarms and cameras", "Not sure, I need recommendations"] },
           { label: "Current Setup", title: "What do you have installed today?", field: "existingProvider" as const, options: ["No current system", "Existing alarm system", "Existing camera system", "Alarm and cameras", "Not sure"] },
           { label: "Timing", title: "How soon should we reach out?", field: "bestTime" as const, options: ["Today", "This week", "Within 2 weeks", "Just researching"] },
         ],
@@ -488,8 +477,8 @@ const LeadForm = ({
         intro: "Answer a few prompts. We will package it cleanly for the admin dashboard.",
         consent: "Yes, Texas Total Security can contact me about my alarm system request. *",
         steps: [
-          { label: "Need", title: "What do you need help with?", field: "goal" as const, options: ["Install a new hardwired alarm system", "Take over my existing alarm system", "Fix sensors, zones, or keypad issues", "Lower my monthly monitoring bill"] },
-          { label: "System", title: "What is happening right now?", field: "currentIssue" as const, options: ["Everything works, I just want better monitoring", "I have zones bypassed or sensors not working", "My equipment is old or unreliable", "I am not sure what condition it is in"] },
+          { label: "Need", title: "What do you need help with?", field: "goal" as const, options: ["Install a new hardwired alarm system", "Take over my existing alarm system", "Add sensors, zones, or keypad coverage", "Lower my monthly monitoring bill"] },
+          { label: "System", title: "What is happening right now?", field: "currentIssue" as const, options: ["Everything works, I just want better monitoring", "I want more complete coverage", "My equipment is old or unreliable", "I am not sure what condition it is in"] },
           { label: "Provider", title: "Who handles your system today?", field: "existingProvider" as const, options: ["ADT", "Vivint", "Brinks", "Alarm.com dealer", "Other / not sure", "No current provider"] },
           { label: "Timing", title: "How soon should we reach out?", field: "bestTime" as const, options: ["Today", "This week", "Within 2 weeks", "Just researching"] },
         ],
@@ -499,16 +488,15 @@ const LeadForm = ({
       formContext === "neighborhood" && areaName ? {
         title: `Guided ${areaName} security assessment`,
         intro: `Answer a few ${areaName}-specific prompts so we can route your request with the right area, property type, and service needs already attached.`,
-        consent: `Yes, Texas Total Security can contact me about security service in ${areaName}. *`,
+        consent: `Yes, Texas Total Security can contact me about security systems in ${areaName}. *`,
         steps: [
-          { label: "Service", title: `What service do you need in ${areaName}?`, field: "goal" as const, options: ["Alarm system installation or takeover", "Security cameras, CCTV, or LPR", "Monitoring, service, or system repair", "Full property assessment across alarms and cameras"] },
+          { label: "Service", title: `What security system do you need in ${areaName}?`, field: "goal" as const, options: ["Alarm system installation or takeover", "Security cameras or License Plate Reader (LPR)", "Monitoring setup or provider switch", "Full property assessment across alarms and cameras"] },
           { label: "Property", title: "What type of property are we protecting?", field: "currentIssue" as const, options: ["Residential home or estate", "Townhome, condo, or multifamily", "Commercial office, retail, or medical property", "HOA, gate, community, or managed property"] },
           { label: "Current Setup", title: "What is installed today?", field: "existingProvider" as const, options: ["No current system", "Existing alarm system", "Existing camera system", "Alarm and cameras", "Not sure / inherited with the property"] },
           { label: "Timing", title: "How soon should we reach out?", field: "bestTime" as const, options: ["Today", "This week", "Within 2 weeks", "Just researching"] },
         ],
       } :
       activeService === "property-management" ? guidedConfigs.hoa :
-      activeService === "maintenance" ? guidedConfigs.maintenance :
       activeService === "monitoring" ? guidedConfigs.monitoring :
       activeService === "commercial" ? guidedConfigs.commercial :
       activeService === "residential" ? guidedConfigs.residential :

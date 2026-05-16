@@ -1,17 +1,16 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, type ElementType, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import {
-  Home, Building2, Briefcase, Users,
-  Camera, Bell, Radio, Car, RefreshCw,
-  ArrowRight, Phone, CheckCircle2, ArrowLeft,
+  Home, Building2, Briefcase, Users, Camera, Bell, Radio, Car,
+  RefreshCw, ArrowRight, Phone, CheckCircle2, ArrowLeft,
+  Clock3, MapPin, User, Mail, Sparkles,
 } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
 
-/* ─── Types & Storage ───────────────────────────────────────── */
 export type QualifyLead = {
   id: number;
   name: string;
@@ -33,9 +32,7 @@ export type QualifyLead = {
 export function loadQualifyLeads(): QualifyLead[] {
   try {
     return JSON.parse(localStorage.getItem("tts_qualify_leads") || "[]");
-  } catch {
-    return [];
-  }
+  } catch { return []; }
 }
 
 function saveQualifyLead(lead: Omit<QualifyLead, "id">) {
@@ -44,83 +41,106 @@ function saveQualifyLead(lead: Omit<QualifyLead, "id">) {
   localStorage.setItem("tts_qualify_leads", JSON.stringify(existing));
 }
 
-/* ─── Step Data ─────────────────────────────────────────────── */
 const ROLES = [
-  { label: "Homeowner", value: "homeowner", icon: Home, desc: "Protect my home & family" },
-  { label: "Property Manager", value: "property-manager", icon: Building2, desc: "Manage multiple properties" },
-  { label: "Business Owner", value: "business-owner", icon: Briefcase, desc: "Secure my business" },
-  { label: "HOA / Board Member", value: "board-member", icon: Users, desc: "Protect our community" },
+  { label: "Homeowner", value: "homeowner", icon: Home, desc: "Home, condo, or townhome" },
+  { label: "Property Manager", value: "property-manager", icon: Building2, desc: "Apartments or multi-family" },
+  { label: "Business Owner", value: "business-owner", icon: Briefcase, desc: "Office, retail, or warehouse" },
+  { label: "HOA / Board Member", value: "board-member", icon: Users, desc: "Gates & common areas" },
 ];
 
 const NEEDS = [
   { label: "Security Cameras", value: "cameras", icon: Camera },
   { label: "Alarm System", value: "alarm", icon: Bell },
   { label: "24/7 Monitoring", value: "monitoring", icon: Radio },
-  { label: "License Plate Recognition", value: "lpr", icon: Car },
-  { label: "Switch Alarm Companies", value: "switch", icon: RefreshCw },
+  { label: "License Plate Reader", value: "lpr", icon: Car },
+  { label: "Switch Companies", value: "switch", icon: RefreshCw },
 ];
 
 const TIMELINES = [
-  { label: "Right now", value: "asap", emoji: "🔥" },
-  { label: "Within 3 months", value: "soon", emoji: "📅" },
-  { label: "Just exploring", value: "exploring", emoji: "👀" },
+  { label: "As soon as possible", value: "asap", icon: Clock3 },
+  { label: "Within a few weeks", value: "soon", icon: Clock3 },
+  { label: "Just exploring", value: "exploring", icon: Sparkles },
 ];
 
 const PROPERTY_SIZES = [
-  { label: "Home / Condo", value: "home", desc: "Single property" },
-  { label: "Small Business", value: "small-biz", desc: "1–2 locations" },
-  { label: "Mid-Size Property", value: "mid", desc: "2–10 buildings" },
-  { label: "Large Portfolio", value: "large", desc: "10+ units / sites" },
+  { label: "Home / Condo", value: "home" },
+  { label: "Small Business", value: "small-biz" },
+  { label: "Mid-Size", value: "mid" },
+  { label: "Large Portfolio", value: "large" },
 ];
 
-const STEP_LABELS = ["About You", "What You Need", "Quick Questions", "Contact"];
-
-/* ─── Progress Bar ──────────────────────────────────────────── */
-function ProgressBar({ step }: { step: number }) {
-  const pct = Math.round(((step + 1) / STEP_LABELS.length) * 100);
+function ChipGroup({ options, selected, onClick }: {
+  options: { label: string; value: string }[];
+  selected: string;
+  onClick: (v: string) => void;
+}) {
   return (
-    <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-      <div className="max-w-2xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between mb-2.5">
-          <div className="flex items-center gap-2">
-            {STEP_LABELS.map((l, i) => (
-              <div key={l} className="flex items-center gap-1.5">
-                <div
-                  className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition-all duration-300"
-                  style={{
-                    background: i < step ? "hsl(120 55% 48%)" : i === step ? "hsl(0 85% 50%)" : "rgb(229 231 235)",
-                    color: i <= step ? "white" : "rgb(156 163 175)",
-                  }}
-                >
-                  {i < step ? "✓" : i + 1}
-                </div>
-                <span className="hidden sm:inline text-[11px] font-medium transition-colors" style={{ color: i === step ? "hsl(0 85% 50%)" : i < step ? "rgb(107 114 128)" : "rgb(209 213 219)" }}>
-                  {l}
-                </span>
-                {i < STEP_LABELS.length - 1 && <div className="w-4 h-px bg-gray-200 hidden sm:block" />}
-              </div>
-            ))}
-          </div>
-          <span className="text-[12px] font-semibold" style={{ color: "hsl(0 85% 50%)" }}>{pct}%</span>
-        </div>
-        <div className="w-full h-1 rounded-full bg-gray-100 overflow-hidden">
-          <motion.div
-            className="h-full rounded-full"
-            style={{ background: "linear-gradient(90deg, hsl(0 85% 50%), hsl(0 85% 58%))" }}
-            animate={{ width: `${pct}%` }}
-            transition={{ duration: 0.5, ease: easeExpo }}
-          />
-        </div>
-      </div>
+    <div className="flex flex-wrap gap-1.5">
+      {options.map(item => (
+        <button
+          key={item.value}
+          type="button"
+          onClick={() => onClick(item.value)}
+          className="rounded-full border-2 px-3.5 py-1.5 text-xs font-bold transition-all duration-200"
+          style={{
+            borderColor: selected === item.value ? "hsl(0 85% 50%)" : "hsl(220 13% 88%)",
+            background: selected === item.value ? "hsl(0 85% 50%)" : "white",
+            color: selected === item.value ? "white" : "hsl(220 9% 38%)",
+          }}
+        >
+          {item.label}
+        </button>
+      ))}
     </div>
   );
 }
 
-/* ─── Main Component ────────────────────────────────────────── */
+function StepBadge({ step, total, label }: { step: number; total: number; label: string }) {
+  const pct = Math.round(((step + 1) / total) * 100);
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5">
+        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[9px] font-bold text-white">{step + 1}</div>
+        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-gray-400">{label}</span>
+      </div>
+      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-100 sm:w-24 sm:flex-none">
+        <motion.div
+          className="h-full rounded-full bg-red-600"
+          animate={{ width: `${pct}%` }}
+          transition={{ duration: 0.4, ease: easeExpo }}
+        />
+      </div>
+      <span className="text-[11px] font-bold text-red-600">{pct}%</span>
+    </div>
+  );
+}
+
+function OptionChip({ selected, onClick, icon: Icon, label }: {
+  selected: boolean;
+  onClick: () => void;
+  icon: ElementType;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-sm font-semibold transition-all duration-200"
+      style={{
+        borderColor: selected ? "hsl(0 85% 50%)" : "hsl(220 13% 88%)",
+        background: selected ? "hsl(0 85% 50%)" : "white",
+        color: selected ? "white" : "hsl(220 9% 38%)",
+      }}
+    >
+      <Icon className="h-4 w-4" />
+      {label}
+    </button>
+  );
+}
+
 const QualifyFunnel = () => {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-
   const [role, setRole] = useState("");
   const [needs, setNeeds] = useState<string[]>([]);
   const [timeline, setTimeline] = useState("");
@@ -141,382 +161,251 @@ const QualifyFunnel = () => {
   const next = () => { if (canProceed() && step < 3) setStep(s => s + 1); };
   const back = () => { if (step > 0) setStep(s => s - 1); };
 
-  const handleRoleSelect = (val: string) => {
-    setRole(val);
-    setTimeout(() => setStep(1), 500);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (!canProceed()) return;
+
     const now = new Date();
     const dateStr = now.toLocaleDateString("en-US", { month: "short", day: "numeric" });
     saveQualifyLead({
-      name: contact.name,
-      phone: contact.phone,
-      email: contact.email,
-      address: contact.address,
-      role,
-      needs,
-      timeline,
-      propertySize,
-      submittedAt: now.toISOString(),
-      source: "Qualify Funnel",
-      status: "new",
-      service: needs.map(n => NEEDS.find(x => x.value === n)?.label || n).join(", "),
-      value: "TBD",
-      date: dateStr,
+      name: contact.name, phone: contact.phone, email: contact.email, address: contact.address,
+      role, needs, timeline, propertySize,
+      submittedAt: now.toISOString(), source: "Pre-Qualify Funnel", status: "new",
+      service: needs.join(", "), value: "TBD", date: dateStr,
     });
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
-        "form-name": "qualify-funnel",
-        "bot-field": "",
-        name: contact.name,
-        phone: contact.phone,
-        email: contact.email,
-        address: contact.address || "",
-        role: role || "",
-        needs: needs.map(n => NEEDS.find(x => x.value === n)?.label || n).join(", "),
-        timeline: timeline || "",
-        propertySize: propertySize || "",
+        "form-name": "prequalify-funnel", "bot-field": "",
+        name: contact.name, phone: contact.phone, email: contact.email,
+        address: contact.address || "", role, needs: needs.join(", "),
+        timeline, propertySize: propertySize || "",
       }).toString(),
     }).catch(() => {});
     setSubmitted(true);
   };
 
-  /* Success screen */
   if (submitted) {
     return (
       <Layout>
-        <SEOHead title="Request Received | Texas Total Security" description="Thank you — a specialist will reach out within 2 hours." />
-        <section className="min-h-screen flex items-center justify-center bg-white px-4">
+        <SEOHead title="Request Received | Texas Total Security" description="Thank you. A specialist will reach out soon." />
+        <section className="flex min-h-screen items-center justify-center bg-white px-4">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: easeExpo }}
-            className="text-center max-w-md mx-auto py-20"
+            transition={{ duration: 0.5, ease: easeExpo }}
+            className="max-w-lg text-center"
           >
             <motion.div
-              className="w-24 h-24 rounded-full mx-auto mb-8 flex items-center justify-center"
-              style={{ background: "hsl(120 55% 48% / 0.1)", border: "2px solid hsl(120 55% 48% / 0.3)" }}
+              className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-red-600"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 200, damping: 14, delay: 0.15 }}
+              transition={{ type: "spring", stiffness: 210, damping: 16, delay: 0.1 }}
             >
-              <CheckCircle2 className="w-12 h-12" style={{ color: "hsl(120 55% 48%)" }} />
+              <CheckCircle2 className="h-8 w-8 text-white" />
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-              <div className="text-3xl mb-3">🎉</div>
-              <h1 className="font-display font-bold text-gray-900 text-3xl mb-3 tracking-tight">You're all set!</h1>
-              <p className="text-gray-500 text-lg mb-2">A local specialist will review your info and reach out within 2 business hours.</p>
-              <p className="text-gray-400 text-sm mb-10">Need something sooner? Call us directly.</p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a href="tel:7133879937" className="btn-primary-gradient inline-flex items-center gap-2 px-8 py-4 text-base">
-                  <Phone className="w-5 h-5" /> (713) 387-9937
-                </a>
-                <Link to="/" className="inline-flex items-center gap-2 px-6 py-3.5 text-sm border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors text-gray-600 font-medium">
-                  Back to Home
-                </Link>
-              </div>
-            </motion.div>
+            <h1 className="text-2xl font-bold text-gray-950">You're all set</h1>
+            <p className="mt-2 text-sm text-gray-500">A local specialist will reach out with the best next step for your property.</p>
+            <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+              <a href="tel:7133879937" className="btn-primary-gradient inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold">
+                <Phone className="h-4 w-4" /> (713) 387-9937
+              </a>
+              <Link to="/" className="inline-flex items-center justify-center rounded-lg border border-gray-200 px-6 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">
+                Back to Home
+              </Link>
+            </div>
           </motion.div>
         </section>
       </Layout>
     );
   }
 
+  const inputClass = "w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-4 text-sm text-gray-950 outline-none transition-all placeholder:text-gray-400 focus:border-red-400 focus:shadow-[0_0_0_3px_hsl(0_85%_45%/0.10)]";
+
   return (
     <Layout>
       <SEOHead
-        title="Get a Free Security Analysis | Texas Total Security"
-        description="Find out what your property needs in 60 seconds. No obligation, no pressure — just local experts who know Houston."
+        title="Free Security Pre-Qualify | Texas Total Security"
+        description="Answer a few quick questions and get guided toward the right alarm, camera, monitoring, or HOA security next step."
       />
 
-      <ProgressBar step={step} />
+      {/* Slim header bar */}
+      <div className="border-b border-gray-100 bg-white">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3 sm:px-6">
+          <Link to="/" className="flex items-center gap-2 text-sm font-bold text-gray-950">
+            <img src="/logo.png" alt="Texas Total Security" className="h-8 w-8 object-contain" />
+            <span className="hidden sm:inline">Texas Total Security</span>
+          </Link>
+          <StepBadge step={step} total={4} label={["Your Role", "Your Needs", "Timing", "Contact"][step]} />
+        </div>
+      </div>
 
-      <section className="min-h-[calc(100vh-72px)] bg-gray-50 relative">
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: "radial-gradient(circle at 2px 2px, hsl(0 85% 45% / 0.025) 1px, transparent 0)",
-          backgroundSize: "40px 40px",
-        }} />
-
-        <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={step}
-              initial={{ opacity: 0, x: 28 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -28 }}
-              transition={{ duration: 0.28, ease: easeExpo }}
-            >
-
-              {/* ── Step 0: Who are you? ── */}
-              {step === 0 && (
-                <div>
-                  <div className="text-center mb-8">
-                    <p className="text-[13px] font-bold tracking-widest uppercase mb-3" style={{ color: "hsl(0 85% 55%)" }}>Step 1 of 4</p>
-                    <h1 className="font-display font-bold text-gray-900 mb-2" style={{ fontSize: "clamp(1.6rem, 4vw, 2.25rem)", letterSpacing: "-0.04em" }}>
-                      What best describes you?
-                    </h1>
-                    <p className="text-gray-500 text-[15px]">We'll tailor everything to your situation.</p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    {ROLES.map((r) => {
-                      const selected = role === r.value;
-                      return (
-                        <motion.button
-                          key={r.value}
-                          onClick={() => handleRoleSelect(r.value)}
-                          className="relative text-left rounded-2xl p-5 transition-all"
-                          style={{
-                            background: selected ? "hsl(0 85% 45% / 0.07)" : "white",
-                            border: `1.5px solid ${selected ? "hsl(0 85% 45% / 0.45)" : "rgb(229 231 235)"}`,
-                            boxShadow: selected ? "0 0 20px hsl(0 85% 45% / 0.12)" : "0 1px 4px rgba(0,0,0,0.04)",
-                          }}
-                          whileHover={{ scale: 1.02, y: -1 }}
-                          whileTap={{ scale: 0.97 }}
-                        >
-                          {selected && (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="absolute top-3 right-3 w-5 h-5 rounded-full flex items-center justify-center"
-                              style={{ background: "hsl(0 85% 50%)" }}
-                            >
-                              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
-                            </motion.div>
-                          )}
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{
-                            background: selected ? "hsl(0 85% 45% / 0.12)" : "rgb(249 250 251)",
-                            border: `1px solid ${selected ? "hsl(0 85% 45% / 0.25)" : "rgb(229 231 235)"}`,
-                          }}>
-                            <r.icon className="w-5 h-5" style={{ color: selected ? "hsl(0 85% 50%)" : "rgb(107 114 128)" }} />
-                          </div>
-                          <p className="font-display font-semibold text-[14px] text-gray-900 mb-0.5">{r.label}</p>
-                          <p className="text-[12px] text-gray-400">{r.desc}</p>
-                        </motion.button>
-                      );
-                    })}
-                  </div>
-                  <p className="text-center text-[11px] text-gray-400 mt-6">Tap to select · Takes about 60 seconds</p>
-                </div>
-              )}
-
-              {/* ── Step 1: What do you need? ── */}
-              {step === 1 && (
-                <div>
-                  <div className="text-center mb-8">
-                    <p className="text-[13px] font-bold tracking-widest uppercase mb-3" style={{ color: "hsl(0 85% 55%)" }}>Step 2 of 4</p>
-                    <h2 className="font-display font-bold text-gray-900 mb-2" style={{ fontSize: "clamp(1.6rem, 4vw, 2.25rem)", letterSpacing: "-0.04em" }}>
-                      What are you looking for?
-                    </h2>
-                    <p className="text-gray-500 text-[15px]">Select everything that applies — we'll build around it.</p>
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {NEEDS.map((n) => {
-                      const selected = needs.includes(n.value);
-                      return (
-                        <motion.button
-                          key={n.value}
-                          onClick={() => toggleNeed(n.value)}
-                          className="flex flex-col items-center text-center rounded-2xl py-5 px-3 transition-all"
-                          style={{
-                            background: selected ? "hsl(0 85% 45% / 0.07)" : "white",
-                            border: `1.5px solid ${selected ? "hsl(0 85% 45% / 0.45)" : "rgb(229 231 235)"}`,
-                            boxShadow: selected ? "0 0 16px hsl(0 85% 45% / 0.1)" : "0 1px 4px rgba(0,0,0,0.04)",
-                          }}
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.96 }}
-                        >
-                          <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-2.5" style={{
-                            background: selected ? "hsl(0 85% 45% / 0.12)" : "rgb(249 250 251)",
-                          }}>
-                            <n.icon className="w-5 h-5" style={{ color: selected ? "hsl(0 85% 50%)" : "rgb(107 114 128)" }} />
-                          </div>
-                          <span className="font-semibold text-[13px]" style={{ color: selected ? "rgb(17 24 39)" : "rgb(107 114 128)" }}>{n.label}</span>
-                          {selected && (
-                            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="mt-1.5">
-                              <CheckCircle2 className="w-4 h-4" style={{ color: "hsl(0 85% 55%)" }} />
-                            </motion.div>
-                          )}
-                        </motion.button>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* ── Step 2: Quick Questions ── */}
-              {step === 2 && (
-                <div>
-                  <div className="text-center mb-8">
-                    <p className="text-[13px] font-bold tracking-widest uppercase mb-3" style={{ color: "hsl(0 85% 55%)" }}>Step 3 of 4</p>
-                    <h2 className="font-display font-bold text-gray-900 mb-2" style={{ fontSize: "clamp(1.6rem, 4vw, 2.25rem)", letterSpacing: "-0.04em" }}>
-                      Two quick questions
-                    </h2>
-                    <p className="text-gray-500 text-[15px]">Almost there — these help us prepare for your call.</p>
-                  </div>
-
-                  {/* Timeline */}
-                  <div className="mb-7">
-                    <p className="font-semibold text-gray-800 text-[14px] mb-3">When do you want to get this done?</p>
-                    <div className="grid grid-cols-3 gap-3">
-                      {TIMELINES.map(t => {
-                        const sel = timeline === t.value;
-                        return (
-                          <button
-                            key={t.value}
-                            onClick={() => setTimeline(t.value)}
-                            className="rounded-2xl py-4 px-3 text-center transition-all"
-                            style={{
-                              background: sel ? "hsl(0 85% 45% / 0.07)" : "white",
-                              border: `1.5px solid ${sel ? "hsl(0 85% 45% / 0.45)" : "rgb(229 231 235)"}`,
-                            }}
-                          >
-                            <div className="text-2xl mb-1">{t.emoji}</div>
-                            <p className="font-semibold text-[13px]" style={{ color: sel ? "rgb(17 24 39)" : "rgb(107 114 128)" }}>{t.label}</p>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Property Size */}
-                  <div>
-                    <p className="font-semibold text-gray-800 text-[14px] mb-3">What size property?</p>
-                    <div className="grid grid-cols-2 gap-3">
-                      {PROPERTY_SIZES.map(s => {
-                        const sel = propertySize === s.value;
-                        return (
-                          <button
-                            key={s.value}
-                            onClick={() => setPropertySize(s.value)}
-                            className="rounded-2xl py-3.5 px-4 text-left transition-all"
-                            style={{
-                              background: sel ? "hsl(0 85% 45% / 0.07)" : "white",
-                              border: `1.5px solid ${sel ? "hsl(0 85% 45% / 0.45)" : "rgb(229 231 235)"}`,
-                            }}
-                          >
-                            <p className="font-semibold text-[13px]" style={{ color: sel ? "rgb(17 24 39)" : "rgb(107 114 128)" }}>{s.label}</p>
-                            <p className="text-[11px] text-gray-400">{s.desc}</p>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* ── Step 3: Contact ── */}
-              {step === 3 && (
-                <div>
-                  <div className="text-center mb-8">
-                    <p className="text-[13px] font-bold tracking-widest uppercase mb-3" style={{ color: "hsl(0 85% 55%)" }}>Last Step</p>
-                    <h2 className="font-display font-bold text-gray-900 mb-2" style={{ fontSize: "clamp(1.6rem, 4vw, 2.25rem)", letterSpacing: "-0.04em" }}>
-                      Where should we reach you?
-                    </h2>
-                    <p className="text-gray-500 text-[15px]">A real local person — not a bot — will call you within 2 hours.</p>
-                  </div>
-
-                  {/* Summary chip */}
-                  {(role || needs.length > 0) && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex flex-wrap gap-2 justify-center mb-7"
-                    >
-                      {role && (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold" style={{ background: "hsl(0 85% 45% / 0.08)", color: "hsl(0 85% 50%)", border: "1px solid hsl(0 85% 45% / 0.2)" }}>
-                          {ROLES.find(r => r.value === role)?.label}
-                        </span>
-                      )}
-                      {needs.map(n => (
-                        <span key={n} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600">
-                          {NEEDS.find(x => x.value === n)?.label}
-                        </span>
-                      ))}
-                    </motion.div>
-                  )}
-
-                  <form
-                    onSubmit={handleSubmit}
-                    className="space-y-4"
-                    name="qualify-funnel"
-                    data-netlify="true"
-                    netlify-honeypot="bot-field"
-                  >
-                    <input type="hidden" name="form-name" value="qualify-funnel" />
-                    <input type="hidden" name="bot-field" />
-                    {[
-                      { label: "Full Name *", key: "name", type: "text", placeholder: "John Smith", required: true },
-                      { label: "Phone *", key: "phone", type: "tel", placeholder: "(713) 555-0000", required: true },
-                      { label: "Email *", key: "email", type: "email", placeholder: "john@email.com", required: true },
-                      { label: "Property Address (optional)", key: "address", type: "text", placeholder: "123 Main St, Houston TX", required: false },
-                    ].map((field) => (
-                      <div key={field.key}>
-                        <label className="text-[12px] font-semibold text-gray-600 block mb-1.5">{field.label}</label>
-                        <input
-                          type={field.type}
-                          required={field.required}
-                          value={contact[field.key as keyof typeof contact]}
-                          onChange={e => setContact({ ...contact, [field.key]: e.target.value })}
-                          placeholder={field.placeholder}
-                          className="w-full px-4 py-3.5 rounded-xl text-gray-900 text-sm placeholder:text-gray-400 focus:outline-none transition-all bg-white border border-gray-200 focus:border-red-400 focus:shadow-[0_0_0_3px_hsl(0_85%_45%/0.1)]"
+      {/* Main content — compact, centered, no sidebar */}
+      <section className="flex min-h-[calc(100vh-60px)] items-start justify-center bg-gradient-to-b from-gray-50 to-white px-4 py-6 sm:py-10">
+        <div className="w-full max-w-2xl">
+          <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={step}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2, ease: easeExpo }}
+              >
+                {/* STEP 0: Role */}
+                {step === 0 && (
+                  <div className="p-5 sm:p-6">
+                    <h2 className="text-xl font-bold text-gray-950 sm:text-2xl">What kind of property?</h2>
+                    <p className="mt-1 text-sm text-gray-500">We'll tailor the rest around it.</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {ROLES.map(item => (
+                        <OptionChip
+                          key={item.value}
+                          selected={role === item.value}
+                          onClick={() => setRole(item.value)}
+                          icon={item.icon}
+                          label={item.label}
                         />
+                      ))}
+                    </div>
+                    <div className="mt-6 flex justify-end">
+                      <button type="button" onClick={next} disabled={!canProceed()}
+                        className="btn-primary-gradient inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold disabled:opacity-40">
+                        Continue <ArrowRight className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 1: Needs */}
+                {step === 1 && (
+                  <div className="p-5 sm:p-6">
+                    <h2 className="text-xl font-bold text-gray-950 sm:text-2xl">What do you need help with?</h2>
+                    <p className="mt-1 text-sm text-gray-500">Pick everything that applies.</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {NEEDS.map(item => (
+                        <OptionChip
+                          key={item.value}
+                          selected={needs.includes(item.value)}
+                          onClick={() => toggleNeed(item.value)}
+                          icon={item.icon}
+                          label={item.label}
+                        />
+                      ))}
+                    </div>
+                    <div className="mt-6 flex items-center justify-between">
+                      <button type="button" onClick={back} className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
+                        <ArrowLeft className="h-4 w-4" /> Back
+                      </button>
+                      <button type="button" onClick={next} disabled={!canProceed()}
+                        className="btn-primary-gradient inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold disabled:opacity-40">
+                        Continue <ArrowRight className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 2: Timing + Size */}
+                {step === 2 && (
+                  <div className="p-5 sm:p-6">
+                    <h2 className="text-xl font-bold text-gray-950 sm:text-2xl">A couple quick details</h2>
+                    <p className="mt-1 text-sm text-gray-500">Timing and property scope.</p>
+                    <div className="mt-4 space-y-4">
+                      <div>
+                        <p className="mb-2 text-xs font-bold uppercase tracking-wider text-gray-500">When would you like to start?</p>
+                        <div className="flex flex-wrap gap-2">
+                          {TIMELINES.map(item => (
+                            <OptionChip
+                              key={item.value}
+                              selected={timeline === item.value}
+                              onClick={() => setTimeline(item.value)}
+                              icon={item.icon}
+                              label={item.label}
+                            />
+                          ))}
+                        </div>
                       </div>
-                    ))}
+                      <div>
+                        <div className="mb-2 flex items-center gap-2">
+                          <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Property size</p>
+                          <span className="text-[10px] text-gray-400">optional</span>
+                        </div>
+                        <ChipGroup options={PROPERTY_SIZES} selected={propertySize} onClick={setPropertySize} />
+                      </div>
+                    </div>
+                    <div className="mt-6 flex items-center justify-between">
+                      <button type="button" onClick={back} className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
+                        <ArrowLeft className="h-4 w-4" /> Back
+                      </button>
+                      <button type="button" onClick={next} disabled={!canProceed()}
+                        className="btn-primary-gradient inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold disabled:opacity-40">
+                        Continue <ArrowRight className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                )}
 
-                    <button
-                      type="submit"
-                      disabled={!canProceed()}
-                      className="btn-primary-gradient w-full flex items-center justify-center gap-2 py-4 text-[15px] font-semibold mt-2 disabled:opacity-40 disabled:cursor-not-allowed"
-                      style={{ boxShadow: "0 4px 20px hsl(0 85% 45% / 0.3)" }}
-                    >
-                      Get My Free Analysis <ArrowRight className="w-5 h-5" />
-                    </button>
-                    <p className="text-center text-[11px] text-gray-400">
-                      🔒 We never share or sell your info. Ever.
-                    </p>
-                  </form>
-                </div>
-              )}
+                {/* STEP 3: Contact */}
+                {step === 3 && (
+                  <div className="p-5 sm:p-6">
+                    <h2 className="text-xl font-bold text-gray-950 sm:text-2xl">Where should we reach you?</h2>
+                    <p className="mt-1 text-sm text-gray-500">A local team member will follow up.</p>
+                    <form onSubmit={handleSubmit} className="mt-4 space-y-3" name="prequalify-funnel" data-netlify="true" netlify-honeypot="bot-field">
+                      <input type="hidden" name="form-name" value="prequalify-funnel" />
+                      <input type="hidden" name="bot-field" />
 
-            </motion.div>
-          </AnimatePresence>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        {[
+                          { label: "Full name", key: "name", type: "text", placeholder: "Your name", icon: User, required: true },
+                          { label: "Phone", key: "phone", type: "tel", placeholder: "(713) 555-0000", icon: Phone, required: true },
+                          { label: "Email", key: "email", type: "email", placeholder: "you@email.com", icon: Mail, required: true },
+                          { label: "Address", key: "address", type: "text", placeholder: "Houston area", icon: MapPin, required: false },
+                        ].map(field => {
+                          const Icon = field.icon;
+                          return (
+                            <label key={field.key}>
+                              <span className="mb-1 block text-[11px] font-bold uppercase tracking-[0.1em] text-gray-500">{field.label}{field.required ? " *" : ""}</span>
+                              <div className="relative">
+                                <Icon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                                <input
+                                  type={field.type}
+                                  required={field.required}
+                                  value={contact[field.key as keyof typeof contact]}
+                                  onChange={e => setContact({ ...contact, [field.key]: e.target.value })}
+                                  placeholder={field.placeholder}
+                                  className={inputClass}
+                                />
+                              </div>
+                            </label>
+                          );
+                        })}
+                      </div>
 
-          {/* Nav buttons — only steps 1–2 need explicit Continue */}
-          {(step === 1 || step === 2) && (
-            <div className="flex items-center justify-between mt-8">
-              <button
-                onClick={back}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" /> Back
-              </button>
-              <button
-                onClick={next}
-                disabled={!canProceed()}
-                className="btn-primary-gradient flex items-center gap-2 px-8 py-3 text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                Continue <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          )}
-          {step === 3 && (
-            <div className="mt-4">
-              <button
-                onClick={back}
-                className="flex items-center gap-1.5 text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors mx-auto"
-              >
-                <ArrowLeft className="w-4 h-4" /> Back
-              </button>
-            </div>
-          )}
+                      {/* Summary chips */}
+                      <div className="flex flex-wrap gap-1.5 text-[11px]">
+                        {role && <span className="rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 font-medium text-gray-700">{ROLES.find(r => r.value === role)?.label}</span>}
+                        {needs.length > 0 && <span className="rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 font-medium text-gray-700">{needs.length} need{needs.length > 1 ? "s" : ""}</span>}
+                        {timeline && <span className="rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 font-medium text-gray-700">{TIMELINES.find(t => t.value === timeline)?.label}</span>}
+                      </div>
 
-          <p className="text-center text-[11px] text-gray-300 mt-6">
-            Takes ~60 seconds · No obligation · We'll tell you straight if there's a fit
-          </p>
+                      <div className="flex items-center justify-between pt-1">
+                        <button type="button" onClick={back} className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
+                          <ArrowLeft className="h-4 w-4" /> Back
+                        </button>
+                        <button type="submit" disabled={!canProceed()}
+                          className="btn-primary-gradient inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold disabled:opacity-40">
+                          Send Request <ArrowRight className="h-4 w-4" />
+                        </button>
+                      </div>
+                      <p className="text-center text-[10px] text-gray-400">We'll use this only to follow up about your security request.</p>
+                    </form>
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </section>
     </Layout>

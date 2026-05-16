@@ -554,7 +554,7 @@ function LeadsPage() {
             {allLeads.length} total leads
             {qualifyLeads.length > 0 && (
               <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                {qualifyLeads.length} new from funnel
+                {qualifyLeads.length} new from pre-qualify
               </span>
             )}
           </p>
@@ -597,9 +597,9 @@ function LeadsPage() {
               onClick={clearQualifyLeads}
               style={{ background: "hsl(0 0% 12%)", border: "1px solid hsl(0 0% 18%)", color: "hsl(0 0% 55%)" }}
               className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm hover:text-red-400 transition-colors"
-              title="Clear funnel leads from local storage"
+              title="Clear pre-qualify leads from local storage"
             >
-              <Trash2 size={14} /> Clear Funnel
+              <Trash2 size={14} /> Clear Pre-Qualify
             </button>
           )}
         </div>
@@ -608,7 +608,7 @@ function LeadsPage() {
           <div className="px-4 py-2 border-b flex items-center gap-2" style={{ borderColor: "hsl(0 0% 14%)", background: "hsl(220 60% 50% / 0.06)" }}>
             <Bell size={13} style={{ color: "hsl(220 70% 65%)" }} />
             <span className="text-[12px] font-semibold" style={{ color: "hsl(220 70% 65%)" }}>
-              {qualifyLeads.length} new submission{qualifyLeads.length !== 1 ? "s" : ""} from the qualify funnel — shown at top
+              {qualifyLeads.length} new pre-qualify submission{qualifyLeads.length !== 1 ? "s" : ""} shown at top
             </span>
           </div>
         )}
@@ -623,7 +623,7 @@ function LeadsPage() {
           </thead>
           <tbody>
             {filtered.map((lead, i) => {
-              const isFunnel = lead.source === "Qualify Funnel";
+              const isFunnel = lead.source === "Qualify Funnel" || lead.source === "Pre-Qualify Funnel";
               const ql = isFunnel ? (lead as QualifyLead) : null;
               return (
                 <tr

@@ -12,7 +12,7 @@ import {
   generateSpecialAnnouncementSchema,
   generateAggregateOfferSchema,
 } from "@/lib/seo";
-import { Shield, CheckCircle2, Clock, Users, Phone, MapPin, ClipboardCheck, Wrench, Star } from "lucide-react";
+import { Shield, CheckCircle2, Clock, Users, Phone, MapPin, ClipboardCheck, Camera, Star } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.12 };
@@ -23,12 +23,12 @@ const fadeRight = { hidden: { opacity: 0, x: 28 }, show: { opacity: 1, x: 0 } };
 const analysisSteps = [
   { icon: MapPin, title: "Walk the Property", desc: "We review entrances, blind spots, existing equipment, wiring paths, exterior exposure, and daily operating needs." },
   { icon: ClipboardCheck, title: "Prioritize Risk", desc: "We separate urgent vulnerabilities from optional upgrades so your proposal is clear, practical, and budget-aware." },
-  { icon: Wrench, title: "Design the System", desc: "You receive a recommendation for alarm coverage, CCTV infrastructure, monitoring, and service needs." },
+  { icon: Camera, title: "Design the System", desc: "You receive a recommendation for alarm coverage, camera placement, monitoring, License Plate Reader (LPR), and active deterrence needs." },
 ];
 
 const benefits = [
   "Onsite assessment by a Houston security specialist",
-  "Alarm, camera, monitoring, and service recommendations",
+  "Alarm, camera, monitoring, License Plate Reader (LPR), and active deterrence recommendations",
   "Existing equipment reviewed before replacement is suggested",
   "No pressure, no obligation, and no generic package selling",
 ];
@@ -50,7 +50,7 @@ const FreeAnalysis = () => {
       [
         { name: "Walk the Property", text: "A licensed Texas Total Security specialist visits your property and reviews all entrances, blind spots, existing equipment, wiring paths, exterior exposure, and daily operating needs." },
         { name: "Prioritize Risk", text: "We separate urgent vulnerabilities from optional upgrades so your proposal is clear, practical, and budget-aware. No upselling — just an honest assessment." },
-        { name: "Design the System", text: "You receive a custom recommendation for alarm coverage, CCTV infrastructure, monitoring, and service needs. Transparent pricing, zero obligation." },
+        { name: "Design the System", text: "You receive a custom recommendation for alarm coverage, camera placement, monitoring, License Plate Reader (LPR), and active deterrence needs. Transparent pricing, zero obligation." },
       ],
       "/free-analysis"
     ),
@@ -63,8 +63,8 @@ const FreeAnalysis = () => {
   return (
     <Layout>
       <SEOHead
-        title="Free Security Analysis Houston TX | Alarm, CCTV & Monitoring Assessment"
-        description="Schedule a free onsite security analysis in Houston, TX. Texas Total Security assesses alarm systems, CCTV cameras, monitoring, service needs, and property vulnerabilities."
+        title="Free Security Analysis Houston TX | Alarm, Cameras & Monitoring Assessment"
+        description="Schedule a free onsite security analysis in Houston, TX. Texas Total Security assesses alarm systems, security cameras, monitoring, License Plate Reader (LPR) needs, active deterrence, and property vulnerabilities."
         schemas={schemas}
       />
       <Breadcrumbs items={[{ name: "Free Security Analysis" }]} />
@@ -101,7 +101,7 @@ const FreeAnalysis = () => {
                 Get a professional security plan before you spend money on equipment.
               </h1>
               <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
-                We assess your property, existing system, vulnerabilities, and goals, then recommend a practical plan for alarms, cameras, monitoring, and service.
+                We assess your property, existing system, vulnerabilities, and goals, then recommend a practical plan for alarms, cameras, monitoring, License Plate Reader (LPR), and active deterrence.
               </p>
               <div className="mt-6 grid sm:grid-cols-2 gap-3 max-w-2xl">
                 {benefits.map((item) => (

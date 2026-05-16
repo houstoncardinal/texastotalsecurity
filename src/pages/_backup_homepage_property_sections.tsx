@@ -112,7 +112,7 @@
                   Business Security Solutions
                 </h3>
                 <p className="text-gray-400 mt-0.5" style={{ fontSize: "0.775rem" }}>
-                  Surveillance, access control & monitoring for any business.
+                  Surveillance, License Plate Reader (LPR), alarm systems & monitoring for any business.
                 </p>
               </div>
               <svg

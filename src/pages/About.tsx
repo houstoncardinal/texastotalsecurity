@@ -39,7 +39,7 @@ const StarRow = () => (
 const values = [
   { icon: MapPin,    title: "Talk to the Owner Directly",        desc: "Locally owned — not a franchise. When something needs attention, you can reach Tim directly. No hold queues, no ticket systems, no scripts." },
   { icon: Shield,    title: "Managed by Texas Total Security", desc: "Your account is managed by Texas Total Security, with alarm signals handled through our certified San Antonio partner monitoring center. Your relationship stays with us, period." },
-  { icon: Radio,     title: "Verizon Cellular Monitoring",       desc: "We monitor over Verizon cellular — not your internet or landline. Your alarm stays connected even when Wi-Fi fails or storms knock out phone lines." },
+  { icon: Radio,     title: "Reliable Alarm Monitoring",       desc: "We configure dependable alarm communication and professional monitoring around the needs of your property." },
   { icon: PhoneCall, title: "We Call You First",                 desc: "When your equipment needs attention, we reach out before you ever have to. Proactive service means issues are resolved before they become problems." },
   { icon: Star,      title: "5-Star Rated on Google",           desc: "Every review we've earned comes from a real Houston customer we genuinely cared for. We stay accountable long after the system goes in." },
   { icon: Award,     title: "Competitive Monitoring Rates",     desc: "Many customers who switch pay less per month than before — often keeping their existing equipment and simply lowering their monitoring rate." },
@@ -51,7 +51,7 @@ const specializations = [
   { icon: Radio,     text: "24/7 Professional Alarm Monitoring" },
   { icon: PhoneCall, text: "Alarm System Takeover — Any Provider" },
   { icon: Users,     text: "HOA & Gated Community Security" },
-  { icon: Camera,    text: "License Plate Recognition (LPR) Cameras" },
+  { icon: Camera,    text: "License Plate Reader (LPR) Cameras" },
   { icon: MapPin,    text: "Active Deterrence — Strobes, Sirens, Two-Way Audio" },
   { icon: Building2, text: "Security Poles — Custom-Height, Multi-Camera" },
   { icon: Building2, text: "Multi-Family & Apartment Complex Security" },
@@ -94,7 +94,7 @@ const About = () => {
       ══════════════════════════════════════════════════ */}
       <section
         className="relative overflow-hidden"
-        style={{ background: "hsl(0 0% 4%)", minHeight: "82vh", display: "flex", alignItems: "center" }}
+        style={{ background: "hsl(0 0% 4%)", minHeight: "70vh", display: "flex", alignItems: "center" }}
       >
         {/* Background */}
         <div className="absolute inset-0 z-0">
@@ -111,24 +111,24 @@ const About = () => {
           <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.012, backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto w-full px-5 sm:px-8 lg:px-10 py-16 sm:py-20 lg:py-24">
+        <div className="relative z-10 max-w-5xl mx-auto w-full px-5 sm:px-8 lg:px-10 py-14 sm:py-16 lg:py-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: easeExpo }}
           >
             {/* Eyebrow */}
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-8" style={{ background: "linear-gradient(to right, transparent, hsl(0 85% 54%))" }} />
               <span style={{ fontSize: "10px", fontWeight: 700, color: "hsl(0 75% 66%)", letterSpacing: "0.22em", textTransform: "uppercase" }}>
-                About Texas Total Security
+                Houston Security Experts
               </span>
               <div className="h-px w-8" style={{ background: "linear-gradient(to left, transparent, hsl(0 85% 54% / 0.4))" }} />
             </div>
 
             {/* Headline */}
             <h1
-              className="font-display font-bold text-white mb-5"
+              className="font-display font-bold text-white mb-4"
               style={{
                 fontSize: "clamp(1.9rem, 5.5vw, 4rem)",
                 lineHeight: 1.08,
@@ -138,7 +138,7 @@ const About = () => {
                 overflowWrap: "normal",
               }}
             >
-              <span className="block">Not a Franchise.</span>
+              <span className="block">Trusted Security,</span>
               <span
                 className="block"
                 style={{
@@ -148,12 +148,12 @@ const About = () => {
                   backgroundClip: "text",
                 }}
               >
-                Houston's Own Security Company.
+                Built for Houston Properties.
               </span>
             </h1>
 
             {/* Accent rule */}
-            <div className="flex items-center gap-2 mb-6" style={{ maxWidth: "50rem" }}>
+            <div className="flex items-center gap-2 mb-5" style={{ maxWidth: "50rem" }}>
               <div className="h-px w-10" style={{ background: "linear-gradient(to right, transparent, hsl(0 85% 50% / 0.5))" }} />
               <div className="h-[2px] w-7 rounded-full" style={{ background: "hsl(0 85% 52%)" }} />
               <div className="h-px w-10" style={{ background: "linear-gradient(to left, transparent, hsl(0 85% 50% / 0.5))" }} />
@@ -164,11 +164,11 @@ const About = () => {
               className="text-white mb-8 leading-relaxed"
               style={{ fontSize: "clamp(0.9rem, 1.6vw, 1.05rem)", opacity: 0.9, maxWidth: "38rem" }}
             >
-              Locally owned and licensed in Houston, Texas. We design, install, and monitor hardwired camera and alarm systems for homeowners, businesses, and property managers — and we answer when you call.
+              Texas Total Security designs, installs, and monitors dependable alarm, camera, License Plate Reader (LPR), and community security systems for Houston homes, businesses, HOAs, and managed properties. Local ownership, licensed expertise, and service you can actually reach.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-9">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-7">
               <Link
                 to="/property-assessment"
                 className="btn-primary-gradient inline-flex items-center justify-center gap-2 font-semibold px-7 py-3.5"
@@ -210,8 +210,8 @@ const About = () => {
           TIM TOWNSEND — owner section
       ══════════════════════════════════════════════════ */}
       <section style={{ background: "#fff", borderTop: "1px solid hsl(0 0% 92%)" }}>
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-9">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-center">
 
             {/* Left — photo */}
             <motion.div
@@ -233,7 +233,7 @@ const About = () => {
                 >
                   {!ownerImgError ? (
                     <img
-                      src="/timtownsend.jpg"
+                      src="/tim.jpg"
                       alt="Tim Townsend — Founder, Texas Total Security"
                       className="w-full h-full object-cover"
                       onError={() => setOwnerImgError(true)}
@@ -286,7 +286,7 @@ const About = () => {
               transition={{ duration: 0.8, ease: easeExpo, delay: 0.1 }}
             >
               <div
-                className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full"
+                className="inline-flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full"
                 style={{ background: "hsl(0 85% 50% / 0.08)", border: "1px solid hsl(0 85% 50% / 0.18)" }}
               >
                 <div className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(0 85% 48%)" }} />
@@ -295,20 +295,20 @@ const About = () => {
 
               <h2
                 className="font-display font-bold mb-1"
-                style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", lineHeight: 1.08, letterSpacing: "-0.035em", color: "hsl(0 0% 8%)" }}
+                style={{ fontSize: "clamp(1.7rem, 3.2vw, 2.45rem)", lineHeight: 1.08, letterSpacing: "-0.035em", color: "hsl(0 0% 8%)" }}
               >
                 Tim Townsend
               </h2>
-              <p style={{ fontSize: "13.5px", color: "hsl(0 85% 44%)", fontWeight: 700, letterSpacing: "0.04em", marginBottom: "1.25rem" }}>
+              <p style={{ fontSize: "13.5px", color: "hsl(0 85% 44%)", fontWeight: 700, letterSpacing: "0.04em", marginBottom: "1rem" }}>
                 Founder & Licensed Security Professional
               </p>
 
-              <div className="space-y-3.5 mb-6" style={{ color: "hsl(0 0% 30%)", fontSize: "15px", lineHeight: 1.72 }}>
+              <div className="space-y-3 mb-5" style={{ color: "hsl(0 0% 30%)", fontSize: "14.5px", lineHeight: 1.65 }}>
                 <p>
                   Tim built Texas Total Security from the ground up — not as a franchise or a call-center operation, but as a hands-on Houston business with one standard: every system he puts in has to be something he'd trust to protect his own family.
                 </p>
                 <p>
-                  With 15+ years of field experience and a state-issued security license, Tim has personally overseen 100's of projects across Houston — hardwired 4K camera systems, alarm systems, and monitored access control for homes in River Oaks, HOA communities in Memorial Villages, and commercial properties throughout the metro. He brings the same level of care to every job, regardless of size.
+                  With 15+ years of field experience and a state-issued security license, Tim has personally overseen 100's of projects across Houston — hardwired 4K camera systems, alarm systems, License Plate Reader (LPR) cameras, and professional monitoring for homes in River Oaks, HOA communities in Memorial Villages, and commercial properties throughout the metro. He brings the same level of care to every job, regardless of size.
                 </p>
                 <p>
                   When you call Texas Total Security, you get Tim. He visits the property, designs the system himself, and stays reachable long after installation day.
@@ -317,7 +317,7 @@ const About = () => {
 
               {/* Google review quote */}
               <blockquote
-                className="mb-6 px-5 py-4"
+                className="mb-5 px-5 py-4"
                 style={{ background: "hsl(0 0% 97%)", borderLeft: "3px solid hsl(0 85% 48%)", borderRadius: "0 10px 10px 0" }}
               >
                 <p style={{ fontSize: "14px", color: "hsl(0 0% 22%)", fontStyle: "italic", lineHeight: 1.68 }}>
@@ -359,10 +359,10 @@ const About = () => {
           COMMUNITY CRIME-FIGHTING
       ══════════════════════════════════════════════════ */}
       <section style={{ background: "hsl(0 0% 5%)", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
 
           <motion.div
-            className="text-center mb-12 max-w-2xl mx-auto"
+            className="text-center mb-9 max-w-2xl mx-auto"
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -370,13 +370,13 @@ const About = () => {
             transition={{ duration: 0.7, ease: easeExpo }}
           >
             <div
-              className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full"
+              className="inline-flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full"
               style={{ background: "hsl(0 85% 50% / 0.10)", border: "1px solid hsl(0 85% 50% / 0.22)" }}
             >
               <span style={{ fontSize: "10px", fontWeight: 700, color: "hsl(0 75% 66%)", letterSpacing: "0.15em", textTransform: "uppercase" }}>15+ Years · 100's of Projects</span>
             </div>
             <h2
-              className="font-display font-bold text-white mb-4"
+              className="font-display font-bold text-white mb-3"
               style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", lineHeight: 1.1, letterSpacing: "-0.03em" }}
             >
               Empowering Houston Communities to Fight Crime Together
@@ -386,7 +386,7 @@ const About = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             {[
               {
                 icon: Smartphone,
@@ -399,14 +399,14 @@ const About = () => {
                 icon: Clock,
                 label: "15+ Years in Houston",
                 heading: "Built on Long-Term Relationships",
-                body: "We've spent 15+ years installing 100's of security systems across Houston — and we don't disappear after installation day. We maintain the relationship, service the system, and stay accountable for years to come.",
+                body: "We've spent 15+ years installing 100's of security systems across Houston — and we don't disappear after installation day. We maintain the relationship, support the account, and stay accountable for years to come.",
                 accent: false,
               },
               {
                 icon: Lightbulb,
                 label: "Real Solutions in 2026",
                 heading: "Modern Security for Today's Threats",
-                body: "Crime evolves. So do we. In 2026, we help Houston homeowners, HOAs, and businesses solve real-world security challenges with technology that actually works — hardwired infrastructure, cellular monitoring, and community connectivity.",
+                body: "Crime evolves. So do we. In 2026, we help Houston homeowners, HOAs, and businesses solve real-world security challenges with technology that actually works — hardwired infrastructure, monitoring workflows, and community connectivity.",
                 accent: false,
               },
             ].map((card, i) => (
@@ -417,7 +417,7 @@ const About = () => {
                 whileInView="show"
                 viewport={vp}
                 transition={{ duration: 0.6, ease: easeExpo, delay: i * 0.1 }}
-                className="rounded-2xl p-6"
+                className="rounded-2xl p-5"
                 style={{
                   background: card.accent ? "hsl(0 85% 50% / 0.07)" : "rgba(255,255,255,0.03)",
                   border: `1px solid ${card.accent ? "hsl(0 85% 50% / 0.18)" : "rgba(255,255,255,0.07)"}`,
@@ -467,10 +467,10 @@ const About = () => {
           OUR VALUES
       ══════════════════════════════════════════════════ */}
       <section style={{ background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 92%)" }}>
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-24">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-18">
 
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-9"
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -478,7 +478,7 @@ const About = () => {
             transition={{ duration: 0.7, ease: easeExpo }}
           >
             <div
-              className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full"
+              className="inline-flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full"
               style={{ background: "hsl(0 85% 50% / 0.08)", border: "1px solid hsl(0 85% 50% / 0.15)" }}
             >
               <span style={{ fontSize: "10px", fontWeight: 700, color: "hsl(0 85% 48%)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Why Choose Us</span>
@@ -494,7 +494,7 @@ const About = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {values.map((v, i) => (
               <motion.div
                 key={v.title}
@@ -503,7 +503,7 @@ const About = () => {
                 whileInView="show"
                 viewport={vp}
                 transition={{ duration: 0.6, ease: easeExpo, delay: i * 0.07 }}
-                className="group flex gap-4 p-5 rounded-2xl bg-white"
+                className="group flex gap-4 p-4 rounded-2xl bg-white"
                 style={{ border: "1px solid hsl(0 0% 91%)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}
               >
                 <div
@@ -526,18 +526,18 @@ const About = () => {
           SPECIALIZATIONS — dark
       ══════════════════════════════════════════════════ */}
       <section style={{ background: "hsl(0 0% 5%)" }}>
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
             <motion.div variants={fadeLeft} initial="hidden" whileInView="show" viewport={vp} transition={{ duration: 0.8, ease: easeExpo }}>
-              <div className="h-[3px] w-10 rounded-full mb-5" style={{ background: "hsl(0 85% 50%)" }} />
+              <div className="h-[3px] w-10 rounded-full mb-4" style={{ background: "hsl(0 85% 50%)" }} />
               <h2
-                className="font-display font-bold text-white mb-4"
+                className="font-display font-bold text-white mb-3"
                 style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", lineHeight: 1.1, letterSpacing: "-0.03em" }}
               >
                 What We Specialize In
               </h2>
-              <p className="leading-relaxed mb-7" style={{ fontSize: "15px", color: "rgba(255,255,255,0.62)" }}>
+              <p className="leading-relaxed mb-6" style={{ fontSize: "15px", color: "rgba(255,255,255,0.62)" }}>
                 Comprehensive security solutions for Houston homeowners, businesses, and property managers. Every system is custom-designed for your specific property.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -561,11 +561,11 @@ const About = () => {
             </motion.div>
 
             <motion.div variants={fadeRight} initial="hidden" whileInView="show" viewport={vp} transition={{ duration: 0.8, ease: easeExpo, delay: 0.1 }}>
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 {specializations.map((s, i) => (
                   <div
                     key={s.text}
-                    className="flex items-center gap-3.5 py-3 border-b"
+                    className="flex items-center gap-3.5 py-2.5 border-b"
                     style={{ borderColor: "rgba(255,255,255,0.055)" }}
                   >
                     <div
@@ -587,10 +587,10 @@ const About = () => {
           GOOGLE REVIEWS
       ══════════════════════════════════════════════════ */}
       <section style={{ background: "white", borderTop: "1px solid hsl(0 0% 92%)" }}>
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-24">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-18">
 
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-9"
             variants={fadeUp}
             initial="hidden"
             whileInView="show"

@@ -87,11 +87,11 @@ const ExitIntentPopup = () => {
                 </p>
 
                 <Link
-                  to="/qualify"
+                  to="/pre-qualify"
                   onClick={() => setShow(false)}
                   className="btn-primary-gradient w-full flex items-center justify-center gap-2 py-4 text-base font-semibold mb-3"
                 >
-                  Check If You Qualify <ArrowRight className="w-5 h-5" />
+                  Pre-Qualify Now <ArrowRight className="w-5 h-5" />
                 </Link>
 
                 <button

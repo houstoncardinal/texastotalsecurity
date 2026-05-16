@@ -21,7 +21,7 @@ const features = [
   { icon: Maximize2, title: "Wide-Angle Enclosure Coverage",  desc: "Full coverage of the dumpster pad, surrounding approach area, and access points — no blind angles where dumping goes unrecorded." },
   { icon: Eye,       title: "Night Vision IR",                desc: "Illegal dumping happens after dark. High-quality IR illumination captures clear footage of individuals and vehicles in complete darkness." },
   { icon: Camera,    title: "Incident Evidence Export",       desc: "Export timestamped footage for code enforcement violations, HOA hearings, police reports, or insurance claims in minutes." },
-  { icon: Clock,     title: "24/7 Continuous Recording",      desc: "Round-the-clock recording backed by Verizon cellular — your dumpster area is monitored every hour of the day and night." },
+  { icon: Clock,     title: "24/7 Continuous Recording",      desc: "Round-the-clock recording — your dumpster area is monitored every hour of the day and night." },
   { icon: Shield,    title: "Vandalism Documentation",        desc: "Graffiti, property damage, and unauthorized access are all captured and documented — giving you the evidence needed to hold individuals accountable." },
 ];
 

@@ -159,13 +159,13 @@ const capabilityGroups = [
   {
     icon: Trees,
     title: "Community",
-    text: "HOA entrances, gated drives, shared parking, amenity areas, perimeter cameras, and license plate recognition.",
+    text: "HOA entrances, gated drives, shared parking, amenity areas, perimeter cameras, and license plate reader.",
   },
 ];
 
 const trustPoints = [
   { icon: Shield, label: "Licensed & Insured", sublabel: "Texas Alarm Company" },
-  { icon: Radio, label: "Verizon Cellular", sublabel: "Monitoring backup" },
+  { icon: Radio, label: "Reliable Monitoring", sublabel: "Monitoring backup" },
   { icon: Camera, label: "Hardwired Systems", sublabel: "PoE cameras & alarms" },
   { icon: Star, label: "Local Houston Team", sublabel: "Owner-led service" },
 ];
@@ -401,7 +401,7 @@ const ServiceAreas = () => {
                 Mature trees, alley access, garage placement, visitor parking, building management rules, and HOA expectations all change the system design. We plan coverage around the property, not a generic package.
               </p>
               <div className="mt-5 space-y-2.5">
-                {["Hardwired alarm and PoE camera infrastructure", "Gate cameras, LPR, active deterrence, and monitoring", "Clean installation for homes, offices, HOAs, and parking areas"].map((item) => (
+                {["Hardwired alarm and PoE camera infrastructure", "Gate cameras, License Plate Reader (LPR), active deterrence, and monitoring", "Clean installation for homes, offices, HOAs, and parking areas"].map((item) => (
                   <div key={item} className="flex gap-2.5 text-sm font-medium text-gray-700">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
                     {item}
@@ -455,7 +455,7 @@ const ServiceAreas = () => {
 
       <CTABlock
         title="Ready to Protect Your Houston Property?"
-        subtitle="Get a free onsite assessment for alarm systems, camera networks, monitoring, gate cameras, LPR, or a full property security upgrade."
+        subtitle="Get a free onsite assessment for alarm systems, camera networks, monitoring, gate cameras, License Plate Reader (LPR), or a full property security upgrade."
       />
     </Layout>
   );

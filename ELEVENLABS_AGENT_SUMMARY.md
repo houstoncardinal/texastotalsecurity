@@ -70,24 +70,24 @@ Community-wide protection:
 - Visitor management systems
 - Video intercom systems
 
-### 7. Access Control Systems
-- Keycard and fob systems
-- PIN codes
-- Mobile credentials
-- Biometric access
-- Visitor management
+### 7. LPR and Gate Camera Systems
+- License plate recognition cameras
+- Gate entrance and exit cameras
+- Visitor vehicle documentation
+- Common-area camera coverage
+- Video intercom visibility
 
 ### 8. System Takeover
 - Take over existing ADT, Vivint, SimpliSafe, Ring, and other systems
 - No new equipment required
 - Transfer to local monitoring
 
-### 9. Service & Maintenance
-- System troubleshooting
-- Battery replacement
-- Software updates
+### 9. System Expansion
+- Additional cameras
+- Added alarm coverage
+- Monitoring setup
 - System expansions
-- Annual testing
+- User and notification configuration
 
 ### 10. Fire Alarm Systems
 - Commercial fire detection

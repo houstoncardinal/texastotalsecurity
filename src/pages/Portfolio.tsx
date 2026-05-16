@@ -12,8 +12,8 @@ const projects = [
     title: "Master-Planned Community Gate Security",
     type: "HOA / Community",
     challenge: "A 500+ home community in Katy needed to monitor multiple entry gates and reduce unauthorized vehicle access.",
-    solution: "Installed a comprehensive LPR camera system at all four community entrances with 24/7 recording and remote access for property management.",
-    systems: ["License Plate Recognition Cameras", "4K Security Cameras", "NVR with 90-Day Storage", "Remote Viewing Platform"],
+    solution: "Installed a comprehensive License Plate Reader (LPR) camera system at all four community entrances with 24/7 recording and remote access for property management.",
+    systems: ["License Plate Reader Cameras", "4K Security Cameras", "NVR with 90-Day Storage", "Remote Viewing Platform"],
     result: "78% reduction in unauthorized entry incidents within the first six months.",
   },
   {
@@ -36,8 +36,8 @@ const projects = [
     title: "Construction Site Security",
     type: "Commercial / Construction",
     challenge: "A general contractor needed temporary security for a 12-month commercial construction project in downtown Houston.",
-    solution: "Deployed solar-powered cameras with active deterrence, cellular connectivity, and remote monitoring — no electrical infrastructure required.",
-    systems: ["Solar-Powered Cameras", "Active Deterrence", "Cellular Connectivity", "Time-Lapse Recording"],
+    solution: "Deployed solar-powered cameras with active deterrence and remote monitoring — no electrical infrastructure required.",
+    systems: ["Solar-Powered Cameras", "Active Deterrence", "Remote Monitoring", "Time-Lapse Recording"],
     result: "Zero theft or vandalism incidents during the entire construction period.",
   },
 ];
@@ -62,7 +62,7 @@ const Portfolio = () => (
   <Layout>
     <SEOHead
       title="Security System Portfolio | HOA Cameras, Security Poles & Alarm Installs | Texas Total Security"
-      description="Browse Texas Total Security's portfolio of HOA security camera systems, CCTV pole installations, residential alarms, and commercial surveillance projects across Houston, TX."
+      description="Browse Texas Total Security's portfolio of HOA security camera systems, security pole installations, residential alarms, License Plate Reader (LPR) cameras, and commercial surveillance projects across Houston, TX."
       schemas={portfolioSchemas}
     />
     <PageHero

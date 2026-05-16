@@ -64,13 +64,181 @@ const COMPANY = {
     "HOA Security Solutions",
     "Video Verification Monitoring",
     "System Takeover",
-    "Service & Maintenance",
     "Fire Alarm Systems",
     "Smart Home Integration",
-    "License Plate Recognition",
+    "License Plate Reader",
     "Video Doorbell Systems",
   ],
 };
+
+const HOUSTON_SECURITY_SEARCH_PHRASES = [
+  "best alarm company in Houston",
+  "alarm company Houston",
+  "local alarm company Houston",
+  "alarm system installation Houston",
+  "alarm systems Houston TX",
+  "security alarm installation Houston",
+  "home alarm installation Houston",
+  "residential alarm systems Houston",
+  "residential alarm system installation Houston",
+  "home security systems Houston",
+  "residential security systems Houston",
+  "commercial security systems Houston",
+  "commercial security company Houston Texas",
+  "commercial alarm systems Houston",
+  "business security systems Houston",
+  "warehouse security cameras Houston",
+  "retail security systems Houston",
+  "office security systems Houston",
+  "security camera systems Houston",
+  "security camera installation Houston",
+  "4K security camera installation Houston",
+  "surveillance camera installation Houston",
+  "hardwired security camera installation Houston",
+  "PoE security camera systems Houston",
+  "NVR camera systems Houston",
+  "commercial surveillance systems Houston",
+  "license plate reader cameras Houston",
+  "license plate reader camera installation Houston",
+  "License Plate Reader (LPR) camera installation Houston",
+  "HOA camera systems Houston",
+  "HOA security cameras Houston",
+  "HOA security systems Houston",
+  "apartment security camera systems Houston",
+  "multifamily security systems Houston",
+  "property management security Houston",
+  "gate camera systems Houston",
+  "neighborhood security cameras Houston",
+  "active deterrence cameras Houston",
+  "video monitoring Houston",
+  "24/7 alarm monitoring Houston",
+  "alarm monitoring company Houston",
+  "alarm system takeover Houston",
+  "switch alarm companies Houston",
+  "free security assessment Houston",
+  "free onsite security analysis Houston",
+];
+
+const SECURITY_SERVICE_FOCUS_AREAS = [
+  "Hardwired alarm system installation",
+  "Honeywell alarm system takeover",
+  "DSC alarm system takeover",
+  "DMP alarm system takeover",
+  "Commercial intrusion detection",
+  "Residential monitored alarms",
+  "4K IP camera systems",
+  "PoE security camera systems",
+  "Hardwired security camera systems",
+  "NVR recording systems",
+  "License plate recognition cameras",
+  "HOA gate cameras",
+  "Apartment complex surveillance",
+  "Multi-family community security",
+  "Security poles",
+  "Active deterrence cameras",
+  "Video verification monitoring",
+  "backup alarm communication",
+  "24/7 professional monitoring",
+  "Property manager security systems",
+  "Commercial facility security",
+  "Security system design and installation",
+];
+
+const SEARCH_INTENT_CLUSTERS = [
+  {
+    name: "Switch Alarm Companies & System Takeovers",
+    url: "/switch-my-alarm",
+    terms: [
+      "switch your alarm company",
+      "switch your alarm company Houston",
+      "switch alarm companies Houston",
+      "change alarm company Houston",
+      "change alarm monitoring company",
+      "alarm company switch",
+      "alarm system takeover Houston",
+      "switch from ADT Houston",
+      "switch from Brinks Houston",
+      "switch from Vivint Houston",
+      "keep existing alarm equipment",
+      "take over existing alarm system",
+    ],
+  },
+  {
+    name: "Houston Alarm Company & Alarm Installation",
+    url: "/alarm-systems",
+    terms: [
+      "best alarm company in Houston",
+      "alarm company Houston",
+      "alarm system installation Houston",
+      "security alarm installation Houston",
+      "alarm systems Houston TX",
+      "alarm monitoring company Houston",
+    ],
+  },
+  {
+    name: "Residential Security Systems",
+    url: "/residential",
+    terms: [
+      "residential alarm systems Houston",
+      "residential alarm system installation Houston",
+      "home security systems Houston",
+      "home alarm installation Houston",
+      "residential security systems Houston",
+    ],
+  },
+  {
+    name: "Commercial Security Systems",
+    url: "/commercial",
+    terms: [
+      "commercial security systems Houston",
+      "commercial security company in Houston Texas",
+      "commercial alarm systems Houston",
+      "business security systems Houston",
+      "office security systems Houston",
+      "warehouse security cameras Houston",
+      "retail security systems Houston",
+    ],
+  },
+  {
+    name: "Security Camera Systems & Video Surveillance",
+    url: "/security-cameras",
+    terms: [
+      "security camera systems Houston",
+      "security camera installation Houston",
+      "surveillance camera installation Houston",
+      "4K security camera installation Houston",
+      "hardwired security camera installation Houston",
+      "PoE security camera systems Houston",
+      "NVR camera systems Houston",
+      "commercial surveillance systems Houston",
+    ],
+  },
+  {
+    name: "HOA, License Plate Reader (LPR) & Community Cameras",
+    url: "/hoa-security",
+    terms: [
+      "HOA camera systems Houston",
+      "HOA security cameras Houston",
+      "HOA security systems Houston",
+      "license plate reader cameras Houston",
+      "license plate reader camera installation Houston",
+      "License Plate Reader (LPR) camera installation Houston",
+      "gate camera systems Houston",
+      "neighborhood security cameras Houston",
+    ],
+  },
+  {
+    name: "Property Management & Multi-Family Security",
+    url: "/property-management-security",
+    terms: [
+      "apartment security camera systems Houston",
+      "multifamily security systems Houston",
+      "property management security Houston",
+      "apartment complex surveillance Houston",
+      "multi-family community security Houston",
+    ],
+  },
+];
 
 /** Enhanced Organization Schema with complete business details */
 export function generateOrganizationSchema() {
@@ -94,6 +262,8 @@ export function generateOrganizationSchema() {
       `${BASE_URL}/imgi_9_iStock-1253624795-Family-on-Couch-Home-Page-scaled.jpg`
     ],
     "description": COMPANY.description,
+    "keywords": HOUSTON_SECURITY_SEARCH_PHRASES,
+    "knowsAbout": SECURITY_SERVICE_FOCUS_AREAS,
     "telephone": COMPANY.phoneTel,
     "email": COMPANY.email,
     "address": {
@@ -252,15 +422,15 @@ export function generateOrganizationSchema() {
 
 export function generateLocalBusinessSchema(city?: string) {
   const serviceOfferings = [
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Alarm System Installation", "description": "Professional installation of hardwired alarm systems — reliable, tamper-resistant, and monitored 24/7 over Verizon cellular" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Alarm System Installation", "description": "Professional installation of hardwired alarm systems — reliable, tamper-resistant, and monitored 24/7 with backup communication planning" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Security Camera Installation", "description": "HD and 4K surveillance camera systems with remote viewing" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "24/7 Alarm Monitoring", "description": "Professional 24/7 monitoring with fast dispatch response" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial Security Systems", "description": "Enterprise-grade security for businesses" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Security Systems", "description": "Whole-home protection with smart home integration" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HOA Security Solutions", "description": "Gate cameras, community surveillance, LPR systems" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HOA Security Solutions", "description": "Gate cameras, community surveillance, License Plate Reader (LPR) systems" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Video Verification Monitoring", "description": "Double-verified video monitoring for alarm events" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "System Takeover", "description": "Take over existing systems from other providers" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Service & Maintenance", "description": "Ongoing system support and troubleshooting" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Security System Design", "description": "Property-specific alarm, camera, monitoring, License Plate Reader (LPR), and active deterrence system planning" } },
   ];
 
   return {
@@ -289,6 +459,10 @@ export function generateLocalBusinessSchema(city?: string) {
     "description": city
       ? `${COMPANY.name} provides professional alarm systems, security cameras, and 24/7 professional monitoring in ${city}, TX and surrounding areas. Locally owned and operated for 10+ years.`
       : COMPANY.description,
+    "keywords": city
+      ? HOUSTON_SECURITY_SEARCH_PHRASES.map(term => term.replace("Houston", city))
+      : HOUSTON_SECURITY_SEARCH_PHRASES,
+    "knowsAbout": SECURITY_SERVICE_FOCUS_AREAS,
     "telephone": COMPANY.phoneTel,
     "email": COMPANY.email,
     "priceRange": "$$",
@@ -710,6 +884,13 @@ export function generateLocalSEOKeywords() {
     "name": `${COMPANY.name} - Houston Security Systems`,
     "description": COMPANY.description,
     "url": COMPANY.url,
+    "keywords": HOUSTON_SECURITY_SEARCH_PHRASES,
+    "about": SEARCH_INTENT_CLUSTERS.map(cluster => ({
+      "@type": "Thing",
+      "name": cluster.name,
+      "alternateName": cluster.terms,
+      "url": `${BASE_URL}${cluster.url}`,
+    })),
     "mainEntity": {
       "@type": "LocalBusiness",
       "name": COMPANY.name,
@@ -719,6 +900,64 @@ export function generateLocalSEOKeywords() {
       }))
     }
   };
+}
+
+export function generateHoustonSearchDemandSchema() {
+  return [
+    {
+      "@type": "WebPage",
+      "@id": `${BASE_URL}/#houston-security-search-demand`,
+      "url": BASE_URL,
+      "name": "Houston Security System Services and Search Topics",
+      "description": "Search topic map for Texas Total Security's Houston alarm systems, security camera systems, residential security, commercial security, HOA cameras, License Plate Reader (LPR) cameras, and property management security services.",
+      "isPartOf": { "@type": "WebSite", "@id": `${BASE_URL}/#website` },
+      "about": SEARCH_INTENT_CLUSTERS.map(cluster => ({
+        "@type": "Thing",
+        "name": cluster.name,
+        "alternateName": cluster.terms,
+        "url": `${BASE_URL}${cluster.url}`,
+      })),
+      "mentions": [
+        ...SECURITY_SERVICE_FOCUS_AREAS.map(name => ({ "@type": "Thing", "name": name })),
+        ...COMPANY.areaServed.map(name => ({ "@type": "Place", "name": `${name}, TX` })),
+      ],
+      "keywords": HOUSTON_SECURITY_SEARCH_PHRASES,
+      "mainEntity": { "@type": "LocalBusiness", "@id": `${BASE_URL}/#localbusiness` },
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": `${BASE_URL}/#security-service-keywords`,
+      "name": "Texas Total Security Houston Service Keywords",
+      "description": "Core Houston search phrases and service entities covered by Texas Total Security.",
+      "hasDefinedTerm": SEARCH_INTENT_CLUSTERS.flatMap(cluster =>
+        cluster.terms.map(term => ({
+          "@type": "DefinedTerm",
+          "name": term,
+          "inDefinedTermSet": cluster.name,
+          "url": `${BASE_URL}${cluster.url}`,
+        }))
+      ),
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${BASE_URL}/#priority-service-clusters`,
+      "name": "Priority Houston Security Service Clusters",
+      "numberOfItems": SEARCH_INTENT_CLUSTERS.length,
+      "itemListElement": SEARCH_INTENT_CLUSTERS.map((cluster, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": cluster.name,
+        "url": `${BASE_URL}${cluster.url}`,
+        "item": {
+          "@type": "Service",
+          "name": cluster.name,
+          "alternateName": cluster.terms,
+          "provider": { "@type": "LocalBusiness", "@id": `${BASE_URL}/#localbusiness` },
+          "areaServed": COMPANY.areaServed.map(city => ({ "@type": "City", "name": `${city}, TX` })),
+        },
+      })),
+    },
+  ];
 }
 
 export function generateImageSchema(imageUrl: string, caption?: string) {
@@ -950,7 +1189,7 @@ export function generatePersonSchema() {
       "24/7 Professional Alarm Monitoring",
       "HOA Security Solutions",
       "Commercial Security Systems",
-      "License Plate Recognition Cameras",
+      "License Plate Reader Cameras",
       "Alarm System Takeovers",
       "Active Deterrence Systems"
     ],
@@ -1108,6 +1347,7 @@ export function generateComprehensiveHomepageSchema() {
         "url": BASE_URL,
         "name": COMPANY.name,
         "description": COMPANY.description,
+        "keywords": HOUSTON_SECURITY_SEARCH_PHRASES,
         "publisher": { "@type": "Organization", "@id": `${BASE_URL}/#organization` },
         "inLanguage": "en-US"
       },
@@ -1121,7 +1361,10 @@ export function generateComprehensiveHomepageSchema() {
         "@type": ["Service", "SecurityService"],
         "@id": `${BASE_URL}/#mainService`,
         "name": "Security System Installation & Monitoring",
+        "alternateName": HOUSTON_SECURITY_SEARCH_PHRASES.slice(0, 20),
         "description": COMPANY.description,
+        "keywords": HOUSTON_SECURITY_SEARCH_PHRASES,
+        "about": SECURITY_SERVICE_FOCUS_AREAS.map(name => ({ "@type": "Thing", "name": name })),
         "provider": { "@type": "Organization", "@id": `${BASE_URL}/#organization` },
         "areaServed": {
           "@type": "GeoCircle",
@@ -1144,6 +1387,7 @@ export function generateComprehensiveHomepageSchema() {
           "result": { "@type": "Reservation", "name": "Free Security Analysis" }
         }
       },
+      ...generateHoustonSearchDemandSchema(),
       // 5. FAQPage — expanded with all required questions
       {
         "@context": "https://schema.org",
@@ -1195,7 +1439,7 @@ export function generateComprehensiveHomepageSchema() {
             "name": "Do you offer security for HOA communities and multi-family properties?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes — this is one of our core specialties. We provide gate cameras, LPR cameras, community-wide surveillance, alarm monitoring for multiple units, and HOA board-friendly reporting. We are trusted by property managers and HOA boards throughout Greater Houston."
+              "text": "Yes — this is one of our core specialties. We provide gate cameras, License Plate Reader (LPR) cameras, community-wide surveillance, alarm monitoring for multiple units, and HOA board-friendly reporting. We are trusted by property managers and HOA boards throughout Greater Houston."
             }
           },
           {
@@ -1266,10 +1510,10 @@ export function generateAllServicesSchemas() {
       "@id": `${BASE_URL}/security-cameras/#service`,
       "name": "Security Camera System Installation – Houston TX",
       "serviceType": "Security Camera Installation",
-      "description": "Professional HD and 4K security camera installation for Houston homes, businesses, and communities. Indoor/outdoor cameras, license plate recognition (LPR), active deterrence, and remote viewing.",
+      "description": "Professional HD and 4K security camera installation for Houston homes, businesses, and communities. Indoor/outdoor cameras, license plate reader (LPR), active deterrence, and remote viewing.",
       "provider": provider,
       "areaServed": areaServed,
-      "offers": [freeOffer, { "@type": "Offer", "name": "4K IP Camera Installation" }, { "@type": "Offer", "name": "License Plate Recognition Systems" }],
+      "offers": [freeOffer, { "@type": "Offer", "name": "4K IP Camera Installation" }, { "@type": "Offer", "name": "License Plate Reader Systems" }],
     },
     {
       "@context": "https://schema.org",
@@ -1277,10 +1521,10 @@ export function generateAllServicesSchemas() {
       "@id": `${BASE_URL}/hoa-security/#service`,
       "name": "HOA Community Security Systems – Houston TX",
       "serviceType": "HOA Security System Installation",
-      "description": "Complete HOA security solutions including gate cameras, LPR cameras, common area surveillance, and community-wide alarm monitoring. Designed for HOA boards and property managers in Greater Houston.",
+      "description": "Complete HOA security solutions including gate cameras, License Plate Reader (LPR) cameras, common area surveillance, and community-wide alarm monitoring. Designed for HOA boards and property managers in Greater Houston.",
       "provider": provider,
       "areaServed": areaServed,
-      "offers": [freeOffer, { "@type": "Offer", "name": "Community Camera Systems" }, { "@type": "Offer", "name": "LPR Gate Camera Systems" }],
+      "offers": [freeOffer, { "@type": "Offer", "name": "Community Camera Systems" }, { "@type": "Offer", "name": "License Plate Reader (LPR) Gate Camera Systems" }],
     },
     {
       "@context": "https://schema.org",
@@ -1288,7 +1532,7 @@ export function generateAllServicesSchemas() {
       "@id": `${BASE_URL}/property-management-security/#service`,
       "name": "Multi-Family Property Security – Houston TX",
       "serviceType": "Multi-Family Security System Installation",
-      "description": "Comprehensive security for apartment complexes and multi-family communities. Entrance/exit cameras, LPR, common area monitoring, package area surveillance, and alarm monitoring for multiple units.",
+      "description": "Comprehensive security for apartment complexes and multi-family communities. Entrance/exit cameras, License Plate Reader (LPR), common area monitoring, package area surveillance, and alarm monitoring for multiple units.",
       "provider": provider,
       "areaServed": areaServed,
       "offers": [freeOffer, { "@type": "Offer", "name": "Multi-Unit Alarm Monitoring" }, { "@type": "Offer", "name": "Community Surveillance Systems" }],
@@ -1318,7 +1562,7 @@ export function generateAllServicesSchemas() {
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      "@id": `${BASE_URL}/alarm-systems/#service`,
+      "@id": `${BASE_URL}/switch-my-alarm/#service`,
       "name": "Alarm Company Switch Service – Houston TX",
       "serviceType": "Alarm System Takeover",
       "description": "Switch your alarm company to Texas Total Security with zero hassle. We take over your existing keypads, sensors, and wiring from any provider — ADT, Brinks, Vivint, and more. Done in one visit.",

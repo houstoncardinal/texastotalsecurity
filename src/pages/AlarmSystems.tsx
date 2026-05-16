@@ -101,7 +101,7 @@ const alarmEquipment = [
   "Glass Break Sensors",
   "Indoor / Outdoor Sirens & Strobes",
   "Smart Home Integration",
-  "Cellular Backup Communication",
+  "Backup Communication Planning",
   "24/7 Professional Monitoring",
 ];
 
@@ -112,7 +112,7 @@ const faqs = [
   { question: "I feel like I was oversold and I'm paying too much — can switching actually save me money?", answer: "Most customers who switch to Texas Total Security pay less per month on monitoring than they did before — often significantly less. We offer transparent, straightforward pricing with no hidden fees. Fill out our free assessment and we'll show you a direct comparison of what you're paying now versus what you'd pay with us." },
   { question: "Am I stuck if I'm still in a contract?", answer: "Not necessarily. We'll review your contract details during the free assessment. Some contracts have conditions that allow you to exit — equipment problems that went unresolved, service failures, or recent changes in terms. We'll give you an honest answer about your options." },
   { question: "How long does switching alarm companies take?", answer: "Most switches are completed in a single visit — typically a few hours. We reprogram your existing panel, test every sensor, replace any faulty components, and activate professional 24/7 monitoring before we leave." },
-  { question: "What happens during a power outage?", answer: "All our systems include battery backup and communicate over Verizon cellular — not your internet or landline. When a storm knocks out your Wi-Fi or a deep freeze disrupts phone lines, your alarm stays fully connected and monitored." },
+  { question: "What happens during a power outage?", answer: "Hardwired alarm systems include battery backup and can use cellular communication instead of depending on Wi-Fi or a landline, so monitoring can stay active during many common outages." },
   { question: "Can you install a completely new alarm system if my equipment isn't salvageable?", answer: "Yes. We design and install complete hardwired alarm systems for Houston homes and businesses. If your current equipment isn't worth keeping, we'll build you a new system from scratch." },
 ];
 
@@ -182,7 +182,7 @@ const faqsDisplay = [
     question: "What happens during a power outage?",
     answer: (
       <span>
-        All our systems include battery backup and communicate over Verizon cellular — not your internet or landline. When a storm knocks out your Wi-Fi or a deep freeze disrupts phone lines, your alarm stays fully connected and monitored.{" "}
+        Hardwired alarm systems include battery backup and can use cellular communication instead of depending on Wi-Fi or a landline, so monitoring can stay active during many common outages.{" "}
         <Link to="/monitoring-services" className="text-red-600 font-semibold hover:underline">Learn more about our monitoring reliability</Link>.
       </span>
     ),
@@ -211,7 +211,7 @@ const alarmSchemas = [
   ),
   generateProductSchema(
     "Professional Alarm System — Houston TX",
-    "Custom hardwired alarm system installation for Houston homes and businesses. Includes door/window sensors, motion detectors, glass break sensors, cellular backup, and 24/7 professional monitoring over Verizon cellular.",
+    "Custom hardwired alarm system installation for Houston homes and businesses. Includes door/window sensors, motion detectors, glass break sensors, backup communication planning, and 24/7 professional monitoring.",
     undefined,
     "https://schema.org/InStock"
   ),
@@ -278,12 +278,12 @@ const AlarmSystems = () => (
               Houston Alarm System Installation, Takeovers & 24/7 Professional Monitoring.
             </h1>
             <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
-              Hardwired alarm systems, problem-zone repairs, system takeovers, and Verizon cellular monitoring from a licensed Houston security company.
+              Hardwired alarm systems, coverage upgrades, system takeovers, and professional monitoring from a licensed Houston security company.
             </p>
             <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
               {[
                 { label: "Hardwired", sublabel: "systems only" },
-                { label: "Verizon", sublabel: "cellular monitoring" },
+                { label: "Backup", sublabel: "communication ready" },
                 { label: "Local", sublabel: "owner access" },
                 { label: "Single Visit", sublabel: "most switches" },
               ].map((stat) => (
@@ -349,7 +349,7 @@ const AlarmSystems = () => (
               A better alarm company should feel obvious from the first call.
             </h2>
             <p className="mt-4 text-gray-600 leading-relaxed">
-              If your system has bypassed zones, unreliable sensors, outdated equipment, poor service, or a monthly bill that keeps climbing, we can inspect it, clean it up, and move your monitoring locally.
+              If your system has bypassed zones, unreliable sensors, outdated equipment, poor provider support, or a monthly bill that keeps climbing, we can evaluate it, recommend the right takeover path, and move your monitoring locally.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row lg:flex-col gap-3">
               <a href="tel:7133879937" className="inline-flex items-center justify-center gap-2 bg-black px-6 py-3 text-sm font-semibold text-white hover:bg-red-700 transition-colors">
@@ -418,12 +418,12 @@ const AlarmSystems = () => (
                 Enterprise-grade alarm protection, built around real coverage.
               </h2>
               <p className="mt-4 text-white/60 leading-relaxed">
-                Every system is planned around the points that actually protect a property: doors, windows, motion zones, glass break, emergency response, cellular communication, and professional monitoring through our certified San Antonio partner center.
+                Every system is planned around the points that actually protect a property: doors, windows, motion zones, glass break, emergency response, backup communication, and professional monitoring through our certified San Antonio partner center.
               </p>
               <div className="mt-6 grid grid-cols-2 gap-3">
                 {[
                   { label: "24/7", sublabel: "Certified monitoring" },
-                  { label: "Cellular", sublabel: "Verizon network" },
+                  { label: "Backup", sublabel: "communication ready" },
                   { label: "Local", sublabel: "Account management" },
                   { label: "Licensed", sublabel: "& Insured" },
                 ].map((badge) => (

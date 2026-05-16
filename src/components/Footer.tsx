@@ -75,18 +75,18 @@ const Footer = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col md:flex-row items-center justify-between gap-5">
           <div>
-             <p className="font-display font-bold text-white text-xl mb-1 tracking-tight" style={{ letterSpacing: "-0.03em" }}>
-               Ready to Secure Your Properties?
+             <p className="font-display font-extrabold text-white text-2xl sm:text-3xl mb-2 tracking-tight leading-tight" style={{ letterSpacing: "-0.04em" }}>
+               Figure out why Houstonians are switching to Texas Total Security?
              </p>
-             <p className="text-sm text-white/44">
-               Free property assessment for commercial, multifamily & HOA communities — no obligation.
+             <p className="text-base sm:text-lg text-white/60 max-w-lg">
+               Call Now For Your Free Security Analysis
              </p>
           </div>
           <Link
             to="/free-analysis"
-            className="btn-primary-gradient inline-flex items-center gap-2 text-sm whitespace-nowrap shrink-0"
+            className="btn-primary-gradient inline-flex items-center gap-3 text-base sm:text-lg whitespace-nowrap shrink-0 px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
-            Get Started <ArrowRight className="w-4 h-4" />
+            Get Started <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </motion.div>
@@ -138,7 +138,7 @@ const Footer = () => {
               ))}
             </ul>
             <div className="mt-6 pt-5 border-t border-white/[0.07]">
-              <p className="text-[13px] font-semibold" style={{ color: "rgba(255,255,255,0.65)" }}>Licensed & Insured</p>
+              <p className="text-[13px] font-semibold" style={{ color: "rgba(255,255,255,0.65)" }}>Licensed & Insured - Lic # B03066901</p>
             </div>
           </motion.div>
 
@@ -161,7 +161,6 @@ const Footer = () => {
                  { name: "Commercial Solutions",        href: "/commercial" },
                  { name: "HOA Security Solutions",      href: "/hoa-security" },
                  { name: "Pole Configurator",           href: "/security-pole-configurator" },
-                 { name: "Service & Maintenance",       href: "/service-maintenance" },
                ].map((link) => (
                 <li key={link.href}>
                   <Link

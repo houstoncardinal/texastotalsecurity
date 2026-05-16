@@ -236,7 +236,7 @@ const PropertyAssessment = () => {
 
   const serviceOptions = [
     { value: "cameras",      icon: Camera,    label: "Security Camera System",    desc: "4K IP cameras, PTZ, wide-angle coverage" },
-    { value: "lpr",          icon: Camera,    label: "License Plate Recognition",  desc: "LPR cameras at gates and entry points" },
+    { value: "lpr",          icon: Camera,    label: "License Plate Reader",  desc: "License Plate Reader (LPR) cameras at gates and entry points" },
     { value: "alarm",        icon: Shield,    label: "Alarm System & Monitoring",  desc: "Intrusion detection with professional monitoring" },
     { value: "poles",        icon: Building2, label: "Security Poles",             desc: "Custom-height poles with multiple cameras" },
     { value: "deterrence",   icon: Radio,     label: "Active Deterrence",          desc: "Sirens, strobes, two-way audio cameras" },

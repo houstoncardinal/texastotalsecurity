@@ -1,48 +1,70 @@
-import { useState, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
-import { generateLocalBusinessSchema, generateHowToSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import {
+  generateAllServicesSchemas,
+  generateBreadcrumbSchema,
+  generateEnhancedServiceSchema,
+  generateFAQSchema,
+  generateHowToSchema,
+  generateLocalBusinessSchema,
+} from "@/lib/seo";
 import {
   CheckCircle2, ArrowRight, ArrowLeft, Phone,
-  Upload, X, AlertCircle, Wrench, Plus,
-  Users, DollarSign, Shield, Camera,
+  Shield, Camera, Home, Building2, Users, Radio,
+  DollarSign, Star, Clock, Award,
 } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
 
-const STEP_LABELS = ["Your System", "Current Provider", "Your Goals", "Contact"];
+const switchSteps = [
+  {
+    title: "Free Switch Assessment",
+    body: "We visit your property, review your existing alarm panel, keypads, sensors, and wiring, and tell you exactly what can be reused alongside a clear proposal for what needs attention.",
+  },
+  {
+    title: "Efficient Takeover Process",
+    body: "When compatible, our technician reprograms your panel, tests every zone, addresses problem devices, and activates 24/7 monitoring — frequently handled in a single visit.",
+  },
+  {
+    title: "Locally Managed & Supported",
+    body: "Your account is managed right here by Texas Total Security. Honeywell, DSC, DMP, Resideo, and many other systems can often be taken over without replacing everything.",
+  },
+];
+
+const switchFaqs = [
+  {
+    question: "Can I switch my alarm company and keep my existing equipment?",
+    answer: "In many cases, yes. Texas Total Security evaluates your existing alarm panel, keypads, sensors, and wiring, then tells you what can be reused, repaired, or upgraded before you switch.",
+  },
+  {
+    question: "How long does an alarm company switch take?",
+    answer: "Many alarm takeovers are completed in a single visit. The technician reprograms the panel, tests zones and sensors, addresses problem equipment, and activates professional monitoring.",
+  },
+  {
+    question: "Can switching alarm companies lower my monthly monitoring bill?",
+    answer: "Often, yes. Many customers who switch to Texas Total Security pay less for monthly monitoring, especially when compatible equipment can be reused instead of replaced.",
+  },
+];
+
+const stepTitles = [
+  "What system do you have?",
+  "Who monitors your alarm?",
+  "Your contact info",
+];
 
 /* ─── Lead storage ──────────────────────────────────────────── */
 export interface SwitchLead {
   id: number;
   submittedAt: string;
-  // Equipment
   systemType: string;
-  systemTypeOther: string;
-  hasEquipmentProblems: string;
-  hasSensorProblems: string;
-  bypassingZones: string;
-  bypassedZoneDetails: string;
-  canSetAlarm: string;
-  missingEquipment: string;
-  keypAdPhotoName: string;
-  // Provider
   currentCompany: string;
   monthlyBill: string;
-  billingFrequency: string;
   inContract: string;
-  signedUpDate: string;
-  signedRecently: string;
-  signedRecentlyDetails: string;
   contractTimeLeft: string;
-  // Goals
   interests: string[];
-  whatToFix: string;
-  whatToAdd: string;
-  situation: string;
-  // Contact
   name: string;
   phone: string;
   email: string;
@@ -70,153 +92,52 @@ function saveSwitchLead(lead: Omit<SwitchLead, "id">) {
   } catch { /* ignore */ }
 }
 
-/* ─── Sub-components ────────────────────────────────────────── */
-function ProgressBar({ step }: { step: number }) {
-  const pct = Math.round(((step + 1) / STEP_LABELS.length) * 100);
-  return (
-    <div className="sticky top-[68px] lg:top-[108px] z-40 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-      <div className="max-w-2xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between mb-2.5">
-          <div className="flex items-center gap-1.5">
-            {STEP_LABELS.map((l, i) => (
-              <div key={l} className="flex items-center gap-1.5">
-                <div
-                  className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition-all duration-300"
-                  style={{
-                    background: i < step ? "hsl(120 55% 48%)" : i === step ? "hsl(0 85% 50%)" : "rgb(229 231 235)",
-                    color: i <= step ? "white" : "rgb(156 163 175)",
-                  }}
-                >
-                  {i < step ? "✓" : i + 1}
-                </div>
-                <span className="hidden sm:inline text-[11px] font-medium transition-colors" style={{ color: i === step ? "hsl(0 85% 50%)" : i < step ? "rgb(107 114 128)" : "rgb(209 213 219)" }}>
-                  {l}
-                </span>
-                {i < STEP_LABELS.length - 1 && <div className="w-4 h-px bg-gray-200 hidden sm:block" />}
-              </div>
-            ))}
-          </div>
-          <span className="text-[12px] font-semibold" style={{ color: "hsl(0 85% 50%)" }}>{pct}%</span>
-        </div>
-        <div className="w-full h-1 rounded-full bg-gray-100 overflow-hidden">
-          <motion.div
-            className="h-full rounded-full"
-            style={{ background: "linear-gradient(90deg, hsl(0 85% 50%), hsl(0 85% 58%))" }}
-            animate={{ width: `${pct}%` }}
-            transition={{ duration: 0.5, ease: easeExpo }}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function YesNo({
-  label, value, onChange, detail, detailLabel, detailValue, onDetailChange,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  detail?: boolean;
-  detailLabel?: string;
-  detailValue?: string;
-  onDetailChange?: (v: string) => void;
-}) {
-  return (
-    <div className="mb-5">
-      <p className="text-sm font-semibold text-gray-800 mb-2">{label}</p>
-      <div className="flex gap-2 mb-2">
-        {["Yes", "No"].map((opt) => (
-          <button
-            key={opt}
-            type="button"
-            onClick={() => onChange(opt)}
-            className="flex-1 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all duration-200"
-            style={{
-              borderColor: value === opt ? "hsl(0 85% 50%)" : "rgb(229 231 235)",
-              background: value === opt ? "hsl(0 85% 50%)" : "white",
-              color: value === opt ? "white" : "rgb(75 85 99)",
-            }}
-          >
-            {opt}
-          </button>
-        ))}
-      </div>
-      {detail && value === "Yes" && onDetailChange && (
-        <input
-          type="text"
-          placeholder={detailLabel || "Please explain..."}
-          value={detailValue || ""}
-          onChange={(e) => onDetailChange(e.target.value)}
-          className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:border-red-400 transition-colors mt-1"
-        />
-      )}
-    </div>
-  );
-}
-
 /* ─── Main Component ────────────────────────────────────────── */
 const SwitchAssessment = () => {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   /* Step 1 — Equipment */
   const [systemType, setSystemType] = useState("");
   const [systemTypeOther, setSystemTypeOther] = useState("");
-  const [hasEquipmentProblems, setHasEquipmentProblems] = useState("");
-  const [hasSensorProblems, setHasSensorProblems] = useState("");
-  const [bypassingZones, setBypassingZones] = useState("");
-  const [bypassedZoneDetails, setBypassedZoneDetails] = useState("");
-  const [canSetAlarm, setCanSetAlarm] = useState("");
-  const [missingEquipment, setMissingEquipment] = useState("");
-  const [keypAdPhotoName, setKeypadPhotoName] = useState("");
 
   /* Step 2 — Provider */
   const [currentCompany, setCurrentCompany] = useState("");
   const [monthlyBill, setMonthlyBill] = useState("");
-  const [billingFrequency, setBillingFrequency] = useState("monthly");
   const [inContract, setInContract] = useState("");
-  const [signedUpDate, setSignedUpDate] = useState("");
-  const [signedRecently, setSignedRecently] = useState("");
-  const [signedRecentlyDetails, setSignedRecentlyDetails] = useState("");
   const [contractTimeLeft, setContractTimeLeft] = useState("");
 
-  /* Step 3 — Goals */
+  /* Step 3 — Contact */
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [interests, setInterests] = useState<string[]>([]);
-  const [whatToFix, setWhatToFix] = useState("");
-  const [whatToAdd, setWhatToAdd] = useState("");
-  const [situation, setSituation] = useState("");
-
-  /* Step 4 — Contact */
-  const [contact, setContact] = useState({ name: "", phone: "", email: "", address: "" });
 
   const toggleInterest = (v: string) =>
     setInterests(prev => prev.includes(v) ? prev.filter(x => x !== v) : [...prev, v]);
 
-  const canProceed = useCallback(() => {
+  const canProceed = () => {
     if (step === 0) return !!systemType;
     if (step === 1) return !!currentCompany;
-    if (step === 2) return interests.length > 0;
-    if (step === 3) return !!(contact.name && contact.phone && contact.email);
+    if (step === 2) return !!(name && phone && email);
     return true;
-  }, [step, systemType, currentCompany, interests, contact]);
+  };
 
-  const next = () => { if (canProceed() && step < 3) setStep(s => s + 1); };
+  const next = () => { if (canProceed() && step < 2) setStep(s => s + 1); };
   const back = () => { if (step > 0) setStep(s => s - 1); };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     saveSwitchLead({
       submittedAt: new Date().toISOString(),
-      systemType, systemTypeOther,
-      hasEquipmentProblems, hasSensorProblems,
-      bypassingZones, bypassedZoneDetails,
-      canSetAlarm, missingEquipment, keypAdPhotoName,
-      currentCompany, monthlyBill, billingFrequency,
-      inContract, signedUpDate, signedRecently, signedRecentlyDetails, contractTimeLeft,
-      interests, whatToFix, whatToAdd, situation,
-      name: contact.name, phone: contact.phone, email: contact.email, address: contact.address,
+      systemType: systemType === "Other" && systemTypeOther ? systemTypeOther : systemType,
+      currentCompany,
+      monthlyBill,
+      inContract,
+      contractTimeLeft,
+      interests,
+      name, phone, email, address,
     });
     fetch("/", {
       method: "POST",
@@ -224,16 +145,11 @@ const SwitchAssessment = () => {
       body: new URLSearchParams({
         "form-name": "switch-assessment",
         "bot-field": "",
-        name: contact.name,
-        phone: contact.phone,
-        email: contact.email,
-        address: contact.address || "",
+        name, phone, email,
+        address: address || "",
         systemType: systemType || "",
         currentCompany: currentCompany || "",
         interests: interests.join(", "),
-        situation: situation || "",
-        whatToFix: whatToFix || "",
-        whatToAdd: whatToAdd || "",
       }).toString(),
     }).catch(() => {});
     setSubmitted(true);
@@ -252,39 +168,21 @@ const SwitchAssessment = () => {
             className="text-center max-w-lg mx-auto py-20"
           >
             <motion.div
-              className="w-24 h-24 rounded-full mx-auto mb-8 flex items-center justify-center"
+              className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center"
               style={{ background: "hsl(120 55% 48% / 0.1)", border: "2px solid hsl(120 55% 48% / 0.3)" }}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 200, damping: 14, delay: 0.15 }}
             >
-              <CheckCircle2 className="w-12 h-12" style={{ color: "hsl(120 55% 48%)" }} />
+              <CheckCircle2 className="w-10 h-10" style={{ color: "hsl(120 55% 48%)" }} />
             </motion.div>
-            <h1 className="font-display font-bold text-gray-900 text-3xl mb-3 tracking-tight">We've got your info!</h1>
-            <p className="text-gray-500 text-lg mb-2">
-              A local specialist will review your alarm situation and reach out within <strong className="text-gray-800">2 business hours</strong>.
+            <h1 className="font-display font-bold text-gray-900 text-2xl mb-2 tracking-tight">We've got your info!</h1>
+            <p className="text-gray-500 mb-2">
+              A local specialist will review your situation and reach out within <strong className="text-gray-800">2 business hours</strong>.
             </p>
-            <p className="text-gray-400 text-sm mb-4">We'll tell you exactly what equipment you have, whether you're out of contract, and how much you could save by switching.</p>
-            <div className="bg-gray-50 rounded-2xl p-5 mb-8 text-left">
-              <p className="text-sm font-semibold text-gray-700 mb-3">What happens next:</p>
-              <div className="space-y-2">
-                {[
-                  "We review your current system and provider details",
-                  "We confirm whether you're in contract or free to switch",
-                  "We put together a side-by-side comparison of what you're paying vs. what you'd pay with us",
-                  "We call you — no pressure, just answers",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <div className="w-5 h-5 rounded-full bg-red-50 flex items-center justify-center shrink-0 mt-0.5">
-                      <span className="text-[10px] font-bold" style={{ color: "hsl(0 85% 50%)" }}>{i + 1}</span>
-                    </div>
-                    <p className="text-sm text-gray-600">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <p className="text-gray-400 text-sm mb-6">We'll tell you what's compatible, how much you could save, and what the switch looks like.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a href="tel:7133879937" className="btn-primary-gradient inline-flex items-center gap-2 px-8 py-4 text-base">
+              <a href="tel:7133879937" className="btn-primary-gradient inline-flex items-center gap-2 px-7 py-3.5 text-sm">
                 <Phone className="w-4 h-4" /> Call Now — (713) 387-9937
               </a>
               <Link to="/" className="text-sm text-gray-400 hover:text-gray-600 transition-colors">Back to Home</Link>
@@ -295,560 +193,436 @@ const SwitchAssessment = () => {
     );
   }
 
-  const inputClass = "w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-red-400 transition-colors placeholder:text-gray-400";
-  const labelClass = "block text-sm font-semibold text-gray-800 mb-1.5";
+  const inputClass = "w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:border-red-400 transition-colors placeholder:text-gray-400 bg-white";
+  const labelClass = "text-sm font-semibold text-gray-800 mb-1.5";
 
   return (
     <Layout>
       <SEOHead
-        title="Alarm Takeover Assessment — Switch Your Alarm | Texas Total Security"
-        description="Tell us about your current alarm system. We'll review your equipment, check your contract status, and show you how much you could save by switching to Texas Total Security."
+        title="Switch Your Alarm Company Houston TX | Free Assessment"
+        description="Switch your alarm company in Houston without starting over. Texas Total Security reviews your existing equipment, contract, and monitoring bill, then explains your alarm takeover options."
         schemas={[
           generateLocalBusinessSchema(),
+          generateEnhancedServiceSchema(
+            "Switch Your Alarm Company Houston TX",
+            "Switch your alarm company to Texas Total Security in Houston. We evaluate existing panels, keypads, sensors, wiring, contract status, and monitoring bills, then take over compatible alarm systems.",
+            "/switch-my-alarm",
+            "Alarm Company Switch and Alarm System Takeover",
+            [],
+            switchFaqs
+          ),
           generateHowToSchema(
             "How to Switch Your Alarm Company to Texas Total Security",
-            "Switch your existing alarm system to Texas Total Security in one visit. We take over your panels, sensors, and wiring from any provider — ADT, Brinks, Vivint, and more.",
+            "Switch your existing alarm system to Texas Total Security in Houston.",
             [
-              { name: "Free Switch Assessment", text: "We visit your property at no charge, evaluate your existing alarm equipment from any provider, and tell you exactly what we can take over — panels, sensors, wiring, and all." },
-              { name: "Same-Day Takeover", text: "Our licensed technician reprograms your panel, tests every sensor, replaces any faulty components, and activates 24/7 Verizon cellular monitoring — all in a single visit. Most switches take just a few hours." },
-              { name: "You're Protected", text: "Your system stays exactly as-is — Honeywell, DSC, DMP, Resideo, and more are all compatible. Monitoring runs over Verizon cellular so you stay protected even when Wi-Fi goes down." },
+              { name: "Request a free switch assessment", text: "Tell us who monitors your alarm now, what equipment you have, and whether you are in contract." },
+              { name: "Review compatibility", text: "We evaluate your alarm panel, keypads, sensors, wiring, and communication path." },
+              { name: "Take over the system", text: "Our technician reprograms the panel, tests every sensor, and activates professional monitoring." },
             ],
             "/switch-my-alarm"
           ),
           generateBreadcrumbSchema([
             { name: "Home", href: "/" },
-            { name: "Switch My Alarm", href: "/switch-my-alarm" },
+            { name: "Switch Your Alarm Company", href: "/switch-my-alarm" },
           ]),
         ]}
       />
-      <ProgressBar step={step} />
 
-      {/* Header */}
-      <div className="bg-white border-b border-gray-100 py-8">
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-3" style={{ background: "hsl(0 85% 50% / 0.08)", color: "hsl(0 85% 50%)" }}>
-            Alarm Takeover Assessment
+      {/* HERO */}
+      <section className="relative overflow-hidden bg-neutral-950">
+        <div className="absolute inset-0">
+          <img src="/keypads-collage.jpg" alt="" className="h-full w-full object-cover opacity-20" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,10,0.98)_0%,rgba(10,10,10,0.9)_48%,rgba(10,10,10,0.68)_100%)]" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+          <div className="max-w-3xl">
+            <div className="mb-4 inline-flex items-center gap-2 border border-red-400/25 bg-red-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-red-100">
+              Houston Alarm Takeovers
+            </div>
+            <h1 className="font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Switch Your Alarm Company Without Starting Over
+            </h1>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
+              Texas Total Security helps Houston homeowners and businesses move away from national alarm providers while keeping compatible panels, keypads, sensors, and wiring whenever possible.
+            </p>
           </div>
-          <h1 className="font-display font-bold text-gray-900 text-2xl sm:text-3xl tracking-tight mb-2">
-            Tell Us About Your Current System
-          </h1>
-          <p className="text-gray-500 text-sm max-w-md mx-auto">
-            Takes about 3 minutes. We use this to review your equipment, check your contract, and show you exactly what switching would look like.
-          </p>
+        </div>
+      </section>
+
+      {/* TRUST STRIP */}
+      <div className="bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-4 gap-4 py-5">
+          {[
+            { icon: Star, text: "5★ Rated on Google" },
+            { icon: Award, text: "Locally Owned & Operated" },
+            { icon: Shield, text: "Licensed & Insured" },
+            { icon: Phone, text: "Talk to the Owner" },
+          ].map((item) => (
+            <div key={item.text} className="flex items-center gap-2 justify-center sm:justify-start">
+              <item.icon className="w-4 h-4 text-red-600 shrink-0" />
+              <span className="text-xs font-semibold text-gray-700">{item.text}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Form body */}
-      <div className="min-h-[70vh] bg-gray-50 py-8 px-4">
-        <div className="max-w-2xl mx-auto">
-          <AnimatePresence mode="wait">
-            {/* ── STEP 0: Your System ── */}
-            {step === 0 && (
-              <motion.div
-                key="step0"
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -40 }}
-                transition={{ duration: 0.4, ease: easeExpo }}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8"
-              >
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "hsl(0 85% 50% / 0.1)" }}>
-                    <AlertCircle className="w-4 h-4" style={{ color: "hsl(0 85% 50%)" }} />
-                  </div>
-                  <h2 className="font-display font-bold text-gray-900 text-lg">Your Current Alarm System</h2>
-                </div>
-
-                {/* System type */}
-                <div className="mb-6">
-                  <p className="text-sm font-semibold text-gray-800 mb-3">What system do you currently have? <span className="text-red-500">*</span></p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {["Honeywell", "DSC", "2GIG", "Other"].map((s) => (
-                      <button
-                        key={s}
-                        type="button"
-                        onClick={() => setSystemType(s)}
-                        className="py-3 px-2 rounded-xl text-sm font-semibold border-2 transition-all duration-200"
-                        style={{
-                          borderColor: systemType === s ? "hsl(0 85% 50%)" : "rgb(229 231 235)",
-                          background: systemType === s ? "hsl(0 85% 50%)" : "white",
-                          color: systemType === s ? "white" : "rgb(75 85 99)",
-                        }}
-                      >
-                        {s}
-                      </button>
-                    ))}
-                  </div>
-                  {systemType === "Other" && (
-                    <input
-                      type="text"
-                      placeholder="What brand or system?"
-                      value={systemTypeOther}
-                      onChange={(e) => setSystemTypeOther(e.target.value)}
-                      className={`${inputClass} mt-3`}
-                    />
-                  )}
-                </div>
-
-                <YesNo label="Do you have any equipment problems?" value={hasEquipmentProblems} onChange={setHasEquipmentProblems} />
-                <YesNo label="Do you have problems with any sensors?" value={hasSensorProblems} onChange={setHasSensorProblems} />
-                <YesNo
-                  label="Do you have to bypass any zones to set your alarm?"
-                  value={bypassingZones}
-                  onChange={setBypassingZones}
-                  detail
-                  detailLabel="Which zones are you bypassing?"
-                  detailValue={bypassedZoneDetails}
-                  onDetailChange={setBypassedZoneDetails}
-                />
-                <YesNo label="Can you set your current alarm system right now?" value={canSetAlarm} onChange={setCanSetAlarm} />
-
-                <div className="mb-5">
-                  <label className={labelClass}>What equipment do you feel you're missing or wish you had?</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. cameras, glass break sensors, door contacts..."
-                    value={missingEquipment}
-                    onChange={(e) => setMissingEquipment(e.target.value)}
-                    className={inputClass}
-                  />
-                </div>
-
-                {/* Keypad photo upload */}
-                <div className="mb-6">
-                  <label className={labelClass}>
-                    Upload a photo of your current alarm keypad <span className="text-gray-400 font-normal">(optional but very helpful)</span>
-                  </label>
-                  <div
-                    className="border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-colors hover:border-red-300 hover:bg-red-50/30"
-                    style={{ borderColor: keypAdPhotoName ? "hsl(120 55% 48%)" : "rgb(209 213 219)" }}
-                    onClick={() => fileInputRef.current?.click()}
-                  >
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) setKeypadPhotoName(file.name);
-                      }}
-                    />
-                    {keypAdPhotoName ? (
-                      <div className="flex items-center justify-center gap-2">
-                        <CheckCircle2 className="w-5 h-5" style={{ color: "hsl(120 55% 48%)" }} />
-                        <span className="text-sm font-medium text-gray-700">{keypAdPhotoName}</span>
-                        <button
-                          type="button"
-                          onClick={(e) => { e.stopPropagation(); setKeypadPhotoName(""); }}
-                          className="text-gray-400 hover:text-gray-600"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      </div>
-                    ) : (
-                      <>
-                        <Upload className="w-7 h-7 text-gray-300 mx-auto mb-2" />
-                        <p className="text-sm text-gray-500">Click to upload a photo of your keypad</p>
-                        <p className="text-xs text-gray-400 mt-1">JPG, PNG, HEIC — This helps us identify your exact panel model</p>
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={next}
-                  disabled={!canProceed()}
-                  className="w-full py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200"
-                  style={{
-                    background: canProceed() ? "linear-gradient(135deg, hsl(0 85% 50%), hsl(0 85% 42%))" : "rgb(229 231 235)",
-                    color: canProceed() ? "white" : "rgb(156 163 175)",
-                  }}
-                >
-                  Continue — Current Provider <ArrowRight className="w-4 h-4" />
-                </button>
-              </motion.div>
-            )}
-
-            {/* ── STEP 1: Current Provider ── */}
-            {step === 1 && (
-              <motion.div
-                key="step1"
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -40 }}
-                transition={{ duration: 0.4, ease: easeExpo }}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8"
-              >
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "hsl(0 85% 50% / 0.1)" }}>
-                    <DollarSign className="w-4 h-4" style={{ color: "hsl(0 85% 50%)" }} />
-                  </div>
-                  <h2 className="font-display font-bold text-gray-900 text-lg">Your Current Provider & Contract</h2>
-                </div>
-
-                <div className="mb-5">
-                  <label className={labelClass}>What company is monitoring your alarm now? <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Brinks, Vivint, Alarm.com, local company..."
-                    value={currentCompany}
-                    onChange={(e) => setCurrentCompany(e.target.value)}
-                    className={inputClass}
-                  />
-                </div>
-
-                <div className="mb-5">
-                  <label className={labelClass}>What is your current monthly monitoring bill?</label>
-                  <div className="flex gap-2">
-                    <div className="relative flex-1">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
-                      <input
-                        type="text"
-                        placeholder="e.g. 49.99"
-                        value={monthlyBill}
-                        onChange={(e) => setMonthlyBill(e.target.value)}
-                        className={`${inputClass} pl-7`}
-                      />
-                    </div>
-                    <select
-                      value={billingFrequency}
-                      onChange={(e) => setBillingFrequency(e.target.value)}
-                      className="border border-gray-200 rounded-xl px-3 py-3 text-sm text-gray-700 focus:outline-none focus:border-red-400 bg-white"
-                    >
-                      <option value="monthly">/ month</option>
-                      <option value="quarterly">/ quarter</option>
-                      <option value="annual">/ year</option>
-                    </select>
-                  </div>
-                  <p className="text-xs text-gray-400 mt-1.5">Before or after tax is fine — just your best estimate</p>
-                </div>
-
-                <div className="mb-5">
-                  <p className="text-sm font-semibold text-gray-800 mb-3">Are you currently in a contract?</p>
-                  <div className="grid grid-cols-3 gap-2">
-                    {[
-                      { label: "Yes, in contract", value: "yes" },
-                      { label: "Month-to-month", value: "no" },
-                      { label: "Not sure", value: "unsure" },
-                    ].map((opt) => (
-                      <button
-                        key={opt.value}
-                        type="button"
-                        onClick={() => setInContract(opt.value)}
-                        className="py-2.5 px-2 rounded-xl text-xs font-semibold border-2 transition-all duration-200 leading-snug"
-                        style={{
-                          borderColor: inContract === opt.value ? "hsl(0 85% 50%)" : "rgb(229 231 235)",
-                          background: inContract === opt.value ? "hsl(0 85% 50%)" : "white",
-                          color: inContract === opt.value ? "white" : "rgb(75 85 99)",
-                        }}
-                      >
-                        {opt.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {inContract === "yes" && (
-                  <div className="mb-5 bg-amber-50 border border-amber-100 rounded-xl p-4">
-                    <p className="text-xs font-semibold text-amber-700 mb-3 uppercase tracking-wide">Contract Details</p>
-                    <div className="space-y-3">
-                      <div>
-                        <label className="block text-xs font-medium text-gray-700 mb-1">When did you sign up?</label>
-                        <input
-                          type="text"
-                          placeholder="e.g. January 2023, about 2 years ago..."
-                          value={signedUpDate}
-                          onChange={(e) => setSignedUpDate(e.target.value)}
-                          className={inputClass}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-gray-700 mb-1">How much time is left in your contract?</label>
-                        <input
-                          type="text"
-                          placeholder="e.g. 14 months, about 1 year..."
-                          value={contractTimeLeft}
-                          onChange={(e) => setContractTimeLeft(e.target.value)}
-                          className={inputClass}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                <YesNo
-                  label="Did you sign anything recently — like when they came out to fix something?"
-                  value={signedRecently}
-                  onChange={setSignedRecently}
-                  detail
-                  detailLabel="What did you sign, and when approximately?"
-                  detailValue={signedRecentlyDetails}
-                  onDetailChange={setSignedRecentlyDetails}
-                />
-
-                <div className="flex gap-3 mt-2">
-                  <button type="button" onClick={back} className="flex items-center gap-1.5 px-5 py-3.5 rounded-xl text-sm font-semibold text-gray-500 border border-gray-200 hover:border-gray-300 transition-colors">
-                    <ArrowLeft className="w-4 h-4" /> Back
-                  </button>
-                  <button
-                    type="button"
-                    onClick={next}
-                    disabled={!canProceed()}
-                    className="flex-1 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200"
-                    style={{
-                      background: canProceed() ? "linear-gradient(135deg, hsl(0 85% 50%), hsl(0 85% 42%))" : "rgb(229 231 235)",
-                      color: canProceed() ? "white" : "rgb(156 163 175)",
-                    }}
-                  >
-                    Continue — Your Goals <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* ── STEP 2: Goals ── */}
-            {step === 2 && (
-              <motion.div
-                key="step2"
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -40 }}
-                transition={{ duration: 0.4, ease: easeExpo }}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8"
-              >
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "hsl(0 85% 50% / 0.1)" }}>
-                    <CheckCircle2 className="w-4 h-4" style={{ color: "hsl(0 85% 50%)" }} />
-                  </div>
-                  <h2 className="font-display font-bold text-gray-900 text-lg">What Are You Looking For?</h2>
-                </div>
-
-                <p className="text-sm font-semibold text-gray-800 mb-3">Select everything that applies: <span className="text-red-500">*</span></p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                  {[
-                    { value: "fix-equipment",  icon: Wrench,  label: "Fix Equipment Problems", desc: "Sensors, panels, keypads that aren't working right" },
-                    { value: "add-equipment",  icon: Plus,    label: "Add New Equipment",       desc: "More cameras, sensors, or upgraded hardware" },
-                    { value: "local-company",  icon: Users,   label: "Work with a Local Company", desc: "Talk to real people — not a national call center" },
-                    { value: "save-money",     icon: DollarSign, label: "Save Money on Monitoring", desc: "Pay less per month than I do now" },
-                  ].map((item) => {
-                    const active = interests.includes(item.value);
-                    return (
-                      <button
-                        key={item.value}
-                        type="button"
-                        onClick={() => toggleInterest(item.value)}
-                        className="flex items-start gap-3 p-4 rounded-xl border-2 text-left transition-all duration-200"
-                        style={{
-                          borderColor: active ? "hsl(0 85% 50%)" : "rgb(229 231 235)",
-                          background: active ? "hsl(0 85% 50% / 0.04)" : "white",
-                        }}
-                      >
-                        <div
-                          className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200"
-                          style={{ background: active ? "hsl(0 85% 50%)" : "rgb(243 244 246)" }}
-                        >
-                          <item.icon className="w-4 h-4" style={{ color: active ? "white" : "rgb(107 114 128)" }} />
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-gray-900 leading-snug">{item.label}</p>
-                          <p className="text-xs text-gray-500 mt-0.5 leading-snug">{item.desc}</p>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {interests.includes("fix-equipment") && (
-                  <div className="mb-4">
-                    <label className={labelClass}>What needs fixing?</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. front door sensor, keypad display, motion detector..."
-                      value={whatToFix}
-                      onChange={(e) => setWhatToFix(e.target.value)}
-                      className={inputClass}
-                    />
-                  </div>
-                )}
-
-                {interests.includes("add-equipment") && (
-                  <div className="mb-4">
-                    <label className={labelClass}>What would you like to add?</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. cameras, motion sensors, glass break detectors..."
-                      value={whatToAdd}
-                      onChange={(e) => setWhatToAdd(e.target.value)}
-                      className={inputClass}
-                    />
-                  </div>
-                )}
-
-                <div className="mb-5">
-                  <label className={labelClass}>Anything else you'd like us to know about your situation?</label>
-                  <textarea
-                    rows={3}
-                    placeholder="Tell us anything else that would help us understand your needs..."
-                    value={situation}
-                    onChange={(e) => setSituation(e.target.value)}
-                    className={`${inputClass} resize-none`}
-                  />
-                </div>
-
-                <div className="flex gap-3">
-                  <button type="button" onClick={back} className="flex items-center gap-1.5 px-5 py-3.5 rounded-xl text-sm font-semibold text-gray-500 border border-gray-200 hover:border-gray-300 transition-colors">
-                    <ArrowLeft className="w-4 h-4" /> Back
-                  </button>
-                  <button
-                    type="button"
-                    onClick={next}
-                    disabled={!canProceed()}
-                    className="flex-1 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200"
-                    style={{
-                      background: canProceed() ? "linear-gradient(135deg, hsl(0 85% 50%), hsl(0 85% 42%))" : "rgb(229 231 235)",
-                      color: canProceed() ? "white" : "rgb(156 163 175)",
-                    }}
-                  >
-                    Continue — Contact Info <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* ── STEP 3: Contact ── */}
-            {step === 3 && (
-              <motion.div
-                key="step3"
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -40 }}
-                transition={{ duration: 0.4, ease: easeExpo }}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8"
-              >
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "hsl(0 85% 50% / 0.1)" }}>
-                    <Phone className="w-4 h-4" style={{ color: "hsl(0 85% 50%)" }} />
-                  </div>
-                  <h2 className="font-display font-bold text-gray-900 text-lg">How Do We Reach You?</h2>
-                </div>
-
-                <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6">
-                  <div className="flex items-start gap-2.5">
-                    <Shield className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
-                    <p className="text-xs text-blue-700 leading-relaxed">
-                      A local specialist — not a call center — will personally review your assessment and reach out with honest answers. No pressure, no scripts.
-                    </p>
-                  </div>
-                </div>
-
-                <form
-                  onSubmit={handleSubmit}
-                  name="switch-assessment"
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
-                >
-                  <input type="hidden" name="form-name" value="switch-assessment" />
-                  <input type="hidden" name="bot-field" />
-                  <div className="space-y-4 mb-6">
-                    <div>
-                      <label className={labelClass}>Full Name <span className="text-red-500">*</span></label>
-                      <input
-                        type="text"
-                        placeholder="Your name"
-                        value={contact.name}
-                        onChange={(e) => setContact(c => ({ ...c, name: e.target.value }))}
-                        className={inputClass}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className={labelClass}>Phone Number <span className="text-red-500">*</span></label>
-                      <input
-                        type="tel"
-                        placeholder="(713) 000-0000"
-                        value={contact.phone}
-                        onChange={(e) => setContact(c => ({ ...c, phone: e.target.value }))}
-                        className={inputClass}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className={labelClass}>Email Address <span className="text-red-500">*</span></label>
-                      <input
-                        type="email"
-                        placeholder="you@email.com"
-                        value={contact.email}
-                        onChange={(e) => setContact(c => ({ ...c, email: e.target.value }))}
-                        className={inputClass}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className={labelClass}>Property Address <span className="text-gray-400 font-normal">(optional)</span></label>
-                      <input
-                        type="text"
-                        placeholder="Houston, TX or full address"
-                        value={contact.address}
-                        onChange={(e) => setContact(c => ({ ...c, address: e.target.value }))}
-                        className={inputClass}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Summary recap */}
-                  <div className="bg-gray-50 rounded-xl p-4 mb-6 space-y-2 text-xs text-gray-500">
-                    {systemType && <div className="flex justify-between"><span>System:</span> <span className="font-medium text-gray-700">{systemType}{systemTypeOther ? ` — ${systemTypeOther}` : ""}</span></div>}
-                    {currentCompany && <div className="flex justify-between"><span>Current provider:</span> <span className="font-medium text-gray-700">{currentCompany}</span></div>}
-                    {monthlyBill && <div className="flex justify-between"><span>Current bill:</span> <span className="font-medium text-gray-700">${monthlyBill}/{billingFrequency === "monthly" ? "mo" : billingFrequency === "quarterly" ? "qtr" : "yr"}</span></div>}
-                    {inContract && <div className="flex justify-between"><span>Contract:</span> <span className="font-medium text-gray-700">{inContract === "yes" ? `In contract${contractTimeLeft ? ` — ${contractTimeLeft} left` : ""}` : inContract === "no" ? "Month-to-month" : "Not sure"}</span></div>}
-                    {interests.length > 0 && <div className="flex justify-between"><span>Looking to:</span> <span className="font-medium text-gray-700 text-right max-w-[60%]">{interests.map(i => ({ "fix-equipment": "Fix equipment", "add-equipment": "Add equipment", "local-company": "Local company", "save-money": "Save money" }[i])).join(", ")}</span></div>}
-                  </div>
-
-                  <div className="flex gap-3">
-                    <button type="button" onClick={back} className="flex items-center gap-1.5 px-5 py-3.5 rounded-xl text-sm font-semibold text-gray-500 border border-gray-200 hover:border-gray-300 transition-colors">
-                      <ArrowLeft className="w-4 h-4" /> Back
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={!canProceed()}
-                      className="flex-1 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200"
-                      style={{
-                        background: canProceed() ? "linear-gradient(135deg, hsl(0 85% 50%), hsl(0 85% 42%))" : "rgb(229 231 235)",
-                        color: canProceed() ? "white" : "rgb(156 163 175)",
-                        boxShadow: canProceed() ? "0 4px 20px hsl(0 85% 45% / 0.3)" : "none",
-                      }}
-                    >
-                      Submit My Assessment <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                  <p className="text-center text-xs text-gray-400 mt-4">No spam. No pressure. A real local person will call you.</p>
-                </form>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-
-      {/* Trust strip */}
-      <div className="bg-white border-t border-gray-100 py-6">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            {[
-              { icon: Shield,  label: "5-Star Google Rating" },
-              { icon: Phone,   label: "Talk to the Owner" },
-              { icon: Camera,  label: "15+ Years in Houston" },
-              { icon: CheckCircle2, label: "No Pressure — Ever" },
-            ].map((item) => (
-              <div key={item.label} className="flex flex-col items-center gap-1.5">
-                <item.icon className="w-5 h-5" style={{ color: "hsl(0 85% 50%)" }} />
-                <p className="text-[11px] font-semibold text-gray-600">{item.label}</p>
+      {/* HOW IT WORKS */}
+      <section className="bg-gray-50 border-b border-gray-100 py-10 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-4 lg:grid-cols-3">
+            {switchSteps.map((item, i) => (
+              <div key={item.title} className="bg-white border border-gray-200 p-5 shadow-sm">
+                <div className="mb-4 flex h-8 w-8 items-center justify-center bg-red-600 text-sm font-bold text-white">{i + 1}</div>
+                <h3 className="text-base font-bold leading-snug text-gray-950">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">{item.body}</p>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* MAIN CONTENT: Side-by-side info + form */}
+      <section className="bg-white py-10 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 items-start">
+
+            {/* RIGHT FIRST on mobile: Compact multi-step form */}
+            <div className="order-first lg:order-last">
+              {/* Sticky form on desktop */}
+              <div className="lg:sticky lg:top-24">
+                <div className="bg-white border border-gray-200 shadow-sm">
+                  {/* Header */}
+                  <div className="px-5 py-4 border-b border-gray-100">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold mb-2" style={{ background: "hsl(0 85% 50% / 0.08)", color: "hsl(0 85% 50%)" }}>
+                      Free Assessment
+                    </div>
+                    <h3 className="font-display font-bold text-gray-900 text-lg leading-tight">
+                      {stepTitles[step]}
+                    </h3>
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      Step {step + 1} of 3{step === 2 ? " — submit and we'll reach out" : ""}
+                    </p>
+                  </div>
+
+                  {/* Body */}
+                  <div className="px-5 py-4">
+                    {step === 0 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="grid grid-cols-2 gap-2 mb-4">
+                          {[
+                            { label: "Honeywell", icon: Shield },
+                            { label: "DSC", icon: Shield },
+                            { label: "2GIG", icon: Shield },
+                            { label: "Other", icon: Shield },
+                          ].map((s) => (
+                            <button
+                              key={s.label}
+                              type="button"
+                              onClick={() => setSystemType(s.label)}
+                              className="flex items-center gap-2 py-3 px-3 rounded-xl text-sm font-semibold border-2 transition-all duration-200"
+                              style={{
+                                borderColor: systemType === s.label ? "hsl(0 85% 50%)" : "rgb(229 231 235)",
+                                background: systemType === s.label ? "hsl(0 85% 50%)" : "white",
+                                color: systemType === s.label ? "white" : "rgb(75 85 99)",
+                              }}
+                            >
+                              <s.icon className="w-4 h-4" />
+                              {s.label}
+                            </button>
+                          ))}
+                        </div>
+                        {systemType === "Other" && (
+                          <div className="mb-4">
+                            <input
+                              type="text"
+                              placeholder="What brand?"
+                              value={systemTypeOther}
+                              onChange={(e) => setSystemTypeOther(e.target.value)}
+                              className={inputClass}
+                              autoFocus
+                            />
+                          </div>
+                        )}
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={next}
+                            disabled={!canProceed()}
+                            className="flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200"
+                            style={{
+                              background: canProceed() ? "linear-gradient(135deg, hsl(0 85% 50%), hsl(0 85% 42%))" : "rgb(229 231 235)",
+                              color: canProceed() ? "white" : "rgb(156 163 175)",
+                            }}
+                          >
+                            Continue <ArrowRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {step === 1 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="space-y-3 mb-4">
+                          <div>
+                            <label className={labelClass}>Current alarm company <span className="text-red-500">*</span></label>
+                            <input
+                              type="text"
+                              placeholder="e.g. ADT, Brinks, Vivint, local company..."
+                              value={currentCompany}
+                              onChange={(e) => setCurrentCompany(e.target.value)}
+                              className={inputClass}
+                              autoFocus
+                            />
+                          </div>
+                          <div>
+                            <label className={labelClass}>Monthly bill</label>
+                            <input
+                              type="text"
+                              placeholder="e.g. $49.99"
+                              value={monthlyBill}
+                              onChange={(e) => setMonthlyBill(e.target.value)}
+                              className={inputClass}
+                            />
+                          </div>
+                          <div>
+                            <label className={labelClass}>Contract status</label>
+                            <div className="grid grid-cols-3 gap-2">
+                              {[
+                                { label: "In contract", value: "yes" },
+                                { label: "Month-to-month", value: "no" },
+                                { label: "Not sure", value: "unsure" },
+                              ].map((opt) => (
+                                <button
+                                  key={opt.value}
+                                  type="button"
+                                  onClick={() => setInContract(opt.value)}
+                                  className="py-2.5 rounded-xl text-xs font-semibold border-2 transition-all duration-200"
+                                  style={{
+                                    borderColor: inContract === opt.value ? "hsl(0 85% 50%)" : "rgb(229 231 235)",
+                                    background: inContract === opt.value ? "hsl(0 85% 50%)" : "white",
+                                    color: inContract === opt.value ? "white" : "rgb(75 85 99)",
+                                  }}
+                                >
+                                  {opt.label}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          {inContract === "yes" && (
+                            <div>
+                              <label className={labelClass}>Time left on contract?</label>
+                              <input
+                                type="text"
+                                placeholder="e.g. 14 months"
+                                value={contractTimeLeft}
+                                onChange={(e) => setContractTimeLeft(e.target.value)}
+                                className={inputClass}
+                              />
+                            </div>
+                          )}
+                          <div>
+                            <label className="text-xs font-semibold text-gray-800 mb-1.5 block">What interests you?</label>
+                            <div className="flex flex-wrap gap-1.5">
+                              {[
+                                { value: "lower-bill", label: "Lower bill" },
+                                { value: "fix-equipment", label: "Fix equipment" },
+                                { value: "local", label: "Local service" },
+                                { value: "add-cameras", label: "Add cameras" },
+                              ].map((opt) => {
+                                const active = interests.includes(opt.value);
+                                return (
+                                  <button
+                                    key={opt.value}
+                                    type="button"
+                                    onClick={() => toggleInterest(opt.value)}
+                                    className="text-xs font-semibold px-3 py-1.5 rounded-full border-2 transition-all duration-200"
+                                    style={{
+                                      borderColor: active ? "hsl(0 85% 50%)" : "rgb(229 231 235)",
+                                      background: active ? "hsl(0 85% 50%)" : "white",
+                                      color: active ? "white" : "rgb(75 85 99)",
+                                    }}
+                                  >
+                                    {opt.label}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-2">
+                          <button type="button" onClick={back} className="flex items-center gap-1.5 px-4 py-3 rounded-xl text-sm font-semibold text-gray-500 border border-gray-200 hover:border-gray-300 transition-colors">
+                            <ArrowLeft className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={next}
+                            disabled={!canProceed()}
+                            className="flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200"
+                            style={{
+                              background: canProceed() ? "linear-gradient(135deg, hsl(0 85% 50%), hsl(0 85% 42%))" : "rgb(229 231 235)",
+                              color: canProceed() ? "white" : "rgb(156 163 175)",
+                            }}
+                          >
+                            Continue <ArrowRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {step === 2 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <form onSubmit={handleSubmit} name="switch-assessment" data-netlify="true" netlify-honeypot="bot-field">
+                          <input type="hidden" name="form-name" value="switch-assessment" />
+                          <input type="hidden" name="bot-field" />
+                          <div className="space-y-3 mb-4">
+                            <div>
+                              <input
+                                type="text"
+                                placeholder="Full name *"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className={inputClass}
+                                required
+                                autoFocus
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type="tel"
+                                placeholder="Phone number *"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                className={inputClass}
+                                required
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type="email"
+                                placeholder="Email *"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={inputClass}
+                                required
+                              />
+                            </div>
+                            <div>
+                              <input
+                                type="text"
+                                placeholder="Property address (optional)"
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                                className={inputClass}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="bg-gray-50 rounded-xl p-3 mb-3 flex flex-wrap gap-1.5 text-xs">
+                            {systemType && <span className="bg-white border border-gray-200 px-2 py-1 rounded font-medium text-gray-700">{systemType}{systemTypeOther ? `: ${systemTypeOther}` : ""}</span>}
+                            {currentCompany && <span className="bg-white border border-gray-200 px-2 py-1 rounded font-medium text-gray-700">{currentCompany}</span>}
+                            {monthlyBill && <span className="bg-white border border-gray-200 px-2 py-1 rounded font-medium text-gray-700">${monthlyBill}/mo</span>}
+                            {interests.length > 0 && <span className="bg-white border border-gray-200 px-2 py-1 rounded font-medium text-gray-700">{interests.length} interest{interests.length > 1 ? "s" : ""}</span>}
+                          </div>
+
+                          <p className="text-[10px] text-gray-400 mb-3 leading-relaxed">
+                            A local specialist will review your situation and reach out with honest answers. No pressure, no call center scripts.
+                          </p>
+
+                          <div className="flex gap-2">
+                            <button type="button" onClick={back} className="flex items-center gap-1.5 px-4 py-3 rounded-xl text-sm font-semibold text-gray-500 border border-gray-200 hover:border-gray-300 transition-colors">
+                              <ArrowLeft className="w-4 h-4" />
+                            </button>
+                            <button
+                              type="submit"
+                              disabled={!canProceed()}
+                              className="flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200"
+                              style={{
+                                background: canProceed() ? "linear-gradient(135deg, hsl(0 85% 50%), hsl(0 85% 42%))" : "rgb(229 231 235)",
+                                color: canProceed() ? "white" : "rgb(156 163 175)",
+                              }}
+                            >
+                              Submit Assessment <ArrowRight className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </form>
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* LEFT: Informative content — below form on mobile */}
+            <div className="order-last lg:order-first">
+              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-600 mb-3">Why Switch to Texas Total Security</div>
+              <h2 className="text-2xl sm:text-3xl font-bold leading-tight tracking-tight text-gray-950 mb-4">
+                A Houston company that answers when you call and owns every part of your account.
+              </h2>
+              <p className="text-sm leading-relaxed text-gray-600 mb-6">
+                If you're tired of your current alarm company — hard to reach, equipment problems that never get resolved, a national call center that doesn't know your property — we can help. Texas Total Security is locally owned and operated in Houston. When you have a question, you talk to the people who installed your system, not a remote support queue.
+              </p>
+
+              <div className="space-y-3 mb-6">
+                {[
+                  "Keep compatible Honeywell, DSC, 2GIG, DMP, and Resideo equipment — no need to replace what works",
+                  "Transparent pricing on monitoring and service — no hidden rate escalations",
+                  "We evaluate your existing system thoroughly before recommending anything",
+                  "Local Houston account management — the same people who install your system support it after",
+                  "You can reach the owner of the company directly when something matters",
+                  "Your system is managed by Texas Total Security, with monitoring routed through our certified partner center",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                    <span className="text-sm font-medium text-gray-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-gray-50 border border-gray-200 p-5">
+                <div className="flex items-center gap-2 mb-1">
+                  <Phone className="w-4 h-4 text-red-600" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Need help now?</span>
+                </div>
+                <p className="text-lg font-bold text-gray-900">(713) 387-9937</p>
+                <p className="text-xs text-gray-500 mt-0.5">Call and ask about switching your alarm company</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-gray-50 border-t border-gray-200 py-10 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-600 mb-3 text-center">FAQ</div>
+          <h2 className="text-2xl sm:text-3xl font-bold leading-tight tracking-tight text-gray-950 mb-6 text-center">
+            Common Questions About Switching
+          </h2>
+          <div className="max-w-3xl mx-auto grid gap-3">
+            {switchFaqs.map((faq) => (
+              <div key={faq.question} className="bg-white border border-gray-200 p-5">
+                <h3 className="text-base font-bold leading-snug text-gray-950">{faq.question}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </Layout>
   );
 };

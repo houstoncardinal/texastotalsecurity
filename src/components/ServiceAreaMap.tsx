@@ -20,6 +20,22 @@ type Area = {
 
 /* ─── Service area data with polygon boundaries ─────────────── */
 const AREAS: Area[] = [
+  // Greater Houston coverage area - encompasses all neighborhoods
+  {
+    id: -1,
+    slug: "houston-security-systems",
+    name: "Greater Houston",
+    zip: "All Areas",
+    lng: -95.47, lat: 29.745,
+    color: "#FF6B6B",
+    fill: "rgba(255,107,107,0.06)",
+    polygon: [
+      // Large polygon encompassing the greater Houston service area
+      [-95.75, 29.62], [-95.20, 29.62],
+      [-95.20, 29.88], [-95.75, 29.88],
+      [-95.75, 29.62],
+    ],
+  },
   {
     id: 0,
     slug: "river-oaks-security-systems",
@@ -545,22 +561,6 @@ const ServiceAreaMap = () => {
     <div className="relative w-full h-full">
       <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
 
-      {/* Top-left badge */}
-      <div
-        className="absolute top-3 left-3 z-10 flex items-center gap-2 px-3 py-1.5 rounded-xl pointer-events-none"
-        style={{
-          background: "rgba(4,4,4,0.84)",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
-          border: "1px solid rgba(255,255,255,0.12)",
-          boxShadow: "0 4px 18px rgba(0,0,0,0.45)",
-        }}
-      >
-        <div className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(0,85%,54%)", boxShadow: "0 0 7px hsla(0,85%,54%,0.9)" }} />
-        <span style={{ fontSize: "10px", fontWeight: 700, color: "rgba(255,255,255,0.92)", letterSpacing: "0.07em", textTransform: "uppercase", fontFamily: "system-ui,sans-serif" }}>
-          {AREAS.length} Houston Service Areas
-        </span>
-      </div>
 
       {/* Hover tooltip pill */}
       {hoveredArea && (
