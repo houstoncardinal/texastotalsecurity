@@ -257,10 +257,11 @@ const ServiceAreas = () => {
               <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-200">Coverage Snapshot</p>
-                  <h2 className="font-display mt-2 text-2xl font-bold text-white">13 Dedicated Area Pages</h2>
+                  <h2 className="font-display mt-2 text-2xl font-bold text-white">Greater Houston, End to End</h2>
                   <p className="mt-2 text-sm leading-relaxed text-white/50">
-                    Full-service coverage in every area listed.
+                    Full-service coverage across the entire Houston metro — inside the Loop, every suburb, and surrounding counties.
                   </p>
+
                 </div>
                 <span className="flex h-11 w-11 items-center justify-center bg-red-500 text-white">
                   <MapPin className="h-5 w-5" />
