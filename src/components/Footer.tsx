@@ -326,34 +326,6 @@ const Footer = () => {
           </motion.div>
         </div>
 
-        {/* Service areas — full internal-link block for Google local SEO */}
-        <div
-          className="py-7 text-center"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
-        >
-          <p className="text-[10px] uppercase tracking-[0.22em] font-bold mb-3" style={{ color: "rgba(255,255,255,0.22)" }}>
-            Serving Houston's Most Prestigious Inner-Loop Neighborhoods
-          </p>
-          <div className="flex flex-wrap justify-center gap-x-3 gap-y-2 text-[12px] leading-relaxed max-w-5xl mx-auto">
-            {footerServiceAreas.map((area, index) => (
-              <span key={area.slug} className="inline-flex items-center gap-3">
-                <Link
-                  to={`/neighborhoods/${area.slug}`}
-                  className="transition-colors hover:text-white"
-                  style={{ color: "rgba(255,255,255,0.34)" }}
-                >
-                  {area.name} ({area.zip}), TX
-                </Link>
-                {index < footerServiceAreas.length - 1 && (
-                  <span style={{ color: "rgba(255,255,255,0.16)" }}>·</span>
-                )}
-              </span>
-            ))}
-          </div>
-          <p className="text-[11px] mt-3 font-medium" style={{ color: "rgba(255,255,255,0.22)" }}>
-            Licensed & Insured · Locally owned &amp; operated for 15+ years
-          </p>
-        </div>
 
         {/* Bottom bar */}
         <div
