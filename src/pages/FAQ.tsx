@@ -282,7 +282,7 @@ const FAQ = () => {
 
           <div className="space-y-6">
             {faqGroups.map((group, groupIndex) => (
-              <section key={group.title} id={group.title.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and")} className="scroll-mt-28 rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
+              <section key={group.title} id={group.title.toLowerCase().replace(/ /g, "-").replace(/&/g, "and")} className="scroll-mt-28 rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
                 <div className="mb-4 flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-600">
                     <group.icon className="h-5 w-5" />
