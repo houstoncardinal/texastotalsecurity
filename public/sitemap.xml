@@ -77,6 +77,60 @@
   </url>
 
   <url>
+    <loc>https://www.texastotalsecurity.com/property-management-security</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HOA SECURITY SUB-PAGES
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/hoa-security/gates-entrances</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://www.texastotalsecurity.com/hoa-security/dumpster-cameras</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://www.texastotalsecurity.com/hoa-security/mailbox-cameras</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.texastotalsecurity.com/hoa-security/pool-cameras</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.texastotalsecurity.com/hoa-security/playground-cameras</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://www.texastotalsecurity.com/hoa-security/dog-park-cameras</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.76</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/faq</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
     <loc>https://www.texastotalsecurity.com/industries</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
