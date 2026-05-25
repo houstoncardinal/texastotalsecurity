@@ -271,7 +271,7 @@ const FAQ = () => {
               <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-red-600">FAQ Topics</div>
               <div className="mt-4 space-y-2">
                 {faqGroups.map(group => (
-                  <a key={group.title} href={`#${group.title.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and")}`} className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-white hover:text-red-600">
+                  <a key={group.title} href={`#${group.title.toLowerCase().replace(/ /g, "-").replace(/&/g, "and")}`} className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-white hover:text-red-600">
                     <group.icon className="h-4 w-4" />
                     {group.title}
                   </a>
