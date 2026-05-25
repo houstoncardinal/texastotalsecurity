@@ -69,6 +69,19 @@ export interface SwitchLead {
   phone: string;
   email: string;
   address: string;
+  systemTypeOther?: string;
+  hasEquipmentProblems?: string;
+  hasSensorProblems?: string;
+  bypassingZones?: string;
+  bypassedZoneDetails?: string;
+  canSetAlarm?: string;
+  missingEquipment?: string;
+  billingFrequency?: string;
+  signedRecently?: string;
+  signedRecentlyDetails?: string;
+  whatToFix?: string;
+  whatToAdd?: string;
+  situation?: string;
 }
 
 export function loadSwitchLeads(): SwitchLead[] {
