@@ -1056,14 +1056,23 @@ function SecurityPole({ config }: { config: PoleConfig }) {
   return (
     <group ref={groupRef} position={[0, -(poleH / 2) - 0.06, 0]}>
 
-      {/* Ground — dark soil so blades contrast clearly */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <circleGeometry args={[3.6, 48]} />
-        <meshStandardMaterial color="#1e2a10" roughness={0.98} metalness={0} />
+      {/* Ground — large grassy disc that fades out so it blends with the sky gradient */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.002, 0]} receiveShadow>
+        <circleGeometry args={[12, 64]} />
+        <meshStandardMaterial color="#2a3a18" roughness={0.98} metalness={0} />
+      </mesh>
+      {/* Inner darker dirt ring around the pole base — visually grounds the install */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.0, 0]} receiveShadow>
+        <circleGeometry args={[0.55, 32]} />
+        <meshStandardMaterial color="#3a2d1c" roughness={0.95} metalness={0} />
       </mesh>
 
       {/* Grass blades */}
       <GrassField />
+
+      {/* Branded backdrop sign in the distance */}
+      <BrandedSign />
+
 
       {/* Base flange plate */}
       <mesh position={[0, 0.072, 0]}>
