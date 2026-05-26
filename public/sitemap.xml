@@ -488,6 +488,12 @@
        (Ordered by SEO/traffic value, not publish date)
   ═══════════════════════════════════════════════════════ -->
   <url>
+    <loc>https://www.texastotalsecurity.com/blog/houston-we-have-a-problem-security-challenges</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
     <loc>https://www.texastotalsecurity.com/blog/houston-crime-statistics-2025-neighborhood-guide</loc>
     <lastmod>2025-11-10</lastmod>
     <changefreq>yearly</changefreq>
