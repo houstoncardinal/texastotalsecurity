@@ -42,7 +42,7 @@ export const blogArticles: BlogArticle[] = [
     category: "crime-prevention",
     datePublished: "2026-05-26",
     readTime: "10 min",
-    heroImage: "/src/assets/houston-we-have-a-problem.png",
+    heroImage: "houston-we-have-a-problem",
     heroImageAlt: "Houston, We Have a Problem — Texas Total Security infographic showing custom alarm systems, commercial surveillance, illegal dumping prevention, theft and burglary deterrence, unauthorized access control, vandalism prevention, and 24/7 professional monitoring for Houston homes and businesses.",
     excerpt: "From commercial property theft and illegal dumping to residential break-ins, vandalism, and unauthorized access — Houston property owners face real risks every day. Here is how Texas Total Security designs customized strategies to actively deter crime and deliver 24/7 peace of mind.",
     content: `In a city as fast-growing and economically powerful as Houston, security threats are evolving just as quickly. From commercial property theft and illegal dumping to residential break-ins, vandalism, and unauthorized access, Houston property owners face real risks every day.

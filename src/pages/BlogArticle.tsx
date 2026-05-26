@@ -5,6 +5,11 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import CTABlock from "@/components/CTABlock";
 import InternalLinks from "@/components/InternalLinks";
 import { getArticleBySlug, blogCategories } from "@/lib/blogData";
+import houstonProblemImg from "@/assets/houston-we-have-a-problem.png";
+
+const heroImageMap: Record<string, string> = {
+  "houston-we-have-a-problem": houstonProblemImg,
+};
 import { generateArticleSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { Clock, ArrowLeft, ArrowRight, Phone } from "lucide-react";
 
