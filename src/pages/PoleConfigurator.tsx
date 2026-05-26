@@ -1,6 +1,6 @@
 import { useState, useRef, Suspense, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Environment, ContactShadows, Html } from "@react-three/drei";
+import { OrbitControls, Environment, ContactShadows, Html, Text } from "@react-three/drei";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
