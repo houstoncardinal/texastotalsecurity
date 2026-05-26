@@ -103,6 +103,18 @@ const BlogArticle = () => {
             <p className="text-lg text-muted-foreground leading-relaxed">{article.excerpt}</p>
           </div>
 
+          {article.heroImage && heroImageMap[article.heroImage] && (
+            <figure className="mb-10 -mx-4 sm:mx-0 rounded-xl overflow-hidden border border-border shadow-elegant">
+              <img
+                src={heroImageMap[article.heroImage]}
+                alt={article.heroImageAlt || article.title}
+                className="w-full h-auto block"
+                loading="eager"
+                fetchPriority="high"
+              />
+            </figure>
+          )}
+
           {/* CTA Banner */}
           <div className="glass-card p-6 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 bg-accent/5 border-accent/20">
             <div>
