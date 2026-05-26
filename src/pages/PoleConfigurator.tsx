@@ -1247,8 +1247,8 @@ function PoleScene({ config }: { config: PoleConfig }) {
       <pointLight position={[0, 4, 1]} intensity={0.22} color="#fff5ee" />
       <Suspense fallback={<Html center><span className="text-sm text-gray-400">Loading…</span></Html>}>
         <SecurityPole config={config} />
-        {/* ContactShadows exactly at ground level: -(poleH/2)-0.06 = -(h*0.085)-0.06 */}
-        <ContactShadows position={[0, -(config.height || 12) * 0.085 - 0.06, 0]} opacity={0.45} scale={9} blur={3} />
+        {/* ContactShadows nudged BELOW the grass plane to avoid z-fighting with blades */}
+        <ContactShadows position={[0, -(config.height || 12) * 0.085 - 0.12, 0]} opacity={0.4} scale={11} blur={3.2} far={4} />
         <Environment preset="forest" />
       </Suspense>
       <OrbitControls
