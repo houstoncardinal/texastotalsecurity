@@ -35,7 +35,6 @@ export const blogCategories: BlogCategory[] = [
 
 export const blogArticles: BlogArticle[] = [
   {
-  {
     slug: "houston-we-have-a-problem-security-challenges",
     title: "Houston, We Have a Problem: The Security Challenges Facing Houston Businesses & Homes — And How Texas Total Security Helps Solve Them",
     metaTitle: "Houston, We Have a Problem: Security Challenges & Solutions | Texas Total Security",
