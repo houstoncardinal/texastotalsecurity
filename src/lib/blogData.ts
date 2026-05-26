@@ -12,6 +12,8 @@ export interface BlogArticle {
   content: string; // markdown-style content rendered as HTML
   relatedServices: string[];
   tags: string[];
+  heroImage?: string;
+  heroImageAlt?: string;
 }
 
 export type BlogCategory = {
