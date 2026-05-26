@@ -1,6 +1,6 @@
 import { useState, useRef, Suspense, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Environment, ContactShadows, Html } from "@react-three/drei";
+import { OrbitControls, Environment, ContactShadows, Html, Text } from "@react-three/drei";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
@@ -129,12 +129,15 @@ function calcPrice(config: PoleConfig): { perPole: number; total: number; breakd
 }
 
 // ─── Grass shaders ───────────────────────────────────────────────────────────
+// Sway is anchored at the base (y=0) via uv.y^2 weighting; tip moves, base stays
+// glued to the ground. Uses world-space position hash so wind looks continuous
+// across the field rather than per-instance random flicker.
 
 const BLADE_VERT = /* glsl */`
-  attribute mat4 instanceMatrix;
   uniform float uTime;
   varying vec2  vUv;
   varying float vId;
+  varying float vWind;
 
   float hash(float n) { return fract(sin(n) * 43758.5453); }
 
@@ -142,15 +145,20 @@ const BLADE_VERT = /* glsl */`
     vUv = uv;
     vId = float(gl_InstanceID);
 
-    float phase  = hash(vId)        * 6.2832;
-    float speed  = 0.55 + hash(vId + 1.0) * 0.35;
-    float hFac   = uv.y * uv.y;
-    float swingX = hFac * sin(uTime * speed + phase)               * 0.05;
-    float swingZ = hFac * cos(uTime * speed * 0.72 + phase + 1.4)  * 0.025;
+    // World position of instance origin (column 3 of instanceMatrix)
+    vec3 instPos = vec3(instanceMatrix[3]);
 
+    // Continuous wind field — large-scale gust + small-scale ripple
+    float gust   = sin(uTime * 0.7 + instPos.x * 0.55 + instPos.z * 0.42);
+    float ripple = sin(uTime * 2.1 + instPos.x * 1.9  - instPos.z * 1.3) * 0.35;
+    float wind   = gust + ripple;
+    vWind = wind;
+
+    // Anchor sway to base: y=0 → 0 movement, y=1 → full movement (quadratic)
+    float bend = uv.y * uv.y;
     vec3 pos = position;
-    pos.x   += swingX;
-    pos.z   += swingZ;
+    pos.x += bend * wind * 0.08;
+    pos.z += bend * cos(uTime * 0.55 + instPos.z * 0.6) * 0.04;
 
     gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(pos, 1.0);
   }
@@ -159,61 +167,63 @@ const BLADE_VERT = /* glsl */`
 const BLADE_FRAG = /* glsl */`
   varying vec2  vUv;
   varying float vId;
+  varying float vWind;
 
   float hash(float n) { return fract(sin(n) * 43758.5453); }
 
   void main() {
     float h   = vUv.y;
-    float var = (hash(vId * 3.73 + 5.1) - 0.5) * 0.18;
+    float var = (hash(vId * 3.73 + 5.1) - 0.5) * 0.22;
 
-    vec3 root = vec3(0.03,  0.12, 0.01);
-    vec3 mid  = vec3(0.10  + var * 0.3, 0.36 + var,        0.04);
-    vec3 tip  = vec3(0.30  + var,       0.68 + var * 0.5,   0.12 + var * 0.2);
+    // Richer, more saturated green gradient — root (dark) → tip (bright)
+    vec3 root = vec3(0.04, 0.16, 0.02);
+    vec3 mid  = vec3(0.13 + var * 0.25, 0.42 + var,        0.06);
+    vec3 tip  = vec3(0.42 + var,        0.78 + var * 0.4,  0.20 + var * 0.15);
 
     vec3 col;
-    if (h < 0.40) col = mix(root, mid,  h / 0.40);
-    else           col = mix(mid,  tip, (h - 0.40) / 0.60);
+    if (h < 0.42) col = mix(root, mid, h / 0.42);
+    else          col = mix(mid,  tip, (h - 0.42) / 0.58);
 
-    float ao  = smoothstep(0.0, 0.25, h);
-    col      *= (0.48 + 0.52 * ao);
+    // Wind highlight — leaves catch light as they tilt away
+    col += vec3(0.05, 0.07, 0.02) * max(vWind, 0.0) * h;
+
+    // Ambient occlusion at base
+    float ao = smoothstep(0.0, 0.30, h);
+    col *= (0.55 + 0.45 * ao);
 
     gl_FragColor = vec4(col, 1.0);
   }
 `;
 
-// ─── Tapered blade geometry (9 verts, wider at base → pointed tip) ────────────
+// ─── Tapered blade geometry (wider base to avoid sub-pixel shimmer) ───────────
 
 function createBladeGeometry(): THREE.BufferGeometry {
-  const bw = 0.052; // base half-width
+  const bw = 0.072; // wider base half-width → no shimmer at distance
 
-  // 9 vertices: 4 rows tapering to a tip, with a slight forward Z curve
   const pos = new Float32Array([
-    -bw,         0.00, 0.000,   // 0 – base L
-     bw,         0.00, 0.000,   // 1 – base R
-    -bw * 0.78,  0.28, 0.006,   // 2 – row-1 L
-     bw * 0.78,  0.28, 0.006,   // 3 – row-1 R
-    -bw * 0.50,  0.56, 0.020,   // 4 – row-2 L
-     bw * 0.50,  0.56, 0.020,   // 5 – row-2 R
-    -bw * 0.24,  0.79, 0.044,   // 6 – row-3 L
-     bw * 0.24,  0.79, 0.044,   // 7 – row-3 R
-     0,          1.00, 0.078,   // 8 – tip
+    -bw,         0.00, 0.000,
+     bw,         0.00, 0.000,
+    -bw * 0.82,  0.30, 0.008,
+     bw * 0.82,  0.30, 0.008,
+    -bw * 0.55,  0.58, 0.024,
+     bw * 0.55,  0.58, 0.024,
+    -bw * 0.28,  0.82, 0.048,
+     bw * 0.28,  0.82, 0.048,
+     0,          1.00, 0.082,
   ]);
 
-  // Front faces (CCW winding)
   const idx = new Uint16Array([
-    0, 1, 3,  0, 3, 2,   // base → row-1
-    2, 3, 5,  2, 5, 4,   // row-1 → row-2
-    4, 5, 7,  4, 7, 6,   // row-2 → row-3
-    6, 7, 8,             // row-3 → tip
-    // Back faces (reversed winding for DoubleSide shader)
+    0, 1, 3,  0, 3, 2,
+    2, 3, 5,  2, 5, 4,
+    4, 5, 7,  4, 7, 6,
+    6, 7, 8,
     3, 1, 0,  2, 3, 0,
     5, 3, 2,  4, 5, 2,
     7, 5, 4,  6, 7, 4,
     8, 7, 6,
   ]);
 
-  // UVs: V = height along blade (0=base, 1=tip), U = 0/1/0.5
-  const vH  = [0.00, 0.00, 0.28, 0.28, 0.56, 0.56, 0.79, 0.79, 1.00];
+  const vH  = [0.00, 0.00, 0.30, 0.30, 0.58, 0.58, 0.82, 0.82, 1.00];
   const uvs = new Float32Array(18);
   for (let i = 0; i < 9; i++) {
     uvs[i * 2]     = i === 8 ? 0.5 : (i % 2 === 0 ? 0 : 1);
@@ -228,13 +238,13 @@ function createBladeGeometry(): THREE.BufferGeometry {
   return geo;
 }
 
-const SHARED_BLADE_GEO = createBladeGeometry(); // created once, shared
+const SHARED_BLADE_GEO = createBladeGeometry();
 
 // ─── Grass Field ─────────────────────────────────────────────────────────────
 
 function GrassField() {
   const meshRef = useRef<THREE.InstancedMesh>(null);
-  const COUNT   = 1400;
+  const COUNT   = 3200;
 
   const mat = useMemo(() => new THREE.ShaderMaterial({
     vertexShader:   BLADE_VERT,
@@ -248,17 +258,16 @@ function GrassField() {
     if (!mesh) return;
     const dummy = new THREE.Object3D();
     for (let i = 0; i < COUNT; i++) {
+      // Annular distribution — denser ring around the pole, sparser at edges
       const angle = Math.random() * Math.PI * 2;
-      const r     = 0.20 + Math.sqrt(Math.random()) * 2.6;
-      const h     = 0.28 + Math.random() * 0.22;   // tall enough to see as blades
-      // Small Y offset so blade bases never z-fight with the ground plane
-      dummy.position.set(Math.cos(angle) * r, 0.004, Math.sin(angle) * r);
-      dummy.rotation.set(
-        (Math.random() - 0.5) * 0.55,  // natural fore/aft lean
-        Math.random() * Math.PI * 2,   // random facing direction
-        (Math.random() - 0.5) * 0.38,  // gentle side lean
-      );
-      dummy.scale.set(0.75 + Math.random() * 0.50, h, 0.75 + Math.random() * 0.50);
+      const r     = 0.32 + Math.sqrt(Math.random()) * 5.8;
+      const h     = 0.26 + Math.random() * 0.26;
+      // Plant blades slightly INTO the ground so the cut is invisible
+      dummy.position.set(Math.cos(angle) * r, -0.005, Math.sin(angle) * r);
+      // Only random Y rotation — no fore/aft lean (the shader's wind does the leaning)
+      dummy.rotation.set(0, Math.random() * Math.PI * 2, 0);
+      const sx = 0.78 + Math.random() * 0.44;
+      dummy.scale.set(sx, h, sx);
       dummy.updateMatrix();
       mesh.setMatrixAt(i, dummy.matrix);
     }
@@ -271,9 +280,77 @@ function GrassField() {
   });
 
   return (
-    <instancedMesh ref={meshRef} args={[SHARED_BLADE_GEO, mat, COUNT]} />
+    <instancedMesh
+      ref={meshRef}
+      args={[SHARED_BLADE_GEO, mat, COUNT]}
+      frustumCulled={false}
+    />
   );
 }
+
+// ─── Branded backdrop sign — Texas Total Security in the distance ─────────────
+
+function BrandedSign() {
+  return (
+    <group position={[-4.6, -0.4, -3.8]} rotation={[0, 0.55, 0]}>
+      {/* Wooden posts */}
+      <mesh position={[-1.05, 0.55, 0]} castShadow>
+        <boxGeometry args={[0.09, 1.4, 0.09]} />
+        <meshStandardMaterial color="#5a3a22" roughness={0.85} metalness={0.05} />
+      </mesh>
+      <mesh position={[1.05, 0.55, 0]} castShadow>
+        <boxGeometry args={[0.09, 1.4, 0.09]} />
+        <meshStandardMaterial color="#5a3a22" roughness={0.85} metalness={0.05} />
+      </mesh>
+      {/* Sign board — deep red brand color */}
+      <mesh position={[0, 1.15, 0]} castShadow>
+        <boxGeometry args={[2.5, 0.85, 0.05]} />
+        <meshStandardMaterial color="#0a0a0a" roughness={0.55} metalness={0.2} />
+      </mesh>
+      {/* Red accent border */}
+      <mesh position={[0, 1.15, 0.028]}>
+        <boxGeometry args={[2.4, 0.78, 0.002]} />
+        <meshStandardMaterial color="#0d0d0d" roughness={0.6} metalness={0.15} />
+      </mesh>
+      {/* Texas Total Security text */}
+      <Text
+        position={[0, 1.28, 0.035]}
+        fontSize={0.18}
+        color="#ffffff"
+        anchorX="center"
+        anchorY="middle"
+        outlineWidth={0.005}
+        outlineColor="#000000"
+        letterSpacing={0.04}
+      >
+        TEXAS TOTAL
+      </Text>
+      <Text
+        position={[0, 1.07, 0.035]}
+        fontSize={0.18}
+        color="#e11d28"
+        anchorX="center"
+        anchorY="middle"
+        outlineWidth={0.005}
+        outlineColor="#000000"
+        letterSpacing={0.04}
+      >
+        SECURITY
+      </Text>
+      <Text
+        position={[0, 0.88, 0.035]}
+        fontSize={0.065}
+        color="#cccccc"
+        anchorX="center"
+        anchorY="middle"
+        letterSpacing={0.2}
+      >
+        HOUSTON · LICENSED · INSURED
+      </Text>
+    </group>
+  );
+}
+
 
 
 // ─── Camera Models (origin = mount point, body faces +X outward) ──────────────
@@ -979,14 +1056,23 @@ function SecurityPole({ config }: { config: PoleConfig }) {
   return (
     <group ref={groupRef} position={[0, -(poleH / 2) - 0.06, 0]}>
 
-      {/* Ground — dark soil so blades contrast clearly */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <circleGeometry args={[3.6, 48]} />
-        <meshStandardMaterial color="#1e2a10" roughness={0.98} metalness={0} />
+      {/* Ground — large grassy disc that fades out so it blends with the sky gradient */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.002, 0]} receiveShadow>
+        <circleGeometry args={[12, 64]} />
+        <meshStandardMaterial color="#2a3a18" roughness={0.98} metalness={0} />
+      </mesh>
+      {/* Inner darker dirt ring around the pole base — visually grounds the install */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.0, 0]} receiveShadow>
+        <circleGeometry args={[0.55, 32]} />
+        <meshStandardMaterial color="#3a2d1c" roughness={0.95} metalness={0} />
       </mesh>
 
       {/* Grass blades */}
       <GrassField />
+
+      {/* Branded backdrop sign in the distance */}
+      <BrandedSign />
+
 
       {/* Base flange plate */}
       <mesh position={[0, 0.072, 0]}>
@@ -1161,8 +1247,8 @@ function PoleScene({ config }: { config: PoleConfig }) {
       <pointLight position={[0, 4, 1]} intensity={0.22} color="#fff5ee" />
       <Suspense fallback={<Html center><span className="text-sm text-gray-400">Loading…</span></Html>}>
         <SecurityPole config={config} />
-        {/* ContactShadows exactly at ground level: -(poleH/2)-0.06 = -(h*0.085)-0.06 */}
-        <ContactShadows position={[0, -(config.height || 12) * 0.085 - 0.06, 0]} opacity={0.45} scale={9} blur={3} />
+        {/* ContactShadows nudged BELOW the grass plane to avoid z-fighting with blades */}
+        <ContactShadows position={[0, -(config.height || 12) * 0.085 - 0.12, 0]} opacity={0.4} scale={11} blur={3.2} far={4} />
         <Environment preset="forest" />
       </Suspense>
       <OrbitControls
