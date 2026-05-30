@@ -138,19 +138,6 @@ const MonitoringServices = () => (
             <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
               Texas Total Security manages your account locally while alarm signals are handled through a certified monitoring partner center with clear dispatch procedures.
             </p>
-            <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
-              {[
-                { label: "24/7", sublabel: "monitoring coverage" },
-                { label: "Reliable", sublabel: "signal handling" },
-                { label: "Local", sublabel: "account management" },
-                { label: "Takeover", sublabel: "existing systems" },
-              ].map((stat) => (
-                <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
-                  <p className="font-display text-xl font-bold text-white">{stat.label}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
-                </div>
-              ))}
-            </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/35">
               <span>Licensed & Insured</span>
               <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-red-400" /> Local Support</span>

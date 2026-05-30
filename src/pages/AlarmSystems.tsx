@@ -280,19 +280,6 @@ const AlarmSystems = () => (
             <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
               Hardwired alarm systems, coverage upgrades, system takeovers, and professional monitoring from a licensed Houston security company.
             </p>
-            <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
-              {[
-                { label: "Hardwired", sublabel: "systems only" },
-                { label: "Backup", sublabel: "communication ready" },
-                { label: "Local", sublabel: "owner access" },
-                { label: "Single Visit", sublabel: "most switches" },
-              ].map((stat) => (
-                <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
-                  <p className="font-display text-xl font-bold text-white">{stat.label}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
-                </div>
-              ))}
-            </div>
             <div className="mt-5 flex flex-col sm:flex-row gap-3">
               <a href="tel:7133879937" className="btn-primary-gradient inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm">
                 <Phone className="w-4 h-4" /> Call (713) 387-9937

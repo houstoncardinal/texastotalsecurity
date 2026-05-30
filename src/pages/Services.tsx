@@ -262,7 +262,7 @@ const Services = () => {
             </div>
             <div className="grid sm:grid-cols-2 gap-3">
               <Link to="/free-analysis" className="flex items-center justify-between border border-gray-200 bg-gray-50 p-4 text-sm font-semibold text-gray-950 hover:border-red-200 hover:bg-red-50 transition-colors">
-                Request Free Analysis <ArrowRight className="w-4 h-4 text-red-600" />
+                Free Onsite Security Analysis <ArrowRight className="w-4 h-4 text-red-600" />
               </Link>
               <a href="tel:7133879937" className="flex items-center justify-between border border-gray-200 bg-gray-50 p-4 text-sm font-semibold text-gray-950 hover:border-red-200 hover:bg-red-50 transition-colors">
                 Call (713) 387-9937 <Phone className="w-4 h-4 text-red-600" />

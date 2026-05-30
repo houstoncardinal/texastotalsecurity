@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import {
   Phone, Menu, X, ChevronDown, Shield,
   Camera, Home, Building2, Users, Radio,
-  ArrowRight, CheckCircle2, MapPin, Star, RefreshCw,
+  ArrowRight, CheckCircle2, MapPin, Star,
 } from "lucide-react";
 
 const mainServices = [
@@ -214,7 +214,7 @@ const Header = () => {
                         to="/free-analysis"
                         className="btn-primary-gradient flex items-center justify-center gap-2 w-full py-2.5 px-4 text-sm font-semibold"
                       >
-                        Get Free Property Assessment <ArrowRight className="w-4 h-4" />
+                        Free Onsite Security Analysis <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
 
@@ -336,11 +336,11 @@ const Header = () => {
               (713) 387-9937
             </a>
             <Link
-              to="/pre-qualify"
+              to="/free-analysis"
               className="btn-primary-gradient text-[13.5px] whitespace-nowrap"
               style={{ padding: "0.55rem 1.25rem", borderRadius: "0.65rem" }}
             >
-              Pre-Qualify Now
+              Free Onsite Security Analysis
             </Link>
           </div>
 
@@ -435,10 +435,10 @@ const Header = () => {
             {/* CTA */}
             <div className="mt-auto pt-4 border-t border-gray-100 space-y-3">
               <Link
-                to="/pre-qualify"
+                to="/free-analysis"
                 className="block btn-primary-gradient text-center text-sm py-3.5 font-semibold"
               >
-                Pre-Qualify Now
+                Free Onsite Security Analysis
               </Link>
               <a
                 href="tel:7133879937"

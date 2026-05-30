@@ -341,7 +341,7 @@ const PropertyManagementSecurity = () => (
               className="btn-primary-gradient inline-flex items-center gap-2 px-8 py-4 text-base"
               style={{ boxShadow: "0 6px 28px hsl(0 85% 45% / 0.38)" }}
             >
-              Schedule a Free Property Assessment <ArrowRight className="w-5 h-5" />
+              Free Onsite Security Analysis <ArrowRight className="w-5 h-5" />
             </Link>
             <a
               href="tel:7133879937"

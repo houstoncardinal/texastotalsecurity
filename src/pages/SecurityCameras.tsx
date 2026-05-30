@@ -291,19 +291,6 @@ const SecurityCameras = () => (
             <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
               Enterprise-grade surveillance systems for HOAs, property managers, commercial facilities, and multi-site operators that need reliable footage, remote viewing, License Plate Reader (LPR), and accountable video monitoring.
             </p>
-            <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
-              {[
-                { label: "4K IP", sublabel: "camera systems" },
-                { label: "PoE", sublabel: "hardwired networks" },
-                { label: "License Plate Reader (LPR)", sublabel: "gate & vehicle capture" },
-                { label: "Alerts", sublabel: "video monitoring" },
-              ].map((stat) => (
-                <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
-                  <p className="font-display text-xl font-bold text-white">{stat.label}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
-                </div>
-              ))}
-            </div>
             <div className="mt-5 flex flex-col sm:flex-row gap-3">
               <a href="tel:7133879937" className="btn-primary-gradient inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm">
                 <Phone className="w-4 h-4" /> Call (713) 387-9937
@@ -614,7 +601,7 @@ const SecurityCameras = () => (
               to="/free-analysis?service=cameras"
               className="btn-primary-gradient inline-flex items-center justify-center gap-2 text-sm px-7 py-3.5"
             >
-              Schedule Free Analysis <ArrowRight className="w-5 h-5" />
+              Free Onsite Security Analysis <ArrowRight className="w-5 h-5" />
             </Link>
             <a
               href="tel:7133879937"

@@ -8,7 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import { generateLocalBusinessSchema, generateEnhancedServiceSchema, generateBreadcrumbSchema, generateFAQSchema, generateAllServicesSchemas, generateServicePageReviewSchema } from "@/lib/seo";
 import {
   Building2, Camera, Shield, Zap, Eye,
-  CheckCircle2, ArrowRight, Phone, Lock, Plus, Minus, Star, Quote
+  ArrowRight, Lock, Plus, Minus, Star, Quote
 } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
@@ -124,7 +124,6 @@ const commercialImages = [
   "20260402_092659.jpg",
   "imgi_2_com10-scaled.jpg",
   "imgi_6_com6-scaled.jpg",
-  "imgi_10_com2.jpg",
   "imgi_22_com16.png",
   "imgi_23_com15.jpg",
   "imgi_50_com25.png",
@@ -173,19 +172,6 @@ const CommercialSecurity = () => {
             <h1 className="font-display font-bold text-white leading-[1.02] text-4xl sm:text-5xl lg:text-6xl max-w-3xl">
               Commercial security solutions built for Houston businesses.
             </h1>
-            <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
-              {[
-                { label: "4K", sublabel: "facility coverage" },
-                { label: "Alarm", sublabel: "risk-based design" },
-                { label: "Active", sublabel: "deterrence options" },
-                { label: "24/7", sublabel: "monitoring support" },
-              ].map((stat) => (
-                <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
-                  <p className="font-display text-xl font-bold text-white">{stat.label}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
-                </div>
-              ))}
-            </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
               <span>Licensed & Insured</span>
               <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-red-400 fill-red-400" /> Commercial-Grade Systems</span>
@@ -385,7 +371,7 @@ const CommercialSecurity = () => {
             </div>
             <Link to="/free-analysis?service=commercial&property=commercial"
               className="btn-primary-gradient inline-flex items-center gap-2 text-sm font-semibold">
-              Request a Free Assessment <ArrowRight className="w-4 h-4" />
+              Free Onsite Security Analysis <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
 

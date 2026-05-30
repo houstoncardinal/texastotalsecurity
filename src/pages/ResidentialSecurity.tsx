@@ -164,19 +164,6 @@ const ResidentialSecurity = () => {
             <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/75">
               Custom alarm systems and hardwired 4K cameras — built around your property, backed by 24/7 professional monitoring.
             </p>
-            <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
-              {[
-                { label: "4K", sublabel: "hardwired cameras" },
-                { label: "Custom", sublabel: "home alarm design" },
-                { label: "24/7", sublabel: "monitoring options" },
-                { label: "Local", sublabel: "Houston support" },
-              ].map((stat) => (
-                <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
-                  <p className="font-display text-xl font-bold text-white">{stat.label}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
-                </div>
-              ))}
-            </div>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
               <span>Licensed & Insured</span>
               <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-red-400 fill-red-400" /> Real Google Reviews</span>
@@ -384,7 +371,7 @@ const ResidentialSecurity = () => {
 
             <Link to="/free-analysis?service=residential&property=residential"
               className="btn-primary-gradient inline-flex items-center gap-2 text-sm font-semibold">
-              Get My Free Assessment <ArrowRight className="w-4 h-4" />
+              Free Onsite Security Analysis <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
 

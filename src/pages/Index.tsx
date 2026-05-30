@@ -815,7 +815,7 @@ const Index = () => {
                 className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-bold uppercase tracking-[0.11em] transition-opacity duration-200 hover:opacity-85 whitespace-nowrap shrink-0"
                 style={{ background: "hsl(0 85% 44%)", color: "white", fontSize: "clamp(0.66rem, 1.2vw, 0.73rem)" }}
               >
-                Get a Free Security Analysis
+                Free Onsite Security Analysis
                 <ArrowRight className="w-3 h-3 shrink-0" />
               </a>
             </div>

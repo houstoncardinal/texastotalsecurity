@@ -125,7 +125,7 @@ const FreeAnalysis = () => {
               className="lg:justify-self-end w-full"
             >
               <LeadForm
-                title="Schedule Your Free Analysis"
+                title="Free Onsite Security Analysis"
                 subtitle="Use the quick form or guided prompts. We'll contact you to schedule the visit."
                 defaultServiceType={defaultServiceType}
                 defaultPropertyType={defaultPropertyType}

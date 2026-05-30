@@ -327,19 +327,6 @@ const HOASecurity = () => {
               <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/75">
                 24/7 surveillance for every location that matters — gates, mailboxes, pools, and parking. One local team for every property you manage.
               </p>
-              <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
-                {[
-                  { label: "Gate", sublabel: "camera systems" },
-                  { label: "LPR", sublabel: "vehicle records" },
-                  { label: "Common", sublabel: "area coverage" },
-                  { label: "Board", sublabel: "ready planning" },
-                ].map((stat) => (
-                  <div key={stat.label} className="border border-white/10 bg-white/[0.055] p-4 backdrop-blur-sm">
-                    <p className="font-display text-xl font-bold text-white">{stat.label}</p>
-                    <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-white/40">{stat.sublabel}</p>
-                  </div>
-                ))}
-              </div>
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
                 <span>HOA & Multi-Site Planning</span>
                 <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-red-400 fill-red-400" /> Board-Ready Support</span>

@@ -56,7 +56,7 @@ const CTABlock = ({
                 to="/free-analysis"
                 className="btn-primary-gradient inline-flex items-center gap-2 text-sm px-7 py-3.5"
               >
-                Get Free Analysis <ArrowRight className="w-4 h-4" />
+                Free Onsite Security Analysis <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="tel:7133879937"

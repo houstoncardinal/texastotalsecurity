@@ -7,6 +7,7 @@ interface SEOHeadProps {
   canonical?: string;
   schemas?: object[];
   ogImage?: string;
+  ogImageAlt?: string;
 }
 
 const BASE_URL = "https://www.texastotalsecurity.com";
@@ -15,12 +16,14 @@ const COMPANY_PHONE = "(713) 387-9937";
 const COMPANY_EMAIL = "info@texastotalsecurity.com";
 const COMPANY_LICENSE = "B03066901";
 
-const SEOHead = ({ title, description, canonical, schemas = [], ogImage }: SEOHeadProps) => {
+const SEOHead = ({ title, description, canonical, schemas = [], ogImage, ogImageAlt }: SEOHeadProps) => {
   const location = useLocation();
   const canonicalUrl = canonical || `${BASE_URL}${location.pathname}`;
   const fullTitle = title.includes(COMPANY_NAME) ? title : `${title} | ${COMPANY_NAME}`;
   const defaultOgImage = `${BASE_URL}/og-image.jpg`;
-  const currentOgImage = ogImage || defaultOgImage;
+  const currentOgImage = ogImage
+    ? ogImage.startsWith("/") ? `${BASE_URL}${ogImage}` : ogImage
+    : defaultOgImage;
 
   useEffect(() => {
     document.title = fullTitle;
@@ -47,7 +50,7 @@ const SEOHead = ({ title, description, canonical, schemas = [], ogImage }: SEOHe
     setMeta("og:url", canonicalUrl, "property");
     setMeta("og:type", "website", "property");
     setMeta("og:image", currentOgImage, "property");
-    setMeta("og:image:alt", `${COMPANY_NAME} - Houston Security Systems`, "property");
+    setMeta("og:image:alt", ogImageAlt || `${COMPANY_NAME} - Houston Security Systems`, "property");
     setMeta("og:image:width", "1200", "property");
     setMeta("og:image:height", "630", "property");
     setMeta("og:site_name", COMPANY_NAME, "property");
@@ -58,7 +61,7 @@ const SEOHead = ({ title, description, canonical, schemas = [], ogImage }: SEOHe
     setMeta("twitter:title", fullTitle, "name");
     setMeta("twitter:description", description, "name");
     setMeta("twitter:image", currentOgImage, "name");
-    setMeta("twitter:image:alt", `${COMPANY_NAME} - Houston Security Systems`, "name");
+    setMeta("twitter:image:alt", ogImageAlt || `${COMPANY_NAME} - Houston Security Systems`, "name");
     setMeta("twitter:site", "@texastotalsecurity", "name");
     
     // Additional SEO meta
