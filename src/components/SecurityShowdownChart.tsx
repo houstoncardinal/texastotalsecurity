@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Shield, WifiOff, Video, Wrench, DollarSign, HardHat, CheckCircle2, XCircle, ChevronRight } from "lucide-react";
+import { Shield, WifiOff, Video, Wrench, DollarSign, HardHat, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 type Feature = {
@@ -131,172 +131,193 @@ export default function SecurityShowdownChart() {
   return (
     <div
       id="showdown-chart"
-      className="my-8 rounded-2xl overflow-hidden"
-      style={{
-        background: "#ffffff",
-        border: "1px solid rgba(0,0,0,0.08)",
-        boxShadow: "0 4px 6px -1px rgba(0,0,0,0.06), 0 16px 48px rgba(0,0,0,0.07)",
-      }}
+      className="rounded-2xl overflow-hidden"
+      style={{ border: "1px solid hsl(0 0% 88%)", boxShadow: "0 4px 32px rgba(0,0,0,0.08)" }}
     >
-      {/* ── Header ── */}
-      <div
-        className="px-6 sm:px-8 pt-8 pb-6 border-b border-gray-100"
-        style={{ background: "linear-gradient(160deg, #f9fafb 0%, #ffffff 100%)" }}
-      >
-        <div className="flex items-center justify-between mb-5">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-200 bg-red-50">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-red-700">Interactive Comparison</span>
-          </div>
-          <span className="text-[11px] text-gray-400 tabular-nums font-medium">6 categories</span>
+      {/* ── Column headers: desktop (3-col) ── */}
+      <div className="hidden md:grid grid-cols-[0.85fr_1.2fr_1.2fr]">
+        <div
+          className="px-6 lg:px-8 py-4 flex items-center"
+          style={{ background: "hsl(0 0% 14%)", borderTopLeftRadius: "1rem" }}
+        >
+          <span className="text-[9px] font-bold uppercase tracking-[0.22em]" style={{ color: "hsl(0 0% 42%)" }}>
+            Feature / Category
+          </span>
         </div>
-
-        <h3 className="text-xl sm:text-2xl font-display font-bold text-gray-950 leading-tight mb-1">
-          The Security Showdown: Texas Total Security vs. DIY Wi-Fi
-        </h3>
-        <p className="text-sm text-gray-500">
-          Select any row to jump to the full breakdown below.
-        </p>
-
-        {/* Column headers */}
-        <div className="grid grid-cols-2 gap-3 mt-6 sm:max-w-lg">
-          <div className="rounded-xl px-4 py-3 bg-emerald-50 border border-emerald-200">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Texas Total Security</span>
-            </div>
-          </div>
-          <div className="rounded-xl px-4 py-3 bg-red-50 border border-red-200">
-            <div className="flex items-center gap-2">
-              <XCircle className="w-3.5 h-3.5 text-red-500 flex-shrink-0" />
-              <span className="text-[11px] font-bold uppercase tracking-wider text-red-700">DIY Wi-Fi Cameras</span>
-            </div>
-          </div>
+        <div
+          className="flex items-center px-5 py-4"
+          style={{ background: "hsl(0 85% 44%)", borderLeft: "1px solid hsl(0 80% 38%)" }}
+        >
+          <span className="font-extrabold text-white leading-tight" style={{ fontSize: "clamp(0.82rem, 2vw, 1rem)" }}>
+            Texas Total Security (Hardwired)
+          </span>
+        </div>
+        <div
+          className="flex items-center px-5 py-4"
+          style={{ background: "hsl(0 0% 20%)", borderLeft: "1px solid hsl(0 0% 27%)", borderTopRightRadius: "1rem" }}
+        >
+          <span className="font-extrabold leading-tight" style={{ fontSize: "clamp(0.82rem, 2vw, 1rem)", color: "hsl(0 0% 58%)" }}>
+            DIY Wi-Fi Cameras
+          </span>
         </div>
       </div>
 
-      {/* ── Feature Rows ── */}
-      <div className="divide-y divide-gray-100">
-        {features.map((feature, i) => {
-          const Icon = feature.icon;
-          const isFlashing = flashRow === i;
+      {/* ── Column headers: mobile (2-col) ── */}
+      <div className="grid grid-cols-2 md:hidden">
+        <div
+          className="flex items-center justify-center px-3 py-3"
+          style={{ background: "hsl(0 85% 44%)", borderTopLeftRadius: "1rem" }}
+        >
+          <span className="font-extrabold text-white text-[11px] leading-tight text-center">
+            Texas Total Security
+          </span>
+        </div>
+        <div
+          className="flex items-center justify-center px-3 py-3"
+          style={{ background: "hsl(0 0% 20%)", borderLeft: "1px solid hsl(0 0% 27%)", borderTopRightRadius: "1rem" }}
+        >
+          <span className="font-extrabold text-[11px] leading-tight text-center" style={{ color: "hsl(0 0% 58%)" }}>
+            DIY Wi-Fi Cameras
+          </span>
+        </div>
+      </div>
 
-          return (
-            <button
-              key={i}
-              onClick={() => handleRowClick(feature.sectionId, i)}
-              className="w-full text-left group transition-colors duration-150 cursor-pointer"
-              style={{
-                background: isFlashing
-                  ? "rgba(239,68,68,0.06)"
-                  : i % 2 === 0
-                  ? "#ffffff"
-                  : "#f9fafb",
-              }}
-              aria-label={`Jump to ${feature.label} section`}
-            >
-              <div className="relative">
-                {/* Left accent bar on hover */}
-                <div
-                  className="absolute left-0 top-0 bottom-0 w-[3px] rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                  style={{ background: "linear-gradient(180deg, hsl(0 85% 44%) 0%, hsl(0 85% 36%) 100%)" }}
-                />
+      {/* ── Rows ── */}
+      {features.map((feature, i) => {
+        const Icon = feature.icon;
+        const isFlashing = flashRow === i;
+        const rowBg  = i % 2 === 0 ? "white"               : "hsl(0 0% 99%)";
+        const ttsBg  = i % 2 === 0 ? "hsl(0 80% 97.5%)"    : "hsl(0 80% 96.5%)";
+        const diyBg  = i % 2 === 0 ? "hsl(0 0% 97%)"       : "hsl(0 0% 96%)";
 
-                {/* Desktop layout: 3-column grid (md+) */}
-                <div className="hidden md:grid md:grid-cols-[26%_37%_37%] min-h-[88px]">
-                  {/* Feature cell */}
-                  <div className="flex items-center gap-3 px-6 py-5 border-r border-gray-100">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-gray-100 border border-gray-200 transition-colors duration-150 group-hover:bg-red-50 group-hover:border-red-200">
-                      <Icon className="w-4 h-4 text-gray-500 group-hover:text-red-600 transition-colors duration-150" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-sm font-display font-semibold text-gray-900 leading-tight">{feature.label}</p>
-                      <p className="text-[11px] text-gray-400 mt-0.5 leading-tight">{feature.sublabel}</p>
-                    </div>
+        return (
+          <button
+            key={i}
+            onClick={() => handleRowClick(feature.sectionId, i)}
+            className="w-full text-left group transition-colors duration-150 cursor-pointer"
+            style={{ borderTop: "1px solid hsl(0 0% 91%)" }}
+            aria-label={`Jump to ${feature.label} section`}
+          >
+            <div className="relative" style={{ background: isFlashing ? "hsl(0 85% 97%)" : undefined }}>
+
+              {/* Left accent bar on hover */}
+              <div
+                className="absolute left-0 top-0 bottom-0 w-[3px] rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                style={{ background: "linear-gradient(180deg, hsl(0 85% 44%) 0%, hsl(0 85% 36%) 100%)" }}
+              />
+
+              {/* Desktop: 3-col */}
+              <div className="hidden md:grid md:grid-cols-[0.85fr_1.2fr_1.2fr]">
+                {/* Feature cell */}
+                <div className="flex items-center gap-3 px-6 lg:px-8 py-5" style={{ background: rowBg, borderRight: "1px solid hsl(0 0% 91%)" }}>
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 border transition-colors duration-150"
+                    style={{ background: "hsl(0 0% 93%)", borderColor: "hsl(0 0% 86%)" }}
+                  >
+                    <Icon className="w-4 h-4 group-hover:text-red-600 transition-colors duration-150" style={{ color: "hsl(0 0% 40%)" }} />
                   </div>
-
-                  {/* TTS cell */}
-                  <div className="flex items-start gap-2.5 px-5 py-5 border-r border-gray-100 bg-emerald-50/40">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-emerald-700 leading-tight">{feature.tts.headline}</p>
-                      <p className="text-[12px] text-gray-500 mt-1.5 leading-relaxed">{feature.tts.detail}</p>
-                    </div>
-                  </div>
-
-                  {/* DIY cell */}
-                  <div className="flex items-start gap-2.5 px-5 py-5 bg-red-50/30">
-                    <XCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-red-700 leading-tight">{feature.diy.headline}</p>
-                      <p className="text-[12px] text-gray-500 mt-1.5 leading-relaxed">{feature.diy.detail}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Mobile layout (below md) */}
-                <div className="md:hidden">
-                  {/* Feature header — large tap target */}
-                  <div className="flex items-center justify-between px-5 pt-5 pb-4 min-h-[64px]">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-gray-100 border border-gray-200 group-hover:bg-red-50 group-hover:border-red-200 transition-colors duration-150">
-                        <Icon className="w-5 h-5 text-gray-500 group-hover:text-red-600 transition-colors duration-150" />
-                      </div>
-                      <div>
-                        <p className="text-[15px] font-display font-bold text-gray-900 leading-tight">{feature.label}</p>
-                        <p className="text-[11px] text-gray-400 mt-0.5">{feature.sublabel}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1.5 flex-shrink-0 ml-2">
-                      <span className="text-[10px] font-semibold text-red-600/70 hidden xs:block">Details</span>
-                      <ChevronRight className="w-5 h-5 text-red-500/60 group-hover:text-red-600 group-hover:translate-x-0.5 transition-all duration-150" />
-                    </div>
-                  </div>
-
-                  {/* Two comparison cells */}
-                  <div className="grid grid-cols-2 border-t border-gray-100">
-                    <div className="flex flex-col gap-2 px-4 py-4 border-r border-gray-100 bg-emerald-50/50">
-                      <div className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                        <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Professional</span>
-                      </div>
-                      <p className="text-[13px] font-semibold text-emerald-800 leading-tight">{feature.tts.headline}</p>
-                      <p className="text-[11px] text-gray-500 leading-relaxed">{feature.tts.detail}</p>
-                    </div>
-                    <div className="flex flex-col gap-2 px-4 py-4 bg-red-50/40">
-                      <div className="flex items-center gap-1.5">
-                        <XCircle className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />
-                        <span className="text-[10px] font-bold text-red-700 uppercase tracking-wider">DIY Wi-Fi</span>
-                      </div>
-                      <p className="text-[13px] font-semibold text-red-800 leading-tight">{feature.diy.headline}</p>
-                      <p className="text-[11px] text-gray-500 leading-relaxed">{feature.diy.detail}</p>
-                    </div>
+                  <div className="min-w-0">
+                    <p className="font-extrabold leading-snug" style={{ fontSize: "clamp(0.82rem, 1.35vw, 0.95rem)", color: "hsl(0 0% 16%)" }}>
+                      {feature.label}
+                    </p>
+                    <p className="text-[11px] text-gray-500 mt-0.5 leading-tight">{feature.sublabel}</p>
                   </div>
                 </div>
 
-                {/* Desktop "Read more" indicator */}
-                <div className="hidden md:flex absolute right-5 top-1/2 -translate-y-1/2 items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-                  <span className="text-[11px] text-red-600 font-semibold">Details</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-red-600 group-hover:translate-x-0.5 transition-transform duration-150" />
+                {/* TTS cell */}
+                <div className="px-5 py-5" style={{ background: ttsBg, borderRight: "1px solid hsl(0 70% 90%)" }}>
+                  <div className="font-extrabold text-red-700 leading-tight mb-1.5" style={{ fontSize: "0.9rem" }}>
+                    {feature.tts.headline}
+                  </div>
+                  <p className="text-gray-700 leading-relaxed" style={{ fontSize: "0.82rem" }}>
+                    {feature.tts.detail}
+                  </p>
+                </div>
+
+                {/* DIY cell */}
+                <div className="px-5 py-5" style={{ background: diyBg }}>
+                  <div className="font-extrabold leading-tight mb-1.5" style={{ color: "hsl(0 0% 31%)", fontSize: "0.9rem" }}>
+                    {feature.diy.headline}
+                  </div>
+                  <p className="text-gray-600 leading-relaxed" style={{ fontSize: "0.82rem" }}>
+                    {feature.diy.detail}
+                  </p>
                 </div>
               </div>
-            </button>
-          );
-        })}
-      </div>
+
+              {/* Mobile: feature full-width, verdicts below */}
+              <div className="md:hidden" style={{ background: rowBg }}>
+                <div className="px-4 pt-3 pb-2.5 flex items-center gap-2.5">
+                  <div
+                    className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 border"
+                    style={{ background: "hsl(0 0% 93%)", borderColor: "hsl(0 0% 86%)" }}
+                  >
+                    <Icon className="w-3.5 h-3.5" style={{ color: "hsl(0 0% 40%)" }} />
+                  </div>
+                  <div>
+                    <span className="font-extrabold text-gray-900 leading-snug" style={{ fontSize: "0.9rem" }}>
+                      {feature.label}
+                    </span>
+                    <p className="text-[10.5px] text-gray-500 leading-tight">{feature.sublabel}</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 ml-auto text-gray-400 group-hover:text-red-500 flex-shrink-0 transition-colors" />
+                </div>
+                <div className="grid grid-cols-2" style={{ borderTop: "1px solid hsl(0 0% 93%)" }}>
+                  <div className="px-3 py-3" style={{ background: ttsBg }}>
+                    <div className="font-extrabold text-red-700 leading-tight mb-1" style={{ fontSize: "0.75rem" }}>
+                      {feature.tts.headline}
+                    </div>
+                    <p className="text-gray-700 leading-relaxed" style={{ fontSize: "0.68rem" }}>
+                      {feature.tts.detail}
+                    </p>
+                  </div>
+                  <div className="px-3 py-3" style={{ background: diyBg, borderLeft: "1px solid hsl(0 0% 91%)" }}>
+                    <div className="font-extrabold leading-tight mb-1" style={{ color: "hsl(0 0% 31%)", fontSize: "0.75rem" }}>
+                      {feature.diy.headline}
+                    </div>
+                    <p className="text-gray-600 leading-relaxed" style={{ fontSize: "0.68rem" }}>
+                      {feature.diy.detail}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Desktop hover indicator */}
+              <div className="hidden md:flex absolute right-5 top-1/2 -translate-y-1/2 items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                <span className="text-[11px] text-red-600 font-semibold">Details</span>
+                <ChevronRight className="w-3.5 h-3.5 text-red-600 group-hover:translate-x-0.5 transition-transform duration-150" />
+              </div>
+
+            </div>
+          </button>
+        );
+      })}
 
       {/* ── Footer ── */}
-      <div className="px-6 sm:px-8 py-6 border-t border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gray-50">
-        <p className="text-[12px] text-gray-400 max-w-sm leading-relaxed">
+      <div
+        style={{
+          borderTop: "1px solid hsl(0 0% 89%)",
+          background: "hsl(0 0% 98%)",
+          borderBottomLeftRadius: "1rem",
+          borderBottomRightRadius: "1rem",
+          padding: "1rem 1.5rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "1rem",
+          flexWrap: "wrap",
+        }}
+      >
+        <p className="text-gray-500" style={{ fontSize: "0.82rem" }}>
           Each category reflects documented performance differences between hardwired PoE and wireless camera systems.
         </p>
         <Link
-          to="/free-analysis"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-white rounded-lg px-4 py-2.5 flex-shrink-0 transition-opacity hover:opacity-90"
-          style={{ background: "linear-gradient(135deg, hsl(0 85% 44%) 0%, hsl(0 92% 34%) 100%)" }}
+          to="/blog/security-showdown-hardwired-vs-wifi-cameras"
+          className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-bold uppercase tracking-[0.11em] transition-opacity duration-200 hover:opacity-85 whitespace-nowrap shrink-0"
+          style={{ background: "hsl(0 85% 44%)", color: "white", fontSize: "clamp(0.66rem, 1.2vw, 0.73rem)" }}
         >
-          Free Onsite Security Analysis
-          <ChevronRight className="w-3.5 h-3.5" />
+          Read the Full Breakdown
+          <ChevronRight className="w-3 h-3 shrink-0" />
         </Link>
       </div>
     </div>

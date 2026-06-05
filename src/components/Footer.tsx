@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, ArrowRight, Shield, Clock, Star } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 
 const footerServiceAreas = [
   { name: "West University Place", zip: "77005", slug: "west-university-security-systems" },
@@ -18,7 +18,6 @@ const footerServiceAreas = [
   { name: "Downtown Houston", zip: "77002", slug: "downtown-houston-security-systems" },
 ];
 
-const techPartners = ["Honeywell / Resideo", "Alarm.com", "DMP", "DSC", "Hikvision", "Bosch Security"];
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
 const vp = { once: true, amount: 0.1 };
@@ -48,52 +47,9 @@ const Footer = () => {
         }}
       />
 
-      {/* ── Tech partner strip ────────────────────────── */}
-      <div className="relative z-10 border-b border-white/[0.045]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
-            <span className="text-[10px] uppercase tracking-[0.24em] font-bold shrink-0 text-white/18">
-              Authorized Installer
-            </span>
-            <span className="hidden sm:inline text-white/[0.08]">|</span>
-            {techPartners.map((p) => (
-              <span key={p} className="text-[12px] font-semibold tracking-wide text-white/28">
-                {p}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── CTA strip ─────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={vp}
-        transition={{ duration: 0.7, ease: easeExpo }}
-        className="relative z-10 border-b border-white/[0.045]"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col md:flex-row items-center justify-between gap-5">
-          <div>
-             <p className="font-display font-extrabold text-white text-2xl sm:text-3xl mb-2 tracking-tight leading-tight" style={{ letterSpacing: "-0.04em" }}>
-               Figure out why Houstonians are switching to Texas Total Security?
-             </p>
-             <p className="text-base sm:text-lg text-white/60 max-w-lg">
-               Call Now For Your Free Security Analysis
-             </p>
-          </div>
-          <Link
-            to="/free-analysis"
-            className="btn-primary-gradient inline-flex items-center gap-3 text-base sm:text-lg whitespace-nowrap shrink-0 px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-          >
-            Get Started <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </motion.div>
-
       {/* ── Main grid ─────────────────────────────────── */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 py-10">
 
           {/* Brand */}
           <motion.div
@@ -101,7 +57,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
             transition={{ duration: 0.65, ease: easeExpo }}
-            className="lg:col-span-1"
+            className="lg:col-span-2"
           >
             <div className="flex items-center gap-2.5 mb-5">
               <img
@@ -115,30 +71,11 @@ const Footer = () => {
                 Texas Total Security
               </span>
             </div>
-             <p className="text-[13px] leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.44)" }}>
-               Houston's trusted commercial security company for property managers, HOAs, and business owners — locally owned and operated.
-             </p>
-            <ul className="space-y-2.5">
-              {[
-                { icon: Shield,       text: "Licensed & Insured" },
-                { icon: Clock,        text: "Locally Owned & Operated" },
-                { icon: Star,         text: "5-Star Google Rating" },
-              ].map((item) => (
-                <li key={item.text} className="flex items-center gap-2.5">
-                  <div
-                    className="w-6 h-6 rounded-md flex items-center justify-center shrink-0"
-                    style={{ background: "hsl(var(--accent) / 0.13)" }}
-                  >
-                    <item.icon className="w-3.5 h-3.5 text-accent" />
-                  </div>
-                  <span className="text-[13px] font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>
-                    {item.text}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 pt-5 border-t border-white/[0.07]">
-              <p className="text-[13px] font-semibold" style={{ color: "rgba(255,255,255,0.65)" }}>Licensed & Insured - Lic # B03066901</p>
+            <p className="text-[16px] font-semibold leading-relaxed mb-4 text-white italic whitespace-nowrap">
+              "For All Your Security Needs"
+            </p>
+            <div className="mt-4 pt-4 border-t border-white/[0.07]">
+              <p className="text-[13px] font-semibold text-white">Licensed & Insured - Lic # B03066901</p>
             </div>
           </motion.div>
 
@@ -149,7 +86,7 @@ const Footer = () => {
             viewport={vp}
             transition={{ duration: 0.65, ease: easeExpo, delay: 0.07 }}
           >
-            <h4 className="text-[10.5px] uppercase tracking-[0.2em] font-bold text-white/35 mb-5">
+            <h4 className="text-[10.5px] uppercase tracking-[0.2em] font-bold text-white/60 mb-5">
               Services
             </h4>
             <ul className="space-y-2.5">
@@ -166,9 +103,9 @@ const Footer = () => {
                   <Link
                     to={link.href}
                     className="text-[14px] transition-colors duration-200 hover:translate-x-1 inline-block"
-                    style={{ color: "rgba(255,255,255,0.60)" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.92)")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.60)")}
+                    style={{ color: "rgba(255,255,255,0.92)" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,1)")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.92)")}
                   >
                     {link.name}
                   </Link>
@@ -184,7 +121,7 @@ const Footer = () => {
             viewport={vp}
             transition={{ duration: 0.65, ease: easeExpo, delay: 0.13 }}
           >
-            <h4 className="text-[10.5px] uppercase tracking-[0.2em] font-bold text-white/35 mb-5">
+            <h4 className="text-[10.5px] uppercase tracking-[0.2em] font-bold text-white/60 mb-5">
               Company
             </h4>
             <ul className="space-y-2.5">
@@ -228,7 +165,7 @@ const Footer = () => {
             viewport={vp}
             transition={{ duration: 0.65, ease: easeExpo, delay: 0.18 }}
           >
-            <h4 className="text-[10.5px] uppercase tracking-[0.2em] font-bold text-white/35 mb-5">
+            <h4 className="text-[10.5px] uppercase tracking-[0.2em] font-bold text-white/60 mb-5">
               Service Areas
             </h4>
             <ul className="space-y-2.5">
@@ -237,9 +174,9 @@ const Footer = () => {
                   <Link
                     to={`/neighborhoods/${area.slug}`}
                     className="text-[14px] transition-colors duration-200 hover:translate-x-1 inline-block"
-                    style={{ color: "rgba(255,255,255,0.60)" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.92)")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.60)")}
+                    style={{ color: "rgba(255,255,255,0.92)" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,1)")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.92)")}
                   >
                     {area.name}
                   </Link>
@@ -263,7 +200,7 @@ const Footer = () => {
             viewport={vp}
             transition={{ duration: 0.65, ease: easeExpo, delay: 0.23 }}
           >
-            <h4 className="text-[10.5px] uppercase tracking-[0.2em] font-bold text-white/35 mb-5">
+            <h4 className="text-[10.5px] uppercase tracking-[0.2em] font-bold text-white/60 mb-5">
               Contact
             </h4>
             <ul className="space-y-4">
@@ -276,7 +213,7 @@ const Footer = () => {
                     <Phone className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-[10.5px] uppercase tracking-wider text-white/34 mb-0.5">Phone</p>
+                    <p className="text-[10.5px] uppercase tracking-wider text-white/60 mb-0.5">Phone</p>
                     <p
                       className="text-[15px] font-bold text-white transition-colors duration-200"
                       style={{}}
@@ -294,13 +231,13 @@ const Footer = () => {
                     className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-200 group-hover:bg-white/18"
                     style={{ background: "rgba(255,255,255,0.08)" }}
                   >
-                    <Mail className="w-5 h-5" style={{ color: "rgba(255,255,255,0.65)" }} />
+                    <Mail className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-[10.5px] uppercase tracking-wider text-white/34 mb-0.5">Email</p>
+                    <p className="text-[10.5px] uppercase tracking-wider text-white/60 mb-0.5">Email</p>
                     <p
                       className="text-[14px] transition-colors duration-200"
-                      style={{ color: "rgba(255,255,255,0.72)" }}
+                      style={{ color: "rgba(255,255,255,0.95)" }}
                     >
                       info@texastotalsecurity.com
                     </p>
@@ -312,11 +249,11 @@ const Footer = () => {
                   className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
                   style={{ background: "rgba(255,255,255,0.08)" }}
                 >
-                  <MapPin className="w-5 h-5" style={{ color: "rgba(255,255,255,0.65)" }} />
+                  <MapPin className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-[10.5px] uppercase tracking-wider text-white/34 mb-1">Address</p>
-                  <p className="text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.72)" }}>
+                  <p className="text-[10.5px] uppercase tracking-wider text-white/60 mb-1">Address</p>
+                  <p className="text-[14px] leading-relaxed text-white">
                     11331 Richmond Ave. #102<br />
                     Houston, TX 77082
                   </p>
@@ -333,11 +270,11 @@ const Footer = () => {
           style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
         >
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-            <p className="text-[13px]" style={{ color: "rgba(255,255,255,0.34)" }}>
+            <p className="text-[13px] text-white/70">
               © {currentYear} Texas Total Security. All rights reserved.
             </p>
-            <span className="hidden sm:inline" style={{ color: "rgba(255,255,255,0.08)" }}>·</span>
-            <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.24)" }}>Licensed &amp; Insured</p>
+            <span className="hidden sm:inline text-white/20">·</span>
+            <p className="text-[12px] text-white/70">Licensed &amp; Insured</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {[
@@ -348,9 +285,10 @@ const Footer = () => {
                 key={item.label}
                 to={item.to}
                 className="text-[13px] transition-colors duration-200"
-                style={{ color: "rgba(255,255,255,0.34)" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.80)")}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.34)")}
+                style={{ color: "rgba(255,255,255,0.70)" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,1)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+
               >
                 {item.label}
               </Link>

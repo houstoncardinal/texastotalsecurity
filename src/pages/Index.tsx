@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
+import SecurityShowdownChart from "@/components/SecurityShowdownChart";
 
 import {
   generateItemListSchema,
@@ -12,8 +12,7 @@ import {
 } from "@/lib/seo";
 import {
   Shield, Building2, Radio, Home, Camera,
-  ArrowRight, Phone, CheckCircle2, Star,
-  Plus, Minus, Briefcase,
+  ArrowRight, Phone, CheckCircle2, XCircle, Star, Briefcase,
 } from "lucide-react";
 
 /* ─── Animation variants ────────────────────────────────────── */
@@ -40,6 +39,7 @@ const vp = { once: true, amount: 0.15 };
 type HeroSlide = {
   eyebrow: string;
   headline: string[];
+  accentLineIndex?: number; // which line index gets the brand-red color
   sub: string;
   cta: { label: string; href: string };
   ctas?: { label: string; href: string; external?: boolean }[];
@@ -51,9 +51,27 @@ const heroSlides: HeroSlide[] = [
   {
     eyebrow: "Locally Owned · Licensed & Insured · Houston Based · 5 Star On Google",
     headline: [
-      "Make the switch to a Local & Reliable",
-      "Security Company That Cares",
+      "Unhappy with your current alarm company?",
+      "Don't let a bad system put your property at risk.",
     ],
+    accentLineIndex: 0,
+    sub: "Are you tired of false alarms, hidden fees, and unresponsive support? Upgrade your peace of mind with a completely Free, No-Obligation Onsite Security Analysis from our Houston-based experts.",
+    cta: { label: "Call Now: (713) 387-9937", href: "tel:7133879937" },
+    ctas: [
+      { label: "Call Now: (713) 387-9937", href: "tel:7133879937", external: true },
+      { label: "Schedule My Free Analysis", href: "/free-analysis" },
+    ],
+    bg: "/imgi_8_qtq80-BdoLjp-2048x1367.jpg",
+    overlay: "rgba(0,0,0,0.78)",
+  },
+  {
+    eyebrow: "Locally Owned · Licensed & Insured · Houston Based · 5 Star On Google",
+    headline: [
+      "Make the switch to a",
+      "Local & Reliable",
+      "Security Company",
+    ],
+    accentLineIndex: 1,
     sub: "Our goal at Texas Total Security is to provide our customers with comfort and peace of mind knowing that their business, family and/or assets are safe!",
     cta: { label: "Switch Your Alarm Company", href: "/switch-my-alarm" },
     bg: "/imgi_9_iStock-1253624795-Family-on-Couch-Home-Page-scaled.jpg",
@@ -82,60 +100,6 @@ const testimonials = [
   },
 ];
 
-const homepageFaqs = [
-  {
-    q: "What security services does Texas Total Security provide?",
-    a: (
-      <span>
-        We design, install, and support residential alarm systems, commercial security systems, hardwired security cameras, 24/7 alarm monitoring, HOA camera systems, License Plate Reader (LPR) cameras, active deterrence, and alarm takeovers.{" "}
-        <Link to="/services" className="text-red-600 font-semibold hover:underline">View all security services</Link>.
-      </span>
-    ),
-  },
-  {
-    q: "Can you take over my existing alarm system?",
-    a: (
-      <span>
-        In many cases, yes. We evaluate your existing panel, keypads, sensors, and wiring, then tell you what can be reused, repaired, or upgraded before switching monitoring.{" "}
-        <Link to="/switch-my-alarm" className="text-red-600 font-semibold hover:underline">Learn about alarm takeovers</Link>.
-      </span>
-    ),
-  },
-  {
-    q: "What makes you different from national alarm companies?",
-    a: (
-      <span>
-        We are Houston-owned, reachable, and locally accountable. Your system is managed by Texas Total Security, and customers can talk to the owner directly.
-      </span>
-    ),
-  },
-  {
-    q: "Do you install security cameras for HOAs and apartment communities?",
-    a: (
-      <span>
-        Yes. We design gate cameras, License Plate Reader (LPR) systems, mailbox and package area cameras, dumpster deterrence, pool area cameras, and portfolio-wide surveillance for HOAs, multi-family properties, and property managers.{" "}
-        <Link to="/hoa-security" className="text-red-600 font-semibold hover:underline">Explore HOA security</Link>.
-      </span>
-    ),
-  },
-  {
-    q: "Do your alarm systems work when internet goes down?",
-    a: (
-      <span>
-        Yes. Our monitored alarm systems can include backup communication and battery backup for power interruptions.
-      </span>
-    ),
-  },
-  {
-    q: "What does a free property assessment include?",
-    a: (
-      <span>
-        We review your property layout, existing equipment, entry points, camera angles, blind spots, and monitoring needs, then provide a clear recommendation with no obligation.{" "}
-        <Link to="/property-assessment" className="text-red-600 font-semibold hover:underline">Request a free assessment</Link>.
-      </span>
-    ),
-  },
-];
 
 const comparisonRows = [
   {
@@ -250,7 +214,6 @@ const whoWeServeCards = [
 
 /* ─── Page ──────────────────────────────────────────────────── */
 const Index = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
@@ -285,97 +248,141 @@ const Index = () => {
       />
 
       {/* ══════════════════════════════════════════════════
-          HERO — redesigned for maximum impact
+          HERO
       ══════════════════════════════════════════════════ */}
-      <section
-        className="relative overflow-hidden"
-        style={{ background: "hsl(0 0% 4%)", display: "flex", flexDirection: "column" }}
-      >
-        {/* Subtle red ambient glow */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 65% 50% at 20% 60%, hsl(0 85% 38% / 0.10), transparent 60%)" }} />
+      <section className="relative overflow-hidden" style={{ minHeight: "60vh", maxHeight: "84vh", display: "flex", flexDirection: "column", background: "white" }}>
 
-        <div className="absolute inset-0 z-0">
-          <img
-            src={hero.bg}
-            alt=""
-            aria-hidden
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.70) 55%, rgba(0,0,0,0.60) 100%)" }} />
-        </div>
+        {/* Full-bleed background */}
+        <img
+          src="/herobanner.jpg"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover z-0" style={{ objectPosition: "center 70%" }}
+        />
 
-        {/* ── Slide content ── */}
-        <div className="relative z-10 flex-1 flex items-center min-h-[440px] sm:min-h-[520px] lg:min-h-[560px]">
-          <div className="max-w-7xl mx-auto w-full px-5 sm:px-8 lg:px-10 py-14 sm:py-16 lg:py-20 text-left">
+        {/* Overlay — strong on mobile, left-weighted on desktop */}
+        <div
+          className="absolute inset-0 z-[1] sm:hidden"
+          style={{ background: "rgba(255,255,255,0.88)" }}
+        />
+        <div
+          className="absolute inset-0 z-[1] hidden sm:block"
+          style={{ background: "linear-gradient(100deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.95) 45%, rgba(255,255,255,0.55) 68%, rgba(255,255,255,0.05) 100%)" }}
+        />
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                className="max-w-[68rem]"
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.6, ease: easeExpo }}
+        {/* Top accent line */}
+        <div className="absolute top-0 inset-x-0 h-[3px] z-20" style={{ background: "linear-gradient(90deg, hsl(0 85% 44%), hsl(0 85% 44%) 50%, transparent)" }} />
+
+        {/* Content */}
+        <div className="relative z-10 flex-1 flex items-center">
+          <div className="w-full max-w-[56rem] px-6 sm:px-10 lg:px-16 xl:px-20 pt-10 pb-20 lg:pt-16 lg:pb-28">
+
+            {/* Headline */}
+            <h1
+              className="font-display font-black mb-5"
+              style={{ fontSize: "clamp(1.9rem, 3.6vw, 3.2rem)", lineHeight: 1.06, letterSpacing: "-0.03em" }}
+            >
+              {hero.headline.map((line, idx) => (
+                <span
+                  key={idx}
+                  className="block"
+                  style={idx === (hero.accentLineIndex ?? 1) ? { color: "hsl(0 85% 40%)" } : { color: "#0a0a0a" }}
+                >
+                  {line}
+                </span>
+              ))}
+            </h1>
+
+            {/* Sub */}
+            <p
+              className="mb-8 leading-relaxed text-[1.05rem] font-medium max-w-xl"
+              style={{ color: "#1a1a1a", paddingLeft: "0.875rem", borderLeft: "2px solid hsl(0 85% 44% / 0.55)" }}
+            >
+              {hero.sub}
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <motion.a
+                href="tel:7133879937"
+                className="inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 text-white text-sm rounded-lg"
+                style={{ background: "linear-gradient(135deg, hsl(0 85% 44%), hsl(0 90% 34%))", boxShadow: "0 4px 20px hsl(0 85% 30% / 0.38)" }}
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
               >
-                {/* Eyebrow badge */}
-                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-3.5 py-1.5 backdrop-blur-sm">
-                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
-                  <span className="text-[9px] font-bold tracking-[0.22em] uppercase text-red-200/90">
-                    Highly Rated & Trusted Houston Security Company
-                  </span>
-                </div>
-
-                {/* Main headline */}
-                <h1
-                  className="font-display font-bold text-white"
-                  style={{
-                    fontSize: "clamp(2rem, 5.8vw, 3.85rem)",
-                    lineHeight: 1.08,
-                    letterSpacing: "-0.03em",
-                    marginBottom: "1.25rem",
-                    maxWidth: "68rem",
-                    wordBreak: "normal",
-                    overflowWrap: "normal",
-                    textShadow: "0 4px 24px rgba(0,0,0,0.55)",
-                  }}
+                <Phone className="w-4 h-4 shrink-0" />
+                Call Now: (713) 387-9937
+              </motion.a>
+              <motion.div whileHover={{ scale: 1.02, y: -1 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
+                <Link
+                  to="/free-analysis"
+                  className="inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 text-sm rounded-lg w-full sm:w-auto transition-colors"
+                  style={{ border: "1.5px solid rgba(0,0,0,0.16)", background: "rgba(255,255,255,0.88)", color: "#111" }}
                 >
-                  <span className="block text-white/95">Make the switch</span>
-                  <span className="block">
-                    to a{" "}
-                    <span className="inline-block" style={{ color: "hsl(0 85% 56%)" }}>Local & Reliable</span>
-                  </span>
-                  <span className="block text-white/90">Security Company</span>
-                </h1>
-
-                <p
-                  className="mb-7 text-white/70 leading-relaxed"
-                  style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)", maxWidth: "36rem", textShadow: "0 2px 14px rgba(0,0,0,0.55)" }}
-                >
-                  <span className="font-semibold text-white/90">Our goal at Texas Total Security is to provide homeowners and business owners with comfort and a piece of mind knowing that their family and assets are safe.</span>
-                </p>
-
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4">
-                  <motion.div className="w-full sm:w-auto" whileHover={{ scale: 1.02, y: -1 }} whileTap={{ scale: 0.98 }}>
-                    <Link
-                      to={hero.cta.href}
-                      className="btn-primary-gradient justify-center w-full sm:w-auto inline-flex items-center gap-2.5 font-semibold px-7 py-3.5 text-white text-sm"
-                      style={{ boxShadow: "0 8px 28px hsl(0 85% 28% / 0.48)" }}
-                    >
-                      {hero.cta.label}
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </motion.div>
-                  <Link
-                    to="/request-callback"
-                    className="text-sm font-semibold text-white/70 hover:text-white transition-colors underline underline-offset-4 decoration-red-500/40 hover:decoration-red-500"
-                  >
-                    Request a Callback
-                  </Link>
-                </div>
-
+                  Free Onsite Security Analysis
+                  <ArrowRight className="w-4 h-4 shrink-0" />
+                </Link>
               </motion.div>
-            </AnimatePresence>
+            </div>
 
           </div>
+        </div>
+
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          MAKE THE SWITCH — banner
+      ══════════════════════════════════════════════════ */}
+      <section style={{ background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 91%)", borderBottom: "1px solid hsl(0 0% 91%)" }}>
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-14">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.6, ease: easeExpo }}
+            className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8"
+          >
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2.5 mb-4">
+                <div className="w-5 h-[2px] rounded-full" style={{ background: "hsl(0 85% 50%)" }} />
+                <span className="text-[10px] font-bold uppercase tracking-[0.26em]" style={{ color: "hsl(0 85% 50%)" }}>
+                  Locally Owned · Houston Based
+                </span>
+              </div>
+              <h2
+                className="font-display font-black text-gray-950 leading-tight mb-4"
+                style={{ fontSize: "clamp(1.7rem, 3.2vw, 2.6rem)", letterSpacing: "-0.03em" }}
+              >
+                Make the switch to a{" "}
+                <span style={{ color: "hsl(0 85% 40%)" }}>Local & Reliable</span>{" "}
+                Security Company
+              </h2>
+              <p className="text-gray-600 leading-relaxed text-[1rem] max-w-xl">
+                Our goal at Texas Total Security is to provide our customers with comfort and peace of mind knowing that their business, family and/or assets are safe.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
+              <motion.div whileHover={{ scale: 1.02, y: -1 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  to="/switch-my-alarm"
+                  className="inline-flex items-center justify-center gap-2 font-bold px-7 py-3.5 text-white text-sm rounded-lg whitespace-nowrap"
+                  style={{ background: "linear-gradient(135deg, hsl(0 85% 44%), hsl(0 90% 34%))", boxShadow: "0 4px 16px hsl(0 85% 30% / 0.30)" }}
+                >
+                  Switch Your Alarm Company
+                  <ArrowRight className="w-4 h-4 shrink-0" />
+                </Link>
+              </motion.div>
+              <a
+                href="tel:7133879937"
+                className="inline-flex items-center justify-center gap-2 font-semibold text-sm rounded-lg px-6 py-3.5 transition-colors whitespace-nowrap"
+                style={{ border: "1.5px solid rgba(0,0,0,0.13)", color: "#111", background: "#fff" }}
+              >
+                <Phone className="w-4 h-4 shrink-0" style={{ color: "hsl(0 85% 44%)" }} />
+                (713) 387-9937
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -390,9 +397,7 @@ const Index = () => {
           paddingBottom: "clamp(1.5rem, 4vw, 3.25rem)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Header */}
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -414,8 +419,6 @@ const Index = () => {
               Security Solutions for Every Property Type
             </h2>
           </motion.div>
-
-          {/* 2-col cards — clean professional design */}
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
             {whoWeServeCards.slice(0, 2).map((card, i) => {
               const Icon = card.icon;
@@ -447,7 +450,6 @@ const Index = () => {
                         (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
                       }}
                     >
-                      {/* Image section - larger, more prominent */}
                       <div className="relative h-[240px] sm:h-[280px] lg:h-[320px] overflow-hidden">
                         <img
                           src={card.image}
@@ -457,21 +459,13 @@ const Index = () => {
                           loading="lazy"
                         />
                         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%)" }} />
-
-                        {/* Icon badge */}
                         <div
                           className="absolute top-5 left-5 flex h-12 w-12 items-center justify-center rounded-lg"
-                          style={{
-                            background: "rgba(255,255,255,0.92)",
-                            backdropFilter: "blur(8px)",
-                            boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-                          }}
+                          style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(8px)", boxShadow: "0 4px 16px rgba(0,0,0,0.12)" }}
                         >
                           <Icon className="h-5 w-5" style={{ color: "hsl(0 85% 46%)" }} />
                         </div>
                       </div>
-
-                      {/* Content section */}
                       <div className="bg-white p-5 sm:p-6 lg:p-7">
                         <h3
                           className="font-bold leading-tight mb-4"
@@ -479,12 +473,8 @@ const Index = () => {
                         >
                           {title}
                         </h3>
-
-                        {/* CTA row */}
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-semibold" style={{ color: "hsl(0 85% 46%)" }}>
-                            {ctaLabel}
-                          </span>
+                          <span className="text-sm font-semibold" style={{ color: "hsl(0 85% 46%)" }}>{ctaLabel}</span>
                           <span
                             className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:translate-x-1.5 group-hover:bg-red-700"
                             style={{ background: "hsl(0 85% 46%)", color: "white", boxShadow: "0 4px 12px hsl(0 85% 38% / 0.25)" }}
@@ -500,164 +490,71 @@ const Index = () => {
               );
             })}
           </div>
-
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════
-          SWITCH YOUR ALARM COMPANY — dark theme
+          BRAND STATEMENT
       ══════════════════════════════════════════════════ */}
-      <section
-        className="overflow-hidden relative"
-        style={{ background: "linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(0 55% 7%) 55%, hsl(0 0% 4%) 100%)" }}
-      >
-        {/* Ambient red glow */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 70% at 100% 50%, hsl(0 85% 38% / 0.13), transparent 65%)" }} />
-        {/* Top / bottom hairlines */}
-        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(to right, transparent 5%, hsl(0 85% 44% / 0.3) 40%, hsl(0 85% 44% / 0.3) 60%, transparent 95%)" }} />
-        <div className="absolute inset-x-0 bottom-0 h-px" style={{ background: "linear-gradient(to right, transparent 5%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.05) 60%, transparent 95%)" }} />
-
-        <div className="relative grid grid-cols-1 lg:grid-cols-2">
-
-          {/* Left — residential image */}
-          <motion.div
-            variants={fadeLeft}
-            initial="hidden"
-            whileInView="show"
-            viewport={vp}
-            transition={{ duration: 0.9, ease: easeExpo }}
-            className="relative min-h-[220px] lg:min-h-0"
-          >
-            <img
-              src="/timtownsend2.jpg"
-              alt="Tim Townsend — Texas Total Security Houston"
-              className="absolute inset-0 w-full h-full object-cover object-center"
-              loading="lazy"
-            />
-            {/* Removed overlay divs for clearer image */}
-            {/* <div className="absolute inset-0 hidden lg:block" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.12) 0%, hsl(0 55% 7%) 100%)" }} /> */}
-            {/* <div className="absolute inset-0 lg:hidden" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 40%, hsl(0 0% 4%) 100%)" }} /> */}
-
-            {/* Review badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={vp}
-              transition={{ duration: 0.6, ease: easeExpo, delay: 0.35 }}
-              className="absolute bottom-5 left-5 rounded-xl p-3.5"
-              style={{
-                background: "rgba(8,8,8,0.84)",
-                backdropFilter: "blur(18px)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                boxShadow: "0 6px 24px rgba(0,0,0,0.5)",
-                maxWidth: "210px",
-              }}
-            >
-              <div className="flex gap-0.5 mb-1.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="w-2.5 h-2.5" style={{ fill: "hsl(0 85% 52%)", color: "hsl(0 85% 52%)" }} />
-                ))}
-              </div>
-              <p className="text-[11.5px] font-semibold text-white leading-snug mb-0.5">"Switched from ADT. Love that they're local — communication and service is awesome."</p>
-              <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.38)" }}>Google Reviewer — Houston, TX</p>
-            </motion.div>
-          </motion.div>
-
-          {/* Right — content */}
-          <motion.div
-            variants={fadeRight}
-            initial="hidden"
-            whileInView="show"
-            viewport={vp}
-            transition={{ duration: 0.9, ease: easeExpo }}
-            className="flex flex-col justify-center px-7 py-9 sm:px-9 lg:px-12 lg:py-10"
-          >
-            {/* Eyebrow */}
-            <div className="mb-6">
-              <h3
-                className="text-red-600 font-extrabold uppercase tracking-widest mb-4"
-                style={{ letterSpacing: "0.2em", fontSize: "1.125rem" }}
-              >
-                Free Onsite Security Analysis
-              </h3>
-              <div className="space-y-6 text-white text-lg sm:text-xl leading-relaxed max-w-md">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg className="w-7 h-7 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 20l9-5-9-5-9 5 9 5z" />
-                      <path d="M12 12v8" />
-                      <path d="M12 12L3 7" />
-                      <path d="M12 12l9-5" />
-                    </svg>
-                  </div>
-                  <p>Security Pro meets with you onsite at your home or business</p>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg className="w-7 h-7 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 6v6l4 2" />
-                    </svg>
-                  </div>
-                  <p>Talks about current security system, upgrades, or plans for a new one</p>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg className="w-7 h-7 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M3 3h18v18H3z" />
-                      <path d="M3 9h18" />
-                      <path d="M9 21V9" />
-                    </svg>
-                  </div>
-                  <p>Examines layout and gathers information regarding equipment</p>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg className="w-7 h-7 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 2l7 7-7 7-7-7 7-7z" />
-                      <path d="M12 12v8" />
-                    </svg>
-                  </div>
-                  <p>Comes up with solutions, ideas, and discusses a plan of action</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-          US VS THEM — comparison table
-      ══════════════════════════════════════════════════ */}
-      <section id="local-vs-national" style={{ scrollMarginTop: "6rem", background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 91%)", padding: "clamp(2.5rem, 5vw, 4rem) 0" }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Header */}
+      <section style={{ background: "#ffffff", borderTop: "1px solid hsl(0 0% 91%)" }}>
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16" style={{ paddingTop: "clamp(3rem, 6vw, 5rem)", paddingBottom: "clamp(3rem, 6vw, 5rem)" }}>
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={vp}
             transition={{ duration: 0.6, ease: easeExpo }}
-            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8"
           >
-            <div>
-              <div className="flex items-center gap-2.5 mb-3">
-                <div className="w-5 h-[2px] rounded-full" style={{ background: "hsl(0 85% 50%)" }} />
-                <span className="text-[9.5px] font-bold uppercase tracking-[0.26em]" style={{ color: "hsl(0 85% 50%)" }}>
-                  The Difference Is Clear
-                </span>
-              </div>
-              <h2
-                className="font-extrabold text-gray-900 leading-tight"
-                style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", letterSpacing: "-0.025em" }}
-              >
-                Texas Total Security
-                <span className="font-light" style={{ color: "hsl(0 85% 48%)" }}> vs. </span>
-                Big National Alarm Companies
-              </h2>
+            <div className="flex items-center gap-2.5 mb-5">
+              <div className="w-6 h-[2px] rounded-full" style={{ background: "hsl(0 85% 50%)" }} />
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em]" style={{ color: "hsl(0 85% 50%)" }}>
+                Locally Owned · Houston, TX
+              </span>
             </div>
+            <h2
+              className="font-display font-black text-gray-950 leading-[1.06] mb-6"
+              style={{ fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: "-0.035em" }}
+            >
+              Welcome to Texas Total Security.
+              <br />
+              <span style={{ color: "hsl(0 85% 40%)" }}>There is a difference.</span>
+            </h2>
+            <p className="text-gray-800 leading-[1.85] text-[1.1rem] max-w-3xl">
+              We are your local alarm company, rooted right here in Houston. While big national corporations treat you like an account number in an overseas call center, our friendly, local staff actually knows your name. With technicians right around the corner, we protect your family with the speed and care of a true neighbor.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          US VS THEM — comparison table
+      ══════════════════════════════════════════════════ */}
+      <section id="local-vs-national" style={{ scrollMarginTop: "6rem", background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 91%)", borderBottom: "1px solid hsl(0 0% 91%)" }}>
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-14 sm:py-20">
+
+          {/* ── Table header ── */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.6, ease: easeExpo }}
+            className="pb-7"
+          >
+            <div className="flex items-center gap-2.5 mb-3">
+              <div className="w-5 h-[2px] rounded-full" style={{ background: "hsl(0 85% 50%)" }} />
+              <span className="text-[9.5px] font-bold uppercase tracking-[0.26em]" style={{ color: "hsl(0 85% 50%)" }}>
+                The Difference Is Clear
+              </span>
+            </div>
+            <h3
+              className="font-extrabold text-gray-900 leading-tight"
+              style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", letterSpacing: "-0.025em" }}
+            >
+              Texas Total Security
+              <span className="font-light" style={{ color: "hsl(0 85% 48%)" }}> vs. </span>
+              Big National Alarm Companies
+            </h3>
           </motion.div>
 
           {/* Table */}
@@ -828,7 +725,7 @@ const Index = () => {
           TESTIMONIALS — Google-branded enterprise reviews
       ══════════════════════════════════════════════════ */}
       <section className="py-12 sm:py-16" style={{ background: "white", borderTop: "1px solid hsl(0 0% 92%)" }}>
-        <div className="container-tight px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
 
           {/* Header row */}
           <motion.div
@@ -1006,104 +903,340 @@ const Index = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          FAQ — animated accordion
+          SECURITY SHOWDOWN CHART TEASER
       ══════════════════════════════════════════════════ */}
-      <section className="py-10 sm:py-14" style={{ background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 92%)" }}>
-        <div className="container-tight px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden" style={{ background: "hsl(0 0% 97%)", borderTop: "1px solid hsl(0 0% 91%)", borderBottom: "1px solid hsl(0 0% 91%)" }}>
 
+        {/* Subtle red tint at top */}
+        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(to right, transparent 10%, hsl(0 85% 44% / 0.25) 40%, hsl(0 85% 44% / 0.25) 60%, transparent 90%)" }} />
+
+        {/* ── Title block ── */}
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-16 sm:pt-20 pb-10 sm:pb-12 text-center">
+
+          {/* Badge */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={vp}
-            transition={{ duration: 0.6, ease: easeExpo }}
-            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-7"
+            transition={{ duration: 0.5, ease: easeExpo }}
+            className="flex justify-center mb-5"
           >
-            <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="h-px w-4 rounded-full" style={{ background: "hsl(0 85% 52%)" }} />
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: "hsl(0 75% 55%)" }}>FAQ</span>
-              </div>
-              <h2
-                className="font-display font-bold text-gray-900"
-                style={{ fontSize: "clamp(1.5rem, 2.8vw, 2rem)", lineHeight: 1.1, letterSpacing: "-0.04em" }}
-              >
-                Frequently Asked Questions
-              </h2>
+            <div
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full"
+              style={{ background: "hsl(0 85% 44% / 0.07)", border: "1px solid hsl(0 85% 44% / 0.2)" }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse flex-shrink-0" />
+              <span className="text-[10px] font-black uppercase tracking-[0.22em]" style={{ color: "hsl(0 85% 44%)" }}>
+                The Security Showdown
+              </span>
             </div>
-            <p className="text-[13px] text-gray-400 sm:text-right sm:max-w-[18rem] leading-relaxed">
-              Everything you need to know about working with Texas Total Security.
+          </motion.div>
+
+          {/* Main title */}
+          <motion.h2
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.65, ease: easeExpo, delay: 0.06 }}
+            className="font-display font-black text-gray-950 leading-[1.02] mb-5"
+            style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", letterSpacing: "-0.04em" }}
+          >
+            Texas Total Security
+            <span style={{ color: "hsl(0 85% 42%)" }}> vs.</span>
+            <br className="hidden sm:block" />{" "}DIY Wi-Fi Cameras
+          </motion.h2>
+
+          {/* Subtext */}
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.6, ease: easeExpo, delay: 0.1 }}
+            className="max-w-xl mx-auto leading-relaxed mb-10 text-gray-500"
+            style={{ fontSize: "clamp(0.92rem, 1.5vw, 1.05rem)" }}
+          >
+            Six critical categories. One clear winner. See exactly where off-the-shelf Wi-Fi cameras fall short — and what a professional hardwired system delivers instead.
+          </motion.p>
+
+          {/* VS chips */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.6, ease: easeExpo, delay: 0.14 }}
+            className="inline-grid grid-cols-[1fr_auto_1fr] items-center gap-4 sm:gap-6 max-w-md mx-auto"
+          >
+            {/* TTS label */}
+            <div className="flex flex-col items-center gap-1 text-center">
+              <img src="/logo.png" alt="Texas Total Security" className="w-8 h-8 object-contain" />
+              <p className="text-[13px] font-black leading-tight" style={{ color: "hsl(0 85% 42%)" }}>Texas Total Security</p>
+              <p className="text-[10px] text-gray-500">Hardwired · Professional</p>
+            </div>
+            {/* VS divider */}
+            <div className="flex flex-col items-center gap-1 flex-shrink-0">
+              <div className="w-px h-8" style={{ background: "hsl(0 0% 88%)" }} />
+              <p className="font-black text-[11px] text-gray-400">VS</p>
+              <div className="w-px h-8" style={{ background: "hsl(0 0% 88%)" }} />
+            </div>
+            {/* DIY label */}
+            <div className="flex flex-col items-center gap-1 text-center">
+              <div className="w-8 h-8 flex items-center justify-center">
+                <XCircle className="w-6 h-6 text-gray-400" />
+              </div>
+              <p className="text-[13px] font-black text-gray-900 leading-tight">DIY Wi-Fi Cameras</p>
+              <p className="text-[10px] text-gray-500">Wireless · Self-Installed</p>
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* ── Chart ── */}
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pb-16 sm:pb-20">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.7, ease: easeExpo, delay: 0.06 }}
+          >
+            <SecurityShowdownChart />
+          </motion.div>
+
+          {/* Read more link */}
+          <div className="flex justify-center mt-6">
+            <Link
+              to="/blog/security-showdown-hardwired-vs-wifi-cameras"
+              className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 hover:gap-3"
+              style={{ color: "hsl(0 85% 44%)" }}
+            >
+              Read the full breakdown article <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          FREE ONSITE SECURITY ANALYSIS
+      ══════════════════════════════════════════════════ */}
+      <section
+        className="relative overflow-hidden"
+        style={{ borderTop: "1px solid hsl(0 0% 91%)" }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[520px]">
+
+          {/* Left — logobg image with white corner vignette */}
+          <motion.div
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.9, ease: easeExpo }}
+            className="relative min-h-[280px] lg:min-h-0 order-2 lg:order-1"
+          >
+            <img
+              src="/logobg.jpg"
+              alt="Texas Total Security — Free Onsite Security Analysis"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              loading="lazy"
+            />
+            {/* White corner vignette — blends image edges into the white section */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: [
+                  "radial-gradient(ellipse 55% 45% at 0% 0%, rgba(255,255,255,0.82) 0%, transparent 60%)",
+                  "radial-gradient(ellipse 55% 45% at 100% 0%, rgba(255,255,255,0.82) 0%, transparent 60%)",
+                  "radial-gradient(ellipse 55% 45% at 0% 100%, rgba(255,255,255,0.82) 0%, transparent 60%)",
+                  "radial-gradient(ellipse 55% 45% at 100% 100%, rgba(255,255,255,0.82) 0%, transparent 60%)",
+                ].join(", "),
+              }}
+            />
+          </motion.div>
+
+          {/* Right — content */}
+          <motion.div
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.85, ease: easeExpo }}
+            className="flex flex-col justify-center px-8 py-14 sm:px-12 lg:px-14 xl:px-16 order-1 lg:order-2"
+            style={{ background: "#ffffff" }}
+          >
+            {/* Eyebrow */}
+            <div className="flex items-center gap-2.5 mb-4">
+              <div className="w-5 h-[2px] rounded-full" style={{ background: "hsl(0 85% 50%)" }} />
+              <span className="text-[10px] font-bold uppercase tracking-[0.26em]" style={{ color: "hsl(0 85% 50%)" }}>
+                No Obligation · No Commitment
+              </span>
+            </div>
+
+            <h2
+              className="font-display font-black text-gray-950 leading-tight mb-7"
+              style={{ fontSize: "clamp(1.9rem, 3.5vw, 2.8rem)", letterSpacing: "-0.03em" }}
+            >
+              Free Onsite<br />Security Analysis
+            </h2>
+
+            {/* 4-step process */}
+            <ol className="mb-8">
+              {[
+                { title: "Meets You Onsite",      body: "Security Pro meets with you onsite at your home or business" },
+                { title: "Reviews Your System",   body: "Talks about current security system, upgrades, or plans for a new one" },
+                { title: "Inspects the Property", body: "Examines layout and gathers information regarding equipment" },
+                { title: "Presents Your Plan",    body: "Comes up with solutions, ideas, and discusses a plan of action" },
+              ].map((step, i) => (
+                <li key={i} className="flex flex-col items-center">
+                  {/* Step row */}
+                  <div className="flex items-center gap-4 w-full">
+                    {/* Circle */}
+                    <div
+                      className="flex-shrink-0 w-11 h-11 rounded-full flex items-center justify-center font-black text-white text-base"
+                      style={{ background: "linear-gradient(135deg, hsl(0 85% 46%) 0%, hsl(0 90% 34%) 100%)", boxShadow: "0 4px 14px hsl(0 85% 36% / 0.28)" }}
+                    >
+                      {i + 1}
+                    </div>
+                    {/* Text */}
+                    <div
+                      className="flex-1 rounded-xl px-4 py-3.5"
+                      style={{ background: "hsl(0 0% 98%)", border: "1px solid hsl(0 0% 91%)" }}
+                    >
+                      <p className="font-display font-black text-[1rem] leading-tight" style={{ color: "hsl(0 85% 40%)" }}>{step.title}</p>
+                      <p className="text-gray-800 text-[0.88rem] leading-relaxed mt-1">{step.body}</p>
+                    </div>
+                  </div>
+
+                  {/* Downward arrow connector */}
+                  {i < 3 && (
+                    <div className="flex flex-col items-center" style={{ marginLeft: "5.5rem", alignSelf: "flex-start" }}>
+                      <div className="w-px h-3" style={{ background: "hsl(0 85% 44% / 0.25)" }} />
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                        <path d="M1 1L5 5L9 1" stroke="hsl(0 85% 44%)" strokeOpacity="0.5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <div className="w-px h-3" style={{ background: "hsl(0 85% 44% / 0.25)" }} />
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ol>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link
+                to="/free-analysis"
+                className="inline-flex items-center justify-center gap-2 font-bold px-7 py-3.5 text-white text-sm rounded-lg"
+                style={{ background: "linear-gradient(135deg, hsl(0 85% 44%), hsl(0 90% 34%))", boxShadow: "0 4px 18px hsl(0 85% 30% / 0.32)" }}
+              >
+                Schedule My Free Analysis
+                <ArrowRight className="w-4 h-4 shrink-0" />
+              </Link>
+              <a
+                href="tel:7133879937"
+                className="inline-flex items-center justify-center gap-2 font-semibold text-sm text-gray-700 hover:text-gray-900 transition-colors"
+              >
+                <Phone className="w-4 h-4" style={{ color: "hsl(0 85% 44%)" }} />
+                (713) 387-9937
+              </a>
+            </div>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          BOTTOM CONVERSION STRIP
+      ══════════════════════════════════════════════════ */}
+      <section
+        className="relative overflow-hidden"
+        style={{ background: "linear-gradient(135deg, hsl(0 0% 5%) 0%, hsl(0 60% 8%) 55%, hsl(0 0% 5%) 100%)" }}
+      >
+        {/* Ambient glow */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 55% 80% at 50% 110%, hsl(0 85% 38% / 0.18), transparent 65%)" }} />
+        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(to right, transparent 10%, hsl(0 85% 44% / 0.4) 40%, hsl(0 85% 44% / 0.4) 60%, transparent 90%)" }} />
+
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10 sm:py-12">
+
+          {/* Conversion copy + CTA */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={vp}
+            transition={{ duration: 0.65, ease: easeExpo }}
+            className="text-center"
+          >
+            <h2
+              className="font-display font-black text-white mb-4 leading-[1.05]"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.6rem)", letterSpacing: "-0.04em" }}
+            >
+              Don't wait for a break-in to realize<br className="hidden sm:block" /> your alarm company failed you.
+            </h2>
+            <p className="mb-9 max-w-2xl mx-auto leading-relaxed font-medium" style={{ fontSize: "clamp(1.05rem, 2vw, 1.3rem)", color: "rgba(255,255,255,0.70)" }}>
+              Claim your{" "}
+              <strong className="text-white font-bold">FREE Onsite Security Analysis</strong>{" "}
+              today.{" "}
+              <span style={{ color: "hsl(0 85% 65%)" }}>Spots are limited this week.</span>
+            </p>
+            <motion.div
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-block w-full sm:w-auto"
+            >
+              <a
+                href="tel:7133879937"
+                className="inline-flex items-center justify-center gap-3 font-black text-white rounded-2xl w-full sm:w-auto"
+                style={{
+                  fontSize: "clamp(1rem, 1.6vw, 1.15rem)",
+                  letterSpacing: "-0.01em",
+                  padding: "1rem 2.5rem",
+                  background: "linear-gradient(135deg, hsl(0 85% 46%) 0%, hsl(0 90% 32%) 100%)",
+                  boxShadow: "0 0 0 1px hsl(0 85% 44% / 0.4), 0 6px 32px hsl(0 85% 28% / 0.55), 0 2px 8px rgba(0,0,0,0.3)",
+                }}
+              >
+                <Phone className="w-5 h-5 shrink-0" />
+                Call Now: (713) 387-9937
+              </a>
+            </motion.div>
+            <p className="mt-4 text-[12px] font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.32)" }}>
+              No commitment. No obligation. Local Houston experts.
             </p>
           </motion.div>
 
-          <div className="grid gap-2 lg:grid-cols-2 lg:items-start">
-            {homepageFaqs.map((faq, i) => {
-              const isOpen = openFaq === i;
-              return (
-                <motion.div
-                  key={faq.q}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={vp}
-                  transition={{ duration: 0.55, ease: easeExpo, delay: i * 0.07 }}
-                  className={`faq-item ${isOpen ? "open" : ""}`}
-                >
-                  <button
-                    className="faq-trigger"
-                    onClick={() => setOpenFaq(isOpen ? null : i)}
-                    aria-expanded={isOpen}
-                  >
-                    <h3 className="font-display font-semibold text-gray-900 text-[15px] leading-snug text-left">
-                      {faq.q}
-                    </h3>
-                    <span
-                      className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200"
-                      style={{
-                        background: isOpen ? "hsl(var(--accent))" : "hsl(0 0% 93%)",
-                      }}
-                    >
-                      {isOpen
-                        ? <Minus className="w-3.5 h-3.5 text-white" />
-                        : <Plus  className="w-3.5 h-3.5 text-gray-500" />
-                      }
-                    </span>
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                        style={{ overflow: "hidden" }}
-                      >
-                        <div className="px-5 sm:px-6 pb-5">
-                          <p className="text-[13.5px] text-gray-500 leading-relaxed">{faq.a}</p>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </div>
-
+          {/* Reviews row */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={vp}
-            transition={{ duration: 0.55, ease: easeExpo, delay: 0.1 }}
-            className="mt-7 flex justify-center"
+            transition={{ duration: 0.6, ease: easeExpo, delay: 0.1 }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-10"
           >
-            <Link
-              to="/faq"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3 text-sm font-bold text-gray-800 shadow-sm transition-all hover:border-red-200 hover:text-red-600 hover:shadow-md"
-            >
-              View the Full Security FAQ <ArrowRight className="h-4 w-4" />
-            </Link>
+            {[
+              { quote: "Switched from ADT — love that they're local. Communication and service is awesome.", author: "Homeowner, Houston TX" },
+              { quote: "They installed cameras and an alarm system. The owner Tim Townsend is very knowledgeable. Would recommend to everyone.", author: "Homeowner, Houston TX" },
+              { quote: "Great coverage for our entrance gates with active deterrence. Their license plate cameras are outstanding.", author: "Property Manager, River Oaks TX" },
+            ].map((r, i) => (
+              <div
+                key={i}
+                className="rounded-xl px-4 py-4"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+              >
+                <div className="flex gap-0.5 mb-2">
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <Star key={s} className="w-3 h-3" style={{ fill: "hsl(0 85% 52%)", color: "hsl(0 85% 52%)" }} />
+                  ))}
+                </div>
+                <p className="text-[12.5px] leading-relaxed mb-2" style={{ color: "rgba(255,255,255,0.78)" }}>"{r.quote}"</p>
+                <p className="text-[11px] font-semibold" style={{ color: "rgba(255,255,255,0.35)" }}>— {r.author}</p>
+              </div>
+            ))}
           </motion.div>
+
         </div>
       </section>
 
