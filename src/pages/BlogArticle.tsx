@@ -61,6 +61,7 @@ const BlogArticle = () => {
       { name: "Security Resources", href: "/blog" },
       { name: article.title, href: `/blog/${article.slug}` },
     ]),
+    ...(article.extraSchemas || []),
   ];
 
   const serviceLinks = article.relatedServices.map(href => {
