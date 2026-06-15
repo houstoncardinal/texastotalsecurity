@@ -488,6 +488,16 @@
        (Ordered by SEO/traffic value, not publish date)
   ═══════════════════════════════════════════════════════ -->
   <url>
+    <loc>https://www.texastotalsecurity.com/blog/alarm-takeover-switch-security-provider-without-replacing-system</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+    <image:image>
+      <image:loc>https://www.texastotalsecurity.com/alarm-takeover-infographic.png</image:loc>
+      <image:title>Alarm Takeover — Keep Your Security System, Upgrade Your Monitoring</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.texastotalsecurity.com/blog/houston-we-have-a-problem-security-challenges</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
