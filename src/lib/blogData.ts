@@ -43,8 +43,6 @@ export const blogArticles: BlogArticle[] = [
     category: "alarm-education",
     datePublished: "2026-07-12",
     readTime: "8 min",
-    heroImage: "/switch-alarm-company-infographic.png",
-    heroImageAlt: "Time to Switch Alarm Companies? — Texas Total Security infographic comparing common alarm problems (bypassed zones, long hold times, outdated keypads, high monthly fees) with Houston-based solutions (local support, system takeovers, lower monthly rates, 4K smart upgrades).",
     excerpt: "Bypassed zones, endless phone queues, and rising monthly fees are the four biggest warning signs your alarm company is failing you. Here is how to diagnose the problem — and how Houston homeowners and businesses are cutting bills and upgrading equipment without starting from scratch.",
     content: `Are you dealing with bypassed zones, endless phone queues, or sky-high monthly fees? You are not alone. If you are struggling with outdated hardware or unresponsive support from your current alarm provider, making the switch to a reliable, customer-focused system may be exactly what your Houston property needs.
 
