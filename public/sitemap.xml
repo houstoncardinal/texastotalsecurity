@@ -488,6 +488,16 @@
        (Ordered by SEO/traffic value, not publish date)
   ═══════════════════════════════════════════════════════ -->
   <url>
+    <loc>https://www.texastotalsecurity.com/blog/signs-its-time-to-switch-alarm-companies-houston</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.93</priority>
+    <image:image>
+      <image:loc>https://www.texastotalsecurity.com/switch-alarm-company-infographic.png</image:loc>
+      <image:title>Time to Switch Alarm Companies? — Houston Alarm Provider Guide</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.texastotalsecurity.com/blog/alarm-takeover-switch-security-provider-without-replacing-system</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
