@@ -142,6 +142,7 @@ const serviceAreas = [
     description: "Commercial security for offices, high-rise residential, hospitality, entertainment, storefronts, and garages.",
     strengths: ["Alarms", "Cameras", "Monitoring"],
     slug: "downtown-houston-security-systems",
+  },
   {
     zip: "77024",
     name: "Bunker Hill Village",
