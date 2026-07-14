@@ -341,7 +341,7 @@ const ServiceAreas = () => {
             <div className="grid grid-cols-3 border border-gray-200 bg-gray-50">
               {[
                 ["37", "Neighborhoods"],
-                ["24", "Memorial-Area Subdivisions"],
+                ["6", "Memorial Villages"],
                 ["24/7", "Monitoring"],
               ].map(([value, label]) => (
                 <div key={label} className="border-r border-gray-200 px-3 py-4 text-center last:border-r-0">
