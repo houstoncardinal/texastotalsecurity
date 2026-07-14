@@ -211,8 +211,8 @@ const ServiceAreas = () => {
   return (
     <Layout>
       <SEOHead
-        title="Houston Security Service Areas | Alarm & Camera Installation | Texas Total Security"
-        description="Texas Total Security serves Houston service areas including West University, Memorial Villages, Bellaire, Galleria, River Oaks, Montrose, Downtown, Energy Corridor and more."
+        title="Houston Home Security Service Areas | 37 Neighborhoods Covered | Texas Total Security"
+        description="Home security systems across 37 Houston-area neighborhoods — including all 6 Memorial Villages, Tanglewood, River Oaks, West University, Bellaire, Galleria, and 18 Memorial subdivisions. Residential alarms, cameras & monitoring."
         schemas={schemas}
       />
 
