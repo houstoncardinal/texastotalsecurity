@@ -211,8 +211,8 @@ const ServiceAreas = () => {
   return (
     <Layout>
       <SEOHead
-        title="Houston Security Service Areas | Alarm & Camera Installation | Texas Total Security"
-        description="Texas Total Security serves Houston service areas including West University, Memorial Villages, Bellaire, Galleria, River Oaks, Montrose, Downtown, Energy Corridor and more."
+        title="Houston Home Security Service Areas | 37 Neighborhoods Covered | Texas Total Security"
+        description="Home security systems across 37 Houston-area neighborhoods — including all 6 Memorial Villages, Tanglewood, River Oaks, West University, Bellaire, Galleria, and 18 Memorial subdivisions. Residential alarms, cameras & monitoring."
         schemas={schemas}
       />
 
@@ -250,10 +250,10 @@ const ServiceAreas = () => {
                 </span>
               </div>
               <h1 className="font-display font-bold text-white leading-[1.02] text-4xl sm:text-5xl lg:text-6xl max-w-4xl">
-                Focused Alarm & Camera Coverage Across Houston's Core Markets.
+                Home Security Coverage Across 37 Houston Neighborhoods.
               </h1>
               <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
-                Every listed area has access to the full Texas Total Security lineup: alarm systems, camera systems, monitoring, takeovers, service, HOA security, commercial security, and residential protection.
+                Now serving 37 dedicated Houston-area neighborhoods — including all 6 Memorial Villages and 18 Memorial-, Tanglewood-, and Galleria-area subdivisions. Every area gets our full residential lineup: hardwired home alarms, 4K cameras, video doorbells, driveway license plate reader, 24/7 monitoring, and existing-system takeovers.
               </p>
 
               <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
@@ -335,13 +335,13 @@ const ServiceAreas = () => {
                 Choose Your Houston Area
               </h2>
               <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-gray-500">
-                Each area page includes local property context, but our complete service lineup is available in every area listed below.
+                We've expanded coverage across the greater Houston metro — including new dedicated pages for the six incorporated Memorial Villages and 18 Memorial-, Tanglewood-, and Galleria-area subdivisions. Each area page includes local residential context, and our complete home security lineup is available in every area listed below.
               </p>
             </div>
             <div className="grid grid-cols-3 border border-gray-200 bg-gray-50">
               {[
-                ["13", "Areas"],
-                ["11", "ZIPs"],
+                ["37", "Areas"],
+                ["15", "ZIPs"],
                 ["24/7", "Monitoring"],
               ].map(([value, label]) => (
                 <div key={label} className="border-r border-gray-200 px-3 py-4 text-center last:border-r-0">
