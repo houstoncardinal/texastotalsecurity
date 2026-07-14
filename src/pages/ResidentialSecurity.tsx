@@ -281,8 +281,8 @@ const ResidentialSecurity = () => {
             </motion.div>
           ))}
         </div>
-        {/* Row 2 — 2 cards centered */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:w-2/3 lg:mx-auto">
+        {/* Row 2 — 3 cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {solutions.slice(3).map((s, i) => (
             <motion.div
               key={s.title}
