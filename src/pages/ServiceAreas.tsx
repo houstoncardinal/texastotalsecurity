@@ -335,13 +335,13 @@ const ServiceAreas = () => {
                 Choose Your Houston Area
               </h2>
               <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-gray-500">
-                Each area page includes local property context, but our complete service lineup is available in every area listed below.
+                We've expanded coverage across the greater Houston metro — including new dedicated pages for the six incorporated Memorial Villages and 18 Memorial-, Tanglewood-, and Galleria-area subdivisions. Each area page includes local residential context, and our complete home security lineup is available in every area listed below.
               </p>
             </div>
             <div className="grid grid-cols-3 border border-gray-200 bg-gray-50">
               {[
-                ["13", "Areas"],
-                ["11", "ZIPs"],
+                ["37", "Areas"],
+                ["15", "ZIPs"],
                 ["24/7", "Monitoring"],
               ].map(([value, label]) => (
                 <div key={label} className="border-r border-gray-200 px-3 py-4 text-center last:border-r-0">
