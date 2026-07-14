@@ -18,11 +18,12 @@ const fadeLeft = { hidden: { opacity: 0, x: -28 }, show: { opacity: 1, x: 0 } };
 const fadeRight= { hidden: { opacity: 0, x:  28 }, show: { opacity: 1, x: 0 } };
 
 const solutions = [
-  { icon: Camera,     title: "4K Hardwired Cameras",      desc: "Hardwired 4K resolution — no Wi-Fi dependency, no dropped feeds, zero blind spots." },
-  { icon: Shield,     title: "Custom Alarm Systems",      desc: "Every door, window, and access point covered — built for your layout, not a generic package." },
-  { icon: Bell,       title: "24/7 Professional Monitoring", desc: "Professional monitoring and backup planning for dependable home protection." },
-  { icon: Smartphone, title: "Remote App Access",         desc: "Arm, disarm, and view live footage from anywhere in the world — full visibility, always." },
-  { icon: Lock,       title: "Perimeter & Gate Security", desc: "Driveway and gate coverage so you know who's approaching before they reach your door." },
+  { icon: Shield,     title: "Home Alarm Systems",           desc: "Hardwired alarm systems on every door, window, and motion zone — built for your layout." },
+  { icon: Camera,     title: "Hardwired 4K Cameras",         desc: "PoE 4K cameras — no Wi-Fi dependency, no dropped feeds, no blind spots." },
+  { icon: Bell,       title: "Video Doorbell Camera",        desc: "Two-way audio and HD video at your front door — accessible from your phone anywhere." },
+  { icon: Lock,       title: "License Plate Reader (LPR)",   desc: "Driveway LPR cameras capture every vehicle plate — day and night." },
+  { icon: Smartphone, title: "Remote App Access",            desc: "Arm, disarm, and view live footage from anywhere in the world." },
+  { icon: Home,       title: "24/7 Professional Monitoring", desc: "Certified monitoring center with fast dispatch for verified alarm events." },
 ];
 
 const propertyTypes = [
@@ -280,8 +281,8 @@ const ResidentialSecurity = () => {
             </motion.div>
           ))}
         </div>
-        {/* Row 2 — 2 cards centered */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:w-2/3 lg:mx-auto">
+        {/* Row 2 — 3 cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {solutions.slice(3).map((s, i) => (
             <motion.div
               key={s.title}
