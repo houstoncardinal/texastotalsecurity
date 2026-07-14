@@ -123,7 +123,7 @@ const SECURITY_SERVICE_FOCUS_AREAS = [
   "Hardwired alarm system installation",
   "Honeywell alarm system takeover",
   "DSC alarm system takeover",
-  "DMP alarm system takeover",
+  "2GIG alarm system takeover",
   "Commercial intrusion detection",
   "Residential monitored alarms",
   "4K IP camera systems",

@@ -87,8 +87,8 @@ const faqGroups: FAQGroup[] = [
       },
       {
         question: "Do I have to replace everything if my alarm system is old?",
-        answerText: "Not always. Compatible Honeywell, DSC, DMP, 2GIG, and similar equipment may be reusable, but Texas Total Security will recommend replacement when equipment is unreliable, outdated, or not worth keeping.",
-        answer: "Not always. Compatible Honeywell, DSC, DMP, 2GIG, and similar equipment may be reusable. If something is unreliable, outdated, or not worth keeping, we will tell you directly.",
+        answerText: "Not always. Compatible Honeywell, DSC, 2GIG, Resideo, and similar equipment may be reusable, but Texas Total Security will recommend replacement when equipment is unreliable, outdated, or not worth keeping.",
+        answer: "Not always. Compatible Honeywell, DSC, 2GIG, Resideo, and similar equipment may be reusable. If something is unreliable, outdated, or not worth keeping, we will tell you directly.",
       },
       {
         question: "Do your alarm systems work if the internet goes down?",

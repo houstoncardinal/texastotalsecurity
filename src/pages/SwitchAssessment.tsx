@@ -30,7 +30,7 @@ const switchSteps = [
   },
   {
     title: "Locally Managed & Supported",
-    body: "Your account is managed right here by Texas Total Security. Honeywell, DSC, DMP, Resideo, and many other systems can often be taken over without replacing everything.",
+    body: "Your account is managed right here by Texas Total Security. Honeywell, DSC, 2GIG, Resideo, and many other systems can often be taken over without replacing everything.",
   },
 ];
 
@@ -590,7 +590,7 @@ const SwitchAssessment = () => {
 
               <div className="space-y-3 mb-6">
                 {[
-                  "Keep compatible Honeywell, DSC, 2GIG, DMP, and Resideo equipment — no need to replace what works",
+                  "Keep compatible Honeywell, DSC, 2GIG, and Resideo equipment — no need to replace what works",
                   "Transparent pricing on monitoring and service — no hidden rate escalations",
                   "We evaluate your existing system thoroughly before recommending anything",
                   "Local Houston account management — the same people who install your system support it after",
