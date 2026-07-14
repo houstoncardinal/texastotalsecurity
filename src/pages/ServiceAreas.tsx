@@ -250,10 +250,10 @@ const ServiceAreas = () => {
                 </span>
               </div>
               <h1 className="font-display font-bold text-white leading-[1.02] text-4xl sm:text-5xl lg:text-6xl max-w-4xl">
-                Focused Alarm & Camera Coverage Across Houston's Core Markets.
+                Home Security Coverage Across 37 Houston Neighborhoods.
               </h1>
               <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
-                Every listed area has access to the full Texas Total Security lineup: alarm systems, camera systems, monitoring, takeovers, service, HOA security, commercial security, and residential protection.
+                Now serving 37 dedicated Houston-area neighborhoods — including all 6 Memorial Villages and 18 Memorial-, Tanglewood-, and Galleria-area subdivisions. Every area gets our full residential lineup: hardwired home alarms, 4K cameras, video doorbells, driveway license plate reader, 24/7 monitoring, and existing-system takeovers.
               </p>
 
               <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
