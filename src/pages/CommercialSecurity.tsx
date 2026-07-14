@@ -18,12 +18,12 @@ const fadeLeft  = { hidden: { opacity: 0, x: -28 }, show: { opacity: 1, x: 0 } }
 const fadeRight = { hidden: { opacity: 0, x:  28 }, show: { opacity: 1, x: 0 } };
 
 const solutions = [
-  { icon: Camera,    title: "4K Commercial Surveillance",    desc: "Multi-camera hardwired systems with 4K resolution, high-retention recording, and remote live viewing for your facility." },
-  { icon: Shield,    title: "Commercial Alarm Systems",      desc: "Intrusion detection across every access point — doors, windows, and motion zones — with 24/7 professional monitoring and direct dispatch." },
-  { icon: Zap,       title: "Active Deterrence",             desc: "Cameras equipped with sirens, strobe lights, and two-way audio that confront and stop trespassers in real time — before damage is done." },
-  { icon: Lock,      title: "License Plate Reader",     desc: "License Plate Reader (LPR) cameras at entry and exit points capture every vehicle — essential for gated facilities, parking areas, and high-traffic commercial properties." },
-  { icon: Eye,       title: "24/7 Alarm Monitoring",         desc: "Professional monitoring through our certified partner center — fast signal verification and direct dispatch communication with your team." },
-  { icon: Building2, title: "Alarm Takeovers & Upgrades",    desc: "Already have a system? We take over existing commercial panels and sensors, saving replacement costs while improving your monitoring service." },
+  { icon: Shield,    title: "Commercial Alarm Systems",      desc: "Hardwired intrusion detection on every door, window, and motion zone." },
+  { icon: Camera,    title: "4K Surveillance Cameras",       desc: "Hardwired PoE 4K IP cameras with 24/7 recording and remote live viewing." },
+  { icon: Lock,      title: "License Plate Reader (LPR)",    desc: "Dedicated LPR cameras that capture every vehicle plate at entries and exits." },
+  { icon: Zap,       title: "Active Deterrence Cameras",     desc: "Cameras with sirens, strobes, and two-way audio that confront trespassers in real time." },
+  { icon: Eye,       title: "24/7 Professional Monitoring",  desc: "Certified monitoring center — fast signal verification and direct dispatch." },
+  { icon: Building2, title: "Alarm Takeovers & Upgrades",    desc: "We take over compatible existing panels and sensors — no need to replace what works." },
 ];
 
 const pillars = [
