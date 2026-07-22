@@ -143,66 +143,35 @@ const serviceAreas = [
     strengths: ["Alarms", "Cameras", "Monitoring"],
     slug: "downtown-houston-security-systems",
   },
-  {
-    zip: "77024",
-    name: "Bunker Hill Village",
-    shortName: "Bunker Hill",
-    label: "Memorial Village",
-    description: "Estate-grade hard-wired camera and alarm systems for large wooded lots, private drives, and detached structures.",
-    strengths: ["Alarms", "Cameras", "Monitoring"],
-    slug: "bunker-hill-village-security-systems",
-    isCityPage: true,
-  },
-  {
-    zip: "77024",
-    name: "Piney Point Village",
-    shortName: "Piney Point",
-    label: "Memorial Village",
-    description: "Discreet estate security with driveway license plate reader, perimeter cameras, and 24/7 monitoring.",
-    strengths: ["Alarms", "Cameras", "Monitoring"],
-    slug: "piney-point-village-security-systems",
-    isCityPage: true,
-  },
-  {
-    zip: "77024",
-    name: "Hedwig Village",
-    shortName: "Hedwig",
-    label: "Memorial Village",
-    description: "Residential and commercial security along Memorial Drive and the I-10 corridor.",
-    strengths: ["Alarms", "Cameras", "Monitoring"],
-    slug: "hedwig-village-security-systems",
-    isCityPage: true,
-  },
-  {
-    zip: "77024",
-    name: "Hunters Creek Village",
-    shortName: "Hunters Creek",
-    label: "Memorial Village",
-    description: "Layered estate protection built for deep wooded lots, long driveways, and outbuildings.",
-    strengths: ["Alarms", "Cameras", "Monitoring"],
-    slug: "hunters-creek-village-security-systems",
-    isCityPage: true,
-  },
-  {
-    zip: "77055",
-    name: "Spring Valley Village",
-    shortName: "Spring Valley Village",
-    label: "Memorial Village",
-    description: "Custom systems for established homes and new-construction pre-wire along Campbell and Bingle.",
-    strengths: ["Alarms", "Cameras", "Monitoring"],
-    slug: "spring-valley-village-security-systems",
-    isCityPage: true,
-  },
-  {
-    zip: "77055",
-    name: "Hilshire Village",
-    shortName: "Hilshire",
-    label: "Memorial Village",
-    description: "Small-enclave residential security with discreet hard-wired cameras and monitored alarms.",
-    strengths: ["Alarms", "Cameras", "Monitoring"],
-    slug: "hilshire-village-security-systems",
-    isCityPage: true,
-  },
+  // Memorial Villages (6 incorporated cities)
+  { zip: "77024", name: "Bunker Hill Village",   shortName: "Bunker Hill",       label: "Memorial Village",              description: "Estate-grade hardwired camera and alarm systems for large wooded lots, private drives, and detached structures.", strengths: ["Alarms", "Cameras", "LPR"], slug: "bunker-hill-village-security-systems" },
+  { zip: "77024", name: "Piney Point Village",   shortName: "Piney Point",       label: "Memorial Village",              description: "Discreet estate security with driveway license plate reader, perimeter cameras, and 24/7 monitoring.",         strengths: ["Alarms", "Cameras", "LPR"], slug: "piney-point-village-security-systems" },
+  { zip: "77024", name: "Hedwig Village",        shortName: "Hedwig",            label: "Memorial Village",              description: "Residential and small-business security along Memorial Drive and the I-10 corridor.",                         strengths: ["Alarms", "Cameras", "LPR"], slug: "hedwig-village-security-systems" },
+  { zip: "77024", name: "Hunters Creek Village", shortName: "Hunters Creek",     label: "Memorial Village",              description: "Layered estate protection built for deep wooded lots, long driveways, and outbuildings.",                     strengths: ["Alarms", "Cameras", "LPR"], slug: "hunters-creek-village-security-systems" },
+  { zip: "77055", name: "Spring Valley Village", shortName: "Spring Valley Village", label: "Memorial Village",          description: "Custom systems for established homes and new-construction pre-wire along Campbell and Bingle.",                strengths: ["Alarms", "Cameras", "LPR"], slug: "spring-valley-village-security-systems" },
+  { zip: "77055", name: "Hilshire Village",      shortName: "Hilshire",          label: "Memorial Village",              description: "Small-enclave residential security with discreet hardwired cameras and monitored alarms.",                    strengths: ["Alarms", "Cameras", "LPR"], slug: "hilshire-village-security-systems" },
+
+  // Memorial subdivisions
+  { zip: "77079", name: "Fleetwood",             shortName: "Fleetwood",         label: "Memorial subdivision",          description: "Wooded estate homes south of Memorial Drive — hardwired cameras and monitored alarms tuned to family properties.", strengths: ["Alarms", "Cameras", "LPR"], slug: "fleetwood-security-systems" },
+  { zip: "77079", name: "Thornwood",             shortName: "Thornwood",         label: "Memorial subdivision",          description: "Mid-century estate homes on tree-lined streets — layered hardwired security built for larger lots.",             strengths: ["Alarms", "Cameras", "LPR"], slug: "thornwood-security-systems" },
+  { zip: "77079", name: "Nottingham Forest",     shortName: "Nottingham",        label: "Memorial subdivision",          description: "Established Memorial subdivision — hardwired 4K cameras and monitored alarms tuned to the neighborhood's layout.", strengths: ["Alarms", "Cameras", "LPR"], slug: "nottingham-forest-security-systems" },
+  { zip: "77079", name: "Wilchester",            shortName: "Wilchester",        label: "Memorial subdivision",          description: "Family estate homes on deep lots — hardwired cameras and monitored alarms for Wilchester and Wilchester West.",   strengths: ["Alarms", "Cameras", "LPR"], slug: "wilchester-security-systems" },
+  { zip: "77079", name: "Yorkchester",           shortName: "Yorkchester",       label: "Memorial subdivision",          description: "Quiet interior-street estate homes — hardwired 4K cameras and driveway LPR built around the neighborhood.",      strengths: ["Alarms", "Cameras", "LPR"], slug: "yorkchester-security-systems" },
+  { zip: "77024", name: "Fonn Villas",           shortName: "Fonn Villas",       label: "Memorial subdivision",          description: "Custom estate homes on private streets — discreet, hardwired security tuned to Fonn Villas architecture.",        strengths: ["Alarms", "Cameras", "LPR"], slug: "fonn-villas-security-systems" },
+  { zip: "77024", name: "Plaza Oaks",            shortName: "Plaza Oaks",        label: "Memorial subdivision",          description: "Mid-century and updated estate homes on tree-lined streets — hardwired cameras and monitored alarms.",           strengths: ["Alarms", "Cameras", "LPR"], slug: "plaza-oaks-security-systems" },
+  { zip: "77024", name: "Memorial Forest",       shortName: "Memorial Forest",   label: "Memorial subdivision",          description: "Heavily wooded estate lots — hardwired 4K cameras positioned for year-round sight lines under Memorial trees.",   strengths: ["Alarms", "Cameras", "LPR"], slug: "memorial-forest-security-systems" },
+  { zip: "77024", name: "Frostwood",             shortName: "Frostwood",         label: "Memorial subdivision",          description: "Family estate homes on deep interior lots — hardwired cameras and monitored alarms as a layered standard.",       strengths: ["Alarms", "Cameras", "LPR"], slug: "frostwood-security-systems" },
+  { zip: "77080", name: "Memorial Hollow",       shortName: "Memorial Hollow",   label: "Memorial-area subdivision",     description: "Established homes near Gessner and I-10 — hardwired cameras and monitored alarms tuned to interior streets.",     strengths: ["Alarms", "Cameras", "LPR"], slug: "memorial-hollow-security-systems" },
+  { zip: "77024", name: "Sherwood Forest",       shortName: "Sherwood",          label: "Memorial subdivision",          description: "Wooded estate lots and winding streets — hardwired 4K perimeter cameras and driveway LPR designed for privacy.",  strengths: ["Alarms", "Cameras", "LPR"], slug: "sherwood-forest-security-systems" },
+  { zip: "77024", name: "Larchmont",             shortName: "Larchmont",         label: "Memorial-area subdivision",     description: "Family estate homes on established lots — hardwired cameras and monitored alarms for Larchmont residents.",       strengths: ["Alarms", "Cameras", "LPR"], slug: "larchmont-security-systems" },
+  { zip: "77024", name: "Glenhaven Estates",     shortName: "Glenhaven",         label: "Memorial-area subdivision",     description: "Luxury family homes on generous lots — hardwired cameras, driveway LPR, and monitored alarms.",                    strengths: ["Alarms", "Cameras", "LPR"], slug: "glenhaven-estates-security-systems" },
+  { zip: "77024", name: "Briarcroft",            shortName: "Briarcroft",        label: "Memorial-area subdivision",     description: "Established estate homes on tree-lined streets — hardwired cameras and monitored alarms.",                        strengths: ["Alarms", "Cameras", "LPR"], slug: "briarcroft-security-systems" },
+
+  // Tanglewood / Galleria-area subdivisions
+  { zip: "77057", name: "Briargrove",            shortName: "Briargrove",        label: "Tanglewood-area subdivision",   description: "Deed-restricted inner-loop subdivision west of the Galleria — hardwired cameras and monitored alarms.",           strengths: ["Alarms", "Cameras", "LPR"], slug: "briargrove-security-systems" },
+  { zip: "77057", name: "Westhaven Estates",     shortName: "Westhaven",         label: "Tanglewood-area subdivision",   description: "Luxury estates with private drives — hardwired 4K perimeter cameras, driveway LPR, and monitored alarms.",        strengths: ["Alarms", "Cameras", "LPR"], slug: "westhaven-estates-security-systems" },
+  { zip: "77056", name: "Tanglewood",            shortName: "Tanglewood",        label: "Galleria-area subdivision",     description: "Stately estate homes on oversized lots east of the Galleria — discreet hardwired security with full coverage.",   strengths: ["Alarms", "Cameras", "LPR"], slug: "tanglewood-security-systems" },
+  { zip: "77057", name: "Lamar Terrace",         shortName: "Lamar Terrace",     label: "Galleria-area subdivision",     description: "Inner-loop 77057 subdivision west of the Galleria — hardwired cameras and monitored alarms.",                     strengths: ["Alarms", "Cameras", "LPR"], slug: "lamar-terrace-security-systems" },
 ];
 
 const capabilityGroups = [
@@ -242,8 +211,8 @@ const ServiceAreas = () => {
   return (
     <Layout>
       <SEOHead
-        title="Houston Security Service Areas | Alarm & Camera Installation | Texas Total Security"
-        description="Texas Total Security serves Houston service areas including West University, Memorial Villages, Bellaire, Galleria, River Oaks, Montrose, Downtown, Energy Corridor and more."
+        title="Houston Home Security Service Areas | 37 Neighborhoods Covered | Texas Total Security"
+        description="Home security systems across 37 Houston-area neighborhoods — including all 6 Memorial Villages, Tanglewood, River Oaks, West University, Bellaire, Galleria, and 18 Memorial subdivisions. Residential alarms, cameras & monitoring."
         schemas={schemas}
       />
 
@@ -281,10 +250,10 @@ const ServiceAreas = () => {
                 </span>
               </div>
               <h1 className="font-display font-bold text-white leading-[1.02] text-4xl sm:text-5xl lg:text-6xl max-w-4xl">
-                Focused Alarm & Camera Coverage Across Houston's Core Markets.
+                Home Security Coverage Across 37 Houston Neighborhoods.
               </h1>
               <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70">
-                Every listed area has access to the full Texas Total Security lineup: alarm systems, camera systems, monitoring, takeovers, service, HOA security, commercial security, and residential protection.
+                Now serving 37 dedicated Houston-area neighborhoods — including all 6 Memorial Villages and 18 Memorial-, Tanglewood-, and Galleria-area subdivisions. Every area gets our full residential lineup: hardwired home alarms, 4K cameras, video doorbells, driveway license plate reader, 24/7 monitoring, and existing-system takeovers.
               </p>
 
               <div className="mt-5 grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl">
@@ -331,7 +300,7 @@ const ServiceAreas = () => {
                 {serviceAreas.slice(0, 8).map((area) => (
                   <Link
                     key={area.slug}
-                    to={area.isCityPage ? `/${area.slug}` : `/neighborhoods/${area.slug}`}
+                    to={`/neighborhoods/${area.slug}`}
                     className="group flex items-center justify-between gap-2 border border-white/10 bg-black/20 px-3 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:border-red-500/35 hover:bg-red-500/10 hover:text-white"
                   >
                     <span className="truncate">{area.shortName}</span>
@@ -366,13 +335,13 @@ const ServiceAreas = () => {
                 Choose Your Houston Area
               </h2>
               <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-gray-500">
-                Each area page includes local property context, but our complete service lineup is available in every area listed below.
+                We've expanded coverage across the greater Houston metro — including new dedicated pages for the six incorporated Memorial Villages and 18 Memorial-, Tanglewood-, and Galleria-area subdivisions. Each area page includes local residential context, and our complete home security lineup is available in every area listed below.
               </p>
             </div>
             <div className="grid grid-cols-3 border border-gray-200 bg-gray-50">
               {[
-                ["13", "Areas"],
-                ["11", "ZIPs"],
+                ["37", "Neighborhoods"],
+                ["6", "Memorial Villages"],
                 ["24/7", "Monitoring"],
               ].map(([value, label]) => (
                 <div key={label} className="border-r border-gray-200 px-3 py-4 text-center last:border-r-0">
@@ -410,7 +379,7 @@ const ServiceAreas = () => {
                 transition={{ duration: 0.5, ease: easeExpo, delay: (index % 3) * 0.035 }}
               >
                 <Link
-                  to={area.isCityPage ? `/${area.slug}` : `/neighborhoods/${area.slug}`}
+                  to={`/neighborhoods/${area.slug}`}
                   className="group grid h-full grid-cols-[auto_minmax(0,1fr)_auto] gap-4 border border-gray-200 bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:shadow-[0_14px_34px_rgba(127,29,29,0.11)]"
                 >
                   <div className="flex h-12 w-12 items-center justify-center bg-gray-950 text-white">
