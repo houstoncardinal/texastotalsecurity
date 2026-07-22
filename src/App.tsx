@@ -89,8 +89,7 @@ const App = () => (
             <Route path="/blog/:articleSlug" element={<BlogArticle />} />
             <Route path="/blog/category/:categorySlug" element={<BlogCategory />} />
             {/* City SEO Landing Pages */}
-            <Route path="/:citySlug-security-systems" element={<CityLanding />} />
-            <Route path="/:citySlug-security" element={<CityLanding />} />
+            <Route path="/:citySlug" element={<CityLanding />} />
             <Route path="/houston-we-have-a-problem" element={<HoustonProblem />} />
             {/* Houston Neighborhood Landing Pages */}
             <Route path="/neighborhoods/:neighborhoodSlug" element={<NeighborhoodLanding />} />

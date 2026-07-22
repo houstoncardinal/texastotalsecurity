@@ -1267,11 +1267,11 @@ const LeadForm = ({
                       className="input-premium pl-10 appearance-none"
                     >
                       <option value="">Budget Range</option>
-                      <option value="under1000">Under $1,000</option>
-                      <option value="1000-3000">$1,000 - $3,000</option>
-                      <option value="3000-5000">$3,000 - $5,000</option>
-                      <option value="5000plus">$5,000+</option>
+                      <option value="basic">Basic Coverage</option>
+                      <option value="standard">Standard Coverage</option>
+                      <option value="premium">Premium Coverage</option>
                       <option value="flexible">Flexible</option>
+                      <option value="not-sure">Not Sure Yet</option>
                     </select>
                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

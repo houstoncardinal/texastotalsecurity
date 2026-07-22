@@ -30,7 +30,8 @@ const serviceLinks = [
 const serviceIcons = [Shield, Camera, Home, Building2, Users, Radio];
 
 const CityLanding = () => {
-  const { citySlug } = useParams<{ citySlug: string }>();
+  const { citySlug: rawSlug } = useParams<{ citySlug: string }>();
+  const citySlug = rawSlug?.replace(/-security-systems$|-security$/, "");
   const city = citySlug ? getCityBySlug(citySlug) : undefined;
 
   if (!city) return <Navigate to="/service-areas" replace />;

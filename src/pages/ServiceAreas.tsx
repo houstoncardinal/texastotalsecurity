@@ -151,6 +151,7 @@ const serviceAreas = [
     description: "Estate-grade hard-wired camera and alarm systems for large wooded lots, private drives, and detached structures.",
     strengths: ["Alarms", "Cameras", "Monitoring"],
     slug: "bunker-hill-village-security-systems",
+    isCityPage: true,
   },
   {
     zip: "77024",
@@ -160,6 +161,7 @@ const serviceAreas = [
     description: "Discreet estate security with driveway license plate reader, perimeter cameras, and 24/7 monitoring.",
     strengths: ["Alarms", "Cameras", "Monitoring"],
     slug: "piney-point-village-security-systems",
+    isCityPage: true,
   },
   {
     zip: "77024",
@@ -169,6 +171,7 @@ const serviceAreas = [
     description: "Residential and commercial security along Memorial Drive and the I-10 corridor.",
     strengths: ["Alarms", "Cameras", "Monitoring"],
     slug: "hedwig-village-security-systems",
+    isCityPage: true,
   },
   {
     zip: "77024",
@@ -178,6 +181,7 @@ const serviceAreas = [
     description: "Layered estate protection built for deep wooded lots, long driveways, and outbuildings.",
     strengths: ["Alarms", "Cameras", "Monitoring"],
     slug: "hunters-creek-village-security-systems",
+    isCityPage: true,
   },
   {
     zip: "77055",
@@ -187,6 +191,7 @@ const serviceAreas = [
     description: "Custom systems for established homes and new-construction pre-wire along Campbell and Bingle.",
     strengths: ["Alarms", "Cameras", "Monitoring"],
     slug: "spring-valley-village-security-systems",
+    isCityPage: true,
   },
   {
     zip: "77055",
@@ -196,6 +201,7 @@ const serviceAreas = [
     description: "Small-enclave residential security with discreet hard-wired cameras and monitored alarms.",
     strengths: ["Alarms", "Cameras", "Monitoring"],
     slug: "hilshire-village-security-systems",
+    isCityPage: true,
   },
 ];
 
@@ -325,7 +331,7 @@ const ServiceAreas = () => {
                 {serviceAreas.slice(0, 8).map((area) => (
                   <Link
                     key={area.slug}
-                    to={`/neighborhoods/${area.slug}`}
+                    to={area.isCityPage ? `/${area.slug}` : `/neighborhoods/${area.slug}`}
                     className="group flex items-center justify-between gap-2 border border-white/10 bg-black/20 px-3 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:border-red-500/35 hover:bg-red-500/10 hover:text-white"
                   >
                     <span className="truncate">{area.shortName}</span>
@@ -404,7 +410,7 @@ const ServiceAreas = () => {
                 transition={{ duration: 0.5, ease: easeExpo, delay: (index % 3) * 0.035 }}
               >
                 <Link
-                  to={`/neighborhoods/${area.slug}`}
+                  to={area.isCityPage ? `/${area.slug}` : `/neighborhoods/${area.slug}`}
                   className="group grid h-full grid-cols-[auto_minmax(0,1fr)_auto] gap-4 border border-gray-200 bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:shadow-[0_14px_34px_rgba(127,29,29,0.11)]"
                 >
                   <div className="flex h-12 w-12 items-center justify-center bg-gray-950 text-white">

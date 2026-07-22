@@ -399,7 +399,7 @@ const SwitchAssessment = () => {
                             <label className={labelClass}>Monthly bill</label>
                             <input
                               type="text"
-                              placeholder="e.g. $49.99"
+                              placeholder="Your current monthly rate"
                               value={monthlyBill}
                               onChange={(e) => setMonthlyBill(e.target.value)}
                               className={inputClass}

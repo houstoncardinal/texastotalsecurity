@@ -93,7 +93,7 @@ const audienceContent = {
       "Property managers solve incidents and coordinate maintenance faster",
     ],
     cta: "Protect Your Investment",
-    stat1: { value: "$0", label: "Monthly Cloud Fees" },
+    stat1: { value: "Zero", label: "Monthly Cloud Fees" },
     stat2: { value: "Own", label: "Your Equipment" },
     stat3: { value: "24/7", label: "Recording Uptime" },
     stat4: { value: "Direct", label: "Owner Access" },
