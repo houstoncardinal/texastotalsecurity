@@ -389,7 +389,7 @@ Call **(713) 387-9937** or [schedule a free onsite security analysis](/free-anal
     datePublished: "2026-05-26",
     readTime: "10 min",
     heroImage: "houston-we-have-a-problem",
-    heroImageAlt: "Houston, We Have a Problem — Texas Total Security infographic showing custom alarm systems, commercial surveillance, illegal dumping prevention, theft and burglary deterrence, unauthorized access control, vandalism prevention, and 24/7 professional monitoring for Houston homes and businesses.",
+    heroImageAlt: "Houston, We Have a Problem — Texas Total Security infographic showing custom alarm systems, commercial surveillance, illegal dumping prevention, theft and burglary deterrence, unauthorized entry detection, vandalism prevention, and 24/7 professional monitoring for Houston homes and businesses.",
     excerpt: "From commercial property theft and illegal dumping to residential break-ins, vandalism, and unauthorized access — Houston property owners face real risks every day. Here is how Texas Total Security designs customized strategies to actively deter crime and deliver 24/7 peace of mind.",
     content: `In a city as fast-growing and economically powerful as Houston, security threats are evolving just as quickly. From commercial property theft and illegal dumping to residential break-ins, vandalism, and unauthorized access, Houston property owners face real risks every day.
 
@@ -461,7 +461,7 @@ Texas Total Security helps property owners combat illegal dumping through strate
 
 ## Preventing Unauthorized Access & Trespassing
 
-Unauthorized access is a major concern for both residential and commercial properties. From after-hours intrusions at businesses to unwanted visitors entering gated communities or restricted areas, access control plays a critical role in modern security planning.
+Unauthorized access is a major concern for both residential and commercial properties. From after-hours intrusions at businesses to unwanted visitors entering gated communities or restricted areas, visual deterrence and monitored surveillance play a critical role in modern security planning.
 
 Texas Total Security helps clients strengthen perimeter awareness and improve property control through integrated security strategies that help limit opportunities for intrusion. This can be especially important for:
 

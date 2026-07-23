@@ -36,7 +36,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -76,7 +75,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -117,7 +115,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -158,7 +155,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -199,7 +195,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -240,7 +235,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -281,7 +275,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -322,7 +315,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -363,7 +355,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -404,7 +395,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -445,7 +435,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -486,7 +475,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -527,7 +515,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -568,7 +555,6 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Alarm Systems", desc: "Professionally installed hardwired alarm systems covering every door, window, and motion zone — no Wi-Fi dependency." },
       { title: "Hardwired 4K Cameras", desc: "PoE 4K IP cameras covering entries, driveways, and property perimeters with 24/7 recording." },
-      { title: "License Plate Reader (LPR)", desc: "Dedicated LPR cameras that capture every vehicle plate at driveways and community entrances — day and night." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors from anywhere." },
       { title: "24/7 Professional Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, or another provider? We take over compatible existing equipment — no need to replace what works." },
@@ -596,7 +582,7 @@ export const neighborhoods: NeighborhoodData[] = [
     {
       slug: "bunker-hill-village", zip: "77024", name: "Bunker Hill Village", full: "Bunker Hill Village, TX 77024", area: "Memorial Village",
       intro: "Bunker Hill Village is one of Houston's six independently incorporated Memorial Villages — a low-density enclave of large wooded estates, private drives, and generational family properties along Memorial Drive and Taylorcrest. Bunker Hill homes demand precision-designed hardwired security that respects both architecture and privacy.",
-      context: "Bunker Hill's deep lots, mature tree canopy, and limited municipal patrol presence create real coverage challenges for off-the-shelf security. Hardwired 4K cameras, driveway license plate reader, and 24/7 monitored alarms are the estate standard here — designed around each lot's specific geometry.",
+      context: "Bunker Hill's deep lots, mature tree canopy, and limited municipal patrol presence create real coverage challenges for off-the-shelf security. Hardwired 4K perimeter cameras and 24/7 monitored alarms are the estate standard here — designed around each lot's specific geometry.",
       types: ["Estate homes on 1+ acre lots", "Properties with detached garages and pool houses", "Long private driveways", "Wooded rear yards", "New-construction rebuilds"],
     },
     {
@@ -608,25 +594,25 @@ export const neighborhoods: NeighborhoodData[] = [
     {
       slug: "hedwig-village", zip: "77024", name: "Hedwig Village", full: "Hedwig Village, TX 77024", area: "Memorial Village",
       intro: "Hedwig Village is a small incorporated Memorial Village along I-10 and Memorial Drive — combining upscale residential estates with a walkable retail and dining corridor. Both residents and businesses rely on hardwired security systems tailored to the village's mixed footprint.",
-      context: "Hedwig Village's I-10 proximity and mix of residential and commercial creates unique exposure — vehicle theft along commercial corridors, residential burglary risk, and after-hours business security. Hardwired cameras, LPR, and monitored alarms serve both homes and small businesses.",
+      context: "Hedwig Village's I-10 proximity and mix of residential and commercial creates unique exposure — vehicle theft along commercial corridors, residential burglary risk, and after-hours business security. Hardwired cameras and monitored alarms serve both homes and small businesses.",
       types: ["Residential estates along Memorial Drive", "Retail and restaurant properties", "Small professional offices", "Homes near the I-10 corridor", "Mixed-use properties"],
     },
     {
       slug: "hunters-creek-village", zip: "77024", name: "Hunters Creek Village", full: "Hunters Creek Village, TX 77024", area: "Memorial Village",
       intro: "Hunters Creek Village is one of the largest and most affluent Memorial Villages — known for wooded ravines, winding private streets, and generational estate properties. Hunters Creek demands security designed around expansive lots, heavy tree cover, and premium residential architecture.",
-      context: "Hunters Creek's deep, wooded lots and secluded street layout create genuine blind spots that generic alarm systems can't cover. Hardwired 4K perimeter cameras, driveway license plate reader, and 24/7 monitored alarms designed around each estate's geometry are the standard.",
+      context: "Hunters Creek's deep, wooded lots and secluded street layout create genuine blind spots that generic alarm systems can't cover. Hardwired 4K perimeter cameras and 24/7 monitored alarms designed around each estate's geometry are the standard.",
       types: ["Estate homes with wooded lots", "Properties along Voss and Memorial Drive", "Homes with detached structures", "Long driveways with limited street visibility", "Pool and outdoor entertainment areas"],
     },
     {
       slug: "spring-valley-village", zip: "77055", name: "Spring Valley Village", full: "Spring Valley Village, TX 77055", area: "Memorial Village",
       intro: "Spring Valley Village is an independently incorporated Memorial Village along Campbell Road and Bingle — an established community of large residential lots, mature trees, and a growing collection of upscale new-construction homes. Spring Valley residents rely on custom hardwired systems built for legacy homes and modern rebuilds alike.",
-      context: "Spring Valley's Katy Freeway proximity and mix of legacy homes and new construction create a distinct security profile — active rebuild sites, high visibility from major thoroughfares, and residential estate exposure. Hardwired cameras, monitored alarms, and driveway LPR are the standard.",
+      context: "Spring Valley's Katy Freeway proximity and mix of legacy homes and new construction create a distinct security profile — active rebuild sites, high visibility from major thoroughfares, and residential estate exposure. Hardwired cameras and monitored alarms are the standard.",
       types: ["Legacy single-family homes", "New-construction estate rebuilds", "Homes along Campbell and Bingle", "Corner lots with alley access", "Properties near the Katy Freeway"],
     },
     {
       slug: "hilshire-village", zip: "77055", name: "Hilshire Village", full: "Hilshire Village, TX 77055", area: "Memorial Village",
       intro: "Hilshire Village is the smallest of the six independently incorporated Memorial Villages — a tight-knit residential enclave along Ridgeley Drive with fewer than 300 homes, most on large private lots. Hilshire properties demand security systems that match the village's low-profile character.",
-      context: "Hilshire Village's small size and residential-only zoning create a quiet security environment — but proximity to I-10 and busier commercial corridors means vehicle-related and package theft can still affect the neighborhood. Hardwired cameras, driveway LPR, and monitored alarms remain the right layered approach.",
+      context: "Hilshire Village's small size and residential-only zoning create a quiet security environment — but proximity to I-10 and busier commercial corridors means vehicle-related and package theft can still affect the neighborhood. Hardwired cameras and monitored alarms remain the right layered approach.",
       types: ["Residential estates on Ridgeley Drive", "Homes with mature landscaping", "Larger single-family lots", "Properties near the Hempstead corridor", "New-construction homes"],
     },
     {
@@ -644,7 +630,7 @@ export const neighborhoods: NeighborhoodData[] = [
     {
       slug: "nottingham-forest", zip: "77079", name: "Nottingham Forest", full: "Nottingham / Nottingham Forest, Houston TX 77079", area: "Memorial subdivision",
       intro: "Nottingham Forest is one of Memorial's largest and most desirable subdivisions — with hundreds of established homes, a strong HOA, and a mix of original estate properties and modern rebuilds. Nottingham Forest residents rely on hardwired security systems designed for the neighborhood's specific layout and risk patterns.",
-      context: "Nottingham Forest's size, tree canopy, and busy resident traffic create coverage priorities around driveways, side yards, and rear entries. Hardwired 4K cameras, driveway LPR, and monitored alarms are the layered standard for Nottingham Forest homes.",
+      context: "Nottingham Forest's size, tree canopy, and busy resident traffic create coverage priorities around driveways, side yards, and rear entries. Hardwired 4K cameras and monitored alarms are the layered standard for Nottingham Forest homes.",
       types: ["Original estate homes", "Modern rebuilds and new construction", "Interior street properties", "Homes on greenbelt lots", "Family homes with pools"],
     },
     {
@@ -656,7 +642,7 @@ export const neighborhoods: NeighborhoodData[] = [
     {
       slug: "yorkchester", zip: "77079", name: "Yorkchester", full: "Yorkchester, Houston TX 77079", area: "Memorial subdivision",
       intro: "Yorkchester is a tightly knit Memorial subdivision west of Wilchester — smaller in scale, with well-maintained estate homes on generous lots. Yorkchester's low-traffic interior streets don't reduce the need for professional security; if anything, they reinforce it.",
-      context: "Yorkchester's quiet, low-traffic character makes any unusual activity stand out — which is exactly why hardwired cameras and monitored alarms are so effective here. Driveway LPR and perimeter cameras give homeowners a clear record of every approach.",
+      context: "Yorkchester's quiet, low-traffic character makes any unusual activity stand out — which is exactly why hardwired cameras and monitored alarms are so effective here. Perimeter cameras give homeowners a clear record of every approach.",
       types: ["Established estate homes", "Family properties on interior streets", "Homes with detached garages", "Pool and yard-focused properties", "Renovated legacy homes"],
     },
     {
@@ -674,7 +660,7 @@ export const neighborhoods: NeighborhoodData[] = [
     {
       slug: "memorial-forest", zip: "77024", name: "Memorial Forest", full: "Memorial Forest, Houston TX 77024", area: "Memorial subdivision",
       intro: "Memorial Forest is one of the classic Memorial-area subdivisions — with heavily wooded lots, winding interior streets, and generational estate homes. Memorial Forest homeowners typically install fully hardwired cameras and alarm systems built for the neighborhood's dense tree cover.",
-      context: "Memorial Forest's dense tree canopy creates real camera-placement challenges for consumer-grade equipment. Hardwired 4K cameras with careful positioning — plus driveway LPR and monitored alarms — deliver reliable coverage under Memorial Forest's tree cover in every season.",
+      context: "Memorial Forest's dense tree canopy creates real camera-placement challenges for consumer-grade equipment. Hardwired 4K cameras with careful positioning — plus monitored alarms — deliver reliable coverage under Memorial Forest's tree cover in every season.",
       types: ["Estate homes on wooded lots", "Winding interior street properties", "Homes with mature tree canopy", "Detached-structure properties", "Renovated legacy homes"],
     },
     {
@@ -692,7 +678,7 @@ export const neighborhoods: NeighborhoodData[] = [
     {
       slug: "sherwood-forest", zip: "77024", name: "Sherwood Forest", full: "Sherwood Forest, Houston TX 77024", area: "Memorial subdivision",
       intro: "Sherwood Forest is one of Memorial's most private and wooded subdivisions — with large estate lots, mature trees, and winding interior streets. Sherwood Forest properties require security systems designed for maximum coverage under heavy landscaping.",
-      context: "Sherwood Forest's dense tree canopy and low-traffic layout create genuine camera-placement challenges. Hardwired 4K cameras positioned for year-round sight lines, plus driveway LPR and monitored alarms, deliver estate-grade coverage.",
+      context: "Sherwood Forest's dense tree canopy and low-traffic layout create genuine camera-placement challenges. Hardwired 4K cameras positioned for year-round sight lines, plus monitored alarms, deliver estate-grade coverage.",
       types: ["Estate homes on large wooded lots", "Winding-street interior properties", "Homes with detached structures", "Properties with pools and outdoor areas", "Long private driveways"],
     },
     {
@@ -704,7 +690,7 @@ export const neighborhoods: NeighborhoodData[] = [
     {
       slug: "westhaven-estates", zip: "77057", name: "Westhaven Estates", full: "Westhaven Estates, Houston TX 77057", area: "Tanglewood-area subdivision",
       intro: "Westhaven Estates is a prestigious inner-loop subdivision west of the Galleria — with luxury estate homes, private drives, and mature landscaping. Westhaven Estates homeowners expect hardwired security systems designed with discretion and full coverage in mind.",
-      context: "Westhaven Estates' luxury home concentration and proximity to major thoroughfares create elevated exposure to targeted residential crime. Hardwired 4K perimeter cameras, driveway LPR, and monitored alarms deliver the estate-grade coverage this neighborhood expects.",
+      context: "Westhaven Estates' luxury home concentration and proximity to major thoroughfares create elevated exposure to targeted residential crime. Hardwired 4K perimeter cameras and monitored alarms deliver the estate-grade coverage this neighborhood expects.",
       types: ["Luxury estate homes", "Properties with private drives", "Homes with pools and outbuildings", "Estate lots with mature landscaping", "New-construction luxury homes"],
     },
     {
@@ -716,13 +702,13 @@ export const neighborhoods: NeighborhoodData[] = [
     {
       slug: "glenhaven-estates", zip: "77024", name: "Glenhaven Estates", full: "Glenhaven Estates, Houston TX 77024", area: "Memorial-area subdivision",
       intro: "Glenhaven Estates is an upscale Memorial-area subdivision — with luxury family homes on generous lots, mature landscaping, and quiet interior streets. Glenhaven Estates residents typically install fully hardwired camera and alarm systems designed around estate coverage.",
-      context: "Glenhaven Estates' luxury home concentration and Memorial-area location create elevated exposure to targeted residential burglary and vehicle theft. Hardwired 4K cameras, driveway LPR, and monitored alarms are the estate standard here.",
+      context: "Glenhaven Estates' luxury home concentration and Memorial-area location create elevated exposure to targeted residential burglary and vehicle theft. Hardwired 4K cameras and monitored alarms are the estate standard here.",
       types: ["Luxury estate homes", "Properties with mature landscaping", "Homes with pools and outbuildings", "Interior-street properties", "Newer luxury construction"],
     },
     {
       slug: "tanglewood", zip: "77056", name: "Tanglewood", full: "Tanglewood, Houston TX 77056", area: "Galleria-area subdivision",
       intro: "Tanglewood is one of Houston's most iconic residential neighborhoods — stately estate homes on oversized lots east of the Galleria, deed-restricted, and highly desirable. Tanglewood estates require security systems that combine discreet installation with complete coverage.",
-      context: "Tanglewood's high property values, oversized lots, and Galleria-corridor exposure create classic upscale-residential crime patterns — targeted residential burglary, catalytic converter theft, and vehicle theft. Hardwired 4K perimeter cameras, driveway LPR, and monitored alarms are the estate standard.",
+      context: "Tanglewood's high property values, oversized lots, and Galleria-corridor exposure create classic upscale-residential crime patterns — targeted residential burglary, catalytic converter theft, and vehicle theft. Hardwired 4K perimeter cameras and monitored alarms are the estate standard.",
       types: ["Stately estate homes", "Properties on oversized deed-restricted lots", "Homes with pools and pool houses", "Long driveways with limited street visibility", "Modern luxury rebuilds"],
     },
     {
@@ -756,16 +742,16 @@ export const neighborhoods: NeighborhoodData[] = [
     services: [
       { title: "Home Alarm Systems", desc: "Professionally installed hardwired residential alarms covering every door, window, and motion zone — designed around your family's daily routine." },
       { title: "Hardwired 4K Home Cameras", desc: "PoE 4K IP cameras covering front doors, side yards, driveways, and backyard perimeters with 24/7 recording." },
-      { title: "Driveway License Plate Reader", desc: "Dedicated LPR cameras that capture every vehicle plate approaching your home — day and night." },
+      { title: "Glass Break & Motion Sensors", desc: "Interior protection layer that detects forced entry attempts and motion throughout your home." },
       { title: "Video Doorbell Camera", desc: "Two-way audio and HD video at your front door — see and speak with visitors, deliveries, and guests from anywhere." },
       { title: "24/7 Home Monitoring", desc: "Certified monitoring center staffed around the clock — fast signal verification and direct dispatch to local authorities when your family needs it." },
       { title: "Alarm System Takeovers", desc: "Switching from ADT, Brinks, Vivint, or another provider? We take over compatible existing equipment — no need to replace what works in your home." },
     ],
     faqs: [
-      { question: `Do you install home security systems in ${sub.name}, TX?`, answer: `Yes. Texas Total Security specializes in residential installations throughout ${sub.name} (${sub.zip}) — hardwired home alarms, 4K cameras, video doorbells, driveway license plate reader, and 24/7 professional monitoring. Every home system is designed on-site around your specific property.` },
-      { question: `What's the best home security setup for a ${sub.name} house?`, answer: `For ${sub.name} homes we typically design a layered residential system: hardwired 4K cameras covering every entry point and driveway, a video doorbell at the front door, a driveway license plate reader, and a fully hardwired monitored home alarm. Your final system is customized during a free onsite consultation.` },
+      { question: `Do you install home security systems in ${sub.name}, TX?`, answer: `Yes. Texas Total Security specializes in residential installations throughout ${sub.name} (${sub.zip}) — hardwired home alarms, 4K cameras, video doorbells, and 24/7 professional monitoring. Every home system is designed on-site around your specific property.` },
+      { question: `What's the best home security setup for a ${sub.name} house?`, answer: `For ${sub.name} homes we typically design a layered residential system: hardwired 4K cameras covering every entry point and driveway, a video doorbell at the front door, glass break and motion sensors, and a fully hardwired monitored home alarm. Your final system is customized during a free onsite consultation.` },
       { question: `Can you take over my existing home alarm in ${sub.name}?`, answer: "In most cases, yes. If your existing residential panel and sensors are compatible — Honeywell, DSC, 2GIG, Resideo, and similar — we can reprogram and take over your system without ripping out what works. We evaluate compatibility during your free in-home consultation." },
-      { question: `How long does a home security installation take in ${sub.name}?`, answer: `Most ${sub.name} home installations are completed in a single day. Larger estate homes with extensive camera counts or driveway LPR may require two days. We schedule around your family's routine — mornings, weekends, or after school, whatever works.` },
+      { question: `How long does a home security installation take in ${sub.name}?`, answer: `Most ${sub.name} home installations are completed in a single day. Larger estate homes with extensive camera counts may require two days. We schedule around your family's routine — mornings, weekends, or after school, whatever works.` },
       { question: `How much does a home security system cost in ${sub.name}?`, answer: `Every ${sub.name} home is different, so we don't publish one-size-fits-all pricing. After a free in-home consultation we design a system around your specific house, then quote transparent pricing with no hidden fees. Monthly monitoring plans start at a fraction of what national providers charge.` },
       { question: "Does your monitoring account ever transfer to another company?", answer: "Never. Your home account is managed directly by Texas Total Security, with alarm signals handled through our certified partner center. We do not sell or transfer residential accounts to a national alarm company." },
     ],
@@ -776,7 +762,7 @@ export const neighborhoods: NeighborhoodData[] = [
       { label: "Response", value: "Sub-30 sec" },
     ],
     metaTitle: `${sub.name} Home Security Systems ${sub.zip} | Residential Alarms & Cameras | Texas Total Security`,
-    metaDescription: `Home security systems for ${sub.full}. Hardwired residential alarms, 4K cameras, video doorbells, driveway LPR & 24/7 monitoring. Locally owned. Call (713) 387-9937.`,
+    metaDescription: `Home security systems for ${sub.full}. Hardwired residential alarms, 4K cameras, video doorbells & 24/7 monitoring. Locally owned. Call (713) 387-9937.`,
   }))),
 ];
 

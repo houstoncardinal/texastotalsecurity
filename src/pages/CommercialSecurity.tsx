@@ -93,7 +93,7 @@ const commercialSchemas = [
     "Enterprise-grade security for Houston businesses. Commercial alarms, 4K surveillance, active deterrence & 24/7 professional monitoring. Scalable for any industry.",
     "/commercial",
     "Commercial Security System Installation",
-    ["commercial security systems Houston TX", "business alarm system Houston", "commercial surveillance Houston", "commercial security camera systems Houston", "business security cameras Houston"],
+    ["commercial security systems Houston TX", "business alarm system Houston", "commercial surveillance Houston", "commercial security camera systems Houston", "business security cameras Houston", "commercial security company near me", "business security systems near me"],
     faqs
   ),
   generateBreadcrumbSchema([

@@ -114,6 +114,7 @@ const faqs = [
   { question: "How long does switching alarm companies take?", answer: "Most switches are completed in a single visit — typically a few hours. We reprogram your existing panel, test every sensor, replace any faulty components, and activate professional 24/7 monitoring before we leave." },
   { question: "What happens during a power outage?", answer: "Hardwired alarm systems include battery backup and can use cellular communication instead of depending on Wi-Fi or a landline, so monitoring can stay active during many common outages." },
   { question: "Can you install a completely new alarm system if my equipment isn't salvageable?", answer: "Yes. We design and install complete hardwired alarm systems for Houston homes and businesses. If your current equipment isn't worth keeping, we'll build you a new system from scratch." },
+  { question: "Is there an alarm company near me that services my specific Houston neighborhood?", answer: "Yes. Texas Total Security is a local Houston-based alarm company — not a national call center — and our technicians cover the full Houston metro, including the inner-loop, Memorial Villages, and surrounding suburbs. Search \"alarm company near me\" and you'll find us because we're actually based here, not routing your call out of state." },
 ];
 
 const faqsDisplay = [
@@ -197,6 +198,15 @@ const faqsDisplay = [
       </span>
     ),
   },
+  {
+    question: "Is there an alarm company near me that services my specific Houston neighborhood?",
+    answer: (
+      <span>
+        Yes. Texas Total Security is a local Houston-based alarm company — not a national call center — and our technicians cover the full Houston metro, including the inner-loop, Memorial Villages, and surrounding suburbs. Search "alarm company near me" and you'll find us because we're actually based here, not routing your call out of state.{" "}
+        <Link to="/service-areas" className="text-red-600 font-semibold hover:underline">See all the areas we serve</Link>.
+      </span>
+    ),
+  },
 ];
 
 const alarmSchemas = [
@@ -206,7 +216,7 @@ const alarmSchemas = [
     "Custom alarm system design, professional installation, and 24/7 professional monitoring for homes and businesses in Houston, TX. We take over existing alarm systems from all providers. Licensed & insured.",
     "/alarm-systems",
     "Alarm System Installation",
-    ["switch alarm company Houston TX", "local alarm company Houston", "change alarm provider Houston", "local alarm system Houston", "local burglar alarm Houston", "alarm companies near me Houston", "best alarm companies Houston", "professional alarm monitoring Houston", "change alarm company Houston", "alarm system takeover Houston"],
+    ["switch alarm company Houston TX", "local alarm company Houston", "change alarm provider Houston", "local alarm system Houston", "local burglar alarm Houston", "alarm companies near me Houston", "alarm company near me", "alarm installers near me", "alarm repair near me", "best alarm companies Houston", "professional alarm monitoring Houston", "change alarm company Houston", "alarm system takeover Houston"],
     faqs
   ),
   generateProductSchema(

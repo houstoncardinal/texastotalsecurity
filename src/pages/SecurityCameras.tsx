@@ -128,6 +128,7 @@ const faqs = [
   { question: "What's the difference between IP cameras and analog cameras?", answer: "IP cameras provide higher resolution, cleaner network architecture, remote access flexibility, and better scalability. Analog cameras may be supported in hybrid systems when existing infrastructure still has value." },
   { question: "Do you install systems for HOAs and enterprise clients?", answer: "Yes. We design and install surveillance systems for HOA communities, apartment portfolios, commercial buildings, warehouses, industrial sites, retail centers, and multi-location enterprise clients." },
   { question: "Can cameras be installed on poles or existing structures?", answer: "Yes. We can mount cameras on buildings, existing poles, or engineered security poles with integrated cameras, lighting, wireless links, and active deterrence equipment." },
+  { question: "Is there a security camera installer near me who works throughout Houston?", answer: "Yes. Texas Total Security installs hardwired camera systems throughout the entire Houston metro — not just one neighborhood. Wherever you're searching from, our local install teams cover your area, and most jobs are scheduled within days of your free assessment." },
 ];
 
 const faqsDisplay = [
@@ -209,6 +210,15 @@ const faqsDisplay = [
       </span>
     ),
   },
+  {
+    question: "Is there a security camera installer near me who works throughout Houston?",
+    answer: (
+      <span>
+        Yes. Texas Total Security installs hardwired camera systems throughout the entire Houston metro — not just one neighborhood. Wherever you're searching from, our local install teams cover your area, and most jobs are scheduled within days of your{" "}
+        <Link to="/property-assessment" className="text-red-600 font-semibold hover:underline">free assessment</Link>.
+      </span>
+    ),
+  },
 ];
 
 const cameraSchemas = [
@@ -218,7 +228,7 @@ const cameraSchemas = [
     "Professional security camera systems in Houston, TX. Hardwired PoE camera infrastructure, 4K IP cameras, license plate reader, video monitoring, remote viewing, active deterrence, and enterprise surveillance systems for HOAs, property managers, and businesses.",
     "/security-cameras",
     "Security Camera Installation",
-    ["security camera systems Houston TX", "security camera installation Houston", "surveillance systems Houston", "video monitoring Houston", "hardwired security camera installation Houston", "PoE security camera systems Houston", "NVR camera systems Houston", "license plate reader cameras Houston", "HOA security cameras Houston", "property management security cameras Houston", "4K IP camera installation Houston", "commercial surveillance systems Houston"],
+    ["security camera systems Houston TX", "security camera installation Houston", "surveillance systems Houston", "video monitoring Houston", "hardwired security camera installation Houston", "PoE security camera systems Houston", "NVR camera systems Houston", "license plate reader cameras Houston", "HOA security cameras Houston", "property management security cameras Houston", "4K IP camera installation Houston", "commercial surveillance systems Houston", "security camera installation near me", "security camera company near me", "security camera installers near me"],
     faqs
   ),
   generateBreadcrumbSchema([

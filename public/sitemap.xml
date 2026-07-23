@@ -226,137 +226,6 @@
     <priority>0.82</priority>
   </url>
 
-  <url>
-    <loc>https://www.texastotalsecurity.com/cypress-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.84</priority>
-  </url>
-
-  <url>
-    <loc>https://www.texastotalsecurity.com/spring-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.82</priority>
-  </url>
-
-  <url>
-    <loc>https://www.texastotalsecurity.com/tomball-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.texastotalsecurity.com/atascocita-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- ═══════════════════════════════════════════════════════
-       CITY LANDING PAGES — FORT BEND COUNTY
-  ═══════════════════════════════════════════════════════ -->
-  <url>
-    <loc>https://www.texastotalsecurity.com/sugar-land-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-
-  <url>
-    <loc>https://www.texastotalsecurity.com/katy-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-
-  <url>
-    <loc>https://www.texastotalsecurity.com/richmond-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.82</priority>
-  </url>
-
-  <url>
-    <loc>https://www.texastotalsecurity.com/missouri-city-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.82</priority>
-  </url>
-
-  <url>
-    <loc>https://www.texastotalsecurity.com/rosenberg-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- ═══════════════════════════════════════════════════════
-       CITY LANDING PAGES — MONTGOMERY COUNTY
-  ═══════════════════════════════════════════════════════ -->
-  <url>
-    <loc>https://www.texastotalsecurity.com/the-woodlands-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.88</priority>
-  </url>
-
-  <!-- ═══════════════════════════════════════════════════════
-       CITY LANDING PAGES — GALVESTON / BRAZORIA COUNTY
-  ═══════════════════════════════════════════════════════ -->
-  <url>
-    <loc>https://www.texastotalsecurity.com/league-city-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.84</priority>
-  </url>
-
-  <url>
-    <loc>https://www.texastotalsecurity.com/pearland-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.84</priority>
-  </url>
-
-  <!-- Memorial Villages (77024 / 77055) city landing pages -->
-  <url>
-    <loc>https://www.texastotalsecurity.com/bunker-hill-village-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.86</priority>
-  </url>
-  <url>
-    <loc>https://www.texastotalsecurity.com/piney-point-village-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.86</priority>
-  </url>
-  <url>
-    <loc>https://www.texastotalsecurity.com/hedwig-village-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.86</priority>
-  </url>
-  <url>
-    <loc>https://www.texastotalsecurity.com/hunters-creek-village-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.86</priority>
-  </url>
-  <url>
-    <loc>https://www.texastotalsecurity.com/spring-valley-village-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.86</priority>
-  </url>
-  <url>
-    <loc>https://www.texastotalsecurity.com/hilshire-village-security-systems</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.86</priority>
-  </url>
-
   <!-- ═══════════════════════════════════════════════════════
        HOUSTON NEIGHBORHOOD LANDING PAGES
        (Priority order per client focus list)
@@ -546,6 +415,12 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.texastotalsecurity.com/blog/security-showdown-hardwired-vs-wifi-cameras</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.89</priority>
+  </url>
+  <url>
     <loc>https://www.texastotalsecurity.com/blog/houston-we-have-a-problem-security-challenges</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -673,12 +548,12 @@
   <url><loc>https://www.texastotalsecurity.com/neighborhoods/tanglewood-security-systems</loc><lastmod>2026-05-25</lastmod><changefreq>monthly</changefreq><priority>0.80</priority></url>
   <url><loc>https://www.texastotalsecurity.com/neighborhoods/briarcroft-security-systems</loc><lastmod>2026-05-25</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://www.texastotalsecurity.com/neighborhoods/lamar-terrace-security-systems</loc><lastmod>2026-05-25</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
-  <url><loc>https://www.texastotalsecurity.com/neighborhoods/bunker-hill-village-security-systems</loc><lastmod>2026-05-25</lastmod><changefreq>monthly</changefreq><priority>0.80</priority></url>
-  <url><loc>https://www.texastotalsecurity.com/neighborhoods/piney-point-village-security-systems</loc><lastmod>2026-05-25</lastmod><changefreq>monthly</changefreq><priority>0.80</priority></url>
-  <url><loc>https://www.texastotalsecurity.com/neighborhoods/hedwig-village-security-systems</loc><lastmod>2026-05-25</lastmod><changefreq>monthly</changefreq><priority>0.80</priority></url>
-  <url><loc>https://www.texastotalsecurity.com/neighborhoods/hunters-creek-village-security-systems</loc><lastmod>2026-05-25</lastmod><changefreq>monthly</changefreq><priority>0.80</priority></url>
-  <url><loc>https://www.texastotalsecurity.com/neighborhoods/spring-valley-village-security-systems</loc><lastmod>2026-05-25</lastmod><changefreq>monthly</changefreq><priority>0.80</priority></url>
-  <url><loc>https://www.texastotalsecurity.com/neighborhoods/hilshire-village-security-systems</loc><lastmod>2026-05-25</lastmod><changefreq>monthly</changefreq><priority>0.80</priority></url>
+  <url><loc>https://www.texastotalsecurity.com/neighborhoods/bunker-hill-village-security-systems</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.86</priority></url>
+  <url><loc>https://www.texastotalsecurity.com/neighborhoods/piney-point-village-security-systems</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.86</priority></url>
+  <url><loc>https://www.texastotalsecurity.com/neighborhoods/hedwig-village-security-systems</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.86</priority></url>
+  <url><loc>https://www.texastotalsecurity.com/neighborhoods/hunters-creek-village-security-systems</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.86</priority></url>
+  <url><loc>https://www.texastotalsecurity.com/neighborhoods/spring-valley-village-security-systems</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.86</priority></url>
+  <url><loc>https://www.texastotalsecurity.com/neighborhoods/hilshire-village-security-systems</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.86</priority></url>
 
 </urlset>
 

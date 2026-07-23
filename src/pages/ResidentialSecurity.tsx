@@ -21,7 +21,7 @@ const solutions = [
   { icon: Shield,     title: "Home Alarm Systems",           desc: "Hardwired alarm systems on every door, window, and motion zone — built for your layout." },
   { icon: Camera,     title: "Hardwired 4K Cameras",         desc: "PoE 4K cameras — no Wi-Fi dependency, no dropped feeds, no blind spots." },
   { icon: Bell,       title: "Video Doorbell Camera",        desc: "Two-way audio and HD video at your front door — accessible from your phone anywhere." },
-  { icon: Lock,       title: "License Plate Reader (LPR)",   desc: "Driveway LPR cameras capture every vehicle plate — day and night." },
+  { icon: Lock,       title: "Smart Lock Integration",       desc: "Keyless entry and remote locking tied into your alarm app — know who's home, and when." },
   { icon: Smartphone, title: "Remote App Access",            desc: "Arm, disarm, and view live footage from anywhere in the world." },
   { icon: Home,       title: "24/7 Professional Monitoring", desc: "Certified monitoring center with fast dispatch for verified alarm events." },
 ];
@@ -84,16 +84,20 @@ const faqs = [
     question: "What if I already have a system from another company?",
     answer: "We can often take over your existing equipment and connect it to our monitoring platform — better service without the cost of full replacement.",
   },
+  {
+    question: "Who is the best home security company in Houston?",
+    answer: "Texas Total Security is locally owned and operated, not a national franchise — every home security system we design is custom-built for your specific property, installed by our own licensed technicians, and backed by 24/7 professional monitoring. That local accountability is why Houston homeowners consistently rate us 5 stars.",
+  },
 ];
 
 const residentialSchemas = [
   generateLocalBusinessSchema(),
   generateEnhancedServiceSchema(
-    "Residential Security Systems Houston TX",
+    "Home Security Systems Houston TX",
     "Custom home security for Houston homeowners. 4K hardwired cameras, alarm systems & 24/7 professional monitoring. New homes, existing homes, condos & second homes.",
     "/residential",
     "Residential Security System Installation",
-    ["local home security companies Houston TX", "local home security systems Houston", "local alarm system Houston", "local burglar alarm Houston", "home security systems local Houston", "residential alarm installation Houston"],
+    ["home security Houston", "home security systems Houston", "home security company Houston", "best home security Houston", "local home security companies Houston TX", "local home security systems Houston", "local alarm system Houston", "local burglar alarm Houston", "home security systems local Houston", "residential alarm installation Houston", "home security companies near me", "home security systems near me", "home security company near me", "home alarm installation near me"],
     faqs
   ),
   generateBreadcrumbSchema([
@@ -128,8 +132,8 @@ const ResidentialSecurity = () => {
   return (
   <Layout>
     <SEOHead
-      title="Residential Security Systems Houston TX | Home Alarm Installation | Texas Total Security"
-      description="Protect your Houston home with professional alarm systems, 4K hardwired cameras & 24/7 professional monitoring. Customized for every property type. Free onsite assessment."
+      title="Home Security Systems Houston TX | Residential Alarms & Cameras | Texas Total Security"
+      description="Home security systems in Houston, TX — professional alarm systems, 4K hardwired cameras & 24/7 professional monitoring. Customized for every property type. Free onsite assessment."
       schemas={residentialSchemas}
     />
 

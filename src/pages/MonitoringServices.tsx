@@ -83,7 +83,7 @@ const monitoringSchemas = [
     "Professional 24/7 alarm monitoring for Houston homes and businesses. System takeovers, local account management, and certified dispatch support.",
     "/monitoring-services",
     "Alarm Monitoring Service",
-    ["alarm monitoring Houston TX", "24/7 alarm monitoring Houston", "professional alarm monitoring Houston", "security monitoring company Houston", "alarm system takeover Houston"]
+    ["alarm monitoring Houston TX", "24/7 alarm monitoring Houston", "professional alarm monitoring Houston", "security monitoring company Houston", "alarm system takeover Houston", "alarm monitoring near me", "24 hour alarm monitoring near me", "alarm monitoring company near me"]
   ),
   generateBreadcrumbSchema([
     { name: "Home", href: "/" },

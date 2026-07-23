@@ -273,6 +273,8 @@ const schemas = [
       "hard wired security cameras Houston",
       "multi-site property management cameras",
       "package theft cameras apartment Houston",
+      "apartment security camera company near me",
+      "property management security company near me",
     ],
     faqs
   ),

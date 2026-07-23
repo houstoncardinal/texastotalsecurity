@@ -2,6 +2,46 @@
   command   = "npm run build"
   publish   = "dist"
 
+# Memorial Villages — consolidated onto a single canonical URL each.
+# These used to also render at the top level via cityData.ts (older template);
+# that data was removed, so send any existing links/bookmarks/indexed URLs
+# straight to the canonical /neighborhoods/ page instead of a dead end.
+[[redirects]]
+  from   = "/bunker-hill-village-security-systems"
+  to     = "/neighborhoods/bunker-hill-village-security-systems"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/piney-point-village-security-systems"
+  to     = "/neighborhoods/piney-point-village-security-systems"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/hedwig-village-security-systems"
+  to     = "/neighborhoods/hedwig-village-security-systems"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/hunters-creek-village-security-systems"
+  to     = "/neighborhoods/hunters-creek-village-security-systems"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/spring-valley-village-security-systems"
+  to     = "/neighborhoods/spring-valley-village-security-systems"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/hilshire-village-security-systems"
+  to     = "/neighborhoods/hilshire-village-security-systems"
+  status = 301
+  force  = true
+
 [[redirects]]
   from   = "/*"
   to     = "/index.html"

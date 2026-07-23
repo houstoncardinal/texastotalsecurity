@@ -249,7 +249,7 @@ const hoaSchemas = [
     "Professional HOA and property management security solutions in Houston, TX. Gate cameras, License Plate Reader (LPR), dumpster area coverage, mailbox surveillance, pool cameras, playground monitoring & 24/7 recording.",
     "/hoa-security",
     "HOA Security System Installation",
-    ["HOA security camera systems Houston TX", "HOA gate cameras Houston", "property management security cameras Houston", "apartment complex security cameras", "community security cameras Houston", "dumpster area cameras Houston", "mailbox cameras HOA", "pool surveillance cameras Houston"],
+    ["HOA security camera systems Houston TX", "HOA gate cameras Houston", "property management security cameras Houston", "apartment complex security cameras", "community security cameras Houston", "dumpster area cameras Houston", "mailbox cameras HOA", "pool surveillance cameras Houston", "HOA security camera company near me", "gate camera installation near me"],
     faqs
   ),
   generateBreadcrumbSchema([
