@@ -155,6 +155,13 @@
   </url>
 
   <url>
+    <loc>https://www.texastotalsecurity.com/property-assessment</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.94</priority>
+  </url>
+
+  <url>
     <loc>https://www.texastotalsecurity.com/qualify</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
@@ -166,6 +173,13 @@
     <lastmod>2026-05-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.82</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/request-callback</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
   </url>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -190,6 +204,23 @@
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════
+       LEGAL PAGES
+  ═══════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.texastotalsecurity.com/privacy-policy</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <url>
+    <loc>https://www.texastotalsecurity.com/terms-of-service</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
   </url>
 
   <!-- ═══════════════════════════════════════════════════════
