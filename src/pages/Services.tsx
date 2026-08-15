@@ -160,52 +160,50 @@ const Services = () => {
         </div>
       </section>
 
-      <section className="py-12 sm:py-14 bg-white">
+      <section className="py-14 sm:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-[0.78fr_1.22fr] gap-8 lg:gap-10 items-start">
-            <div className="lg:sticky lg:top-24">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 bg-red-50 border border-red-100">
-                <Star className="w-3.5 h-3.5 text-red-600" />
-                <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-red-700">Service Menu</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-gray-950 leading-tight">
-                One local team for the systems that protect your property.
-              </h2>
-              <p className="mt-4 text-gray-600 leading-relaxed">
-                The services below match the Services menu in the site navigation. Each page is focused on a specific security need, while our field team can design integrated systems across multiple categories.
-              </p>
+          <div className="mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 bg-red-50 border border-red-100">
+              <Star className="w-3.5 h-3.5 text-red-600" />
+              <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-red-700">Service Menu</span>
             </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-gray-950 leading-tight">
+              One local team for the systems that protect your property.
+            </h2>
+            <p className="mt-5 text-gray-600 leading-relaxed text-base sm:text-lg max-w-3xl">
+              The services below match the Services menu in the site navigation. Each page is focused on a specific security need, while our field team can design integrated systems across multiple categories.
+            </p>
+          </div>
 
-            <div className="grid sm:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
-              {services.map((service) => (
-                <Link
-                  key={service.href}
-                  to={service.href}
-                  className="group bg-white p-5 hover:bg-gray-50 transition-colors"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 flex items-center justify-center shrink-0 bg-red-50 border border-red-100">
-                      <service.icon className="w-5 h-5 text-red-600" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 border border-gray-200">
+            {services.map((service) => (
+              <Link
+                key={service.href}
+                to={service.href}
+                className="group bg-white p-5 hover:bg-gray-50 transition-colors"
+              >
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="w-10 h-10 flex items-center justify-center shrink-0 bg-red-50 border border-red-100">
+                    <service.icon className="w-5 h-5 text-red-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-gray-950 leading-tight">{service.title}</h3>
+                  </div>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-gray-600 mb-4">{service.desc}</p>
+                <div className="grid gap-1.5">
+                  {service.features.map((feature) => (
+                    <div key={feature} className="flex items-center gap-2 text-sm text-gray-600">
+                      <CheckCircle2 className="w-4 h-4 text-red-600 shrink-0" />
+                      {feature}
                     </div>
-                    <div>
-                      <h3 className="font-display font-bold text-gray-950 leading-tight">{service.title}</h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-gray-600">{service.desc}</p>
-                    </div>
-                  </div>
-                  <div className="mt-4 grid gap-1.5">
-                    {service.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-2 text-sm text-gray-600">
-                        <CheckCircle2 className="w-4 h-4 text-red-600 shrink-0" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-red-600 group-hover:gap-3 transition-all">
-                    Learn More <ArrowRight className="w-4 h-4" />
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  ))}
+                </div>
+                <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-red-600 group-hover:gap-3 transition-all">
+                  Learn More <ArrowRight className="w-4 h-4" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

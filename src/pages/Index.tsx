@@ -1,8 +1,11 @@
-import { motion, useScroll, useSpring } from "framer-motion";
+import { useState } from "react";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import SecurityShowdownChart from "@/components/SecurityShowdownChart";
+import LeadForm from "@/components/LeadForm";
+import { X } from "lucide-react";
 
 import {
   generateItemListSchema,
@@ -66,7 +69,7 @@ const hero = {
 const heroThumbnails = [
   { label: "Residential Solutions", href: "/residential", img: "/residential/imgi_33_luxury-home-6886153_1280.jpg", alt: "Modern residential security system installation" },
   { label: "Commercial Solutions", href: "/commercial", img: "/commercial/commercialbanner.jpg", alt: "Commercial security camera system for a Houston business" },
-  { label: "HOA & Multi-Family", href: "/hoa-security", img: "/residential/imgi_4_resi5-scaled.jpg", alt: "Texas residential neighborhood protected by community security cameras" },
+  { label: "HOA & Multi-Family", href: "/hoa-security", img: "/hoacardimage.jpg", alt: "Texas residential neighborhood protected by community security cameras" },
 ];
 
 /* ─── Data ──────────────────────────────────────────────────── */
@@ -225,7 +228,8 @@ const whoWeServeCards = [
 /* ─── Page ──────────────────────────────────────────────────── */
 const Index = () => {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
   const schemas = [
     generateComprehensiveHomepageSchema(),
@@ -323,9 +327,9 @@ const Index = () => {
                 transition={{ duration: 0.6, ease: easeExpo, delay: 0.05 }}
                 className="font-display font-black text-gray-950 mb-4"
                 style={{
-                  fontSize: "clamp(1.8rem, 3.3vw, 3rem)",
-                  lineHeight: 1.1,
-                  letterSpacing: "-0.02em",
+                  fontSize: "clamp(1.9rem, 3.5vw, 3.15rem)",
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.035em",
                   textWrap: "balance",
                   maxWidth: "44rem",
                 }}
@@ -391,9 +395,9 @@ const Index = () => {
                 className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3"
               >
                 <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
-                  <Link
-                    to="/free-analysis"
-                    className="inline-flex items-center justify-center gap-2 font-bold px-4 py-3.5 text-white text-[12px] sm:text-[13px] sm:py-4 rounded-xl whitespace-nowrap w-full sm:w-auto sm:px-6 sm:text-sm"
+                  <button
+                    onClick={() => setIsFormModalOpen(true)}
+                    className="inline-flex items-center justify-center gap-2 font-bold px-4 py-3.5 text-white text-[12px] sm:text-[13px] sm:py-4 rounded-xl whitespace-nowrap w-full sm:w-auto sm:px-6 sm:text-sm cursor-pointer"
                     style={{ 
                       background: "linear-gradient(135deg, hsl(0 85% 48%), hsl(0 90% 38%))", 
                       boxShadow: "0 8px 24px hsl(0 85% 40% / 0.35), 0 2px 8px hsl(0 85% 40% / 0.2)" 
@@ -402,7 +406,7 @@ const Index = () => {
                     <Calendar className="w-4 h-4 shrink-0" />
                     Schedule Free Onsite Analysis
                     <ArrowRight className="w-4 h-4 shrink-0" />
-                  </Link>
+                  </button>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
                   <Link
@@ -1501,6 +1505,49 @@ const Index = () => {
 
         </div>
       </section>
+
+      {/* Form Modal */}
+      <AnimatePresence>
+        {isFormModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[10000] flex items-start justify-center overflow-y-auto bg-black/70 px-4 py-6 backdrop-blur-sm sm:items-center"
+            onClick={() => setIsFormModalOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.98 }}
+              className="my-auto w-full max-w-2xl bg-white shadow-2xl max-h-[calc(100vh-3rem)] overflow-y-auto rounded-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white px-6 py-4">
+                <div>
+                  <h3 className="text-xl font-display font-bold text-gray-950">Free Onsite Security Analysis</h3>
+                  <p className="text-sm text-gray-500">Quick request or guided help</p>
+                </div>
+                <button
+                  onClick={() => setIsFormModalOpen(false)}
+                  className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="p-6">
+                <LeadForm
+                  title=""
+                  subtitle="Use the quick form or guided prompts. We'll contact you to schedule the visit."
+                  compact={true}
+                  formContext="analysis"
+                  autoOpenGuided={true}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </Layout>
   );

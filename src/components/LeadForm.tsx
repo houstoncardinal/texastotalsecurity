@@ -24,6 +24,7 @@ interface LeadFormProps {
   formContext?: string;
   compact?: boolean;
   className?: string;
+  autoOpenGuided?: boolean;
 }
 
 interface UploadedFile {
@@ -70,6 +71,7 @@ const LeadForm = ({
   formContext,
   compact = false,
   className = "",
+  autoOpenGuided = false,
 }: LeadFormProps) => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -95,7 +97,7 @@ const LeadForm = ({
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [dragActive, setDragActive] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
-  const [guidedOpen, setGuidedOpen] = useState(false);
+  const [guidedOpen, setGuidedOpen] = useState(autoOpenGuided);
   const [guidedStep, setGuidedStep] = useState(0);
   const [guidedAnswers, setGuidedAnswers] = useState({
     goal: "",
