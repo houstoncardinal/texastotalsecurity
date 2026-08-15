@@ -7,7 +7,7 @@ import { generateOrganizationSchema, generateBreadcrumbSchema, generatePersonSch
 import {
   Shield, MapPin, Radio, PhoneCall, Star, Award,
   CheckCircle2, ArrowRight, Phone, Users,
-  Building2, Camera, Smartphone, Clock, Lightbulb,
+  Building2, Camera, Clock, Lightbulb,
 } from "lucide-react";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
@@ -379,20 +379,20 @@ const About = () => {
               className="font-display font-bold text-white mb-3"
               style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", lineHeight: 1.1, letterSpacing: "-0.03em" }}
             >
-              Empowering Houston Communities to Fight Crime Together
+              Built on Reputation, Relationships, and Results
             </h2>
             <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.58)", lineHeight: 1.72 }}>
-              Security isn't just cameras and alarms — it's giving neighbors the tools to protect each other. We build systems that connect communities and solve real-world problems.
+              Security isn't just cameras and alarms — it's the trust our customers place in us, call after call, year after year. Here's what that looks like in practice.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             {[
               {
-                icon: Smartphone,
-                label: "Community Crime App",
-                heading: "Neighbors Watching Out for Each Other",
-                body: "Our clients gain access to a community-connected security app where neighbors can instantly share photos and video footage of suspicious activity — turning individual cameras into a neighborhood-wide crime-fighting network.",
+                icon: Star,
+                label: "25+ 5-Star Reviews",
+                heading: "A Reputation Built on Real Results",
+                body: "Every one of our Google reviews is 5 stars — from homeowners, HOA boards, and business owners across Houston. We earn that reputation one honest installation and one responsive service call at a time.",
                 accent: true,
               },
               {
@@ -406,7 +406,7 @@ const About = () => {
                 icon: Lightbulb,
                 label: "Real Solutions in 2026",
                 heading: "Modern Security for Today's Threats",
-                body: "Crime evolves. So do we. In 2026, we help Houston homeowners, HOAs, and businesses solve real-world security challenges with technology that actually works — hardwired infrastructure, monitoring workflows, and community connectivity.",
+                body: "Crime evolves. So do we. In 2026, we help Houston homeowners, HOAs, and businesses solve real-world security challenges with technology that actually works — hardwired infrastructure, professional monitoring, and equipment upgrades that keep pace with new threats.",
                 accent: false,
               },
             ].map((card, i) => (

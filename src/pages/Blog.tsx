@@ -3,7 +3,7 @@ import SEOHead from "@/components/SEOHead";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SectionHeading from "@/components/SectionHeading";
 import CTABlock from "@/components/CTABlock";
-import { blogArticles, blogCategories } from "@/lib/blogData";
+import { allArticles, blogCategories } from "@/lib/blogData";
 import { generateBreadcrumbSchema } from "@/lib/seo";
 import { Link } from "react-router-dom";
 import { ArrowRight, Clock, Tag } from "lucide-react";
@@ -58,7 +58,7 @@ const Blog = () => {
         <div className="container-tight">
           <SectionHeading title="Latest Articles" subtitle="In-depth guides and expert insights to help you make informed security decisions." />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogArticles.map(article => {
+            {allArticles.map(article => {
               const category = blogCategories.find(c => c.slug === article.category);
               return (
                 <Link key={article.slug} to={`/blog/${article.slug}`} className="glass-card group block overflow-hidden">

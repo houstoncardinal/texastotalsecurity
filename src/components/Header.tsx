@@ -337,10 +337,11 @@ const Header = () => {
             </a>
             <Link
               to="/free-analysis"
-              className="btn-primary-gradient text-[13.5px] whitespace-nowrap"
+              className="btn-primary-gradient text-[13.5px] whitespace-nowrap inline-flex items-center gap-1.5"
               style={{ padding: "0.55rem 1.25rem", borderRadius: "0.65rem" }}
             >
               Free Onsite Security Analysis
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 

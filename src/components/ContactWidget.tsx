@@ -134,13 +134,13 @@ const ContactWidget = () => {
           onClick={() => setOpen(value => !value)}
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.98 }}
-          className="group flex items-center gap-2.5 border border-white/10 bg-neutral-950/95 px-3 py-2.5 text-white shadow-xl shadow-black/30 backdrop-blur-sm transition-colors hover:border-red-500/35 hover:bg-black"
+          className="group flex items-center gap-0 border border-white/10 bg-neutral-950/95 px-2.5 py-2.5 text-white shadow-xl shadow-black/30 backdrop-blur-sm transition-colors hover:border-red-500/35 hover:bg-black sm:gap-2.5 sm:px-3"
           aria-label="Open contact options"
         >
           <span className="flex h-8 w-8 items-center justify-center bg-red-600 text-white">
             <Shield className="h-4 w-4" />
           </span>
-          <span className="text-left">
+          <span className="hidden text-left sm:block">
             <span className="block text-[13px] font-bold leading-none">Need help?</span>
             <span className="mt-0.5 hidden text-[9px] font-semibold uppercase tracking-[0.14em] text-white/45 sm:block">Contact TTS</span>
           </span>

@@ -567,6 +567,9 @@
 .marquee-track:hover {
   animation-play-state: paused;
 }
+.review-marquee-card {
+  white-space: normal;
+}
 
 /* ─── Scroll progress bar ────────────────────────────────────── */
 .scroll-progress {

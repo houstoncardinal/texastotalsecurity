@@ -18,7 +18,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { blogArticles, blogCategories } from "../src/lib/blogData";
+import { allArticles, blogCategories } from "../src/lib/blogData";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
@@ -52,7 +52,7 @@ function resolveOgImage(heroImage: string | undefined): string {
   return DEFAULT_OG;
 }
 
-function buildSchemas(article: typeof blogArticles[number]) {
+function buildSchemas(article: typeof allArticles[number]) {
   const url = `${SITE_URL}/blog/${article.slug}`;
   const image = resolveOgImage(article.heroImage);
   const category = blogCategories.find((c) => c.slug === article.category);
@@ -97,7 +97,7 @@ function buildSchemas(article: typeof blogArticles[number]) {
   return [articleSchema, breadcrumbSchema, ...(article.extraSchemas || [])];
 }
 
-function buildMetaBlock(article: typeof blogArticles[number]): string {
+function buildMetaBlock(article: typeof allArticles[number]): string {
   const url = `${SITE_URL}/blog/${article.slug}`;
   const image = resolveOgImage(article.heroImage);
   const title = escape(article.metaTitle);
@@ -133,7 +133,7 @@ ${schemas.map((s) => `    <script type="application/ld+json">${JSON.stringify(s)
 // Replace the head's existing title + meta description + canonical + og:* +
 // twitter:* block with the article's. We strip the homepage-level tags so
 // crawlers see only the article-correct ones.
-function rewriteHead(article: typeof blogArticles[number]): string {
+function rewriteHead(article: typeof allArticles[number]): string {
   const meta = buildMetaBlock(article);
   let out = shell;
 
@@ -150,7 +150,7 @@ function rewriteHead(article: typeof blogArticles[number]): string {
 }
 
 let written = 0;
-for (const article of blogArticles) {
+for (const article of allArticles) {
   const outDir = resolve(distDir, "blog", article.slug);
   mkdirSync(outDir, { recursive: true });
   writeFileSync(resolve(outDir, "index.html"), rewriteHead(article), "utf8");
