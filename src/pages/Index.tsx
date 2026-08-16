@@ -381,7 +381,7 @@ const Index = () => {
                         feature.title
                       )}
                     </p>
-                    <p className="text-gray-500 leading-snug text-[0.65rem] sm:text-[0.82rem] line-clamp-2 sm:line-clamp-none">{feature.desc}</p>
+                    <p className="text-gray-500 leading-snug text-[0.65rem] sm:text-[0.82rem]">{feature.desc}</p>
                   </div>
                 ))}
               </motion.div>

@@ -665,7 +665,7 @@ const LeadForm = ({
 
     return (
       <>
-        <div className={`glass-card-static p-5 sm:p-6 ${className}`}>
+        <div className={`glass-card-static p-5 sm:p-6 ${className} ${autoOpenGuided ? 'hidden' : ''}`}>
           <div className="mb-4">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
