@@ -92,7 +92,7 @@ const features: Feature[] = [
       detail: "Turnkey service by licensed local experts — cable routing, mounting, and setup handled.",
     },
     diy: {
-      headline: "Frustrating DIY",
+      headline: "Frustrating Setup",
       detail: "Ladder work, drilling, complex tech setup, and troubleshooting — all on your shoulders.",
     },
   },
@@ -157,7 +157,7 @@ export default function SecurityShowdownChart() {
           style={{ background: "hsl(0 0% 20%)", borderLeft: "1px solid hsl(0 0% 27%)", borderTopRightRadius: "1rem" }}
         >
           <span className="font-extrabold leading-tight" style={{ fontSize: "clamp(0.82rem, 2vw, 1rem)", color: "hsl(0 0% 58%)" }}>
-            DIY Wi-Fi Cameras
+            Wi-Fi Cameras
           </span>
         </div>
       </div>
@@ -177,7 +177,7 @@ export default function SecurityShowdownChart() {
           style={{ background: "hsl(0 0% 20%)", borderLeft: "1px solid hsl(0 0% 27%)", borderTopRightRadius: "1rem" }}
         >
           <span className="font-extrabold text-[11px] leading-tight text-center" style={{ color: "hsl(0 0% 58%)" }}>
-            DIY Wi-Fi Cameras
+            Wi-Fi Cameras
           </span>
         </div>
       </div>

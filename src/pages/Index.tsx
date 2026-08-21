@@ -44,7 +44,7 @@ const hero = {
   eyebrow: "Protect What Matters Most",
   headline: "Residential & Commercial Security Systems in Houston, TX",
   headlineAccent: "in Houston, TX", // trailing substring of `headline` rendered in brand red
-  subline: "We design and install reliable security systems tailored to your property. No call centers, no long wait times—just fast, local service from neighbors you can trust.",
+  subline: "Texas Total Security designs, installs and services security camera systems and alarm systems with monitoring in Houston and surrounding areas.",
   features: [
     {
       icon: ShieldCheck,
@@ -65,12 +65,6 @@ const hero = {
   phone: "(713) 387-9937",
   phoneHref: "tel:7133879937",
 };
-
-const heroThumbnails = [
-  { label: "Residential Solutions", href: "/residential", img: "/residential/imgi_33_luxury-home-6886153_1280.jpg", alt: "Modern residential security system installation" },
-  { label: "Commercial Solutions", href: "/commercial", img: "/commercial/commercialbanner.jpg", alt: "Commercial security camera system for a Houston business" },
-  { label: "HOA & Multi-Family", href: "/hoa-security", img: "/hoacardimage.jpg", alt: "Texas residential neighborhood protected by community security cameras" },
-];
 
 /* ─── Data ──────────────────────────────────────────────────── */
 
@@ -372,7 +366,7 @@ const Index = () => {
                     >
                       <feature.icon className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2} />
                     </div>
-                    <p className="font-bold text-gray-950 text-[0.75rem] leading-tight mb-1 sm:text-[0.9rem] sm:whitespace-nowrap">
+                    <p className="font-bold text-gray-950 text-[0.75rem] leading-tight sm:text-[0.9rem] sm:whitespace-nowrap">
                       {feature.title === "Faster Support" ? (
                         <>
                           Faster<br className="sm:hidden" /> Support
@@ -381,7 +375,6 @@ const Index = () => {
                         feature.title
                       )}
                     </p>
-                    <p className="text-gray-500 leading-snug text-[0.65rem] sm:text-[0.82rem]">{feature.desc}</p>
                   </div>
                 ))}
               </motion.div>
@@ -505,54 +498,6 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Thumbnail strip */}
-              <div className="absolute bottom-0 left-2 right-2 z-[3] grid grid-cols-3 items-stretch gap-2 sm:left-auto sm:right-6 sm:w-[28rem] sm:gap-3.5 lg:right-10 lg:w-[32rem]">
-                {heroThumbnails.map((thumb, idx) => (
-                  <motion.div key={idx} className="h-full" whileHover={{ y: -4 }} whileTap={{ scale: 0.97 }}>
-                    <Link
-                      to={thumb.href}
-                      className="group flex h-[7.5rem] flex-col overflow-hidden rounded-lg bg-white transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-600 sm:h-[10.5rem] sm:rounded-xl"
-                      style={{ 
-                        border: "1px solid hsl(0 0% 88%)", 
-                        boxShadow: "0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)" 
-                      }}
-                      onMouseEnter={e => {
-                        (e.currentTarget as HTMLAnchorElement).style.borderColor = "hsl(0 85% 50%)";
-                        (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 16px 40px hsl(0 85% 44% / 0.22), 0 4px 12px rgba(0,0,0,0.08)";
-                        (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-4px)";
-                      }}
-                      onMouseLeave={e => {
-                        (e.currentTarget as HTMLAnchorElement).style.borderColor = "hsl(0 0% 88%)";
-                        (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)";
-                        (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)";
-                      }}
-                    >
-                      <div className="relative h-[5rem] overflow-hidden sm:h-[7.2rem]">
-                        <img
-                          src={thumb.img}
-                          alt={thumb.alt}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          style={idx === 2 ? { objectPosition: "center 42%" } : undefined}
-                          loading="lazy"
-                        />
-                        <div
-                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.4) 0%, transparent 60%)" }}
-                        />
-                        <span
-                          className="absolute top-2 left-2 flex h-5 w-5 items-center justify-center rounded-full bg-white shadow-lg"
-                        >
-                          <CheckCircle2 className="w-3 h-3" style={{ color: "hsl(0 85% 44%)" }} />
-                        </span>
-                      </div>
-                      <div className="flex flex-1 items-center justify-between gap-1.5 px-2.5 py-2 sm:px-4 sm:py-2.5">
-                        <p className="font-bold text-gray-900 text-[10px] leading-tight sm:text-[12px]">{thumb.label}</p>
-                        <ArrowRight className="hidden h-3 w-3 shrink-0 text-red-600 transition-transform duration-300 group-hover:translate-x-1 min-[380px]:block" />
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
 
           </div>
@@ -590,7 +535,7 @@ const Index = () => {
               <p
                 className="text-gray-600 leading-relaxed text-[0.82rem] sm:text-[0.88rem] lg:border-l lg:border-gray-200 lg:pl-7"
               >
-                Our goal at Texas Total Security is to provide our customers with comfort and peace of mind knowing that their business, family and/or assets are safe.
+                Our goal at Texas Total Security is to provide our customers with comfort and peace of mind knowing that their business, family and assets are safe.
               </p>
 
               <div className="relative z-10 flex flex-col gap-2 sm:flex-row lg:w-64 lg:flex-col">
@@ -1211,7 +1156,7 @@ const Index = () => {
           >
             Texas Total Security
             <span style={{ color: "hsl(0 85% 42%)" }}> vs.</span>
-            <br className="hidden sm:block" />{" "}DIY Wi-Fi Cameras
+            <br className="hidden sm:block" />{" "}Wi-Fi Cameras
           </motion.h2>
 
           {/* Subtext */}
@@ -1253,7 +1198,7 @@ const Index = () => {
               <div className="w-8 h-8 flex items-center justify-center">
                 <XCircle className="w-6 h-6 text-gray-400" />
               </div>
-              <p className="text-[13px] font-black text-gray-900 leading-tight">DIY Wi-Fi Cameras</p>
+              <p className="text-[13px] font-black text-gray-900 leading-tight">Wi-Fi Cameras</p>
               <p className="text-[10px] text-gray-500">Wireless · Self-Installed</p>
             </div>
           </motion.div>

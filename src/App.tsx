@@ -36,6 +36,7 @@ const QualifyFunnel = lazy(() => import("./pages/QualifyFunnel"));
 const NeighborhoodLanding = lazy(() => import("./pages/NeighborhoodLanding"));
 const SwitchAssessment = lazy(() => import("./pages/SwitchAssessment"));
 const RequestCallback = lazy(() => import("./pages/RequestCallback"));
+const HoneywellOffer = lazy(() => import("./pages/HoneywellOffer"));
 const PropertyManagementSecurity = lazy(() => import("./pages/PropertyManagementSecurity"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
@@ -98,6 +99,7 @@ const App = () => (
             <Route path="/pre-qualify" element={<QualifyFunnel />} />
             <Route path="/switch-my-alarm" element={<SwitchAssessment />} />
             <Route path="/request-callback" element={<RequestCallback />} />
+            <Route path="/honeywell-keypad-offer" element={<HoneywellOffer />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
